@@ -1,4 +1,4 @@
-# ssafy-vue
+# petmily_front
 
 ## Project setup
 ```
