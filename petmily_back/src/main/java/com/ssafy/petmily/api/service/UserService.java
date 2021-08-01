@@ -1,7 +1,9 @@
 package com.ssafy.petmily.api.service;
 
 
+import com.ssafy.petmily.api.request.AgencyRegisterPostReq;
 import com.ssafy.petmily.api.request.UserRegisterPostReq;
+import com.ssafy.petmily.db.entity.Agency;
 import com.ssafy.petmily.db.entity.User;
 
 /**
@@ -9,5 +11,6 @@ import com.ssafy.petmily.db.entity.User;
  */
 public interface UserService {
 	User createUser(UserRegisterPostReq userRegisterInfo);
+	Agency createAgency(AgencyRegisterPostReq agencyRegisterInfo);
 	User getUserByUserId(String userId);
 }

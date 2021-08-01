@@ -111,7 +111,7 @@ dependencies {
     compile("javax.annotation:javax.annotation-api:1.2")
     implementation("org.projectlombok:lombok:1.18.20")
     annotationProcessor("org.projectlombok:lombok:1.18.20")
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+    //testCompile('org.springframework.boot:spring-boot-starter-test')
 
 }
 
