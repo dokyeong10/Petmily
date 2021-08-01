@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 @Getter
 @Setter
 @ToString
-public class Agency extends User{
+public class Agency extends BaseEntity {
     String agencycode;
     String agencyname;
 }
