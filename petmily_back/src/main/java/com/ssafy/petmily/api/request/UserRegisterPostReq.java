@@ -16,12 +16,14 @@ public class UserRegisterPostReq {
 	String userid;
 	@ApiModelProperty(name="유저 Password", example="your_password")
 	String password;
-	@ApiModelProperty(name="유저 email", example = "your_position")
+	@ApiModelProperty(name="유저 email", example = "your_email")
 	String email;
-	@ApiModelProperty(name="유저 department", example = "your_department")
+	@ApiModelProperty(name="유저 phone", example = "your_phone")
 	String phone;
-	@ApiModelProperty(name="유저 name", example = "your_name")
+	@ApiModelProperty(name="유저 username", example = "your_username")
 	String username;
+	@ApiModelProperty(name="유저 img", example = "your_img")
+	String img;
 
 
 }

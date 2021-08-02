@@ -1,8 +1,11 @@
 package com.ssafy.petmily.api.service;
 
 
+import com.ssafy.petmily.api.request.AgencyRegisterPostReq;
 import com.ssafy.petmily.api.request.UserRegisterPostReq;
+import com.ssafy.petmily.db.entity.Agency;
 import com.ssafy.petmily.db.entity.User;
+import com.ssafy.petmily.db.repository.AgencyRepository;
 import com.ssafy.petmily.db.repository.UserRepository;
 import com.ssafy.petmily.db.repository.UserRepositorySupport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,9 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	UserRepository userRepository;
+
+	@Autowired
+	AgencyRepository agencyRepository;
 	
 	@Autowired
 	UserRepositorySupport userRepositorySupport;
@@ -32,7 +38,22 @@ public class UserServiceImpl implements UserService {
 		user.setEmail(userRegisterInfo.getEmail());
 		user.setPhone(userRegisterInfo.getPhone());
 		user.setUsername(userRegisterInfo.getUsername());
+		user.setImg(userRegisterInfo.getImg());
 		return userRepository.save(user);
+	}
+
+	@Override
+	public Agency createAgency(AgencyRegisterPostReq agencyRegisterInfo) {
+		Agency agency = new Agency();
+		agency.setUserid(agencyRegisterInfo.getUserid());
+		agency.setPassword(passwordEncoder.encode(agencyRegisterInfo.getPassword()));
+		agency.setEmail(agencyRegisterInfo.getEmail());
+		agency.setPhone(agencyRegisterInfo.getPhone());
+		agency.setUsername(agencyRegisterInfo.getUsername());
+		agency.setImg(agencyRegisterInfo.getImg());
+		agency.setAgencycode(agencyRegisterInfo.getAgencycode());
+		agency.setAgencyname(agencyRegisterInfo.getAgencyname());
+		return agencyRepository.save(agency);
 	}
 
 	@Override
