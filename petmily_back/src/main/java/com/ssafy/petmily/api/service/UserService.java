@@ -12,7 +12,8 @@ import com.ssafy.petmily.db.entity.User;
 public interface UserService {
 	User createUser(UserRegisterPostReq userRegisterInfo);
 	Agency createAgency(AgencyRegisterPostReq agencyRegisterInfo);
-	User getUserByUserid(String userId);
+	User getUserByEmail(String email);
+	Agency getAgencyByEmail(String email);
 
 	//User getUserByUserid(String );
 }

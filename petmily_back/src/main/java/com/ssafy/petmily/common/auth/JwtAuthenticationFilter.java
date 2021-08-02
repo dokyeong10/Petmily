@@ -5,6 +5,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ssafy.petmily.api.service.UserService;
 import com.ssafy.petmily.common.util.JwtTokenUtil;
 import com.ssafy.petmily.common.util.ResponseBodyWriteUtil;
+import com.ssafy.petmily.db.entity.Agency;
 import com.ssafy.petmily.db.entity.User;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,6 +31,7 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 		this.userService = userService;
 	}
 
+
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
@@ -45,8 +47,10 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
         try {
             // If header is present, try grab user principal from database and perform authorization
             Authentication authentication = getAuthentication(request);
+            //Authentication agencyauthentication = getagencyAuthentication(request);
             // jwt 토큰으로 부터 획득한 인증 정보(authentication) 설정.
             SecurityContextHolder.getContext().setAuthentication(authentication);
+            //SecurityContextHolder.getContext().setAuthentication(agencyauthentication);
         } catch (Exception ex) {
             ResponseBodyWriteUtil.sendError(request, response, ex);
             return;
@@ -64,24 +68,34 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
             JWTVerifier verifier = JwtTokenUtil.getVerifier();
             JwtTokenUtil.handleError(token);
             DecodedJWT decodedJWT = verifier.verify(token.replace(JwtTokenUtil.TOKEN_PREFIX, ""));
-            String userId = decodedJWT.getSubject();
+            String email = decodedJWT.getSubject();
             
             // Search in the DB if we find the user by token subject (username)
             // If so, then grab user details and create spring auth token using username, pass, authorities/roles
-            if (userId != null) {
+            if (email != null) {
                     // jwt 토큰에 포함된 계정 정보(userId) 통해 실제 디비에 해당 정보의 계정이 있는지 조회.
-            		User user = userService.getUserByUserid(userId);
+            		User user = userService.getUserByEmail(email);
+            		//Agency agency = userService.getAgencyByEmail(email);
                 if(user != null) {
                         // 식별된 정상 유저인 경우, 요청 context 내에서 참조 가능한 인증 정보(jwtAuthentication) 생성.
                 		SsafyUserDetails userDetails = new SsafyUserDetails(user);
-                		UsernamePasswordAuthenticationToken jwtAuthentication = new UsernamePasswordAuthenticationToken(userId,
+                		UsernamePasswordAuthenticationToken jwtAuthentication = new UsernamePasswordAuthenticationToken(email,
                 				null, userDetails.getAuthorities());
                 		jwtAuthentication.setDetails(userDetails);
                 		return jwtAuthentication;
+//                }else if(agency != null){
+//                    // 식별된 정상 유저인 경우, 요청 context 내에서 참조 가능한 인증 정보(jwtAuthentication) 생성.
+//                    SsafyAgencyDetails agencyDetails = new SsafyAgencyDetails(agency);
+//                    UsernamePasswordAuthenticationToken jwtAuthentication = new UsernamePasswordAuthenticationToken(email,
+//                            null, agencyDetails.getAuthorities());
+//                    jwtAuthentication.setDetails(agencyDetails);
+//                    return jwtAuthentication;
                 }
             }
             return null;
         }
         return null;
     }
+
+
 }
