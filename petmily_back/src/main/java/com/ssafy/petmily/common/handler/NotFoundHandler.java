@@ -1,4 +1,4 @@
-package com.ssafy.petmily.common.exception.handler;
+package com.ssafy.petmily.common.handler;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
