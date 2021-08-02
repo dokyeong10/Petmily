@@ -2,6 +2,7 @@ package com.ssafy.petmily.common.auth.dto;
 
 import com.ssafy.petmily.db.entity.User;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.io.Serializable;
 
@@ -12,18 +13,19 @@ import java.io.Serializable;
  */
 
 @Getter
+@ToString
 public class SessionUser implements Serializable {
 
     private static final long serialVersionUID = 178630l;
 
-    private String name, email, picture;
+    private String name, email, picture, phone;
     private Long id;
 
     public SessionUser(User user) {
-        System.out.println("============================="+user+"====================================");
         this.name = user.getUsername();
         this.email = user.getEmail();
         this.picture = user.getImg();
         this.id = user.getNo();
+        this.phone = user.getPhone();
     }
 }

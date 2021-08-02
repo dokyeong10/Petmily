@@ -33,16 +33,18 @@ public class User extends BaseEntity{
 
 
     @Builder
-    public User(String name, String email, String picture, Role role){
+    public User(String name, String email, String picture, Role role, String phone){
         this.username = name;
         this.email = email;
+        this.phone = phone;
         this.img = picture;
         this.role = role;
     }
 
-    public User update(String name, String picture){
+    public User update(String name, String picture, String phone){
         this.username = name;
         this.img = picture;
+        this.phone = phone;
         return this;
     }
 

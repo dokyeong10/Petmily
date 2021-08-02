@@ -32,7 +32,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         OAuth2UserService<OAuth2UserRequest,OAuth2User> delegate = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
 
-        // 현재 로그인 진행 중인 서비스를 구분하는 코드, 구글, 네이버, 카카오 등을 구분하기 위한 코
+        // 현재 로그인 진행 중인 서비스를 구분하는 코드, 구글, 네이버, 카카오 등을 구분하기 위한 코드
         String registrationId = userRequest
                 .getClientRegistration()
                 .getRegistrationId();
@@ -48,6 +48,9 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         User user = saveOrUpdate(attributes);
 
+        System.out.println("userRequest : "+userRequest.getAccessToken().getTokenValue()); // 코드 토큰 유저정보
+        System.out.println("userRequest : "+userRequest.getClientRegistration()); // 코드 토큰 유저정보
+
         // SessionUser : 세션에 사용자 정보를 저장하기 위한 DTO 클래스 (개발자가 생성)
 
         httpSession.setAttribute("userinfo", new SessionUser(user));
@@ -62,7 +65,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     // update 하는 이유는 사용자의 정보가 바뀔 경우가 존재할 수 있기 때문 (회원 이름 or 사진 변경의 경우)
     private User saveOrUpdate(OAuthAttributes attributes){
         User user = userRepository.findByEmail(attributes.getEmail())
-                .map(entity -> entity.update(attributes.getName(), attributes.getPicture()))
+                .map(entity -> entity.update(attributes.getName(), attributes.getPicture(), attributes.getPhone()))
                 .orElse(attributes.toEntity());
 
         // db에 저장 (User 정보)
