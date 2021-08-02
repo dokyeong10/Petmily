@@ -106,6 +106,10 @@ dependencies {
     implementation("io.springfox:springfox-bean-validators:3.0.0")
     implementation("io.springfox:springfox-boot-starter:3.0.0")
 
+    // security + oauth2 => Social login 구현
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
 
 
     implementation("org.projectlombok:lombok:1.18.20")
