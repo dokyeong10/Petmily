@@ -15,11 +15,10 @@ public class AgencyRepositorySupport {
     private JPAQueryFactory jpaQueryFactory;
     QAgency qAgency = QAgency.agency;
 
-    public Optional<Agency> findAgencyByUserid(String userid) {
+    public Optional<Agency> findAgencyByEmail(String email) {
         Agency agency = jpaQueryFactory.select(qAgency).from(qAgency)
-                .where(qAgency.userid.eq(userid)).fetchOne();
+                .where(qAgency.email.eq(email)).fetchOne();
         if(agency == null) return Optional.empty();
         return Optional.ofNullable(agency);
     }
-
 }

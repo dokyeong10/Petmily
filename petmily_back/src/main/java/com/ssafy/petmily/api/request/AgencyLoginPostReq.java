@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @ApiModel("AgencyLoginPostRequset")
 public class AgencyLoginPostReq {
-    @ApiModelProperty(name="유저 ID", example="userid")
-    String userid;
+    @ApiModelProperty(name="email", example="Email")
+    String email;
     @ApiModelProperty(name="유저 Password", example="password")
     String password;
 }

@@ -13,7 +13,6 @@ import javax.persistence.Entity;
 @Setter
 @ToString
 public class Agency extends BaseEntity {
-    String userid;
     String email;
     String username;
     String phone;

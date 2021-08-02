@@ -18,7 +18,6 @@ import javax.persistence.Enumerated;
 @NoArgsConstructor
 
 public class User extends BaseEntity{
-    String userid;
     String email;
     String username;
     String phone;

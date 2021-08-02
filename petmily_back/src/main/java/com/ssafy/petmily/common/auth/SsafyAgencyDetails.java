@@ -1,8 +1,6 @@
 package com.ssafy.petmily.common.auth;
 
-
 import com.ssafy.petmily.db.entity.Agency;
-import com.ssafy.petmily.db.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,13 +9,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * 현재 액세스 토큰으로 부터 인증된 유저의 부가 상세정보(활성화 여부, 만료, 롤 등) 정의.
- */
-public class SsafyUserDetails implements UserDetails {
-    @Autowired
-    User user;
+public class SsafyAgencyDetails implements UserDetails {
 
+    @Autowired
+    Agency agency;
 
     boolean accountNonExpired;
     boolean accountNonLocked;
@@ -25,24 +20,23 @@ public class SsafyUserDetails implements UserDetails {
     boolean enabled = false;
     List<GrantedAuthority> roles = new ArrayList<>();
 
-    public SsafyUserDetails(User user) {
+    public SsafyAgencyDetails(Agency agency) {
         super();
-        this.user = user;
+        this.agency = agency;
     }
 
-    public User getUser() {
-        return this.user;
+    public Agency getAgency() {
+        return this.agency;
     }
-
 
     @Override
     public String getPassword() {
-        return this.user.getPassword();
+        return this.agency.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return this.user.getEmail();
+        return this.agency.getEmail();
     }
 
     @Override

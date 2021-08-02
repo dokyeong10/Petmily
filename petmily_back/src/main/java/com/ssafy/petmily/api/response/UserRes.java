@@ -13,8 +13,7 @@ import lombok.Setter;
 @Setter
 @ApiModel("UserResponse")
 public class UserRes {
-	@ApiModelProperty(name="userid")
-	String userid;
+
 	@ApiModelProperty(name="email")
 	String email;
 	@ApiModelProperty(name="phone")
@@ -26,7 +25,6 @@ public class UserRes {
 	
 	public static UserRes of(User user) {
 		UserRes res = new UserRes();
-		res.setUserid(user.getUserid());
 		res.setEmail(user.getEmail());
 		res.setPhone(user.getPhone());
 		res.setUsername(user.getUsername());
