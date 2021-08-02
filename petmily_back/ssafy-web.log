@@ -2321,3 +2321,6 @@ Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'sp
 2021-08-02 16:47:27.039 DEBUG 4214 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
 2021-08-02 16:47:27.040 DEBUG 4214 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.ssafy.petmily.api.response.UserLoginPostRes@5b61c29c]
 2021-08-02 16:47:27.055 DEBUG 4214 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-08-02 17:22:23.565  INFO 4214 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-08-02 17:22:23.573  INFO 4214 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-08-02 17:22:23.580  INFO 4214 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
