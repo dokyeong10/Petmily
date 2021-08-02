@@ -6,6 +6,7 @@ import com.ssafy.petmily.api.request.UserRegisterPostReq;
 import com.ssafy.petmily.db.entity.Agency;
 import com.ssafy.petmily.db.entity.User;
 import com.ssafy.petmily.db.repository.AgencyRepository;
+import com.ssafy.petmily.db.repository.AgencyRepositorySupport;
 import com.ssafy.petmily.db.repository.UserRepository;
 import com.ssafy.petmily.db.repository.UserRepositorySupport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	UserRepositorySupport userRepositorySupport;
+
+	@Autowired
+	AgencyRepositorySupport agencyRepositorySupport;
 	
 	@Autowired
 	PasswordEncoder passwordEncoder;
@@ -61,5 +65,12 @@ public class UserServiceImpl implements UserService {
 		// 디비에 유저 정보 조회 (userId 를 통한 조회).
 		User user = userRepositorySupport.findUserByUserid(userId).get();
 		return user;
+	}
+
+
+	@Override
+	public Agency getAgencyByUserid(String userId) {
+		Agency agency = agencyRepositorySupport.findAgencyByUserid(userId).get();
+		return agency;
 	}
 }

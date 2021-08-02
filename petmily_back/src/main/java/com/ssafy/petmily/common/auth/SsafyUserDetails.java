@@ -30,6 +30,10 @@ public class SsafyUserDetails implements UserDetails {
         super();
         this.user = user;
     }
+    public SsafyUserDetails(Agency agency) {
+        super();
+        this.agency = agency;
+    }
 
     public User getUser() {
         return this.user;
@@ -48,6 +52,11 @@ public class SsafyUserDetails implements UserDetails {
     public String getUsername() {
         return this.user.getUserid();
     }
+
+    public String getAgencyname() {
+        return this.agency.getUserid();
+    }
+
 
     @Override
     public boolean isAccountNonExpired() {

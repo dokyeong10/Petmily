@@ -13,6 +13,7 @@ import java.util.Optional;
  */
 @Repository
 public class UserRepositorySupport {
+
     @Autowired
     private JPAQueryFactory jpaQueryFactory;
     QUser qUser = QUser.user;

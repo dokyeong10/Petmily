@@ -13,6 +13,7 @@ public interface UserService {
 	User createUser(UserRegisterPostReq userRegisterInfo);
 	Agency createAgency(AgencyRegisterPostReq agencyRegisterInfo);
 	User getUserByUserid(String userId);
+	Agency getAgencyByUserid(String userId);
 
 	//User getUserByUserid(String );
 }
