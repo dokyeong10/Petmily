@@ -68,3 +68,60 @@
 2021-08-02 11:47:29.533  INFO 34792 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2021-08-02 11:47:29.536  INFO 34792 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2021-08-02 11:47:29.539  INFO 34792 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-08-02 13:53:40.075  INFO 37532 --- [restartedMain] com.ssafy.petmily.PetmilyApplication     : Starting PetmilyApplication using Java 1.8.0_282 on odogyeong-ui-MacBookPro.local with PID 37532 (/Users/odogyeong/git/Petmily_real/petmily_back/build/classes/java/main started by odogyeong in /Users/odogyeong/git/Petmily_real/petmily_back)
+2021-08-02 13:53:40.077  INFO 37532 --- [restartedMain] com.ssafy.petmily.PetmilyApplication     : No active profile set, falling back to default profiles: default
+2021-08-02 13:53:40.111  INFO 37532 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-08-02 13:53:40.112  INFO 37532 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-08-02 13:53:40.864  INFO 37532 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-08-02 13:53:40.893  INFO 37532 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 25 ms. Found 2 JPA repository interfaces.
+2021-08-02 13:53:41.061  INFO 37532 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@3705933d' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-08-02 13:53:41.063  INFO 37532 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-08-02 13:53:41.215  INFO 37532 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-08-02 13:53:41.219  INFO 37532 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-08-02 13:53:41.219  INFO 37532 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.50]
+2021-08-02 13:53:41.253  INFO 37532 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-08-02 13:53:41.254  INFO 37532 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1142 ms
+2021-08-02 13:53:41.335 DEBUG 37532 --- [restartedMain] o.s.w.f.CommonsRequestLoggingFilter      : Filter 'commonsRequestLoggingFilter' configured for use
+2021-08-02 13:53:41.444  INFO 37532 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-08-02 13:53:41.471  INFO 37532 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.32.Final
+2021-08-02 13:53:41.541  INFO 37532 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-08-02 13:53:41.583  INFO 37532 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-08-02 13:53:41.743  INFO 37532 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-08-02 13:53:41.749  INFO 37532 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2021-08-02 13:53:42.048  INFO 37532 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-08-02 13:53:42.052  INFO 37532 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-08-02 13:53:42.275  WARN 37532 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-08-02 13:53:42.423 DEBUG 37532 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 11 mappings in 'requestMappingHandlerMapping'
+2021-08-02 13:53:42.573  INFO 37532 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2021-08-02 13:53:42.693  INFO 37532 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1e75d0ac, org.springframework.security.web.context.SecurityContextPersistenceFilter@7f66fd9d, org.springframework.security.web.header.HeaderWriterFilter@54bea9ed, org.springframework.web.filter.CorsFilter@47eb6de, org.springframework.security.web.authentication.logout.LogoutFilter@3dc591e9, com.ssafy.petmily.common.auth.JwtAuthenticationFilter@3e7e2f6c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@38546f25, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@41e06229, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3263bcb9, org.springframework.security.web.session.SessionManagementFilter@77109516, org.springframework.security.web.access.ExceptionTranslationFilter@6ca0c028, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@a5496d3]
+2021-08-02 13:53:42.750  INFO 37532 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-08-02 13:53:42.754 DEBUG 37532 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-08-02 13:53:42.775 DEBUG 37532 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/] in 'viewControllerHandlerMapping'
+2021-08-02 13:53:42.788 DEBUG 37532 --- [restartedMain] o.s.w.s.c.annotation.WebMvcConfigurer    : Default resource handling disabled
+2021-08-02 13:53:42.889 DEBUG 37532 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/resources/**, /swagger-ui.html, /webjars/**, /css/**, /fonts/**, /icons/**, /img/**, /js/**, /swagger-ui/**] in 'resourceHandlerMapping'
+2021-08-02 13:53:42.896 DEBUG 37532 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-08-02 13:53:43.044  INFO 37532 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-08-02 13:53:43.068  INFO 37532 --- [restartedMain] com.ssafy.petmily.PetmilyApplication     : Started PetmilyApplication in 3.207 seconds (JVM running for 3.55)
+2021-08-02 13:54:00.923  INFO 37532 --- [http-nio-127.0.0.1-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-08-02 13:54:00.923  INFO 37532 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-08-02 13:54:00.923 DEBUG 37532 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2021-08-02 13:54:00.923 DEBUG 37532 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2021-08-02 13:54:00.923 DEBUG 37532 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2021-08-02 13:54:00.925 DEBUG 37532 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@4b50673a
+2021-08-02 13:54:00.925 DEBUG 37532 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@5fb80237
+2021-08-02 13:54:00.925 DEBUG 37532 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-08-02 13:54:00.925  INFO 37532 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2021-08-02 13:54:00.940 DEBUG 37532 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/auth/login", parameters={}
+2021-08-02 13:54:00.941 DEBUG 37532 --- [http-nio-127.0.0.1-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ssafy.petmily.api.controller.AuthController#login(UserLoginPostReq)
+2021-08-02 13:54:00.980 DEBUG 37532 --- [http-nio-127.0.0.1-8080-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.ssafy.petmily.api.request.UserLoginPostReq@46810722]
+2021-08-02 13:54:01.152 DEBUG 37532 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-08-02 13:54:01.152 DEBUG 37532 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.ssafy.petmily.api.response.UserLoginPostRes@33c9431d]
+2021-08-02 13:54:01.159 DEBUG 37532 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-08-02 13:55:26.994 DEBUG 37532 --- [http-nio-127.0.0.1-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/users/personal/me", parameters={}
+2021-08-02 13:55:26.994 DEBUG 37532 --- [http-nio-127.0.0.1-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ssafy.petmily.api.controller.UserController#getUserInfo(Authentication)
+2021-08-02 13:55:27.002 DEBUG 37532 --- [http-nio-127.0.0.1-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-08-02 13:55:27.002 DEBUG 37532 --- [http-nio-127.0.0.1-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.ssafy.petmily.api.response.UserRes@268be0c2]
+2021-08-02 13:55:27.003 DEBUG 37532 --- [http-nio-127.0.0.1-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-08-02 13:56:19.671  INFO 37532 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-08-02 13:56:19.676  INFO 37532 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-08-02 13:56:19.679  INFO 37532 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
