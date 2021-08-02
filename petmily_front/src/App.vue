@@ -1,5 +1,5 @@
 <template>
-  <div id="nav">
+  <div id="nav" style="box-shadow: 0 4px 4px 0 $transparent-blue-violet;">
     <span>
       <router-link to="/home" class="mx-5 text-decoration-none">Home</router-link> 
       <router-link to="/home" class="mx-5 text-decoration-none">Home</router-link> 
