@@ -35,6 +35,7 @@ import javax.xml.transform.Result;
  */
 @Api(value = "유저 API", tags = {"User"})
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/users")
 public class UserController {
 	
