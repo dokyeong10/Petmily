@@ -21,4 +21,10 @@ public class AgencyRepositorySupport {
         if(agency == null) return Optional.empty();
         return Optional.ofNullable(agency);
     }
+
+    public Agency checkAgencyByEmail(String email) {
+        Agency agency = jpaQueryFactory.select(qAgency).from(qAgency)
+                .where(qAgency.email.eq(email)).fetchOne();
+        return agency;
+    }
 }

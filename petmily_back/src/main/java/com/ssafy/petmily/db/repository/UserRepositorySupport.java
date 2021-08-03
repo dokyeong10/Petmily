@@ -30,4 +30,10 @@ public class UserRepositorySupport {
         if(user == null) return Optional.empty();
         return Optional.ofNullable(user);
     }
+
+    public User checkUserByEmailAndType(String email, String type) {
+        User user = jpaQueryFactory.select(qUser).from(qUser)
+                .where(qUser.email.eq(email).and(qUser.type.eq(type))).fetchOne();
+        return user;
+    }
 }
