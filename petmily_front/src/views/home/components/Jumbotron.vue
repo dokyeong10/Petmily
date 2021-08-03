@@ -1,6 +1,13 @@
 <template>
-  <div class="Jbgc">
-    asd
+  <div class="Jbgc container" style="height: 350px;">
+    <div class="d-flex justify-content-even">
+      <div>
+        ad
+      </div>
+      <div>
+        as
+      </div>
+    </div>
   </div>
 </template>
 <script>
