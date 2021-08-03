@@ -1,4 +1,4 @@
-package com.ssafy.petmily.config;
+package com.ssafy.petmily.config.customAnnotation;
 
 
 import com.ssafy.petmily.common.auth.dto.SessionUser;
