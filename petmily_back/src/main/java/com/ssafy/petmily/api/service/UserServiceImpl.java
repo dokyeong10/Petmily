@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Agency getAgencyByEmail(String email) {
-		Agency agency = agencyRepositorySupport.findAgencyByEmail(email).get();
+		Agency agency = agencyRepositorySupport.checkAgencyByEmail(email);
 		return agency;
 	}
 
@@ -146,6 +146,13 @@ public class UserServiceImpl implements UserService {
 			return null;
 		}
 	}
+
+	@Override
+	public User getUserByEmailAndType(String email) {
+		User user = userRepositorySupport.checkUserByEmailAndType(email,"normal");
+		return user;
+	}
+
 
 //	@Override
 //	public User updateUser(String email, User user) {
