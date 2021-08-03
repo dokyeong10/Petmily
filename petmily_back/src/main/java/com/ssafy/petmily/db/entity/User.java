@@ -15,7 +15,6 @@ import javax.persistence.Enumerated;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 
 public class User extends BaseEntity{
     String email;
@@ -30,6 +29,8 @@ public class User extends BaseEntity{
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     String password;
 
+    public User() {
+    }
 
     @Builder
     public User(String name, String email, String picture, Role role, String phone){
@@ -50,5 +51,15 @@ public class User extends BaseEntity{
     public String getRoleKey() {
         return this.role.getKey() ;
     }
+
+
+//    public User update(String name, String img, String phone,String password){
+//        this.username = name;
+//        this.img = img;
+//        this.phone = phone;
+//        this.password=password;
+//        return this;
+//    }
+
 }
 
