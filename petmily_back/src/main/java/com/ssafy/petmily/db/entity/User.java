@@ -26,7 +26,6 @@ public class User extends BaseEntity{
     String type;
 
     @Enumerated(EnumType.STRING)
-    @DefaultValue("USER")
     private Role role;
 
     @JsonIgnore
