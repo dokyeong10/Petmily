@@ -6,18 +6,16 @@ import com.ssafy.petmily.api.request.UserRegisterPostReq;
 import com.ssafy.petmily.api.response.AgencyRes;
 import com.ssafy.petmily.api.response.UserRes;
 import com.ssafy.petmily.api.service.UserService;
-import com.ssafy.petmily.common.auth.SsafyAgencyDetails;
 import com.ssafy.petmily.common.auth.SsafyUserDetails;
 import com.ssafy.petmily.common.response.BaseResponseBody;
 import com.ssafy.petmily.db.entity.Agency;
 import com.ssafy.petmily.db.entity.User;
-import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,7 +27,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * 유저 관련 API 요청 처리를 위한 컨트롤러 정의.
@@ -110,4 +107,36 @@ public class UserController {
 		Agency agency = userService.getAgencyByEmail(email);
 		return ResponseEntity.status(200).body(AgencyRes.of(agency));
 	}
+
+	//개인회원삭제
+	@DeleteMapping("/personal/{email}")
+	@ApiOperation(value = "개인회원삭제", notes = "개인회원삭제")
+	@ApiResponses({
+			@ApiResponse(code = 200, message = "성공"),
+			@ApiResponse(code = 401, message = "인증 실패"),
+			@ApiResponse(code = 404, message = "사용자 없음"),
+			@ApiResponse(code = 500, message = "서버 오류")
+	})
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity<? extends BaseResponseBody>  deleteuser(@PathVariable String email){
+		userService.deleteUser(email);
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+	}
+
+
+	//기관회원 삭제
+	@DeleteMapping("/agency/{email}")
+	@ApiOperation(value = "기관 삭제", notes = "기관삭제")
+	@ApiResponses({
+			@ApiResponse(code = 200, message = "성공"),
+			@ApiResponse(code = 401, message = "인증 실패"),
+			@ApiResponse(code = 404, message = "사용자 없음"),
+			@ApiResponse(code = 500, message = "서버 오류")
+	})
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity<? extends BaseResponseBody> deleteagency(@PathVariable String email){
+		userService.deleteAgency(email);
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+	}
+
 }

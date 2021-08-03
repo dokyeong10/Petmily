@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 /**
  *	유저 관련 비즈니스 로직 처리를 위한 서비스 구현 정의.
  */
@@ -70,5 +72,17 @@ public class UserServiceImpl implements UserService {
 	public Agency getAgencyByEmail(String email) {
 		Agency agency = agencyRepositorySupport.findAgencyByEmail(email).get();
 		return agency;
+	}
+
+	@Override
+	@Transactional
+	public void deleteUser(String email) {
+		userRe.deleteByEmail(email);
+	}
+
+	@Override
+	@Transactional
+	public void deleteAgency(String email) {
+		agencyRepository.deleteByEmail(email);
 	}
 }
