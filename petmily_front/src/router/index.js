@@ -5,6 +5,7 @@ import Login from '@/views/accounts/Login'
 import SignupTerms from '@/views/accounts/SignupTerms'
 import AgencyForm from '@/views/accounts/AgencyForm.vue'
 import PrivateForm from '@/views/accounts/PrivateForm.vue'
+import pppp from '@/views/accounts/pppp.vue'
 
 const routes = [
   {
@@ -31,6 +32,11 @@ const routes = [
     path: '/privateform',
     name: 'privateform',
     component: PrivateForm
+  },
+  {
+    path: '/pppp',
+    name: 'pppp',
+    component: pppp
   },
 
   // {

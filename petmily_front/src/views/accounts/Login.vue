@@ -91,7 +91,7 @@ export default {
     }
 
     const goToSignup = function () {
-      router.push("/signup")
+      router.push("/signupterms")
     }
 
     const clickLogin = function () {

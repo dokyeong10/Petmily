@@ -1,5 +1,5 @@
 <template>
-  <JumbotonTerms/>
+  <JumbotronTerms/>
   <div class="container">
     <!-- 약관 1 -->
     <div style="width: 800px; height: 800px;">
@@ -87,12 +87,12 @@
 <script>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import JumbotonTerms from "@/views/accounts/components/JumbotonTerms"
+import JumbotronTerms from "@/views/accounts/components/JumbotronTerms"
 
 export default {
   name: 'SignupTerms',
   components: {
-    JumbotonTerms,
+    JumbotronTerms,
   },
   setup () {
     const firstAgree = ref(false)
