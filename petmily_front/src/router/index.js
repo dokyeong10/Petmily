@@ -1,7 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
-// import Home from '../views/Home.vue'
+
 import Home from '@/views/home/Home'
 import Login from '@/views/accounts/Login'
+import SignupTerms from '@/views/accounts/SignupTerms'
+import AgencyForm from '@/views/accounts/AgencyForm.vue'
+import PrivateForm from '@/views/accounts/PrivateForm.vue'
+
 const routes = [
   {
     path: '/home',
@@ -10,10 +14,24 @@ const routes = [
   },
   {
     path: '/login',
-    name: 'Login',
+    name: 'login',
     component: Login
-  }
-
+  },
+  {
+    path: '/signupterms',
+    name: 'signupterms',
+    component: SignupTerms
+  },
+  {
+    path: '/agencyform',
+    name: 'agencyform',
+    component: AgencyForm
+  },
+  {
+    path: '/privateform',
+    name: 'privateform',
+    component: PrivateForm
+  },
   // {
   //   path: '/',
   //   name: 'Home',

@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface AgencyRepository extends JpaRepository<Agency, Long> {
+    void deleteByEmail(String email);
     Optional<Agency> findByEmail(String email);
 
 

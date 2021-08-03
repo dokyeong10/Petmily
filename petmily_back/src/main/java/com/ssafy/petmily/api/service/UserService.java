@@ -14,6 +14,8 @@ public interface UserService {
 	Agency createAgency(AgencyRegisterPostReq agencyRegisterInfo);
 	User getUserByEmail(String email);
 	Agency getAgencyByEmail(String email);
+	void deleteUser(String email);
+	void deleteAgency(String email);
 
 	//User getUserByUserid(String );
 }

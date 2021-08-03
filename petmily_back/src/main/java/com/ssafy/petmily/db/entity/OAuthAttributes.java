@@ -13,38 +13,43 @@ import java.util.Map;
 public class OAuthAttributes {
 
     private Map<String,Object> attributes;
-    private String nameAttributeKey, name, email, picture,phone;
+    private String nameAttributeKey, name, email, picture,phone, registrationId;
 
     @Builder
-    public OAuthAttributes(Map<String, Object> attributes, String nameAttributeKey, String name, String email, String picture, String phone){
+    public OAuthAttributes(Map<String, Object> attributes, String nameAttributeKey, String name, String email, String picture, String phone, String registrationId){
         this.attributes = attributes;
         this.nameAttributeKey = nameAttributeKey;
         this.name = name;
         this.email = email;
         this.picture = picture;
         this.phone = phone;
+        this.registrationId = registrationId;
+
     }
 
     public static OAuthAttributes of(String registrationId, String userNameAttributeName,Map<String,Object> attributes){
 
         switch (registrationId){
             case "naver":
-                return ofNaver("id",attributes);
+                return ofNaver(registrationId,"id",attributes);
+            case "kakao" :
+                return ofKakao(registrationId,"id", attributes);
         }
-        return ofGoogle(userNameAttributeName, attributes);
+        return ofGoogle(registrationId, userNameAttributeName, attributes);
     }
 
-    public static OAuthAttributes ofGoogle(String userNameAttributeName, Map<String,Object> attributes){
+    public static OAuthAttributes ofGoogle(String registrationId, String userNameAttributeName, Map<String,Object> attributes){
         return OAuthAttributes.builder()
                 .name((String) attributes.get("name"))
                 .email((String) attributes.get("email"))
                 .picture((String) attributes.get("picture"))
                 .attributes(attributes)
+                .registrationId(registrationId)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
     }
 
-    public static OAuthAttributes ofNaver(String userNameAttributeName, Map<String, Object>attributes){
+    public static OAuthAttributes ofNaver(String registrationId, String userNameAttributeName, Map<String, Object>attributes){
         Map<String, Object> response = (Map<String,Object>) attributes.get("response");
 
         return OAuthAttributes.builder()
@@ -52,9 +57,28 @@ public class OAuthAttributes {
                 .email((String) response.get("email"))
                 .picture((String) response.get("profile_image"))
                 .phone((String) response.get("mobile"))
+                .registrationId(registrationId)
                 .attributes(response)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
+    }
+
+    public static OAuthAttributes ofKakao(String registrationId, String userNameAttributeName, Map<String, Object> attributes){
+        Map<String, Object> kakaoAccount = (Map<String, Object>) attributes.get("kakao_account");
+        Map<String, Object> profile = (Map<String, Object>) kakaoAccount.get("profile");
+        profile.put("id", attributes.get("id"));
+        profile.put("email", kakaoAccount.get("email"));
+        profile.put("name", profile.get("nickname"));
+        profile.put("picture", profile.get("profile_image_url"));
+
+        return OAuthAttributes.builder().name((String) profile.get("name"))
+                                        .email((String) profile.get("email"))
+                                        .picture((String) profile.get("picture"))
+                                        .registrationId(registrationId)
+                                        .attributes(profile)
+                                        .nameAttributeKey(userNameAttributeName)
+                                        .build();
+
     }
 
     public User toEntity(){
@@ -63,7 +87,8 @@ public class OAuthAttributes {
                 .email(email)
                 .picture(picture)
                 .phone(phone)
-                .role(Role.GUEST)
+                .role(Role.USER)
+                .type(registrationId)
                 .build();
     }
 }

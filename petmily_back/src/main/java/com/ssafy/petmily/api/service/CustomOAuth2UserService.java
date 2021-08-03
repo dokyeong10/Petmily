@@ -4,6 +4,7 @@ import com.ssafy.petmily.common.auth.dto.SessionUser;
 import com.ssafy.petmily.db.entity.OAuthAttributes;
 import com.ssafy.petmily.db.entity.User;
 import com.ssafy.petmily.db.repository.UserRepository;
+import com.ssafy.petmily.db.repository.UserRepositorySupport;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -24,6 +25,7 @@ import java.util.Collections;
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
     private final UserRepository userRepository;
+    private final UserRepositorySupport userRepositorySupport;
     private final HttpSession httpSession;
 
 
@@ -52,7 +54,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         System.out.println("userRequest : "+userRequest.getClientRegistration()); // 코드 토큰 유저정보
 
         // SessionUser : 세션에 사용자 정보를 저장하기 위한 DTO 클래스 (개발자가 생성)
-
         httpSession.setAttribute("userinfo", new SessionUser(user));
 
         return new DefaultOAuth2User(
@@ -64,7 +65,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     // 우리 테이블에 없는 정보면 insert를 하고 이미 존재하는 유저면 update를 한다.
     // update 하는 이유는 사용자의 정보가 바뀔 경우가 존재할 수 있기 때문 (회원 이름 or 사진 변경의 경우)
     private User saveOrUpdate(OAuthAttributes attributes){
-        User user = userRepository.findByEmail(attributes.getEmail())
+        User user = userRepositorySupport.findUserByEmailAndType(attributes.getEmail(), attributes.getRegistrationId())
                 .map(entity -> entity.update(attributes.getName(), attributes.getPicture(), attributes.getPhone()))
                 .orElse(attributes.toEntity());
 

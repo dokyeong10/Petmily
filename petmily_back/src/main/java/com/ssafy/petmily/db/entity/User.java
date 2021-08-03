@@ -3,6 +3,7 @@ package com.ssafy.petmily.db.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -22,6 +23,7 @@ public class User extends BaseEntity{
     String username;
     String phone;
     String img;
+    String type;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -32,12 +34,13 @@ public class User extends BaseEntity{
 
 
     @Builder
-    public User(String name, String email, String picture, Role role, String phone){
+    public User(String name, String email, String picture, Role role, String phone, String type){
         this.username = name;
         this.email = email;
         this.phone = phone;
         this.img = picture;
         this.role = role;
+        this.type = type;
     }
 
     public User update(String name, String picture, String phone){
