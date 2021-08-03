@@ -19,4 +19,5 @@ public interface UserService {
 	void deleteUser(String email);
 	void deleteAgency(String email);
 	User patchUser(String email, User user);
+	Agency patchAgency(String email, Agency agency);
 }

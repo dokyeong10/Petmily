@@ -141,20 +141,18 @@ public class UserController {
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
 	}
 
-//	@PutMapping("/personal/{email}")
-//	public ResponseEntity<User> updateUser(@PathVariable String email,  @RequestBody User user){
-//		 User updateUser = userService.updateUser(email,user);
-//
-//		return new ResponseEntity<User>(updateUser,HttpStatus.OK);
-//
-//	}
-
+	//개인회원수정
 	@PatchMapping("/personal/{email}")
 	public ResponseEntity<User> patchUser(@PathVariable String email,  @RequestBody User user){
 		User updateUser = userService.patchUser(email,user);
-
 		return new ResponseEntity<User>(updateUser,HttpStatus.OK);
+	}
 
+	//기관회원수정
+	@PatchMapping("/agency/{email}")
+	public ResponseEntity<Agency> patchAgency(@PathVariable String email,  @RequestBody Agency agency){
+		Agency updateAgency = userService.patchAgency(email,agency);
+		return new ResponseEntity<Agency>(updateAgency,HttpStatus.OK);
 	}
 
 

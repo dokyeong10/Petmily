@@ -27,6 +27,8 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserupdateRe userupdateRe;
+	@Autowired
+	AgencyupdateRe agencyupdateRe;
 
 	@Autowired
 	AgencyRepository agencyRepository;
@@ -106,7 +108,39 @@ public class UserServiceImpl implements UserService {
 			if(user.getImg() != null){
 				fetchedUser.get().setImg(user.getImg());
 			}
+			if(user.getType() != null){
+				fetchedUser.get().setType(user.getType());
+			}
+			if(user.getRole() != null){
+				fetchedUser.get().setRole(user.getRole());
+			}
 			return userRe.save(fetchedUser.get());
+		}
+		else{
+			return null;
+		}
+	}
+
+	@Override
+	public Agency patchAgency(String email, Agency agency) {
+		final Optional<Agency> fetchedAgency = agencyupdateRe.findByEmail(email);
+		if(fetchedAgency.isPresent()){
+			if(agency.getPassword() != null){
+				fetchedAgency.get().setPassword(agency.getPassword());
+			}
+			if(agency.getPhone() != null){
+				fetchedAgency.get().setPhone(agency.getPhone());
+			}
+			if(agency.getImg() != null){
+				fetchedAgency.get().setImg(agency.getImg());
+			}
+			if(agency.getAgencycode() != null){
+				fetchedAgency.get().setAgencycode(agency.getAgencycode());
+			}
+			if(agency.getAgencyname() != null){
+				fetchedAgency.get().setAgencyname(agency.getAgencyname());
+			}
+			return agencyRepository.save(fetchedAgency.get());
 		}
 		else{
 			return null;
