@@ -10,7 +10,7 @@
       <input v-model="state.password" type="password" class="form-control br mb-5" placeholder="••••••••">
       <input v-model="state.passwordConfirm" type="password" class="form-control br mb-5" placeholder="••••••••">
       <input v-model="state.phoneNum" type="text" class="form-control br mb-5" placeholder="010-1234-5678">
-      <button class="btn-white" @click="confirmSignup">회원가입 하기</button>
+      <button class="btn-white" style="color: #FFFFFF;" @click="confirmSignup">회원가입 하기</button>
     </div>
   </div>
 </template>
