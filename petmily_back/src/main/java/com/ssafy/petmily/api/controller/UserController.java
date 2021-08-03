@@ -6,6 +6,7 @@ import com.ssafy.petmily.api.request.UserRegisterPostReq;
 import com.ssafy.petmily.api.response.AgencyRes;
 import com.ssafy.petmily.api.response.UserRes;
 import com.ssafy.petmily.api.service.UserService;
+import com.ssafy.petmily.common.auth.SsafyAgencyDetails;
 import com.ssafy.petmily.common.auth.SsafyUserDetails;
 import com.ssafy.petmily.common.response.BaseResponseBody;
 import com.ssafy.petmily.db.entity.Agency;
@@ -105,8 +106,8 @@ public class UserController {
 	})
 	public ResponseEntity<AgencyRes> getAgencyInfo(@ApiIgnore Authentication authentication) {
 
-		SsafyUserDetails agencyDetails = (SsafyUserDetails) authentication.getDetails();
-		String email = agencyDetails.getUsername();
+		SsafyUserDetails userDetails = (SsafyUserDetails) authentication.getDetails();
+		String email = userDetails.getUsername();
 		Agency agency = userService.getAgencyByEmail(email);
 		return ResponseEntity.status(200).body(AgencyRes.of(agency));
 	}
