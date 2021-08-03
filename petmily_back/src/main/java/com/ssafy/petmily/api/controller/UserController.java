@@ -28,11 +28,14 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+import javax.xml.transform.Result;
+
 /**
  * 유저 관련 API 요청 처리를 위한 컨트롤러 정의.
  */
 @Api(value = "유저 API", tags = {"User"})
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/users")
 public class UserController {
 	
@@ -138,5 +141,22 @@ public class UserController {
 		userService.deleteAgency(email);
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
 	}
+
+	//개인회원수정
+	@PatchMapping("/personal/{email}")
+	public ResponseEntity<User> patchUser(@PathVariable String email,  @RequestBody User user){
+		User updateUser = userService.patchUser(email,user);
+		return new ResponseEntity<User>(updateUser,HttpStatus.OK);
+	}
+
+	//기관회원수정
+	@PatchMapping("/agency/{email}")
+	public ResponseEntity<Agency> patchAgency(@PathVariable String email,  @RequestBody Agency agency){
+		Agency updateAgency = userService.patchAgency(email,agency);
+		return new ResponseEntity<Agency>(updateAgency,HttpStatus.OK);
+	}
+
+
+
 
 }

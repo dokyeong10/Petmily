@@ -8,6 +8,7 @@ import org.springframework.boot.context.properties.bind.DefaultValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
 
 /**
  * 유저 모델 정의.
@@ -16,22 +17,25 @@ import javax.persistence.Enumerated;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
-
 public class User extends BaseEntity{
     String email;
     String username;
     String phone;
     String img;
-    String type;
+
+    @Builder.Default
+    String type= "normal";
 
     @Enumerated(EnumType.STRING)
-    private Role role;
+    @Builder.Default
+    private Role role=Role.USER;
 
     @JsonIgnore
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     String password;
 
+    public User() {
+    }
 
     @Builder
     public User(String name, String email, String picture, Role role, String phone, String type){
@@ -53,5 +57,15 @@ public class User extends BaseEntity{
     public String getRoleKey() {
         return this.role.getKey() ;
     }
+
+
+//    public User update(String name, String img, String phone,String password){
+//        this.username = name;
+//        this.img = img;
+//        this.phone = phone;
+//        this.password=password;
+//        return this;
+//    }
+
 }
 

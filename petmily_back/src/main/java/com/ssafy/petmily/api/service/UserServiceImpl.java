@@ -11,6 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import javax.xml.transform.Result;
+import java.util.Optional;
 
 /**
  *	유저 관련 비즈니스 로직 처리를 위한 서비스 구현 정의.
@@ -24,6 +26,11 @@ public class UserServiceImpl implements UserService {
 	UserRe userRe;
 
 	@Autowired
+	UserupdateRe userupdateRe;
+	@Autowired
+	AgencyupdateRe agencyupdateRe;
+
+	@Autowired
 	AgencyRepository agencyRepository;
 	
 	@Autowired
@@ -35,6 +42,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
+	private Object ResultCode;
+
 	@Override
 	public User createUser(UserRegisterPostReq userRegisterInfo) {
 		User user = new User();
@@ -85,4 +94,73 @@ public class UserServiceImpl implements UserService {
 	public void deleteAgency(String email) {
 		agencyRepository.deleteByEmail(email);
 	}
+
+	@Override
+	public User patchUser(String email, User user) {
+		final Optional<User> fetchedUser = userupdateRe.findByEmail(email);
+		if(fetchedUser.isPresent()){
+			if(user.getPassword() != null){
+				fetchedUser.get().setPassword(user.getPassword());
+			}
+			if(user.getPhone() != null){
+				fetchedUser.get().setPhone(user.getPhone());
+			}
+			if(user.getImg() != null){
+				fetchedUser.get().setImg(user.getImg());
+			}
+			if(user.getType() != null){
+				fetchedUser.get().setType(user.getType());
+			}
+			if(user.getRole() != null){
+				fetchedUser.get().setRole(user.getRole());
+			}
+			return userRe.save(fetchedUser.get());
+		}
+		else{
+			return null;
+		}
+	}
+
+	@Override
+	public Agency patchAgency(String email, Agency agency) {
+		final Optional<Agency> fetchedAgency = agencyupdateRe.findByEmail(email);
+		if(fetchedAgency.isPresent()){
+			if(agency.getPassword() != null){
+				fetchedAgency.get().setPassword(agency.getPassword());
+			}
+			if(agency.getPhone() != null){
+				fetchedAgency.get().setPhone(agency.getPhone());
+			}
+			if(agency.getImg() != null){
+				fetchedAgency.get().setImg(agency.getImg());
+			}
+			if(agency.getAgencycode() != null){
+				fetchedAgency.get().setAgencycode(agency.getAgencycode());
+			}
+			if(agency.getAgencyname() != null){
+				fetchedAgency.get().setAgencyname(agency.getAgencyname());
+			}
+			return agencyRepository.save(fetchedAgency.get());
+		}
+		else{
+			return null;
+		}
+	}
+
+//	@Override
+//	public User updateUser(String email, User user) {
+//		final Optional<User> fetchedUser = userRepository.findByEmail(email);
+//		if(fetchedUser.isPresent()){
+//			user.setEmail(email);
+//			return userRepository.save(user);
+//		}
+//		else{
+//			return null;
+//		}
+//
+//	}
+
+
+
+
 }
