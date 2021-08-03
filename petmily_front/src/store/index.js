@@ -9,6 +9,7 @@ export default createStore({
   ],
   state: {
     email: "",
+    isSignup: false,
   },
   mutations: {
   },

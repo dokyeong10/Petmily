@@ -10,8 +10,8 @@
         <router-link to="/" class="mx-5 text-decoration-none">커뮤니티</router-link>
         <router-link to="/" class="mx-5 text-decoration-none">라이브</router-link>
       </span>
-      <span v-if="isLogin">
-        <router-link to="/" class="mx-5 text-decoration-none">로그아웃</router-link>
+      <span v-if="confirmLogin">
+        <button class="mx-5 text-decoration-none" @click="logout">로그아웃</button>
         <router-link to="/" class="mx-5 text-decoration-none">마이페이지</router-link>
       </span>
       <span v-else>
@@ -25,14 +25,14 @@
   
 </template>
 <script>
-import { ref, onMounted } from 'vue'
-// import { useStore } from 'vuex'
+import { onMounted, computed } from 'vue'
+import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 
 export default {
   name: 'App',
   setup () {
-    const isLogin = ref(false)
+    const store = useStore()
     const router = useRouter()
     const goToLogin = function () {
       router.push('/login')
@@ -43,7 +43,11 @@ export default {
     }
 
     onMounted(() => { router.push('/home') }) 
-    return { isLogin, goToLogin, goToSignup }
+
+    const confirmLogin = computed(() => { 
+      return store.state.isLogin
+      }) 
+    return { goToLogin, goToSignup, confirmLogin }
   }
 }
 </script>
