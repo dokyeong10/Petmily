@@ -1,21 +1,26 @@
 <template>
-  <div id="nav" style="box-shadow: 0 4px 4px 0 $transparent-blue-violet;">
-    <span>
-      <router-link to="/home" class="mx-5 text-decoration-none">Home</router-link> 
-      <router-link to="/home" class="mx-5 text-decoration-none">Home</router-link> 
-      <router-link to="/" class="mx-5 text-decoration-none">유기동물</router-link>
-      <router-link to="/" class="mx-5 text-decoration-none">커뮤니티</router-link>
-      <router-link to="/" class="mx-5 text-decoration-none">라이브</router-link>
-    </span>
-    <span v-if="isLogin">
-      <router-link to="/" class="mx-5 text-decoration-none">로그아웃</router-link>
-      <router-link to="/" class="mx-5 text-decoration-none">마이페이지</router-link>
-    </span>
-    <span v-else>
-      <router-link @click="goTologin" to="/login" class="mx-5 text-decoration-none">로그인</router-link>
-      <router-link to="/" class="mx-5 text-decoration-none">회원가입</router-link>
-    </span>
-    <router-view/>
+  <div id="nav">
+    <div>
+      <div>
+        <!-- style="box-shadow: 0 4px 0 0 violet; content-box" 여부 다시 결정 해야함. -->
+      <span>
+        <router-link to="/home" class="mx-5 text-decoration-none">Home</router-link> 
+        <router-link to="/home" class="mx-5 text-decoration-none">Home</router-link> 
+        <router-link to="/" class="mx-5 text-decoration-none">유기동물</router-link>
+        <router-link to="/" class="mx-5 text-decoration-none">커뮤니티</router-link>
+        <router-link to="/" class="mx-5 text-decoration-none">라이브</router-link>
+      </span>
+      <span v-if="isLogin">
+        <router-link to="/" class="mx-5 text-decoration-none">로그아웃</router-link>
+        <router-link to="/" class="mx-5 text-decoration-none">마이페이지</router-link>
+      </span>
+      <span v-else>
+        <router-link @click="goTologin" to="/login" class="mx-5 text-decoration-none">로그인</router-link>
+        <router-link @click="goToSignup" to="/signup" class="mx-5 text-decoration-none">회원가입</router-link>
+      </span>
+      <router-view/>
+      </div>
+    </div>
   </div>
   
 </template>
@@ -33,8 +38,12 @@ export default {
       router.push('/login')
     }
 
+    const goToSignup = function () {
+      router.push('/signup')
+    }
+
     onMounted(() => { router.push('/home') }) 
-    return { isLogin, goToLogin}
+    return { isLogin, goToLogin, goToSignup }
   }
 }
 </script>

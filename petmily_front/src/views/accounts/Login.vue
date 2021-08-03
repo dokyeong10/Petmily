@@ -2,30 +2,40 @@
   <br>
   <br>
   <div class="container">
-  <button>개인 로그인</button>
-  <button>기관 로그인</button>
-    <div class="d-flex justify-content-center">
-      <div>
-        <div align="left" class="mb-3">
-          <div>Welcome Back!</div>
-          <div> <span>Don’t have a account,</span><button style="color: #8699DA" class="bw-color">Sign up</button></div>
-        </div>
-        <form ref="loginForm">
-          <div>
-            <input v-model="state.form.id" class="mb-5 radius-border form-control" type="text" placeholder="email">
-          </div>
-          <div>
-            <input v-model="state.form.password" class="mb-5 radius-border form-control" type="password" placeholder="password">
-          </div>
-        </form>
-        <div>
-          <button class="btn-white" @click="clickLogin" style="color: #FFFFFF">로그인 하기</button>
-        </div>
-      </div>
-      <img class="ms-3" style="border-radius: 12px" alt="petmily login" src="@/assets/login.png">
+    <div class="d-flex justify-content-evenly">
+      <button class="btn-white" style="color: #FFFFFF" @click="changeTogglePrivate">개인 로그인</button>
+      <button class="btn-white" style="color: #FFFFFF" @click="changeToggleAgency">기관 로그인</button>
     </div>
+    <br>
+    <!-- <div v-if="toggle"> -->
+      <div class="d-flex justify-content-center">
+        <div>
+          <div align="left" class="mb-3">
+            <div>Welcome Back!</div>
+            <div> <span>Don’t have an account,</span><button style="color: #8699DA" class="bw-color" @click="goToSignup">Sign up</button></div>
+          </div>
+          <form ref="loginForm">
+            <div>
+              <input v-model="state.form.id" class="mb-5 radius-border form-control" type="text" placeholder="email">
+            </div>
+            <div>
+              <input v-model="state.form.password" class="mt-5 mb-2 radius-border form-control" type="password" placeholder="password">
+            </div>
+            <div class="d-flex justify-content-start checkbox-container">
+              <label><input type="checkbox" name="remind_user" value="동의함">  Remember Me</label>
+            </div>
+          </form>
+          <div class="mt-5">
+            <button class="btn-white" @click="clickLogin" style="color: #FFFFFF">로그인 하기</button>
+          </div>
+          <div>
+            <!-- 소셜로그인 로그인 만들기 -->
+          </div>
+        </div>
+        <img class="ms-3" style="border-radius: 12px" alt="petmily login" src="@/assets/login.png">
+      </div>
+    <!-- </div> -->
   </div>
-  
 </template>
 <script>
 import { onMounted, reactive, ref } from 'vue'
@@ -39,7 +49,8 @@ export default {
     const loginForm = ref(null)
     const store = useStore()
     const router = useRouter()
-    // const toggle = false
+    // const RememberMe = ref(true)
+    let toggle = true
 
     const state = reactive({
       form: {
@@ -63,6 +74,24 @@ export default {
         Authorization: `JWT ${token}`
       }
       return config
+    }
+
+    const changeTogglePrivate = function () {
+      if (toggle) {
+        toggle = false
+        console.log(toggle)
+      } 
+    }
+
+    const changeToggleAgency = function () {
+      if (!toggle) {
+        toggle = true
+        console.log(toggle)
+      }
+    }
+
+    const goToSignup = function () {
+      router.push("/signup")
     }
 
     const clickLogin = function () {
@@ -94,7 +123,7 @@ export default {
       // console.log(loginForm.value)
     })
 
-    return {state, clickLogin}
+    return {state, clickLogin, goToSignup, changeTogglePrivate, changeToggleAgency}
 
   }
   
