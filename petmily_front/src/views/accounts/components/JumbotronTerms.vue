@@ -7,7 +7,7 @@
 </template>
 <script>
 export default {
-  name: 'JumbotonTerms'
+  name: 'JumbotronTerms'
 }
 </script>
 <style>
