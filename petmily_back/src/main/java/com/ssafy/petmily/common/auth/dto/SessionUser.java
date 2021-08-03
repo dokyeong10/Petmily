@@ -18,7 +18,7 @@ public class SessionUser implements Serializable {
 
     private static final long serialVersionUID = 178630l;
 
-    private String name, email, picture, phone;
+    private String name, email, picture, phone, type;
     private Long id;
 
     public SessionUser(User user) {
@@ -27,5 +27,6 @@ public class SessionUser implements Serializable {
         this.picture = user.getImg();
         this.id = user.getNo();
         this.phone = user.getPhone();
+        this.type = user.getType();
     }
 }
