@@ -1,4 +1,4 @@
-package com.ssafy.petmily.config;
+package com.ssafy.petmily.config.customAnnotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
