@@ -15,17 +15,17 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 
 /*
- * 
+ *
  * SPA처리를 위한 ControllerAdvice.
  * 요청에 해당하는 Request Mapping이 존재하지 않을 경우 Default로 index.html을 렌더링한다.
- * 
+ *
  */
 
 @ControllerAdvice
 public class NotFoundHandler {
 	@Value("${spa.default-file}")
 	String defaultFile;
-	 
+
 	@ExceptionHandler(NoHandlerFoundException.class)
 	public ResponseEntity<String> renderDefaultPage(NoHandlerFoundException ex) {
 		String url = ex.getRequestURL();

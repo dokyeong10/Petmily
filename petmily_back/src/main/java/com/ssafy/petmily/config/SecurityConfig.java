@@ -1,9 +1,11 @@
 package com.ssafy.petmily.config;
 
 
+import com.ssafy.petmily.api.service.CustomOAuth2UserService;
 import com.ssafy.petmily.api.service.UserService;
 import com.ssafy.petmily.common.auth.JwtAuthenticationFilter;
 import com.ssafy.petmily.common.auth.SsafyUserDetailService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,15 +23,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * 인증(authentication) 와 인가(authorization) 처리를 위한 스프링 시큐리티 설정 정의.
  */
 @Configuration
-@EnableWebSecurity
+@RequiredArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    private final CustomOAuth2UserService customOAuth2UserService;
+
     @Autowired
     private SsafyUserDetailService ssafyUserDetailService;
-    
+
     @Autowired
     private UserService userService;
-    
+
     // Password 인코딩 방식에 BCrypt 암호화 방식 사용
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -57,12 +61,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .httpBasic().disable()
                 .csrf().disable()
+                .headers().frameOptions().disable()
+                .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 토큰 기반 인증이므로 세션 사용 하지않음
                 .and()
                 .addFilter(new JwtAuthenticationFilter(authenticationManager(), userService)) //HTTP 요청에 JWT 토큰 인증 필터를 거치도록 필터를 추가
                 .authorizeRequests()
-                .antMatchers("/api/v1/users/me").authenticated()       //인증이 필요한 URL과 필요하지 않은 URL에 대하여 설정
+                .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile").permitAll()
+                .antMatchers("/users/personal/me").authenticated()       //인증이 필요한 URL과 필요하지 않은 URL에 대하여 설정
     	        	    .anyRequest().permitAll()
-                .and().cors();
+                .and()
+                .logout()
+                .logoutSuccessUrl("/")
+                .and()
+                .oauth2Login()
+                .userInfoEndpoint()
+                .userService(customOAuth2UserService);
     }
 }
