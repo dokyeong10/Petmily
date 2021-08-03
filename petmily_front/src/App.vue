@@ -16,7 +16,7 @@
       </span>
       <span v-else>
         <router-link @click="goTologin" to="/login" class="mx-5 text-decoration-none">로그인</router-link>
-        <router-link @click="goToSignup" to="/signup" class="mx-5 text-decoration-none">회원가입</router-link>
+        <router-link @click="goToSignup" to="/signupterms" class="mx-5 text-decoration-none">회원가입</router-link>
       </span>
       <router-view/>
       </div>
@@ -39,7 +39,7 @@ export default {
     }
 
     const goToSignup = function () {
-      router.push('/signup')
+      router.push('/signupterms')
     }
 
     onMounted(() => { router.push('/home') }) 
