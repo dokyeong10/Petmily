@@ -32,7 +32,6 @@ const routes = [
     name: 'privateform',
     component: PrivateForm
   },
-
   // {
   //   path: '/',
   //   name: 'Home',
