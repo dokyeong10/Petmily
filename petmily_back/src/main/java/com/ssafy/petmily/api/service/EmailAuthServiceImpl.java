@@ -1,13 +1,9 @@
 package com.ssafy.petmily.api.service;
 
-import com.ssafy.petmily.common.response.BaseResponseBody;
 import com.ssafy.petmily.db.entity.EmailCheck;
 import com.ssafy.petmily.db.repository.EmailAuthRepository;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
