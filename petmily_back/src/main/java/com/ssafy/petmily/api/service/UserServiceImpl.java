@@ -23,14 +23,6 @@ public class UserServiceImpl implements UserService {
 	UserRepository userRepository;
 
 	@Autowired
-	UserRe userRe;
-
-	@Autowired
-	UserupdateRe userupdateRe;
-	@Autowired
-	AgencyupdateRe agencyupdateRe;
-
-	@Autowired
 	AgencyRepository agencyRepository;
 	
 	@Autowired
@@ -51,7 +43,7 @@ public class UserServiceImpl implements UserService {
 		user.setPhone(userRegisterInfo.getPhone());
 		user.setUsername(userRegisterInfo.getUsername());
 		user.setImg(userRegisterInfo.getImg());
-		return userRe.save(user);
+		return userRepository.save(user);
 	}
 
 	@Override
@@ -74,6 +66,11 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
+	@Override
+	public User getUserByEmailAndType(String email) {
+		User user = userRepositorySupport.checkUserByEmailAndType(email,"normal");
+		return user;
+	}
 
 	@Override
 	public Agency getAgencyByEmail(String email) {
@@ -84,7 +81,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public void deleteUser(String email) {
-		userRe.deleteByEmail(email);
+		userRepositorySupport.deleteByEmailAndType(email,"normal");
 	}
 
 	@Override
@@ -95,10 +92,10 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User patchUser(String email, User user) {
-		final Optional<User> fetchedUser = userupdateRe.findByEmail(email);
+		final Optional<User> fetchedUser = userRepositorySupport.findUserByEmailAndType(email,"normal");
 		if(fetchedUser.isPresent()){
 			if(user.getPassword() != null){
-				fetchedUser.get().setPassword(user.getPassword());
+				fetchedUser.get().setPassword(passwordEncoder.encode(user.getPassword()));
 			}
 			if(user.getPhone() != null){
 				fetchedUser.get().setPhone(user.getPhone());
@@ -112,7 +109,7 @@ public class UserServiceImpl implements UserService {
 			if(user.getRole() != null){
 				fetchedUser.get().setRole(user.getRole());
 			}
-			return userRe.save(fetchedUser.get());
+			return userRepository.save(fetchedUser.get());
 		}
 		else{
 			return null;
@@ -121,10 +118,10 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Agency patchAgency(String email, Agency agency) {
-		final Optional<Agency> fetchedAgency = agencyupdateRe.findByEmail(email);
+		final Optional<Agency> fetchedAgency = agencyRepository.findByEmail(email);
 		if(fetchedAgency.isPresent()){
 			if(agency.getPassword() != null){
-				fetchedAgency.get().setPassword(agency.getPassword());
+				fetchedAgency.get().setPassword(passwordEncoder.encode(agency.getPassword()));
 			}
 			if(agency.getPhone() != null){
 				fetchedAgency.get().setPhone(agency.getPhone());
@@ -146,26 +143,26 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getUserByEmailAndType(String email) {
-		User user = userRepositorySupport.checkUserByEmailAndType(email,"normal");
-		return user;
+	public boolean patchPassword(String email, String password) {
+		final User fetchUser = userRepositorySupport.checkUserByEmailAndType(email,"normal");
+		System.out.println(fetchUser);
+		if(fetchUser != null){
+			fetchUser.setPassword(passwordEncoder.encode(password));
+			System.out.println(fetchUser);
+			userRepository.save(fetchUser);
+			return true;
+		}else{
+			final Agency fetchAgency = agencyRepositorySupport.checkAgencyByEmail(email);
+			System.out.println(fetchAgency);
+			if(fetchAgency != null){
+				fetchAgency.setPassword(passwordEncoder.encode(password));
+				System.out.println(fetchAgency);
+				agencyRepository.save(fetchAgency);
+				return true;
+			}else{
+				return false;
+			}
+		}
 	}
-
-
-//	@Override
-//	public User updateUser(String email, User user) {
-//		final Optional<User> fetchedUser = userRepository.findByEmail(email);
-//		if(fetchedUser.isPresent()){
-//			user.setEmail(email);
-//			return userRepository.save(user);
-//		}
-//		else{
-//			return null;
-//		}
-//
-//	}
-
-
-
 
 }
