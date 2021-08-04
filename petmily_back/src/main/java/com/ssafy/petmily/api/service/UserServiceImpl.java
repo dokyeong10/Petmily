@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
 		final Optional<User> fetchedUser = userupdateRe.findByEmail(email);
 		if(fetchedUser.isPresent()){
 			if(user.getPassword() != null){
-				fetchedUser.get().setPassword(user.getPassword());
+				fetchedUser.get().setPassword(passwordEncoder.encode(user.getPassword()));
 			}
 			if(user.getPhone() != null){
 				fetchedUser.get().setPhone(user.getPhone());
