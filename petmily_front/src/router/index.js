@@ -5,6 +5,8 @@ import Login from '@/views/accounts/Login'
 import SignupTerms from '@/views/accounts/SignupTerms'
 import AgencyForm from '@/views/accounts/AgencyForm.vue'
 import PrivateForm from '@/views/accounts/PrivateForm.vue'
+import SignupSuccess from '@/views/accounts/SignupSuccess.vue'
+
 
 const routes = [
   {
@@ -31,6 +33,11 @@ const routes = [
     path: '/privateform',
     name: 'privateform',
     component: PrivateForm
+  },
+  {
+    path: '/signupsuccess',
+    name: 'signupsuccess',
+    component: SignupSuccess
   },
   // {
   //   path: '/',

@@ -16,7 +16,7 @@
           </div>
           <form ref="loginForm">
             <div>
-              <input v-model="state.form.id" class="mb-5 radius-border form-control" type="text" placeholder="email">
+              <input v-model="state.form.email" class="mb-5 radius-border form-control" type="text" placeholder="email">
             </div>
             <div>
               <input v-model="state.form.password" class="mt-5 mb-2 radius-border form-control" type="password" placeholder="password">
@@ -38,7 +38,7 @@
   </div>
 </template>
 <script>
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, reactive} from 'vue'
 import axios from 'axios'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
@@ -46,7 +46,6 @@ import { useRouter } from 'vue-router'
 export default {
   name: "login",
   setup () {
-    const loginForm = ref(null)
     const store = useStore()
     const router = useRouter()
     // const RememberMe = ref(true)
@@ -54,7 +53,7 @@ export default {
 
     const state = reactive({
       form: {
-        id: '',
+        email: '',
         password: '',
         align: 'left'
       },
@@ -96,29 +95,27 @@ export default {
 
     const clickLogin = function () {
       // 로그인 클릭 시 validate 체크 후 그 결과 값에 따라, 로그인 API 호출 또는 경고창 표시
-      loginForm.value.validate((valid) => {
-        if (valid) {
-          console.log('submit')
-          axios({
-            method: 'post',
-            url: "http://localhost:8080/users/personal",
-            headers: setToken()
-          })
-          .then((res) => {
-            console.log(res)
-            localStorage.setItem('jwt', res.data.token)
-            store.state.email = state.form.id
-            router.push({name: '/'})
-          })
-          .catch(function (err) {
-            alert(err)
-          })
-        } else {
-          alert('Validate error!')
+      axios({
+        method: 'post',
+        url: 'http://localhost:8080/auth/personal/login',
+        data: {
+          email: state.form.email,
+          password: state.form.password,
+          header: setToken()
         }
-      });
-    }
-
+      })
+      .then(res => {
+        localStorage.setItem('jwt', res.data.token)
+        console.log(res)
+        store.state.isLogin = true
+        router.push('/home')
+      })
+      .catch(err => {
+        console.log(err)
+      })
+        
+      }
+    
     onMounted(() => {
       // console.log(loginForm.value)
     })

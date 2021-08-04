@@ -157,7 +157,27 @@ public class UserController {
 		return new ResponseEntity<Agency>(updateAgency,HttpStatus.OK);
 	}
 
+	// 이메일 중복 체크
+	@ApiOperation(value = "이메일 중복 체크", notes = "이메일 중복 확인을 위한 컨트롤러")
+	@ApiResponses({
+			@ApiResponse(code = 200, message = "true = 중복 O"),
+			@ApiResponse(code = 200, message = "false = 중복 X")
+	})
+	@GetMapping("/check/{email}")
+	public ResponseEntity<Boolean> duplicateCheck(@PathVariable @ApiParam(value = "회원 이메일") String email){
+		User user = userService.getUserByEmailAndType(email);
+		System.out.println("===================" + user);
+		if(user != null)
+			return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+		else{
+			Agency agency = userService.getAgencyByEmail(email);
 
+			if(agency != null)
+				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+			else
+				return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+		}
+	}
 
 
 }
