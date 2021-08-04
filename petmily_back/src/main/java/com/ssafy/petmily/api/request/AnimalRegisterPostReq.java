@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @ApiModel("AnimalRegisterPostRequest")
@@ -22,11 +24,10 @@ public class AnimalRegisterPostReq {
     @ApiModelProperty(name ="중성화", example = "1(유)")
     boolean neutered;
     @ApiModelProperty(name ="발견날짜", example = "2021.02.12")
-    String find_date;
+    Date find_date;
     @ApiModelProperty(name ="보호소코드", example = "10303")
     String agencycode;
-    @ApiModelProperty(name ="보호소번호", example = "30")
-    Long no;
+
 
 
 }

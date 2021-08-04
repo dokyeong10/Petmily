@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface AnimalWaitRepository extends JpaRepository<AnimalWait,Long> {
-    Optional<AnimalWait> findByNo(Long no);
+    Optional<AnimalWait> findByAgencycode(String agencycode);
 }

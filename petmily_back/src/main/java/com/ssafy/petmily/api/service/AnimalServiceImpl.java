@@ -22,7 +22,6 @@ public class AnimalServiceImpl implements AnimalService {
     @Override
     public AnimalWait createAnimal(AnimalRegisterPostReq registerInfo) {
         AnimalWait animalWait = new AnimalWait();
-        Agency agency = new Agency();
         animalWait.setType(registerInfo.getType());
         animalWait.setSpecies(registerInfo.getSpecies());
         animalWait.setAddr(registerInfo.getAddr());
@@ -30,8 +29,7 @@ public class AnimalServiceImpl implements AnimalService {
         animalWait.setSex(registerInfo.isSex());
         animalWait.setNeutered(registerInfo.isNeutered());
         animalWait.setFind_date(registerInfo.getFind_date());
-        agency.setAgencycode(registerInfo.getAgencycode());
-        agency.setNo(registerInfo.getNo());
+        animalWait.setAgencycode(registerInfo.getAgencycode());
         return animalWaitRepository.save(animalWait);
     }
 }
