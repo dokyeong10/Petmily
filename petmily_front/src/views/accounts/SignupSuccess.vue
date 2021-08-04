@@ -31,7 +31,7 @@ export default {
     //     router.push('/home')
     //   }
     // })
-    // 내일 물어보기
+    // 내일 회의하기
     return { goTologin }
   }
 }

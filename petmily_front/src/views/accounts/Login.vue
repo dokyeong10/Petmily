@@ -105,9 +105,10 @@ export default {
         }
       })
       .then(res => {
-        localStorage.setItem('jwt', res.data.token)
-        console.log(res)
+        console.log(res.data)
+        localStorage.setItem('jwt', res.data.accessToken)
         store.state.isLogin = true
+        localStorage.setItem('isLogin', store.state.isLogin)
         router.push('/home')
       })
       .catch(err => {
