@@ -17,9 +17,9 @@
 <script>
 import {reactive} from 'vue'
 import axios from 'axios'
-import JumbotronTerms from '@/views/accounts/components/JumbotronTerms'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+import JumbotronTerms from '@/views/accounts/components/JumbotronTerms'
 export default {
   components: { JumbotronTerms },
   name: 'PrivateForm',
@@ -28,7 +28,7 @@ export default {
   },
   setup () {
     const state = reactive({
-      // isEmail: false,
+      isEmail: false,
       email: "",
       username: "",
       password: null,
@@ -44,6 +44,13 @@ export default {
         }
       return config
     }
+
+    // const confirmEmail = function () {
+    //   axios({
+    //     method: 'post',
+    //     url: ''
+    //   })
+    // }
 
     const confirmSignup = function () {
       const reg = /(?=.*[a-zA-ZS])(?=.*?[#?!@$%^&*-]).{8,16}/
@@ -96,7 +103,7 @@ export default {
 
     }
 
-    return {state, confirmSignup, setToken}
+    return {state, confirmSignup, setToken }
 
 
 

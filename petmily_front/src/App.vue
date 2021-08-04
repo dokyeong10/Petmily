@@ -42,11 +42,14 @@ export default {
       router.push('/signupterms')
     }
 
+    const confirmLogin = computed(() => {
+      console.log(store.state.isLogin)
+      return localStorage.getItem('isLogin')
+        }
+      )
+      
     onMounted(() => { router.push('/home') }) 
 
-    const confirmLogin = computed(() => { 
-      return store.state.isLogin
-      }) 
     return { goToLogin, goToSignup, confirmLogin }
   }
 }
