@@ -25,8 +25,11 @@ public class UserRepositorySupport {
         return Optional.ofNullable(user);
    }
     public Optional<User> findUserByEmailAndType(String email, String type) {
+        System.out.println(email);
+        System.out.println(type);
         User user = jpaQueryFactory.select(qUser).from(qUser)
                 .where(qUser.email.eq(email).and(qUser.type.eq(type))).fetchOne();
+        System.out.println("--------------------------------" + user);
         if(user == null) return Optional.empty();
         return Optional.ofNullable(user);
     }
@@ -35,5 +38,9 @@ public class UserRepositorySupport {
         User user = jpaQueryFactory.select(qUser).from(qUser)
                 .where(qUser.email.eq(email).and(qUser.type.eq(type))).fetchOne();
         return user;
+    }
+
+    public void deleteByEmailAndType(String email, String type){
+        jpaQueryFactory.delete(qUser).where(qUser.email.eq(email).and(qUser.type.eq(type))).execute();
     }
 }
