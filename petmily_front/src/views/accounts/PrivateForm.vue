@@ -3,13 +3,20 @@
   <div class="container mb-5">
     <div style="width: 600px;">
       <span>
-        <input v-model="state.email" type="text" class="form-control br" placeholder="petmily@email.com">
+        <input v-model="state.email" type="text" class="form-control radius-border br" placeholder="petmily@email.com">
         <button @click="confirmEmail" class="mb-5">이메일 인증하기</button>
       </span>
-      <input v-model="state.username" type="text" class="form-control br mb-5" placeholder="홍길동">
-      <input v-model="state.password" type="password" class="form-control br mb-5" placeholder="••••••••">
-      <input v-model="state.passwordConfirm" type="password" class="form-control br mb-5" placeholder="••••••••">
-      <input v-model="state.phone" type="text" class="form-control br mb-5" placeholder="010-1234-5678">
+      <span v-if="state.isEmail">
+        <input v-model="state.number" type="text" class="form-control radius-border br" placeholder="인증번호를 입력해주세요.">
+        <button @click="confirmNumber" class="mb-5">인증하기</button>
+      </span>
+      <div v-if="state.isConfirm" class="mb-5">
+        인증이 완료되었습니다.
+      </div>
+      <input v-model="state.username" type="text" class="form-control radius-border br mb-5" placeholder="홍길동">
+      <input v-model="state.password" type="password" class="form-control radius-border br mb-5" placeholder="••••••••">
+      <input v-model="state.passwordConfirm" type="password" class="form-control radius-border br mb-5" placeholder="••••••••">
+      <input v-model="state.phone" type="text" class="form-control br radius-border mb-5" placeholder="010-1234-5678">
       <button class="btn-white" style="color: #FFFFFF;" @click="confirmSignup">회원가입 하기</button>
     </div>
   </div>
@@ -29,6 +36,8 @@ export default {
   setup () {
     const state = reactive({
       isEmail: false,
+      isConfirm: false,
+      number: null,
       email: "",
       username: "",
       password: null,
@@ -44,13 +53,54 @@ export default {
         }
       return config
     }
+    
+    const confirmEmail = function () {
+      axios({
+        method: 'post',
+        url: 'http://localhost:8080/email/send/register',
+        data: {
+          email: state.email
+          }
+        })
+        .then(res => {
+          console.log(res)
+          alert('작성하신 이메일로 인증번호를 보내드렸습니다. 아래 칸에 인증번호를 입력해주세요.')
+          state.isEmail = true
+        })
+        .catch(err => {
+          if (err.response.status >= 500 ) {
+            alert("올바른 이메일을 입력해주세요!")
+          } else {
+            alert("이미 가입된 이메일입니다!")
+          }
+        })
+    }
 
-    // const confirmEmail = function () {
-    //   axios({
-    //     method: 'post',
-    //     url: ''
-    //   })
-    // }
+    const confirmNumber = function () {
+      axios({
+        method: 'post',
+        url: 'http://localhost:8080/email/check/authcode',
+        data: {
+          email: state.email,
+          authCode: state.number
+          }
+      })
+      .then(res => {
+        console.log(res)
+        if (res.data) {
+          alert('인증에 성공하셨습니다.')
+          state.isEmail = false
+          state.isConfirm = true
+        } else {
+          alert('잘못된 인증 번호입니다.')
+          return
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
+
 
     const confirmSignup = function () {
       const reg = /(?=.*[a-zA-ZS])(?=.*?[#?!@$%^&*-]).{8,16}/
@@ -58,9 +108,9 @@ export default {
       const reg_phone = /^\d{3}-\d{3,4}-\d{4}$/
       const reg_name = /^[가-힣]+$/
 
-      // if (!state.isEmail) {
-      //   return alert("이메일 인증을 진행해주세요.")
-      // }
+      if (!state.isConfirm) {
+        return alert("이메일 인증을 진행해주세요.")
+      }
 
       if (!reg_name.test(state.username)) {
         return alert("올바른 이름을 입력하세요.")
@@ -94,7 +144,7 @@ export default {
       })
       .then( res => {
         console.log(res.data)
-        store.state.isSignup = true
+        store.state.isLogin = true
         router.push('/signupsuccess')
       })
       .catch(err => {
@@ -103,12 +153,8 @@ export default {
 
     }
 
-    return {state, confirmSignup, setToken }
-
-
-
+    return {state, confirmSignup, setToken, confirmEmail, confirmNumber}
   }
-  
 }
 </script>
 <style>
@@ -131,5 +177,14 @@ export default {
   border-radius: 12px;
 }
 
+.radius-border {
+  border-radius: 12px;
+  border-right: #789ADE 1px solid;
+  border-left: #789ADE 1px solid;
+  border-top: #789ADE 1px solid;
+  border-bottom: #789ADE 1px solid;
+  width: 400px;
+  color: #789ADE;
+}
 
 </style>
