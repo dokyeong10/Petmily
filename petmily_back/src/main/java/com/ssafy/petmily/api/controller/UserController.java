@@ -91,7 +91,7 @@ public class UserController {
 		 */
 		SsafyUserDetails userDetails = (SsafyUserDetails) authentication.getDetails();
 		String email = userDetails.getUsername();
-		User user = userService.getUserByEmail(email);
+		User user = userService.getUserByEmailAndType(email);
 
 		return ResponseEntity.status(200).body(UserRes.of(user));
 	}
@@ -179,5 +179,22 @@ public class UserController {
 		}
 	}
 
+	@ApiOperation(value = "비밀번호 찾기 -> 비밀번호 변경", notes = "비밀번호 찾기 중 이메일 인증 후 새로운 비밀번호 입력")
+	@ApiResponses({
+			@ApiResponse(code = 200, message = "Success"),
+			@ApiResponse(code = 500, message = "Internal Server Error")
+	})
+	@PatchMapping("/findpwd/change")
+	public ResponseEntity<? extends BaseResponseBody>changePassword(@ApiParam(value = "비밀번호 변경하는 이메일") @RequestBody User user){
+		String email = user.getEmail();
+		String password = user.getPassword();
+		System.out.println(user);
+		boolean isOk = userService.patchPassword(email, password);
+		if(isOk){
+			return ResponseEntity.status(200).body(BaseResponseBody.of(200,"Success"));
+		}else{
+			return ResponseEntity.status(500).body(BaseResponseBody.of(500,"Internal Server Error"));
+		}
+	}
 
 }

@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
 
 /**
  * 유저 모델 정의.
@@ -18,9 +15,13 @@ import javax.persistence.GeneratedValue;
 @Setter
 @ToString
 public class User extends BaseEntity{
+    @Column
     String email;
+    @Column
     String username;
+    @Column
     String phone;
+    @Column
     String img;
 
     @Builder.Default
@@ -30,7 +31,6 @@ public class User extends BaseEntity{
     @Builder.Default
     private Role role=Role.USER;
 
-    @JsonIgnore
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     String password;
 
@@ -57,15 +57,6 @@ public class User extends BaseEntity{
     public String getRoleKey() {
         return this.role.getKey() ;
     }
-
-
-//    public User update(String name, String img, String phone,String password){
-//        this.username = name;
-//        this.img = img;
-//        this.phone = phone;
-//        this.password=password;
-//        return this;
-//    }
 
 }
 
