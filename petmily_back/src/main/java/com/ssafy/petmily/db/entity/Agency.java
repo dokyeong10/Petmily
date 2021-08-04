@@ -7,6 +7,10 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import java.util.Collection;
 
 @Entity
 @Getter
@@ -19,6 +23,10 @@ public class Agency extends BaseEntity {
     String img;
     String agencycode;
     String agencyname;
+
+//    @OneToMany(fetch = FetchType.EAGER)
+//    @JoinColumn(name="Agency_no")
+//    Collection<AnimalWait> AnimalWait;
 
     @JsonIgnore
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

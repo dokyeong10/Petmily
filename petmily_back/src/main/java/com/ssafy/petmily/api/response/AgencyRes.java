@@ -12,8 +12,8 @@ import lombok.Setter;
 @ApiModel("AgencyResponse")
 public class AgencyRes {
 
-//    @ApiModelProperty(name="no")
-//    Long no;
+    @ApiModelProperty(name="no")
+    Long no;
     @ApiModelProperty(name="email")
     String email;
     @ApiModelProperty(name="phone")
@@ -29,7 +29,7 @@ public class AgencyRes {
 
     public static AgencyRes of(Agency agency) {
         AgencyRes res = new AgencyRes();
-        //res.setNo(agency.getNo());
+        res.setNo(agency.getNo());
         res.setEmail(agency.getEmail());
         res.setPhone(agency.getPhone());
         res.setUsername(agency.getUsername());
