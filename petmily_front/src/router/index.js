@@ -6,7 +6,7 @@ import SignupTerms from '@/views/accounts/SignupTerms'
 import AgencyForm from '@/views/accounts/AgencyForm.vue'
 import PrivateForm from '@/views/accounts/PrivateForm.vue'
 import SignupSuccess from '@/views/accounts/SignupSuccess.vue'
-
+import FindPassword from '@/views/accounts/FindPassword.vue'
 
 const routes = [
   {
@@ -38,6 +38,11 @@ const routes = [
     path: '/signupsuccess',
     name: 'signupsuccess',
     component: SignupSuccess
+  },
+  {
+    path: '/findpassword',
+    name: 'findpassword',
+    component: FindPassword
   },
   // {
   //   path: '/',
