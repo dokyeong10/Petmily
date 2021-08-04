@@ -41,8 +41,6 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	PasswordEncoder passwordEncoder;
-	
-	private Object ResultCode;
 
 	@Override
 	public User createUser(UserRegisterPostReq userRegisterInfo) {
