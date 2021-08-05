@@ -3,8 +3,8 @@
   <br>
   <div class="container">
     <div class="d-flex justify-content-evenly">
-      <label><input type="radio" name="login" v-model="toggle" @click="changeTogglePrivate" checked="checked">개인 로그인</label>
-      <label><input type="radio" name="login" v-model="toggle" @click="changeToggleAgency">기관 로그인</label>
+      <label><input type="radio" name="login" v-model="toggle" value="false" checked="checked">개인 로그인</label>
+      <label><input type="radio" name="login" v-model="toggle" value="true">기관 로그인</label>
     </div>
     <br>
     <div class="d-flex justify-content-center">
@@ -77,20 +77,6 @@ export default {
       return config
     }
 
-    const changeTogglePrivate = function () {
-      if (toggle) {
-        toggle = false
-      } 
-      console.log(toggle)
-    }
-
-    const changeToggleAgency = function () {
-      if (!toggle) {
-        toggle = true
-      }
-      console.log(toggle)
-    }
-
     const goToSignup = function () {
       router.push("/signupterms")
     }
@@ -147,7 +133,7 @@ export default {
         } 
       }
 
-    return {state, clickLogin, goToSignup, changeTogglePrivate, changeToggleAgency, goToFindPassword}
+    return {state, clickLogin, goToSignup, goToFindPassword}
 
   }
   

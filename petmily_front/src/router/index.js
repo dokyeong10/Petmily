@@ -10,6 +10,7 @@ import FindPassword from '@/views/accounts/FindPassword.vue'
 import ChangePassword from '@/views/accounts/ChangePassword.vue'
 import AnimalList from '@/views/animal/AnimalList.vue'
 import AnimalRegister from '@/views/animal/AnimalRegister.vue'
+import AnimalRegisterSuccess from '@/views/animal/AnimalRegisterSuccess.vue'
 
 const routes = [
   {
@@ -61,6 +62,11 @@ const routes = [
     path: '/animalregister',
     name: 'animalregister',
     component: AnimalRegister
+  },
+  {
+    path: '/animalregistersuccess',
+    name: 'animalregistersuccess',
+    component: AnimalRegisterSuccess
   },
   // {
   //   path: '/',
