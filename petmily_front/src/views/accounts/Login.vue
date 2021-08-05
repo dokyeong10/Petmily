@@ -31,9 +31,9 @@
           </div>
         <div class="d-flex justify-content-evenly">
           <!-- 소셜로그인 로그인 만들기 -->
-          <button class="btn-white"><a style="color: #FFFFFF; text-decoration-line: none;" href="">구글</a></button>
-          <button class="btn-white"><a style="color: #FFFFFF; text-decoration-line: none;" href="">카카오</a></button>
-          <button class="btn-white"><a style="color: #FFFFFF; text-decoration-line: none;" href="">네이버</a></button>
+          <button class="btn-white"><a style="color: #FFFFFF; text-decoration-line: none;" href="http://localhost:8080/oauth2/authorization/google">구글</a></button>
+          <button class="btn-white"><a style="color: #FFFFFF; text-decoration-line: none;" href="http://localhost:8080/oauth2/authorization/kakao">카카오</a></button>
+          <button class="btn-white"><a style="color: #FFFFFF; text-decoration-line: none;" href="http://localhost:8080/oauth2/authorization/naver">네이버</a></button>
         </div>    
       </div>
       <img class="ms-3" style="border-radius: 12px; width: 400px;" alt="petmily login" src="@/assets/login.png">
@@ -114,8 +114,8 @@ export default {
           console.log(res.data)
           localStorage.setItem('jwt', res.data.accessToken)
           store.state.isLogin = true
-          localStorage.setItem('isLogin', store.state.isLogin)
-          router.push('/home')
+          sessionStorage.setItem('isLogin', store.state.isLogin)
+          router.go()
         })
         .catch(err => {
           console.log(err)
@@ -135,8 +135,10 @@ export default {
           console.log(res.data)
           localStorage.setItem('jwt', res.data.accessToken)
           store.state.isLogin = true
-          localStorage.setItem('isLogin', store.state.isLogin)
-          router.push('/home')
+          store.state.isAgency = true
+          sessionStorage.setItem('isLogin', store.state.isLogin)
+          sessionStorage.setItem('isAgency', store.state.isAgency)
+          router.go()
           })
         .catch(err => {
           console.log(err)

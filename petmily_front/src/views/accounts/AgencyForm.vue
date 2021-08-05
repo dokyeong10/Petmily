@@ -25,7 +25,6 @@
 <script>
 import {reactive} from 'vue'
 import axios from 'axios'
-import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import JumbotronTerms from '@/views/accounts/components/JumbotronTerms'
 export default {
@@ -47,7 +46,6 @@ export default {
       phone: ""
     })
     const router = useRouter()
-    const store = useStore()
     const setToken = function () {
         const token = localStorage.getItem('jwt')
         const config = {
@@ -150,19 +148,13 @@ export default {
       })
       .then( res => {
         console.log(res.data)
-        store.state.isLogin = true
         router.push('/signupsuccess')
       })
       .catch(err => {
         console.log(err)
       })
-
     }
-
     return {state, confirmSignup, setToken, confirmEmail, confirmNumber}
-
-
-
   }
   
 }

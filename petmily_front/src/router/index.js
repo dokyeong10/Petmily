@@ -7,6 +7,9 @@ import AgencyForm from '@/views/accounts/AgencyForm.vue'
 import PrivateForm from '@/views/accounts/PrivateForm.vue'
 import SignupSuccess from '@/views/accounts/SignupSuccess.vue'
 import FindPassword from '@/views/accounts/FindPassword.vue'
+import ChangePassword from '@/views/accounts/ChangePassword.vue'
+import AnimalList from '@/views/animal/AnimalList.vue'
+import AnimalRegister from '@/views/animal/AnimalRegister.vue'
 
 const routes = [
   {
@@ -43,6 +46,21 @@ const routes = [
     path: '/findpassword',
     name: 'findpassword',
     component: FindPassword
+  },
+  {
+    path: '/changepassword',
+    name: 'changepassword',
+    component: ChangePassword
+  },
+  {
+    path: '/animallist',
+    name: 'animallist',
+    component: AnimalList
+  },
+  {
+    path: '/animalregister',
+    name: 'animalregister',
+    component: AnimalRegister
   },
   // {
   //   path: '/',
