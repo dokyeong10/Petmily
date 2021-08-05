@@ -1,26 +1,23 @@
 <template>
   <div>
-    <Jumbotron/>
-    <HomeLiveList/>
-    <HomeAnimalLIst/>
+    <Jumbotron />
+    <HomeLiveList />
+    <HomeAnimalLIst />
   </div>
 </template>
 <script>
-import HomeLiveList from "@/views/home/components/HomeLiveList"
-import HomeAnimalLIst from "@/views/home/components/HomeAnimalLIst"
-import Jumbotron from "@/views/home/components/Jumbotron"
+import HomeLiveList from "@/views/home/components/HomeLiveList";
+import HomeAnimalLIst from "@/views/home/components/HomeAnimalLIst";
+import Jumbotron from "@/views/home/components/Jumbotron";
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     Jumbotron,
     HomeLiveList,
     HomeAnimalLIst,
   },
-  setup() {
-
-  }
-}
+  setup() {},
+};
 </script>
 <style>
-  
 </style>
