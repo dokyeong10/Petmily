@@ -1,17 +1,16 @@
 <template>
   <div>
-    <Jumbotron/>
+    <Jumbotron />
   </div>
 </template>
 <script>
-import Jumbotron from "@/views/home/components/Jumbotron"
+import Jumbotron from "@/views/home/components/Jumbotron";
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     Jumbotron,
   },
-}
+};
 </script>
 <style>
-  
 </style>
