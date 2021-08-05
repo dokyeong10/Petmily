@@ -6,7 +6,7 @@
       <span>
         <router-link to="/home" class="mx-5 text-decoration-none">Home</router-link> 
         <router-link to="/home" class="mx-5 text-decoration-none">Home</router-link> 
-        <router-link to="/" class="mx-5 text-decoration-none">유기동물</router-link>
+        <router-link to="/animallist" class="mx-5 text-decoration-none">유기동물</router-link>
         <router-link to="/" class="mx-5 text-decoration-none">커뮤니티</router-link>
         <router-link to="/" class="mx-5 text-decoration-none">라이브</router-link>
       </span>
@@ -26,31 +26,29 @@
 </template>
 <script>
 import { onMounted, computed } from 'vue'
-import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 
 export default {
   name: 'App',
   setup () {
-    const store = useStore()
     const router = useRouter()
-    const goToLogin = function () {
-      router.push('/login')
-    }
-
-    const goToSignup = function () {
-      router.push('/signupterms')
-    }
 
     const confirmLogin = computed(() => {
-      console.log(store.state.isLogin)
-      return localStorage.getItem('isLogin')
+      console.log(sessionStorage.getItem('isLogin'))
+      return sessionStorage.getItem('isLogin')
         }
       )
+
+    const logout = function () {
+      sessionStorage.removeItem('isLogin')
+      localStorage.removeItem('jwt')
+      sessionStorage.removeItem('isAgency')
+      router.go()
+    }
       
     onMounted(() => { router.push('/home') }) 
 
-    return { goToLogin, goToSignup, confirmLogin }
+    return { confirmLogin, logout }
   }
 }
 </script>
