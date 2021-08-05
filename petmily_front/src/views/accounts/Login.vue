@@ -3,8 +3,8 @@
   <br>
   <div class="container">
     <div class="d-flex justify-content-evenly">
-      <label><input type="radio" name="login" v-model="toggle" value="false" checked="checked">개인 로그인</label>
-      <label><input type="radio" name="login" v-model="toggle" value="true">기관 로그인</label>
+      <label><input type="radio" name="login" v-model="state.toggle" value="false" checked="checked">개인 로그인</label>
+      <label><input type="radio" name="login" v-model="state.toggle" value="true">기관 로그인</label>
     </div>
     <br>
     <div class="d-flex justify-content-center">
@@ -51,7 +51,7 @@ export default {
   setup () {
     const store = useStore()
     const router = useRouter()
-    let toggle = true
+    
 
     const state = reactive({
       form: {
@@ -67,6 +67,7 @@ export default {
           { required: true, message: 'Please input password', trigger: 'blur' }
         ]
       },
+      toggle: false
     })
 
     const setToken = function () {
@@ -86,7 +87,7 @@ export default {
     }
 
     const clickLogin = function () {
-      if (!toggle) {
+      if (!state.toggle) {
         axios({
           method: 'post',
           url: 'http://localhost:8080/auth/personal/login',
@@ -133,7 +134,7 @@ export default {
         } 
       }
 
-    return {state, clickLogin, goToSignup, goToFindPassword}
+    return { state, clickLogin, goToSignup, goToFindPassword }
 
   }
   
