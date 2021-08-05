@@ -7,24 +7,25 @@
         <div>Forgot Password!</div>
         <div><span>Don’t have an account,</span><button style="color: #8699DA" class="bw-color" @click="goToSignup">Sign up</button></div>
         <form>
+          {{ state.isEmail }}
+          {{ state.isConfirm }}
+          {{ state.findEmail }}
           <span>
-            <input v-model="findEmail" class="mb-5 radius-border form-control" type="text" placeholder="email">
-            <button class="btn-white" style="color: #FFFFFF" @click="confirmEmail">이메일 인증하기</button>
+            <input v-model="state.findEmail" class="mb-5 radius-border form-control" type="text" placeholder="email">
+            <button class="btn-white" type="button" style="color: #FFFFFF" @click="confirmEmail">이메일 인증하기</button>
           </span>
-          <div v-if="isEmail">
-            <input v-model="authNum" class="mt-5 mb-2 radius-border form-control" type="text" placeholder="인증번호">
-            <button class="btn-white" style="color: #FFFFFF" @click="confirmNumber">인증하기</button>
-          </div>
-          <div v-if="isConfirm">
+          <span v-if="state.isEmail">
+          {{state.authNum}}
+            <input v-model="state.authNum" class="mt-5 mb-2 radius-border form-control" type="text" placeholder="인증번호">
+            <button class="btn-white" type="button" style="color: #FFFFFF" @click="confirmNumber">인증하기</button>
+          </span>
+          <div v-if="state.isConfirm">
             인증되었습니다.
           </div>
-          <div v-if="isConfirm">
+          <!-- <div v-if="state.isConfirm">
             <button class="btn-white" style="color: #FFFFFF;" @click="goToChangePassword">비밀번호 바꾸러 가기</button>
-          </div>
+          </div> -->
         </form>
-          <div class="mt-5 mb-5">
-            <button class="btn-white" style="color: #FFFFFF; width: 400px;">인증하기</button>
-          </div>
           <div class="m-5 d-flex justify-content-evenly">
             <div>소셜 로그인 하기</div>         
           </div>
@@ -40,6 +41,7 @@
   </div>
 </template>
 <script>
+import { reactive } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
@@ -48,23 +50,29 @@ export default {
   setup () {
     const store = useStore()
     const router = useRouter()
-    const findEmail = ""
-    const authNum = ""
-    let isEmail = false
-    let isConfirm = false
+    const state = reactive({
+      findEmail: '',
+      authNum: '',
+      isEmail: false,
+      isConfirm: false
+    })
 
     const confirmEmail = function () {
+      console.log(state.findEmail)
       axios({
         method: 'post',
-        url: '',
+        url: 'http://localhost:8080/email/send/findpwd',
         data: {
-          email: findEmail
+          email: state.findEmail
         }
-      }).then(res => {
+      })
+      .then(res => {
         console.log(res)
-        store.state.findEmail = findEmail
+        alert('입력하신 메일로 인증번호가 발송되었습니다.')
+        store.state.findEmail = state.findEmail
         localStorage.setItem('findEmail', store.state.findEmail)
-        isEmail = true
+        state.isEmail = true
+        console.log(state.isEmail)
       })
       .catch(err => {
         console.log(err)
@@ -72,31 +80,36 @@ export default {
     }
 
     const confirmNumber = function () {
+      console.log(store.state.findEmail )
+      console.log(state.authNum)
       axios({
         method: 'post',
-        url: '',
+        url: 'http://localhost:8080/email/check/authcode',
         data: {
           email: store.state.findEmail,
-          authCode: authNum
+          authCode: state.authNum
+          }
+      })
+      .then(res => {
+        console.log(res)
+        if (res.data) {
+          alert('인증에 성공하셨습니다.')
+          state.isConfirm = true
+          router.push('/changepassword')
+        } else {
+          alert('잘못된 인증 번호입니다.')
+          return
         }
-        })
-        .then(res => {
-          console.log(res)
-          isConfirm = true 
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    }
-
-    const goToChangePassword = function () {
-      router.push('/changepassword')
+      })
+      .catch(err => {
+        console.log(err)
+      })
     }
 
     const goToSignup = function () {
       router.push('/signupterms')
     }
-    return { goToSignup, isEmail, findEmail, confirmEmail, isConfirm, confirmNumber, goToChangePassword }
+    return {state, goToSignup, confirmEmail, confirmNumber }
   }
 }
 </script>
