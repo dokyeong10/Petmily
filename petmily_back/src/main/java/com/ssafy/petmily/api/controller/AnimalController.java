@@ -1,18 +1,17 @@
 package com.ssafy.petmily.api.controller;
 
-import com.ssafy.petmily.api.request.AgencyRegisterPostReq;
 import com.ssafy.petmily.api.request.AnimalRegisterPostReq;
-import com.ssafy.petmily.api.request.UserRegisterPostReq;
 import com.ssafy.petmily.api.service.AnimalService;
 import com.ssafy.petmily.common.response.BaseResponseBody;
-import com.ssafy.petmily.db.entity.AnimalAdopt;
 import com.ssafy.petmily.db.entity.AnimalWait;
-import com.ssafy.petmily.db.entity.User;
+import com.ssafy.petmily.db.repository.SearchAnimalRepositorySupport;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @Api(value = "동물 API", tags = {"Animal"})
 @RestController
@@ -22,6 +21,9 @@ public class AnimalController {
 
     @Autowired
     AnimalService animalService;
+
+    @Autowired
+    SearchAnimalRepositorySupport searchAnimalRepositorySupport;
 
     @PostMapping("/register")
     @ApiOperation(value = "동물 등록", notes = "동물을 등록한다.")
@@ -47,7 +49,7 @@ public class AnimalController {
             @ApiResponse(code = 500, message = "서버 오류")
     })
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<? extends BaseResponseBody>  deleteAaimal(@PathVariable Long no){
+    public ResponseEntity<? extends BaseResponseBody> deleteAaimal(@PathVariable Long no){
         animalService.deleteAnimal(no);
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
     }
@@ -58,6 +60,11 @@ public class AnimalController {
         AnimalWait updateAnimal = animalService.patchAnimal(no,animalWait);
         return new ResponseEntity<AnimalWait>(updateAnimal,HttpStatus.OK);
     }
+
+//    @GetMapping("/filter")
+//    public Optional<AnimalWait> TypeFilter(@PathVariable Long no, @RequestBody String type) {
+//        return searchAnimalRepositorySupport.Search(no,type);
+//    }
 
 
 

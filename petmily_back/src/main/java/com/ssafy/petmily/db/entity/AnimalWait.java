@@ -23,5 +23,8 @@ public class AnimalWait extends BaseEntity {
     Date find_date;
     String agencycode;
 
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    Agency agency;
+
 
 }

@@ -106,7 +106,7 @@ public class UserController {
 	})
 	public ResponseEntity<AgencyRes> getAgencyInfo(@ApiIgnore Authentication authentication) {
 
-		SsafyUserDetails userDetails = (SsafyUserDetails) authentication.getDetails();
+		SsafyAgencyDetails userDetails = (SsafyAgencyDetails)  authentication.getDetails();
 		String email = userDetails.getUsername();
 		Agency agency = userService.getAgencyByEmail(email);
 		return ResponseEntity.status(200).body(AgencyRes.of(agency));
