@@ -28,12 +28,13 @@ plugins {
     id 'org.springframework.boot' version '2.5.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
-    id 'war'
 }
 
-group = 'com.ssafy.petmily'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'eclipse'
+apply plugin: 'com.github.node-gradle.node'
+
+
 
 configurations {
     compileOnly {
@@ -50,6 +51,56 @@ repositories {
     maven { url "https://build.shibboleth.net/nexus/content/repositories/releases" }
 }
 
+group = 'com.ssafy.petmily'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+node {
+    download = true
+    version = '14.17.0'
+    // Set the work directory where node_modules should be located
+    nodeModulesDir = file("${project.projectDir}/../petmily_front")
+}
+
+configurations {
+    providedRuntime
+}
+
+/*task npmInstall(type: NpmTask, overwrite: true) {
+    args = ['install']
+}*/
+
+task webpack(type: NpmTask, dependsOn: 'npmInstall') {
+    args = ['run','build']
+}
+
+// processResources is a Java task. Run the webpack bundling before this task using the 'build' task in the package.json
+processResources.dependsOn 'webpack'
+
+//set build time and inject value to application.properties
+def buildTime() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMdd_HHmm')
+    return formattedDate
+}
+
+project.ext.set("build.date", buildTime())
+
+processResources {
+    with copySpec {
+        from "src/main/resources"
+        include "**/application*.yml"
+        include "**/application*.yaml"
+        project.properties.findAll().each {
+            prop ->
+                if (prop.value != null) {
+                    filter(ReplaceTokens, tokens: [ (prop.key): String.valueOf(prop.value)])
+                    filter(ReplaceTokens, tokens: [ ('project.' + prop.key): String.valueOf(prop.value)])
+                    filter(ReplaceTokens, tokens: [ ('project.ext.' + prop.key): String.valueOf(prop.value)])
+                }
+        }
+    }
+}
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -105,6 +156,7 @@ dependencies {
     implementation("io.springfox:springfox-data-rest:3.0.0")
     implementation("io.springfox:springfox-bean-validators:3.0.0")
     implementation("io.springfox:springfox-boot-starter:3.0.0")
+
 
     // security + oauth2 => Social login 구현
     implementation 'org.springframework.boot:spring-boot-starter-security'
