@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 
 @Api(value = "동물 API", tags = {"Animal"})
 @RestController
@@ -61,12 +61,9 @@ public class AnimalController {
         return new ResponseEntity<AnimalWait>(updateAnimal,HttpStatus.OK);
     }
 
-//    @GetMapping("/filter")
-//    public Optional<AnimalWait> TypeFilter(@PathVariable Long no, @RequestBody String type) {
-//        return searchAnimalRepositorySupport.Search(no,type);
-//    }
-
-
-
+//  @GetMapping("/{key}/{word}/{no}/{isLike}")
+//    public ResponseEntity<List<AnimalWait>> searchAll(@PathVariable String key, @PathVariable String word, @PathVariable long no, @PathVariable boolean isLike){
+//        List<AnimalWait> list =
+//  }
 
 }

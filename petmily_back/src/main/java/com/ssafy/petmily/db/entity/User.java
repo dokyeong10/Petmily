@@ -14,7 +14,10 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-public class User extends BaseEntity{
+public class User{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long no;
     @Column
     String email;
     @Column
@@ -38,7 +41,8 @@ public class User extends BaseEntity{
     }
 
     @Builder
-    public User(String name, String email, String picture, Role role, String phone, String type){
+    public User(Long no,String name, String email, String picture, Role role, String phone, String type){
+        this.no = no;
         this.username = name;
         this.email = email;
         this.phone = phone;
