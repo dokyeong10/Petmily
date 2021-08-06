@@ -2,28 +2,9 @@
   <br />
   <br />
   <div class="container">
-    <div class="d-flex justify-content-evenly">
-      <label
-        ><input
-          type="radio"
-          name="login"
-          v-model="state.toggle"
-          value="false"
-          checked="checked"
-        />개인 로그인</label
-      >
-      <label
-        ><input
-          type="radio"
-          name="login"
-          v-model="state.toggle"
-          value="true"
-        />기관 로그인</label
-      >
-    </div>
     <br />
     <div class="d-flex justify-content-center">
-      <div align="left" class="mb-3">
+      <div align="left" class="mb-3 mx-5">
         <div class="font-weight-bold" style="font-size: 30px">Welcome Back!</div>
         <div>
           <span>Don’t have an account,</span
@@ -34,32 +15,43 @@
         <br>
         <form>
           <div>
-            <label>이메일</label>
+            <label class="ps-2 pb-2">이메일</label>
             <input
               v-model="state.form.email"
-              class="mb-4 form-control radius-border rounded-pill p-3"
+              class="mb-4 form-control radius-border rounded-pill"
               type="text"
               placeholder="email"
             />
           </div>
           <div>
-            <label>비밀번호</label>
+            <label class="ps-2 pb-2">비밀번호</label>
             <input
               v-model="state.form.password"
-              class="mb-2 form-control radius-border rounded-pill p-3"
+              class="mb-2 form-control radius-border rounded-pill"
               type="password"
               placeholder="password"
             />
           </div>
           <div class="checkbox-container d-flex align-items-center justify-content-between">
-            <label>
-              <input 
-                class="checkbox-round"
-                type="checkbox" 
-                name="remind_user" 
-                value="동의함" />
-              Remember Me
-            </label>
+            <div>
+              <label class="mx-3">
+                <input
+                  type="radio"
+                  name="login"
+                  v-model="state.toggle"
+                  value="false"
+                  checked="checked"
+                />개인
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="login"
+                  v-model="state.toggle"
+                  value="true"
+                />기관
+              </label>
+            </div>
             <button
               class="btn btn-link"
               @click="goToFindPassword"
@@ -70,12 +62,13 @@
           </div>
         </form>
         <div class="mt-5 mb-5">
-          <button class="btn-white" @click="clickLogin" style="color: #ffffff">
+          <button class="btn-login font-" @click="clickLogin">
             로그인 하기
           </button>
         </div>
-        <div class="m-5 d-flex justify-content-evenly">
-          <div>소셜 로그인 하기</div>
+        <div class="mb-3 position-relative mb-5">
+          <hr>
+          <div class="position-absolute top-50 start-50 translate-middle px-2 bg-white" style="font-size:5px;">on continue with</div>
         </div>
         <div class="d-flex justify-content-evenly">
           <!-- 소셜로그인 로그인 만들기 -->
@@ -83,21 +76,21 @@
             <a
               style="color: #ffffff; text-decoration-line: none"
               href="http://localhost:8080/oauth2/authorization/google"
-              ><img src="src\assets\google.png"></a
+              ><img src="@\assets\google.png" style="width:30px;height:30px;border-radius: 50%;"></a
             >
           </button>
-          <button class="btn-white">
+          <button class="btn-logo">
             <a
               style="color: #ffffff; text-decoration-line: none"
               href="http://localhost:8080/oauth2/authorization/kakao"
-              >카카오</a
+              ><img src="@\assets\KakaoTalk.png" style="width:30px;height:30px;border-radius: 50%;"></a
             >
           </button>
-          <button class="btn-white">
+          <button class="btn-logo">
             <a
               style="color: #ffffff; text-decoration-line: none"
               href="http://localhost:8080/oauth2/authorization/naver"
-              >네이버</a
+              ><img src="@\assets\naver.png" style="width:30px;height:30px;border-radius: 50%;"></a
             >
           </button>
         </div>
@@ -228,11 +221,25 @@ img {
   border-radius: 12px;
 }
 
+.btn-login {
+  width: 100%;
+  height: 50px;
+  background-color: #a4b5f0;
+  border-right: #a4b5f0 1px solid;
+  border-left: #a4b5f0 1px solid;
+  border-top: #a4b5f0 1px solid;
+  border-bottom: #a4b5f0 1px solid;
+  border-style: none;
+  border-radius: 30px;
+  color: white;
+}
+
 .btn-logo {
-  width: 3rem;
+  width: 5rem;
   height: 3rem;
-  background-color: rgba(255, 255, 255, 0);
-  border-radius: 50%;
+  border-radius: 10px;
+  border: #a4b5f0 3px solid;
+  background-color: #ffffff;
 }
 
 .radius-border {
