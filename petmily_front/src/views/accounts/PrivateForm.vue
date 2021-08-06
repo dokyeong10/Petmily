@@ -28,7 +28,7 @@ import { useRouter } from 'vue-router'
 import JumbotronTerms from '@/views/accounts/components/JumbotronTerms'
 export default {
   components: { JumbotronTerms },
-  name: 'PrivateForm',
+  name: 'privateform',
   setup () {
     const state = reactive({
       isEmail: false,

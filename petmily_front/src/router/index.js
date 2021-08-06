@@ -1,6 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+// main
 import Home from '@/views/home/Home'
+
+
+// Login & Signup & ChangePassword
 import Login from '@/views/accounts/Login'
 import SignupTerms from '@/views/accounts/SignupTerms'
 import AgencyForm from '@/views/accounts/AgencyForm.vue'
@@ -8,6 +12,12 @@ import PrivateForm from '@/views/accounts/PrivateForm.vue'
 import SignupSuccess from '@/views/accounts/SignupSuccess.vue'
 import FindPassword from '@/views/accounts/FindPassword.vue'
 import ChangePassword from '@/views/accounts/ChangePassword.vue'
+
+// Profile
+import MyProfile from '@/views/accounts/MyProfile.vue'
+
+
+// Animal
 import AnimalList from '@/views/animal/AnimalList.vue'
 import AnimalRegister from '@/views/animal/AnimalRegister.vue'
 import AnimalRegisterSuccess from '@/views/animal/AnimalRegisterSuccess.vue'
@@ -68,6 +78,11 @@ const routes = [
     name: 'animalregistersuccess',
     component: AnimalRegisterSuccess
   },
+  {
+    path: '/myprofile',
+    name: 'myprofile',
+    component: MyProfile
+  }
   // {
   //   path: '/',
   //   name: 'Home',
