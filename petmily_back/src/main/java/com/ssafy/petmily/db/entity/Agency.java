@@ -7,10 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
@@ -18,7 +15,10 @@ import java.util.Collection;
 @Setter
 @ToString
 // animalWait Entity에서 User와의 관계를 Json으로 변환시 오류 방지를 위한 코드
-public class Agency extends BaseEntity {
+public class Agency{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long no;
     String email;
     String username;
     String phone;
@@ -26,8 +26,6 @@ public class Agency extends BaseEntity {
     String agencycode;
     String agencyname;
 
-
-    @JsonIgnore
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     String password;
 

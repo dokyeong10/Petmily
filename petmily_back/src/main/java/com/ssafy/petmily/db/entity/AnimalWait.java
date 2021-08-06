@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
+
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,8 +14,10 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class AnimalWait extends BaseEntity {
-
+public class AnimalWait {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long no;
     String type;
     String species;
     String addr;
@@ -22,6 +26,7 @@ public class AnimalWait extends BaseEntity {
     boolean neutered;
     Date find_date;
     String agencycode;
+    MultipartFile[] fileup;
 
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    Agency agency;
