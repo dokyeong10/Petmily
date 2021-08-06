@@ -4,7 +4,7 @@ import com.ssafy.petmily.api.request.AnimalRegisterPostReq;
 import com.ssafy.petmily.api.service.AnimalService;
 import com.ssafy.petmily.common.response.BaseResponseBody;
 import com.ssafy.petmily.db.entity.AnimalWait;
-import com.ssafy.petmily.db.repository.SearchAnimalRepositorySupport;
+import com.ssafy.petmily.db.repository.AnimalWaitRepositorySupport;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,9 +21,6 @@ public class AnimalController {
 
     @Autowired
     AnimalService animalService;
-
-    @Autowired
-    SearchAnimalRepositorySupport searchAnimalRepositorySupport;
 
     @PostMapping("/register")
     @ApiOperation(value = "동물 등록", notes = "동물을 등록한다.")
@@ -61,9 +58,11 @@ public class AnimalController {
         return new ResponseEntity<AnimalWait>(updateAnimal,HttpStatus.OK);
     }
 
-//  @GetMapping("/{key}/{word}/{no}/{isLike}")
-//    public ResponseEntity<List<AnimalWait>> searchAll(@PathVariable String key, @PathVariable String word, @PathVariable long no, @PathVariable boolean isLike){
-//        List<AnimalWait> list =
-//  }
+    // 동물 리스트
+  @GetMapping("/{key}/{word}/{no}/{isLike}")
+    public ResponseEntity<List<AnimalWait>> searchAll(@PathVariable String key, @PathVariable String word, @PathVariable long no, @PathVariable boolean isLike){
+        List<AnimalWait> list = animalService.searchAllAnimal(key,word,no,isLike);
+        return new ResponseEntity<List<AnimalWait>>(list, HttpStatus.OK);
+  }
 
 }

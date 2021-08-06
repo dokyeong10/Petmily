@@ -3,6 +3,7 @@ package com.ssafy.petmily.api.service;
 import com.ssafy.petmily.api.request.AnimalRegisterPostReq;
 import com.ssafy.petmily.db.entity.AnimalWait;
 import com.ssafy.petmily.db.repository.AnimalWaitRepository;
+import com.ssafy.petmily.db.repository.AnimalWaitRepositorySupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +11,14 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Service("animalService")
+@Service
 public class AnimalServiceImpl implements AnimalService {
 
     @Autowired
     AnimalWaitRepository animalWaitRepository;
+
+    @Autowired
+    AnimalWaitRepositorySupport animalWaitRepositorySupport;
 
     @Override
     public AnimalWait patchAnimal(Long no, AnimalWait animalWait) {
@@ -72,7 +76,8 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
     @Override
+    @Transactional
     public List<AnimalWait> searchAllAnimal(String key, String word, long no, boolean isLike) {
-        return null;
+        return animalWaitRepositorySupport.findAllAnimalWait(key, word, no, isLike);
     }
 }
