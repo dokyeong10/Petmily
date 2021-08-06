@@ -1,7 +1,26 @@
 <template>
   <div class="container">
     <div class="align-content-center">
-      <input class="form-control radius-border" type="text" placeholder="사진 혹은 동영상을 넣어주세요.">
+      <!-- <v-file-input label="File input" @change="selectFile"></v-file-input>
+      <v-btn @click="confirmProfilePicRegister">전송</v-btn> -->
+      <form action="confirmProfilePicRegister" method="post" name="profilePicForm" enctype="multipart/form-data" class="d-flex flex-column align-items-start">
+        <div>
+          <label for="profilePic">프로필 사진을 넣어주세요.</label>
+        </div>
+        <div>
+          <input type="file" name="profilePic">
+          <input type="submit" value="등록">
+        </div>
+      </form>
+      <form action="confirmFilesRegister" method="post" name="profilePicForm" enctype="multipart/form-data" class="d-flex flex-column align-items-start">
+        <div>
+          <label for="profilePic">기타 사진들 및 동영상들을 넣어주세요.</label>
+        </div>
+        <div>
+          <input multiple="multiple" type="file" name="files">
+          <input type="submit" value="등록">
+        </div>
+      </form>
       <input v-model="state.type" class="form-control radius-border" type="text" placeholder="ex) 강아지, 고양이">
       <input v-model="state.species" class="form-control radius-border" type="text" placeholder="ex) 말티즈 시바">
       <input v-model="state.age" class="form-control radius-border" type="text" placeholder="ex) 3살 추정">
@@ -42,6 +61,8 @@ export default {
   name: 'AnimalRegister',
   setup () {
     const state = reactive({
+      profile_pic: '',
+      files: '',
       type: '',
       species: '',
       addr: '',
@@ -54,19 +75,31 @@ export default {
     })
     const router = useRouter()
     const confirmAnimalRegister = function () {
+      const reg = /^[0-9]{1,}$/
+
+      if (!reg.test(state.age)) {
+        return alert('나이는 숫자만 입력해주세요.')
+      }
+
       axios({
         method: 'post',
         url: 'http://localhost:8080/animal/register',
         data: {
-          type: state.type,
-          species: state.species,
-          addr: state.addr,
-          age: state.age,
-          sex: state.sexToggle,
-          neutered: state.neuteredToggle,
-          find_date: state.find_date,
-          userno: state.userno,
-          agencycode: state.agencycode
+          name: {
+            profile_pic: state.profile_pic,
+            type: state.type,
+            species: state.species,
+            addr: state.addr,
+            age: state.age,
+            sex: state.sexToggle,
+            neutered: state.neuteredToggle,
+            find_date: state.find_date,
+            userno: state.userno,
+            agencycode: state.agencycode
+          },
+          files: {
+            files: state.files
+          }
         }
       })
       .then( res => {
@@ -77,7 +110,14 @@ export default {
         console.log(err)
       })
     }
-    return { state, confirmAnimalRegister }
+
+    const confirmProfilePicRegister = function () {
+
+    }
+    const confirmFilesRegister = function () {
+
+    }
+    return { state, confirmAnimalRegister, confirmProfilePicRegister, confirmFilesRegister }
   }
 }
 </script>
