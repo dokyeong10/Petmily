@@ -18,12 +18,34 @@
           <div v-if="isConfirm">
             인증되었습니다.
           </div>
+          <div class="mb-3 position-relative mb-5">
+          <hr>
+            <div class="position-absolute top-50 start-50 translate-middle px-2 bg-white" style="font-size:5px;">on continue with</div>
+          </div>
         <div class="d-flex justify-content-evenly">
           <!-- 소셜로그인 로그인 만들기 -->
-          <button class="btn-white"><a style="color: #FFFFFF; text-decoration-line: none;" href="">구글</a></button>
-          <button class="btn-white"><a style="color: #FFFFFF; text-decoration-line: none;" href="">카카오</a></button>
-          <button class="btn-white"><a style="color: #FFFFFF; text-decoration-line: none;" href="">네이버</a></button>
-        </div>    
+          <button class="btn-logo">
+            <a
+              style="color: #ffffff; text-decoration-line: none"
+              href="http://localhost:8080/oauth2/authorization/google"
+              ><img src="@\assets\google.png" style="width:30px;height:30px;border-radius: 50%;"></a
+            >
+          </button>
+          <button class="btn-logo">
+            <a
+              style="color: #ffffff; text-decoration-line: none"
+              href="http://localhost:8080/oauth2/authorization/kakao"
+              ><img src="@\assets\KakaoTalk.png" style="width:30px;height:30px;border-radius: 50%;"></a
+            >
+          </button>
+          <button class="btn-logo">
+            <a
+              style="color: #ffffff; text-decoration-line: none"
+              href="http://localhost:8080/oauth2/authorization/naver"
+              ><img src="@\assets\naver.png" style="width:30px;height:30px;border-radius: 50%;"></a
+            >
+          </button>
+        </div> 
       </div>
       <img class="ms-3" style="border-radius: 12px; width: 400px;" alt="petmily login" src="@/assets/login.png">
     </div>

@@ -1,9 +1,7 @@
 <template>
   <div>
     <AnimalCategory/>
-    <AnimalListItem
-      
-    />
+    <AnimalListItem/>
   </div>
 </template>
 <script>

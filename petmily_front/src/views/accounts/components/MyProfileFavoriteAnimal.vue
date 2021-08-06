@@ -1,6 +1,12 @@
 <template>
-  <div>
-    Favorite
+  <br>
+  <div class="d-flex jusify-content-start mx-auto" style="width: 800px">
+    <h2>
+      즐겨찾기 한 동물
+    </h2>
+  </div>
+  <div class="Jbgc mx-auto d-flex align-items-center justify-content-center" style="width: 800px; height: 350px;">
+    <h2></h2>
   </div> 
 </template>
 <script>
