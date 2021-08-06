@@ -24,35 +24,42 @@
     <br />
     <div class="d-flex justify-content-center">
       <div align="left" class="mb-3">
-        <div>Welcome Back!</div>
+        <div class="font-weight-bold" style="font-size: 30px">Welcome Back!</div>
         <div>
           <span>Don’t have an account,</span
           ><button style="color: #8699da" class="bw-color" @click="goToSignup">
             Sign up
           </button>
         </div>
+        <br>
         <form>
           <div>
+            <label>이메일</label>
             <input
               v-model="state.form.email"
-              class="mb-5 radius-border form-control"
+              class="mb-4 form-control radius-border rounded-pill p-3"
               type="text"
               placeholder="email"
             />
           </div>
           <div>
+            <label>비밀번호</label>
             <input
               v-model="state.form.password"
-              class="mt-5 mb-2 radius-border form-control"
+              class="mb-2 form-control radius-border rounded-pill p-3"
               type="password"
               placeholder="password"
             />
           </div>
-          <div class="d-flex justify-content-start checkbox-container">
-            <label
-              ><input type="checkbox" name="remind_user" value="동의함" />
-              Remember Me</label
-            >
+          <div class="checkbox-container d-flex align-items-center justify-content-between">
+            <label>
+              <input 
+                class="checkbox-round"
+                type="checkbox" 
+                name="remind_user" 
+                value="동의함" />
+              Remember Me
+            </label>
             <button
               class="btn btn-link"
               @click="goToFindPassword"
@@ -72,11 +79,11 @@
         </div>
         <div class="d-flex justify-content-evenly">
           <!-- 소셜로그인 로그인 만들기 -->
-          <button class="btn-white">
+          <button class="btn-logo">
             <a
               style="color: #ffffff; text-decoration-line: none"
               href="http://localhost:8080/oauth2/authorization/google"
-              >구글</a
+              ><img src="src\assets\google.png"></a
             >
           </button>
           <button class="btn-white">
@@ -202,6 +209,8 @@ export default {
 };
 </script>
 <style>
+
+
 img {
   width: 20%;
   height: 21%;
@@ -219,13 +228,18 @@ img {
   border-radius: 12px;
 }
 
+.btn-logo {
+  width: 3rem;
+  height: 3rem;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 50%;
+}
+
 .radius-border {
-  border-radius: 12px;
   border-right: #789ade 1px solid;
   border-left: #789ade 1px solid;
   border-top: #789ade 1px solid;
   border-bottom: #789ade 1px solid;
-  width: 400px;
   color: #789ade;
 }
 
@@ -237,4 +251,25 @@ img {
   border-bottom: #ffffff 1px solid;
   font-weight: bold;
 }
+
+.checkbox-round {
+    width: 1rem;
+    height: 1rem;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.checkbox-round:checked {
+    background-color: #789ade;
+}
+
+.checkbox-container {
+width: 25rem;
+}
+
 </style>
