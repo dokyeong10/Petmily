@@ -3,10 +3,12 @@
     <div>
       <MyProfileMyPage/>
     </div>
+    <br/>
     <div class="container">
       <MyProfileForm/>
     </div>
-    <div>
+    <br/>
+    <div class="container">
       <MyProfileFavoriteAnimal/>
     </div>
   </div>

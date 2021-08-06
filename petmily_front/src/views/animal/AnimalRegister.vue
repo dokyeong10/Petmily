@@ -1,9 +1,11 @@
 <template>
   <div class="container">
     <div class="align-content-center">
-      <!-- <v-file-input label="File input" @change="selectFile"></v-file-input>
-      <v-btn @click="confirmProfilePicRegister">전송</v-btn> -->
-      <form action="confirmProfilePicRegister" method="post" name="profilePicForm" enctype="multipart/form-data" class="d-flex flex-column align-items-start">
+      <form>
+        <input type="file" name="photo" id="photo">
+        <button @click="confirmProfilePicRegister">등록</button>
+      </form>
+      <!-- <form action="confirmProfilePicRegister" method="post" name="profilePicForm" enctype="multipart/form-data" class="d-flex flex-column align-items-start">
         <div>
           <label for="profilePic">프로필 사진을 넣어주세요.</label>
         </div>
@@ -11,7 +13,7 @@
           <input type="file" name="profilePic">
           <input type="submit" value="등록">
         </div>
-      </form>
+      </form> -->
       <form action="confirmFilesRegister" method="post" name="profilePicForm" enctype="multipart/form-data" class="d-flex flex-column align-items-start">
         <div>
           <label for="profilePic">기타 사진들 및 동영상들을 넣어주세요.</label>
@@ -62,7 +64,7 @@ export default {
   setup () {
     const state = reactive({
       profile_pic: '',
-      files: '',
+      files: [],
       type: '',
       species: '',
       addr: '',
@@ -75,12 +77,28 @@ export default {
     })
     const router = useRouter()
     const confirmAnimalRegister = function () {
-      const reg = /^[0-9]{1,}$/
+      const reg = /.{1,}/
+      const reg_num = /^[0-9]{1,}$/
 
+      if (!reg.test(state.type)) {
+        return alert('동물의 종류를 입력해주세요')
+      }
+      if (!reg.test(state.species)) {
+        return alert('동물의 품종을 입력해주세요')
+      }
       if (!reg.test(state.age)) {
+        return alert('동물의 나이를 입력해주세요')
+      }
+      if (!reg_num.test(state.age)) {
         return alert('나이는 숫자만 입력해주세요.')
       }
-
+      if (!reg.test(state.addr)) {
+        return alert('발견 주소를 입력해주세요.')
+      }
+      if (!reg.test(state.find_date)) {
+        return alert('날짜를 입력해주세요.')
+      }
+      
       axios({
         method: 'post',
         url: 'http://localhost:8080/animal/register',
@@ -112,11 +130,30 @@ export default {
     }
 
     const confirmProfilePicRegister = function () {
-
+      const frm = new FormData()
+      const photoFile = document.getElementById('photo')
+      frm.append('photo', photoFile.files[0])
+      axios({
+        method: 'post',
+        url: '',
+        data: {
+          frm,
+        },
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
     }
     const confirmFilesRegister = function () {
 
     }
+
     return { state, confirmAnimalRegister, confirmProfilePicRegister, confirmFilesRegister }
   }
 }

@@ -1,23 +1,21 @@
 <template>
-<br>
+  <br>
   <div class="d-flex jusify-content-start mx-auto" style="width: 800px">
     <h2>
       내 프로필
     </h2>
   </div>
-  <div>
-    <div class="Jbgc mx-auto" align="center" justify="center" style="height: 400px; width: 800px;">
-      <div class="d-flex col justify-content-evenly content">
-        <div>
-          Profile Photo
-        </div>
-        <div>
-          <p>ID</p>
-          <p>AGENCY</p>
-          <p>EMAIL</p>
-          <p>PHONE</p>
-          <p>NAME</p>
-        </div>
+  <div class="Jbgc mx-auto" style="height: 400px; width: 800px;">
+    <div class="position-relative inner d-flex justify-content-evenly align-items-center">
+      <div>
+        Profile Photo
+      </div>
+      <div>
+        <p>ID</p>
+        <p>AGENCY</p>
+        <p>EMAIL</p>
+        <p>PHONE</p>
+        <p>NAME</p>
       </div>
     </div>
   </div>
@@ -39,8 +37,7 @@ export default {
   border-radius: 12px;
 }
 
-.content{
-  display:inline-block;
-  vertical-align:middle
-  }
+.inner {
+  top: 30%;
+}
 </style>
