@@ -96,6 +96,14 @@ public class AnimalController {
         return new ResponseEntity<List<AnimalLike>>(list, HttpStatus.OK);
     }
 
+    //즐겨찾기 취소
+    @DeleteMapping("/like/{no}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<? extends BaseResponseBody> deleteLike(@PathVariable Long no){
+        animalService.deleteLike(no);
+        return ResponseEntity.status(200).body(BaseResponseBody.of(200,"Success"));
+    }
+
 
 
 }

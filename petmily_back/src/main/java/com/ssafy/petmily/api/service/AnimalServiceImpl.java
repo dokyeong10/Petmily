@@ -100,4 +100,11 @@ public class AnimalServiceImpl implements AnimalService {
     public List<AnimalLike> searchLikeAnimal(Long userno) {
         return  animalWaitRepositorySupport.findAnimalByUserno(userno);
     }
+    @Override
+    @Transactional
+    public void deleteLike(Long no) {
+        animalLikeRepository.deleteByNo(no);
+    }
+
+
 }
