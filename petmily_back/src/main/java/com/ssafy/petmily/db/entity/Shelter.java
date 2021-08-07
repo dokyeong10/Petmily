@@ -25,8 +25,6 @@ public class Shelter {
     Double lng;
     String week_open_time;
     String week_end_time;
-    String weekend_open_time;
-    String weekend_end_time;
     String addr;
     String tel;
 }
