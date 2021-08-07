@@ -97,13 +97,18 @@ public class AnimalController {
     }
 
     //즐겨찾기 취소
-    @DeleteMapping("/like/{no}")
+    @DeleteMapping("/like/{no}")@ApiOperation(value = "즐겨찾기 삭제", notes = "즐겨찾기 삭제")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<? extends BaseResponseBody> deleteLike(@PathVariable Long no){
-        animalService.deleteLike(no);
-        return ResponseEntity.status(200).body(BaseResponseBody.of(200,"Success"));
+    public ResponseEntity<? extends BaseResponseBody> deleteLike(@PathVariable Long no) {
+        boolean isOk = animalService.deleteLike(no);
+        if (isOk) {
+            return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+        }else{
+            return ResponseEntity.status(401).body(BaseResponseBody.of(500,"즐겨찾는 동물 X"));
+        }
+    }
     }
 
 
 
-}
+
