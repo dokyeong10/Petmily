@@ -23,7 +23,7 @@ public class AnimalWaitRepositorySupport {
         System.out.println("===================== Like? : " + isLike);
 
         if (key == null || word == null || word.equals(" ") || key.equals("all")) { // 전체를 요청할 때
-            if (no < 0 || !isLike) { // 즐겨찾기 동물이 아닐 때
+            if (no <= 0 || !isLike) { // 즐겨찾기 동물이 아닐 때
                 return jpaQueryFactory.select(qAnimalWait).from(qAnimalWait).fetch();
             } else if (no > 0 && isLike) { // 즐겨찾기 동물일 때
                 return jpaQueryFactory.select(qAnimalWait).from(qAnimalWait)
@@ -36,43 +36,43 @@ public class AnimalWaitRepositorySupport {
 
         } else {
             if(key.equals("type")) { // 동물 종류로 검색
-                if (no < 0 || !isLike) { // 즐겨찾기 동물이 아닐 때
+                if (no <= 0 || !isLike) { // 즐겨찾기 동물이 아닐 때
                     return jpaQueryFactory.select(qAnimalWait).from(qAnimalWait)
-                            .where(qAnimalWait.type.like(word)).fetch();
+                            .where(qAnimalWait.species.like("%"+word+"%")).fetch();
                 } else if (no > 0 && isLike) { // 즐겨찾기 동물일 때
                     return jpaQueryFactory.select(qAnimalWait).from(qAnimalWait)
-                            .where(qAnimalWait.type.like(word)
+                            .where(qAnimalWait.species.like("%"+word+"%")
                                     .and(qAnimalWait.no.in(jpaQueryFactory.select(qAnimalLike.animalno).from(qAnimalLike).where(qUser.no.eq(no))))
                             ).fetch();
                 }
 
 
             } else if (key.equals("addr")) { // 동물 보호소 위치로 검색
-                if (no < 0 || !isLike) { // 즐겨찾기 동물이 아닐 때
+                if (no <= 0 || !isLike) { // 즐겨찾기 동물이 아닐 때
                     return jpaQueryFactory.select(qAnimalWait).from(qAnimalWait)
                             .where(qAnimalWait.agencycode
-                                    .in(jpaQueryFactory.select(qShelter.agencycode).from(qShelter).where(qShelter.addr.like(word)))
+                                    .in(jpaQueryFactory.select(qShelter.agencycode).from(qShelter).where(qShelter.addr.like("%"+word+"%")))
                             ).fetch();
                 } else if (no > 0 && isLike) { // 즐겨찾기 동물일 때
                     return jpaQueryFactory.select(qAnimalWait).from(qAnimalWait)
                             .where(qAnimalWait.agencycode
-                                    .in(jpaQueryFactory.select(qShelter.agencycode).from(qShelter).where(qShelter.addr.like(word)))
+                                    .in(jpaQueryFactory.select(qShelter.agencycode).from(qShelter).where(qShelter.addr.like("%"+word+"%")))
                                     .and(qAnimalWait.no.in(jpaQueryFactory.select(qAnimalLike.animalno).from(qAnimalLike).where(qUser.no.eq(no))))
                             ).fetch();
                 }
 
 
             } else if (key.equals("agencyname")) { // 동물 보호소 이름으로 검색
-                if (no < 0 || !isLike) { // 즐겨찾기 동물이 아닐 때
+                if (no <= 0 || !isLike) { // 즐겨찾기 동물이 아닐 때
                     return jpaQueryFactory.select(qAnimalWait).from(qAnimalWait)
                             .where(qAnimalWait.agencycode
-                                    .in(jpaQueryFactory.select(qShelter.agencycode).from(qShelter).where(qShelter.agencyname.like(word)))
+                                    .in(jpaQueryFactory.select(qShelter.agencycode).from(qShelter).where(qShelter.agencyname.like("%"+word+"%")))
                             ).fetch();
                 } else if (no > 0 && isLike) { // 즐겨찾기 동물일 때
                     return jpaQueryFactory.select(qAnimalWait).from(qAnimalWait)
                             .where(qAnimalWait.agencycode
-                                    .in(jpaQueryFactory.select(qShelter.agencycode).from(qShelter).where(qShelter.agencyname.like(word)))
-                                    .and(qAnimalWait.no.in(jpaQueryFactory.select(qAnimalLike.animalno).from(qAnimalLike).where(qUser.no.eq(no))))
+                                    .in(jpaQueryFactory.select(qShelter.agencycode).from(qShelter).where(qShelter.agencyname.like("%"+word+"%")))
+                                    .and(qAnimalWait.no.in(jpaQueryFactory.select(qAnimalLike.animalno).from(qAnimalLike).where(qAnimalLike.userno.eq(no))))
                             ).fetch();
                 }
 

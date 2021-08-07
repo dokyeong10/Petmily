@@ -16,7 +16,7 @@ public class AnimalRegisterPostReq {
     @ApiModelProperty(name ="종", example = "진돗개")
     String species;
     @ApiModelProperty(name ="발견장소", example = "서울시 강남구")
-    String addr;
+    String find_addr;
     @ApiModelProperty(name ="나이", example = "3")
     int age;
     @ApiModelProperty(name ="성별", example = "1(남)")

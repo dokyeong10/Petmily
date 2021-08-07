@@ -1,7 +1,11 @@
 package com.ssafy.petmily.api.controller;
 
 import com.ssafy.petmily.api.request.AnimalRegisterPostReq;
+<<<<<<< HEAD
+import com.ssafy.petmily.api.request.AnimalSearchPostReq;
+=======
 import com.ssafy.petmily.api.request.LikeRegisterPostReq;
+>>>>>>> a608e2eadec838f25a285367bf89688e63c962bc
 import com.ssafy.petmily.api.service.AnimalService;
 import com.ssafy.petmily.common.response.BaseResponseBody;
 import com.ssafy.petmily.db.entity.AnimalLike;
@@ -60,13 +64,20 @@ public class AnimalController {
         return new ResponseEntity<AnimalWait>(updateAnimal,HttpStatus.OK);
     }
 
-    // 동물 리스트
-  @GetMapping("/{key}/{word}/{no}/{isLike}")
-    public ResponseEntity<List<AnimalWait>> searchAll(@PathVariable String key, @PathVariable String word, @PathVariable long no, @PathVariable boolean isLike){
+    // 동물 리스트 필터링
+  @PostMapping("/")
+    public ResponseEntity<List<AnimalWait>> searchAll(@RequestBody AnimalSearchPostReq animalSearchPostReq){
+        System.out.println("============================ animal list 요청 데이터 : " + animalSearchPostReq);
+        String key = animalSearchPostReq.getKey();
+        String word = animalSearchPostReq.getWord();
+        long no = animalSearchPostReq.getNo();
+        boolean isLike = animalSearchPostReq.getIsLike();
         List<AnimalWait> list = animalService.searchAllAnimal(key,word,no,isLike);
         return new ResponseEntity<List<AnimalWait>>(list, HttpStatus.OK);
   }
 
+<<<<<<< HEAD
+=======
   //즐겨찾기 등록
   @PostMapping("/like")
   @ApiOperation(value = "개인 회원 가입", notes = "<strong>아이디와 패스워드</strong>를 통해 회원가입 한다.")
@@ -81,6 +92,7 @@ public class AnimalController {
       AnimalLike animalLike = animalService.addlike(likeRegisterPostReq);
       return ResponseEntity.status(200).body(BaseResponseBody.of(200,"Sucess"));
   }
+>>>>>>> a608e2eadec838f25a285367bf89688e63c962bc
 
 
 }
