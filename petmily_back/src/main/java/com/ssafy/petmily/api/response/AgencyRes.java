@@ -1,7 +1,6 @@
 package com.ssafy.petmily.api.response;
 
-import com.ssafy.petmily.db.entity.Agency;
-import com.ssafy.petmily.db.entity.User;
+import com.ssafy.petmily.db.entity.agency.Agency;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -29,7 +28,6 @@ public class AgencyRes {
 
     public static AgencyRes of(Agency agency) {
         AgencyRes res = new AgencyRes();
-        res.setNo(agency.getNo());
         res.setEmail(agency.getEmail());
         res.setPhone(agency.getPhone());
         res.setUsername(agency.getUsername());

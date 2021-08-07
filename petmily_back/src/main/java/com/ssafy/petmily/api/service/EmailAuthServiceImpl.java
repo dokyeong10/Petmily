@@ -1,6 +1,6 @@
 package com.ssafy.petmily.api.service;
 
-import com.ssafy.petmily.db.entity.EmailCheck;
+import com.ssafy.petmily.db.entity.util.EmailCheck;
 import com.ssafy.petmily.db.repository.EmailAuthRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

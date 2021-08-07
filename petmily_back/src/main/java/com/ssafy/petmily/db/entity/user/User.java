@@ -1,9 +1,8 @@
-package com.ssafy.petmily.db.entity;
+package com.ssafy.petmily.db.entity.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.ssafy.petmily.db.entity.util.Role;
 import lombok.*;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.persistence.*;
 

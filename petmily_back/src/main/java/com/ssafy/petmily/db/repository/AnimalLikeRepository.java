@@ -1,6 +1,6 @@
 package com.ssafy.petmily.db.repository;
 
-import com.ssafy.petmily.db.entity.AnimalLike;
+import com.ssafy.petmily.db.entity.animal.AnimalLike;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

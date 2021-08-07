@@ -5,8 +5,8 @@ import com.ssafy.petmily.api.request.AnimalSearchPostReq;
 import com.ssafy.petmily.api.request.LikeRegisterPostReq;
 import com.ssafy.petmily.api.service.AnimalService;
 import com.ssafy.petmily.common.response.BaseResponseBody;
-import com.ssafy.petmily.db.entity.AnimalLike;
-import com.ssafy.petmily.db.entity.AnimalWait;
+import com.ssafy.petmily.db.entity.animal.Animal;
+import com.ssafy.petmily.db.entity.animal.AnimalLike;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,7 +34,7 @@ public class AnimalController {
     })
     public ResponseEntity<? extends BaseResponseBody> Animalregister(
             @RequestBody @ApiParam(value="동물 정보", required = true) AnimalRegisterPostReq registerInfo) {
-        AnimalWait animalWait = animalService.createAnimal(registerInfo);
+        Animal animal = animalService.createAnimal(registerInfo);
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
     }
 
@@ -55,21 +55,21 @@ public class AnimalController {
 
     //동물 수정
     @PatchMapping("/{no}")
-    public ResponseEntity<AnimalWait> patchUser(@PathVariable Long no,  @RequestBody AnimalWait animalWait){
-        AnimalWait updateAnimal = animalService.patchAnimal(no,animalWait);
-        return new ResponseEntity<AnimalWait>(updateAnimal,HttpStatus.OK);
+    public ResponseEntity<Animal> patchUser(@PathVariable Long no, @RequestBody Animal animal){
+        Animal updateAnimal = animalService.patchAnimal(no, animal);
+        return new ResponseEntity<Animal>(updateAnimal,HttpStatus.OK);
     }
 
     // 동물 리스트 필터링
   @PostMapping("/")
-    public ResponseEntity<List<AnimalWait>> searchAll(@RequestBody AnimalSearchPostReq animalSearchPostReq){
+    public ResponseEntity<List<Animal>> searchAll(@RequestBody AnimalSearchPostReq animalSearchPostReq){
         System.out.println("============================ animal list 요청 데이터 : " + animalSearchPostReq);
         String key = animalSearchPostReq.getKey();
         String word = animalSearchPostReq.getWord();
         long no = animalSearchPostReq.getNo();
         boolean isLike = animalSearchPostReq.getIsLike();
-        List<AnimalWait> list = animalService.searchAllAnimal(key,word,no,isLike);
-        return new ResponseEntity<List<AnimalWait>>(list, HttpStatus.OK);
+        List<Animal> list = animalService.searchAllAnimal(key,word,no,isLike);
+        return new ResponseEntity<List<Animal>>(list, HttpStatus.OK);
   }
 
 

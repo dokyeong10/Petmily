@@ -1,7 +1,6 @@
 package com.ssafy.petmily.api.response;
 
 import com.ssafy.petmily.common.response.BaseResponseBody;
-import com.ssafy.petmily.db.entity.Agency;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;

@@ -1,8 +1,8 @@
 package com.ssafy.petmily.api.service;
 
 import com.ssafy.petmily.common.auth.dto.SessionUser;
-import com.ssafy.petmily.db.entity.OAuthAttributes;
-import com.ssafy.petmily.db.entity.User;
+import com.ssafy.petmily.db.entity.util.OAuthAttributes;
+import com.ssafy.petmily.db.entity.user.User;
 import com.ssafy.petmily.db.repository.UserRepository;
 import com.ssafy.petmily.db.repository.UserRepositorySupport;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.ssafy.petmily.db.entity;
+package com.ssafy.petmily.db.entity.util;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
