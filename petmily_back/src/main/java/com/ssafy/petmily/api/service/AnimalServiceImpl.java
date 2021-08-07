@@ -30,8 +30,8 @@ public class AnimalServiceImpl implements AnimalService {
             if(animalWait.getSpecies() != null){
                 fetchedAnimal.get().setSpecies(animalWait.getSpecies());
             }
-            if(animalWait.getAddr() != null){
-                fetchedAnimal.get().setAddr(animalWait.getAddr());
+            if(animalWait.getFind_addr() != null){
+                fetchedAnimal.get().setFind_addr(animalWait.getFind_addr());
             }
             if(animalWait.getAge() != -1){
                 fetchedAnimal.get().setAge(animalWait.getAge());
@@ -60,7 +60,7 @@ public class AnimalServiceImpl implements AnimalService {
         AnimalWait animalWait = new AnimalWait();
         animalWait.setType(registerInfo.getType());
         animalWait.setSpecies(registerInfo.getSpecies());
-        animalWait.setAddr(registerInfo.getAddr());
+        animalWait.setFind_addr(registerInfo.getFind_addr());
         animalWait.setAge(registerInfo.getAge());
         animalWait.setSex(registerInfo.isSex());
         animalWait.setNeutered(registerInfo.isNeutered());

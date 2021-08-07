@@ -20,7 +20,7 @@ public class AnimalWait {
     Long no;
     String type;
     String species;
-    String addr;
+    String find_addr;
     int age;
     boolean sex;
     boolean neutered;

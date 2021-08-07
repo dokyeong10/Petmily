@@ -1,6 +1,7 @@
 package com.ssafy.petmily.api.controller;
 
 import com.ssafy.petmily.api.request.AnimalRegisterPostReq;
+import com.ssafy.petmily.api.request.AnimalSearchPostReq;
 import com.ssafy.petmily.api.service.AnimalService;
 import com.ssafy.petmily.common.response.BaseResponseBody;
 import com.ssafy.petmily.db.entity.AnimalWait;
@@ -58,11 +59,18 @@ public class AnimalController {
         return new ResponseEntity<AnimalWait>(updateAnimal,HttpStatus.OK);
     }
 
-    // 동물 리스트
-  @GetMapping("/{key}/{word}/{no}/{isLike}")
-    public ResponseEntity<List<AnimalWait>> searchAll(@PathVariable String key, @PathVariable String word, @PathVariable long no, @PathVariable boolean isLike){
+    // 동물 리스트 필터링
+  @PostMapping("/")
+    public ResponseEntity<List<AnimalWait>> searchAll(@RequestBody AnimalSearchPostReq animalSearchPostReq){
+        System.out.println("============================ animal list 요청 데이터 : " + animalSearchPostReq);
+        String key = animalSearchPostReq.getKey();
+        String word = animalSearchPostReq.getWord();
+        long no = animalSearchPostReq.getNo();
+        boolean isLike = animalSearchPostReq.getIsLike();
         List<AnimalWait> list = animalService.searchAllAnimal(key,word,no,isLike);
         return new ResponseEntity<List<AnimalWait>>(list, HttpStatus.OK);
   }
+
+
 
 }

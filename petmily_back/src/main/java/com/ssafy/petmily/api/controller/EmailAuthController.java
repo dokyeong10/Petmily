@@ -35,6 +35,7 @@ public class EmailAuthController {
     @PostMapping("/send/register")
     @ApiOperation(value = "이메일 인증코드 전송", notes = "<strong>이메일 인증 코드</strong>를 전송하기 위한 Controller")
     public ResponseEntity<? extends BaseResponseBody> SendEmailAuthReg(@ApiParam(value = "인증하려는 이메일") @RequestBody EmailPostReq emailPostReq){
+        System.out.println("=============================== 요청 이메일 : "+emailPostReq.getEmail());
         User user = userService.getUserByEmailAndType(emailPostReq.getEmail());
         if(user != null) { // 유저가 존재할 때
             return ResponseEntity.status(401).body(BaseResponseBody.of(401, "Already Exist"));
