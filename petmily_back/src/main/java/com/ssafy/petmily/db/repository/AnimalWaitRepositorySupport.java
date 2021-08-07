@@ -20,7 +20,7 @@ public class AnimalWaitRepositorySupport {
         if (userno == 0) {
             return null;
         } else {
-            return jpaQueryFactory.select(qAnimalLike).from(qAnimalLike)
+            return jpaQueryFactory.select(qAnimalLike).limit(4).from(qAnimalLike)
                     .where(qAnimalLike.userno.eq(userno)).fetch();
         }
     }
