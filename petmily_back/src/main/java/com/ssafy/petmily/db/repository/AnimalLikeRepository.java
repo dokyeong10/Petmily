@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface AnimalLikeRepository extends JpaRepository<AnimalLike,Long> {
     Optional<AnimalLike> findByNo(Long no);
+    void deleteByNo(Long no);
 }
