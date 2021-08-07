@@ -26,7 +26,7 @@ public class AnimalWait {
     boolean neutered;
     Date find_date;
     String agencycode;
-    MultipartFile[] fileup;
+  //  MultipartFile[] fileup;
 
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    Agency agency;
