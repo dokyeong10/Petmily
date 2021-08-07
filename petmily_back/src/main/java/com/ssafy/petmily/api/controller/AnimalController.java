@@ -1,16 +1,12 @@
 package com.ssafy.petmily.api.controller;
 
 import com.ssafy.petmily.api.request.AnimalRegisterPostReq;
-<<<<<<< HEAD
 import com.ssafy.petmily.api.request.AnimalSearchPostReq;
-=======
 import com.ssafy.petmily.api.request.LikeRegisterPostReq;
->>>>>>> a608e2eadec838f25a285367bf89688e63c962bc
 import com.ssafy.petmily.api.service.AnimalService;
 import com.ssafy.petmily.common.response.BaseResponseBody;
 import com.ssafy.petmily.db.entity.AnimalLike;
 import com.ssafy.petmily.db.entity.AnimalWait;
-import com.ssafy.petmily.db.repository.AnimalWaitRepositorySupport;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -76,8 +72,7 @@ public class AnimalController {
         return new ResponseEntity<List<AnimalWait>>(list, HttpStatus.OK);
   }
 
-<<<<<<< HEAD
-=======
+
   //즐겨찾기 등록
   @PostMapping("/like")
   @ApiOperation(value = "개인 회원 가입", notes = "<strong>아이디와 패스워드</strong>를 통해 회원가입 한다.")
@@ -92,7 +87,15 @@ public class AnimalController {
       AnimalLike animalLike = animalService.addlike(likeRegisterPostReq);
       return ResponseEntity.status(200).body(BaseResponseBody.of(200,"Sucess"));
   }
->>>>>>> a608e2eadec838f25a285367bf89688e63c962bc
+
+    // userno로 즐겨찾기
+
+    @GetMapping("/like/{userno}")
+    public ResponseEntity<List<AnimalLike>>searchLike(@PathVariable Long userno){
+        List<AnimalLike> list = animalService.searchLikeAnimal(userno);
+        return new ResponseEntity<List<AnimalLike>>(list, HttpStatus.OK);
+    }
+
 
 
 }

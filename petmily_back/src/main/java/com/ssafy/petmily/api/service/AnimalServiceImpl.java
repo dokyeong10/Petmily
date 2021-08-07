@@ -96,4 +96,8 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
 
+    @Override
+    public List<AnimalLike> searchLikeAnimal(Long userno) {
+        return  animalWaitRepositorySupport.findAnimalByUserno(userno);
+    }
 }
