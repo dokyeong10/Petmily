@@ -14,5 +14,5 @@ public interface AnimalService {
     List<AnimalWait> searchAllAnimal(String key, String word, long no, boolean isLike);
     AnimalLike addlike(LikeRegisterPostReq likeRegisterPostReq);
     List<AnimalLike> searchLikeAnimal(Long userno);
-    void deleteLike(Long no);
+    boolean deleteLike(Long no);
 }
