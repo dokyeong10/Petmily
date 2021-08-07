@@ -1,7 +1,10 @@
 package com.ssafy.petmily.api.service;
 
 import com.ssafy.petmily.api.request.AnimalRegisterPostReq;
+import com.ssafy.petmily.api.request.LikeRegisterPostReq;
+import com.ssafy.petmily.db.entity.AnimalLike;
 import com.ssafy.petmily.db.entity.AnimalWait;
+import com.ssafy.petmily.db.repository.AnimalLikeRepository;
 import com.ssafy.petmily.db.repository.AnimalWaitRepository;
 import com.ssafy.petmily.db.repository.AnimalWaitRepositorySupport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,9 @@ public class AnimalServiceImpl implements AnimalService {
 
     @Autowired
     AnimalWaitRepositorySupport animalWaitRepositorySupport;
+
+    @Autowired
+    AnimalLikeRepository animalLikeRepository;
 
     @Override
     public AnimalWait patchAnimal(Long no, AnimalWait animalWait) {
@@ -80,4 +86,14 @@ public class AnimalServiceImpl implements AnimalService {
     public List<AnimalWait> searchAllAnimal(String key, String word, long no, boolean isLike) {
         return animalWaitRepositorySupport.findAllAnimalWait(key, word, no, isLike);
     }
+    @Override
+    public AnimalLike addlike(LikeRegisterPostReq likeRegisterPostReq) {
+        AnimalLike animalLike= new AnimalLike();
+        animalLike.setNo(likeRegisterPostReq.getNo());;
+        animalLike.setAnimalno(likeRegisterPostReq.getAnimalno());
+        animalLike.setUserno(likeRegisterPostReq.getUserno());
+        return animalLikeRepository.save(animalLike);
+    }
+
+
 }
