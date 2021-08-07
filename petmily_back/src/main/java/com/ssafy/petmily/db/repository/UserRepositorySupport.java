@@ -1,8 +1,8 @@
 package com.ssafy.petmily.db.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssafy.petmily.db.entity.QUser;
-import com.ssafy.petmily.db.entity.User;
+import com.ssafy.petmily.db.entity.user.QUser;
+import com.ssafy.petmily.db.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

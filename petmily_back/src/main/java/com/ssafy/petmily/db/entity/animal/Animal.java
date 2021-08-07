@@ -1,31 +1,34 @@
-package com.ssafy.petmily.db.entity;
+package com.ssafy.petmily.db.entity.animal;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
+
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Getter
 @Setter
 @ToString
-public class AnimalAdopt {
-
+public class Animal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long no;
     String type;
     String species;
-    String addr;
+    String find_addr;
     int age;
     boolean sex;
     boolean neutered;
-    String find_date;
+    Date find_date;
     String agencycode;
+  //  MultipartFile[] fileup;
 
-//    @ManyToOne(optional = false)
-//    @JoinColumn(name="animalAdopt_no")
+//    @ManyToOne(fetch = FetchType.LAZY)
 //    Agency agency;
 
 

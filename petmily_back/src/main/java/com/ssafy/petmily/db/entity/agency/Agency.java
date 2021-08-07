@@ -1,4 +1,4 @@
-package com.ssafy.petmily.db.entity;
+package com.ssafy.petmily.db.entity.agency;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -17,13 +17,12 @@ import java.util.Collection;
 // animalWait Entity에서 User와의 관계를 Json으로 변환시 오류 방지를 위한 코드
 public class Agency{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long no;
+    String agencycode;
+
     String email;
     String username;
     String phone;
     String img;
-    String agencycode;
     String agencyname;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

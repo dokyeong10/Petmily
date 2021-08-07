@@ -1,6 +1,6 @@
 package com.ssafy.petmily.common.auth;
 
-import com.ssafy.petmily.db.entity.Agency;
+import com.ssafy.petmily.db.entity.agency.Agency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

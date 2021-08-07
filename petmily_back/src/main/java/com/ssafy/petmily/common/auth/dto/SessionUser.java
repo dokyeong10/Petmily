@@ -1,6 +1,6 @@
 package com.ssafy.petmily.common.auth.dto;
 
-import com.ssafy.petmily.db.entity.User;
+import com.ssafy.petmily.db.entity.user.User;
 import lombok.Getter;
 import lombok.ToString;
 

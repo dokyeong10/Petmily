@@ -8,15 +8,13 @@ import com.ssafy.petmily.api.response.UserLoginPostRes;
 import com.ssafy.petmily.api.service.UserService;
 import com.ssafy.petmily.common.response.BaseResponseBody;
 import com.ssafy.petmily.common.util.JwtTokenUtil;
-import com.ssafy.petmily.db.entity.Agency;
-import com.ssafy.petmily.db.entity.User;
+import com.ssafy.petmily.db.entity.agency.Agency;
+import com.ssafy.petmily.db.entity.user.User;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
 //http://localhost:8080/swagger-ui/
 
 /**

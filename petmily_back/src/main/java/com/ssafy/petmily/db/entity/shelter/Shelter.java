@@ -1,13 +1,11 @@
-package com.ssafy.petmily.db.entity;
+package com.ssafy.petmily.db.entity.shelter;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -15,10 +13,8 @@ import javax.persistence.Id;
 @ToString
 public class Shelter {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long no;
-
     String agencycode;
+
     String agencyname;
     String closeday;
     Double lat;
@@ -27,4 +23,5 @@ public class Shelter {
     String week_end_time;
     String addr;
     String tel;
+
 }

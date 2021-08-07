@@ -1,5 +1,6 @@
-package com.ssafy.petmily.db.entity;
+package com.ssafy.petmily.db.entity.animal;
 
+import com.ssafy.petmily.db.entity.user.User;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -23,7 +24,7 @@ public class AnimalLike {
     @ManyToOne
     @JoinColumn(name="animalno", insertable=false, updatable=false)
     //@JoinColumn
-    AnimalWait animalWait;
+    Animal animal;
 
     @ManyToOne
     @JoinColumn(name="userno", insertable=false, updatable=false)

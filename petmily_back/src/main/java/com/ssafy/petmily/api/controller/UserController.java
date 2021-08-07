@@ -9,8 +9,8 @@ import com.ssafy.petmily.api.service.UserService;
 import com.ssafy.petmily.common.auth.SsafyAgencyDetails;
 import com.ssafy.petmily.common.auth.SsafyUserDetails;
 import com.ssafy.petmily.common.response.BaseResponseBody;
-import com.ssafy.petmily.db.entity.Agency;
-import com.ssafy.petmily.db.entity.User;
+import com.ssafy.petmily.db.entity.agency.Agency;
+import com.ssafy.petmily.db.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +28,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-
-import javax.xml.transform.Result;
 
 /**
  * 유저 관련 API 요청 처리를 위한 컨트롤러 정의.

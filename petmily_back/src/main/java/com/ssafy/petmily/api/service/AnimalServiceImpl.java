@@ -2,8 +2,8 @@ package com.ssafy.petmily.api.service;
 
 import com.ssafy.petmily.api.request.AnimalRegisterPostReq;
 import com.ssafy.petmily.api.request.LikeRegisterPostReq;
-import com.ssafy.petmily.db.entity.AnimalLike;
-import com.ssafy.petmily.db.entity.AnimalWait;
+import com.ssafy.petmily.db.entity.animal.Animal;
+import com.ssafy.petmily.db.entity.animal.AnimalLike;
 import com.ssafy.petmily.db.repository.AnimalLikeRepository;
 import com.ssafy.petmily.db.repository.AnimalWaitRepository;
 import com.ssafy.petmily.db.repository.AnimalWaitRepositorySupport;
@@ -27,32 +27,32 @@ public class AnimalServiceImpl implements AnimalService {
     AnimalLikeRepository animalLikeRepository;
 
     @Override
-    public AnimalWait patchAnimal(Long no, AnimalWait animalWait) {
-        final Optional<AnimalWait> fetchedAnimal = animalWaitRepository.findByNo(no);
+    public Animal patchAnimal(Long no, Animal animal) {
+        final Optional<Animal> fetchedAnimal = animalWaitRepository.findByNo(no);
         if (fetchedAnimal.isPresent()) {
-            if (animalWait.getType() != null) {
-                fetchedAnimal.get().setType(animalWait.getType());
+            if (animal.getType() != null) {
+                fetchedAnimal.get().setType(animal.getType());
             }
-            if (animalWait.getSpecies() != null) {
-                fetchedAnimal.get().setSpecies(animalWait.getSpecies());
+            if (animal.getSpecies() != null) {
+                fetchedAnimal.get().setSpecies(animal.getSpecies());
             }
-            if (animalWait.getFind_addr() != null) {
-                fetchedAnimal.get().setFind_addr(animalWait.getFind_addr());
+            if (animal.getFind_addr() != null) {
+                fetchedAnimal.get().setFind_addr(animal.getFind_addr());
             }
-            if (animalWait.getAge() != -1) {
-                fetchedAnimal.get().setAge(animalWait.getAge());
+            if (animal.getAge() != -1) {
+                fetchedAnimal.get().setAge(animal.getAge());
             }
-            if (animalWait.isSex()) {
-                fetchedAnimal.get().setSex(animalWait.isSex());
+            if (animal.isSex()) {
+                fetchedAnimal.get().setSex(animal.isSex());
             }
-            if (animalWait.isNeutered()) {
-                fetchedAnimal.get().setNeutered(animalWait.isNeutered());
+            if (animal.isNeutered()) {
+                fetchedAnimal.get().setNeutered(animal.isNeutered());
             }
-            if (animalWait.getFind_date() != null) {
-                fetchedAnimal.get().setFind_date(animalWait.getFind_date());
+            if (animal.getFind_date() != null) {
+                fetchedAnimal.get().setFind_date(animal.getFind_date());
             }
-            if (animalWait.getAgencycode() != null) {
-                fetchedAnimal.get().setAgencycode(animalWait.getAgencycode());
+            if (animal.getAgencycode() != null) {
+                fetchedAnimal.get().setAgencycode(animal.getAgencycode());
             }
             return animalWaitRepository.save(fetchedAnimal.get());
         } else {
@@ -61,17 +61,17 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
     @Override
-    public AnimalWait createAnimal(AnimalRegisterPostReq registerInfo) {
-        AnimalWait animalWait = new AnimalWait();
-        animalWait.setType(registerInfo.getType());
-        animalWait.setSpecies(registerInfo.getSpecies());
-        animalWait.setFind_addr(registerInfo.getFind_addr());
-        animalWait.setAge(registerInfo.getAge());
-        animalWait.setSex(registerInfo.isSex());
-        animalWait.setNeutered(registerInfo.isNeutered());
-        animalWait.setFind_date(registerInfo.getFind_date());
-        animalWait.setAgencycode(registerInfo.getAgencycode());
-        return animalWaitRepository.save(animalWait);
+    public Animal createAnimal(AnimalRegisterPostReq registerInfo) {
+        Animal animal = new Animal();
+        animal.setType(registerInfo.getType());
+        animal.setSpecies(registerInfo.getSpecies());
+        animal.setFind_addr(registerInfo.getFind_addr());
+        animal.setAge(registerInfo.getAge());
+        animal.setSex(registerInfo.isSex());
+        animal.setNeutered(registerInfo.isNeutered());
+        animal.setFind_date(registerInfo.getFind_date());
+        animal.setAgencycode(registerInfo.getAgencycode());
+        return animalWaitRepository.save(animal);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class AnimalServiceImpl implements AnimalService {
 
     @Override
     @Transactional
-    public List<AnimalWait> searchAllAnimal(String key, String word, long no, boolean isLike) {
+    public List<Animal> searchAllAnimal(String key, String word, long no, boolean isLike) {
         return animalWaitRepositorySupport.findAllAnimalWait(key, word, no, isLike);
     }
 

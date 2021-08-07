@@ -1,5 +1,6 @@
-package com.ssafy.petmily.db.entity;
+package com.ssafy.petmily.db.entity.util;
 
+import com.ssafy.petmily.db.entity.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;

@@ -3,8 +3,8 @@ package com.ssafy.petmily.api.service;
 
 import com.ssafy.petmily.api.request.AgencyRegisterPostReq;
 import com.ssafy.petmily.api.request.UserRegisterPostReq;
-import com.ssafy.petmily.db.entity.Agency;
-import com.ssafy.petmily.db.entity.User;
+import com.ssafy.petmily.db.entity.agency.Agency;
+import com.ssafy.petmily.db.entity.user.User;
 import com.ssafy.petmily.db.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

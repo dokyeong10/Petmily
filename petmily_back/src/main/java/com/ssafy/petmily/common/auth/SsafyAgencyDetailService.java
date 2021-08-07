@@ -1,8 +1,7 @@
 package com.ssafy.petmily.common.auth;
 
 import com.ssafy.petmily.api.service.UserService;
-import com.ssafy.petmily.db.entity.Agency;
-import com.ssafy.petmily.db.entity.User;
+import com.ssafy.petmily.db.entity.agency.Agency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
