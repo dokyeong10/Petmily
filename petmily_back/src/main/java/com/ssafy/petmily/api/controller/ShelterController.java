@@ -28,4 +28,11 @@ public class ShelterController {
         System.out.println("========================= searchShelterCode 응답 데이터 : "+list);
         return new ResponseEntity<List<Shelter>>(list, HttpStatus.OK);
     }
+
+    @GetMapping("/detail/{no}")
+    public ResponseEntity<Shelter> searchShelterDetail(@PathVariable long no){
+        Shelter shelter = shelterService.searchShelterDetail(no);
+        System.out.println("========================= searchShelterDetail 응답 데이터 : " + shelter);
+        return new ResponseEntity<Shelter>(shelter, HttpStatus.OK);
+    }
 }
