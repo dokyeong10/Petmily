@@ -16,6 +16,14 @@ public class AnimalWaitRepositorySupport {
     QUser qUser = QUser.user;
     QShelter qShelter = QShelter.shelter;
 
+    public List<AnimalLike> findAnimalByUserno(Long userno) {
+        if (userno == 0) {
+            return null;
+        } else {
+            return jpaQueryFactory.select(qAnimalLike).from(qAnimalLike)
+                    .where(qAnimalLike.userno.eq(userno)).fetch();
+        }
+    }
    public List<AnimalWait> findAllAnimalWait(String key, String word, Long no, boolean isLike) {
         System.out.println("===================== key : " + key);
         System.out.println("===================== word : " + word);

@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -21,4 +18,15 @@ public class AnimalLike {
     Long animalno;
     Long userno;
     boolean state;
+
+
+    @ManyToOne
+    @JoinColumn(name="animalno", insertable=false, updatable=false)
+    //@JoinColumn
+    AnimalWait animalWait;
+
+    @ManyToOne
+    @JoinColumn(name="userno", insertable=false, updatable=false)
+    //@JoinColumn
+    User user;
 }
