@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="nav" class="mb-5">
+    <div id="nav" class="mb-1">
       <div>
         <!-- style="box-shadow: 0 4px 0 0 violet; content-box" 여부 다시 결정 해야함. -->
         <router-link to="/home" class="mx-5 text-decoration-none"
@@ -73,7 +73,6 @@ export default {
 
 #nav {
   padding: 30px;
-  margin-bottom: 100px;
   box-shadow: 0 2px 3px 0 #ebd6f2;
 }
 
