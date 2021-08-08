@@ -2,21 +2,29 @@
   <JumbotronTerms/>
   <div class="container mb-5">
     <div style="width: 600px;">
-      <span>
-        <input v-model="state.email" type="text" class="form-control radius-border br" placeholder="petmily@email.com">
-        <button @click="confirmEmail" class="mb-5">이메일 인증하기</button>
+      <label for="email" class="d-flex flex-row">이메일</label>
+      <span class="d-flex" style="width: 400px;">
+        <input v-model="state.email" type="text" class="form-control radius-border br" placeholder="petmily@email.com" @keyup.enter="confirmEmail" id="email" style="height: 38px;">
+        <button @click="confirmEmail" type="button" class="mb-5 btn btn-primary" style="height: 38px; width: 80px">인증</button>
       </span>
-      <span v-if="state.isEmail">
-        <input v-model="state.number" type="text" class="form-control radius-border br" placeholder="인증번호를 입력해주세요.">
-        <button @click="confirmNumber" class="mb-5">인증하기</button>
+      <span v-if="state.isEmail" style="width: 400px;">
+        <label for="emailcode" class="d-flex flex-row">인증번호</label>
+        <div class="d-flex" style="width: 400px;">
+          <input v-model="state.number" type="text" class="form-control radius-border br" placeholder="인증번호를 입력해주세요." @keyup.enter="confirmNumber" id="emailcode" style="height: 38px;">
+          <button @click="confirmNumber" type="button" class="mb-5 btn btn-primary" style="height: 38px; width: 160px">인증하기</button>
+        </div>
       </span>
       <div v-if="state.isConfirm" class="mb-5">
         인증이 완료되었습니다.
       </div>
-      <input v-model="state.username" type="text" class="form-control radius-border br mb-5" placeholder="홍길동">
-      <input v-model="state.password" type="password" class="form-control radius-border br mb-5" placeholder="••••••••">
-      <input v-model="state.passwordConfirm" type="password" class="form-control radius-border br mb-5" placeholder="••••••••">
-      <input v-model="state.phone" type="text" class="form-control br radius-border mb-5" placeholder="010-1234-5678">
+      <label for="username" class="d-flex flex-row">이름</label>
+      <input v-model="state.username" type="text" class="form-control radius-border br mb-5" placeholder="홍길동" id="username">
+      <label for="password" class="d-flex flex-row">비밀번호</label>
+      <input v-model="state.password" type="password" class="form-control radius-border br mb-5" placeholder="••••••••" id="password">
+      <label for="confirmPassword" class="d-flex flex-row">비밀번호 재입력</label>
+      <input v-model="state.passwordConfirm" type="password" class="form-control radius-border br mb-5" placeholder="••••••••" id="confirmPassword">
+      <label for="phone" class="d-flex flex-row">전화번호</label>
+      <input v-model="state.phone" type="text" class="form-control br radius-border mb-5" placeholder="010-1234-5678" id="phone">
       <button class="btn-white" style="color: #FFFFFF;" @click="confirmSignup">회원가입 하기</button>
     </div>
   </div>

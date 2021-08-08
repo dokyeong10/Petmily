@@ -2,22 +2,60 @@
   <JumbotronTerms/>
   <div class="container mb-5">
     <div style="width: 600px;">
-      <input v-model="state.agencyname" type="text" class="form-control radius-border br mb-5" placeholder="기관 이름">
-      <span>
-        <input v-model="state.email" type="text" class="form-control radius-border br" placeholder="petmily@email.com">
-        <button @click="confirmEmail" class="mb-5">이메일 인증하기</button>
+      <label for="agencyname" class="d-flex flex-row">기관 이름</label>
+      <input v-model="state.agencyname" type="text" class="form-control radius-border br mb-5" placeholder="기관 이름" id="agencyname">
+      <label for="agencycode" class="d-flex flex-row">기관 코드</label>
+      <div class="d-flex" style="width: 400px;">
+        <input v-model="state.agencycode" type="text" class="form-control radius-border br mb-5" placeholder="기관 코드" id="agencycode">
+        <!-- 기관 코드 검색 모달 -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agencycodeSearchModal" style="height: 38px; width: 80px">
+          검색
+        </button>
+        <div class="modal fade" id="agencycodeSearchModal" tabindex="-1" aria-labelledby="agencycodeSearchModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="agencycodeSearchModalLabel">기관 코드 검색</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="agencycodeSearchDataDelete"></button>
+              </div>
+              <div class="modal-body d-flex">
+                <input v-model="state.agencycodeSearchKeyword" type="text" class="form-control radius-border br" placeholder="검색어를 입력하세요." @keyup.enter=agencycodeSearch>
+                <button type="button" class="btn btn-primary" @click=agencycodeSearch>검색</button>
+              </div>
+              <ul v-if="state.agencycodeSearchData">
+                  <li v-for="value in state.agencycodeSearchData" :key="value.agencycode">기관 이름: {{ value.agencyname }} | 기관 코드: {{ value.agencycode }}</li>
+              </ul>
+              <div>키워드로 검색하여 기관 코드를 복사 후 붙여넣기해 주세요.</div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="agencycodeSearchDataDelete">닫기</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <label for="email" class="d-flex flex-row">이메일</label>
+      <span class="d-flex" style="width: 400px;">
+        <input v-model="state.email" type="text" class="form-control radius-border br" placeholder="petmily@email.com" @keyup.enter="confirmEmail" id="email" style="height: 38px;">
+        <button @click="confirmEmail" type="button" class="mb-5 btn btn-primary" style="height: 38px; width: 80px">인증</button>
       </span>
-      <span v-if="state.isEmail">
-        <input v-model="state.number" type="text" class="form-control radius-border br" placeholder="인증번호를 입력해주세요.">
-        <button @click="confirmNumber" class="mb-5">인증하기</button>
+      <span v-if="state.isEmail" style="width: 400px;">
+        <label for="emailcode" class="d-flex flex-row">인증번호</label>
+        <div class="d-flex" style="width: 400px;">
+          <input v-model="state.number" type="text" class="form-control radius-border br" placeholder="인증번호를 입력해주세요." @keyup.enter="confirmNumber" id="emailcode" style="height: 38px;">
+          <button @click="confirmNumber" type="button" class="mb-5 btn btn-primary" style="height: 38px; width: 160px">인증하기</button>
+        </div>
       </span>
       <div v-if="state.isConfirm" class="mb-5">
         인증이 완료되었습니다.
       </div>
-      <input v-model="state.username" type="text" class="form-control radius-border br mb-5" placeholder="담당자 이름">
-      <input v-model="state.password" type="password" class="form-control radius-border br mb-5" placeholder="••••••••">
-      <input v-model="state.passwordConfirm" type="password" class="form-control radius-border br mb-5" placeholder="••••••••">
-      <input v-model="state.phone" type="text" class="form-control radius-border br mb-5" placeholder="010-1234-5678">
+      <label for="username" class="d-flex flex-row">담당자 이름</label>
+      <input v-model="state.username" type="text" class="form-control radius-border br mb-5" placeholder="담당자 이름" id="username">
+      <label for="password" class="d-flex flex-row">비밀번호</label>
+      <input v-model="state.password" type="password" class="form-control radius-border br mb-5" placeholder="••••••••" id="password">
+      <label for="confirmPassword" class="d-flex flex-row">비밀번호 재입력</label>
+      <input v-model="state.passwordConfirm" type="password" class="form-control radius-border br mb-5" placeholder="••••••••" id="confirmPassword">
+      <label for="phone" class="d-flex flex-row">전화번호</label>
+      <input v-model="state.phone" type="text" class="form-control radius-border br mb-5" placeholder="010-1234-5678" id="phone">
       <button class="btn-white" style="color: #FFFFFF;" @click="confirmSignup">회원가입 하기</button>
     </div>
   </div>
@@ -39,11 +77,15 @@ export default {
       isConfirm: false,
       number: null,
       agencyname: "",
+      agencycode: "",
       email: "",
       username: "",
       password: null,
       passwordConfirm: null,
-      phone: ""
+      phone: "",
+      agencycodeSearchKeyword: "",
+      agencycodeSearchData: "",
+      isClickedSearch: false,
     })
     const router = useRouter()
     const setToken = function () {
@@ -144,6 +186,8 @@ export default {
           username: state.username,
           password: state.password,
           phone: state.phone,
+          agencyname: state.agencyname,
+          agencycode: state.agencycode,
         }
       })
       .then( res => {
@@ -154,7 +198,25 @@ export default {
         console.log(err)
       })
     }
-    return {state, confirmSignup, setToken, confirmEmail, confirmNumber}
+    const agencycodeSearch = function () {
+      axios({
+        method: 'get',
+        url: `http://localhost:8080/shelter/${state.agencycodeSearchKeyword}`
+      })
+      .then( res => {
+        console.log(res.data)
+        state.agencycodeSearchData = res.data
+        console.log(state.agencycodeSearchData)
+      })
+      .catch( err => {
+        console.log(err)
+      })
+    }
+    const agencycodeSearchDataDelete = function () {
+      state.agencycodeSearchKeyword = ""
+      state.agencycodeSearchData = ""
+    }
+    return {state, confirmSignup, setToken, confirmEmail, confirmNumber, agencycodeSearch, agencycodeSearchDataDelete }
   }
   
 }
