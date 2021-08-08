@@ -73,7 +73,7 @@ export default {
 
 #nav {
   padding: 30px;
-  box-shadow: 0 2px 3px 0 #ebd6f2;
+  box-shadow: 0 2px 3px 0 #edddf2;
 }
 
 #nav a {
