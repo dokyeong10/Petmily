@@ -37,7 +37,7 @@
             </div>
           </div>
           <div class="d-flex justify-content-end">
-            <label><input type="checkbox" value="동의함" v-model="firstAgree" @click="agree">동의함 {{firstAgree}} </label>
+            <label><input type="checkbox" value="동의함" v-model="firstAgree" @click="agree">동의함 </label>
           </div>
           <!-- 약관 2 -->
           <div class="d-flex justify-content-start">개인정보수집 및 이용동의</div>
@@ -73,7 +73,7 @@
           </div>
           <div class="d-flex justify-content-end">
             <input type="checkbox" value="동의함" v-model="secondAgree">
-            <label for="checkbox">동의함 {{ secondAgree }}</label>
+            <label for="checkbox">동의함</label>
           </div>
           <div class="d-flex justify-content-evenly">
             <button class="btn-white" style="color: #FFFFFF" @click="goToPrivateForm">개인 회원가입</button>
