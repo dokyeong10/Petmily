@@ -19,8 +19,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="agencycodeSearchDataDelete"></button>
               </div>
               <div class="modal-body d-flex">
-                <input v-model="state.agencycodeSearchKeyword" type="text" class="form-control radius-border br" placeholder="검색어를 입력하세요." @keyup.enter=agencycodeSearch>
-                <button type="button" class="btn btn-primary" @click=agencycodeSearch>검색</button>
+                <input v-model="state.agencycodeSearchKeyword" type="text" class="form-control radius-border br" placeholder="검색어를 입력하세요." @keyup.enter="agencycodeSearch">
+                <button type="button" class="btn btn-primary" @click="agencycodeSearch">검색</button>
               </div>
               <ul v-if="state.agencycodeSearchData">
                   <li v-for="value in state.agencycodeSearchData" :key="value.agencycode">기관 이름: {{ value.agencyname }} | 기관 코드: {{ value.agencycode }}</li>
@@ -190,7 +190,7 @@ export default {
           agencycode: state.agencycode,
         }
       })
-      .then( res => {
+      .then(res => {
         console.log(res.data)
         router.push('/signupsuccess')
       })
