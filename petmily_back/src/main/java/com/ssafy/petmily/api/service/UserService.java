@@ -20,4 +20,6 @@ public interface UserService {
 	Agency patchAgency(String email, Agency agency);
 	User getUserByEmailAndType(String email);
 	boolean patchPassword(String email, String password);
+
+	User getUserByNo(Long no);
 }

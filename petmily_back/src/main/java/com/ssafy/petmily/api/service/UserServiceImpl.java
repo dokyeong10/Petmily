@@ -164,4 +164,10 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public User getUserByNo(Long no) {
+		User user = userRepositorySupport.findUserByNo(no);
+		return user;
+	}
+
 }
