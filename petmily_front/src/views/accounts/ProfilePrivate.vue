@@ -48,14 +48,6 @@ export default {
         .catch((err) => {
           console.log(2);
           console.log(err);
-        })
-        .then((res) => {
-          console.log(1);
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(2);
-          console.log(err);
         });
     };
     console.log(getUserInfo());
