@@ -175,6 +175,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public AnimalLike addlike(LikeRegisterPostReq likeRegisterPostReq) {
 		AnimalLike animalLike = new AnimalLike();
 		animalLike.setNo(likeRegisterPostReq.getNo());
@@ -200,13 +201,11 @@ public class UserServiceImpl implements UserService {
 		} else {
 			return false;
 		}
-
-	}
-
-	@Override
+=======
 	public User getUserByNo(Long no) {
 		User user = userRepositorySupport.findUserByNo(no);
 		return user;
+>>>>>>> ddf2bf3dee03b6bca13b4da32fedf78ae0fa846d
 	}
 
 }
