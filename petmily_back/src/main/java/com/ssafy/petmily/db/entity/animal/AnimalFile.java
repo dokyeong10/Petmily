@@ -18,4 +18,9 @@ public class AnimalFile implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long no;
+
+    Long animalno;
+    String file;
+    String extension;
+
 }
