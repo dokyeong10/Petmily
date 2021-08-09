@@ -1,33 +1,32 @@
 <template>
   <div>
     <div>
-      <MyProfileMyPage/>
+      <MyProfileMyPage />
     </div>
-    <br/>
+    <br />
     <div class="container">
-      <MyProfileForm/>
+      <MyProfileForm />
     </div>
-    <br/>
+    <br />
     <div class="container">
-      <MyProfileFavoriteAnimal/>
+      <MyProfileFavoriteAnimal />
     </div>
   </div>
 </template>
 <script>
-import MyProfileFavoriteAnimal from '@/views/accounts/components/MyProfileFavoriteAnimal'
-import MyProfileForm from '@/views/accounts/components/MyProfileForm'
-import MyProfileMyPage from '@/views/accounts/components/MyProfileMyPage'
-import axios from 'axios'
+import MyProfileFavoriteAnimal from "@/views/accounts/components/MyProfileFavoriteAnimal";
+import MyProfileForm from "@/views/accounts/components/MyProfileForm";
+import MyProfileMyPage from "@/views/accounts/components/MyProfileMyPage";
+import axios from "axios";
 
 export default {
-  name: 'ProfilePrivate',
+  name: "ProfilePrivate",
   components: {
     MyProfileMyPage,
     MyProfileForm,
     MyProfileFavoriteAnimal,
   },
-  setup () {
-
+  setup() {
     const setToken = function () {
       const token = localStorage.getItem("jwt");
       const config = {
@@ -36,28 +35,27 @@ export default {
       return config;
     };
 
-    const getUserInfo = async function() {
+    const getUserInfo = async function () {
       await axios({
-        method: 'get',
-        url: 'http://localhost:8080/users/personal/me',
+        method: "get",
+        url: "http://localhost:8080/users/personal/me",
         headers: {
-          Authorization: setToken()
-        }
+          Authorization: setToken(),
+        },
       })
-      .then((res) => {
-        console.log(1)
-        console.log(res)
-      })
-      .catch((err) => {
-        console.log(2)
-        console.log(err)
-      })
-    }
-    console.log(getUserInfo())
-    return { getUserInfo, setToken }
-  }
-}
+        .then((res) => {
+          console.log(1);
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(2);
+          console.log(err);
+        });
+    };
+    console.log(getUserInfo());
+    return { getUserInfo, setToken };
+  },
+};
 </script>
 <style>
-  
 </style>
