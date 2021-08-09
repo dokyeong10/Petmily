@@ -2,19 +2,15 @@ package com.ssafy.petmily.api.service;
 
 
 import com.ssafy.petmily.api.request.AgencyRegisterPostReq;
-import com.ssafy.petmily.api.request.LikeRegisterPostReq;
 import com.ssafy.petmily.api.request.UserRegisterPostReq;
 import com.ssafy.petmily.db.entity.agency.Agency;
-import com.ssafy.petmily.db.entity.animal.AnimalLike;
 import com.ssafy.petmily.db.entity.user.User;
-import com.ssafy.petmily.db.entity.user.UserJoin;
 import com.ssafy.petmily.db.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -36,12 +32,6 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	PasswordEncoder passwordEncoder;
-
-	@Autowired
-	AnimalLikeRepository animalLikeRepository;
-
-	@Autowired
-	AnimalWaitRepositorySupport animalWaitRepositorySupport;
 
 	@Override
 	public User createUser(UserRegisterPostReq userRegisterInfo) {
@@ -175,37 +165,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-<<<<<<< HEAD
-	public AnimalLike addlike(LikeRegisterPostReq likeRegisterPostReq) {
-		AnimalLike animalLike = new AnimalLike();
-		animalLike.setNo(likeRegisterPostReq.getNo());
-		;
-		animalLike.setAnimalno(likeRegisterPostReq.getAnimalno());
-		animalLike.setUserno(likeRegisterPostReq.getUserno());
-		return animalLikeRepository.save(animalLike);
-	}
-
-
-	@Override
-	public UserJoin searchMypage(Long no) {
-		return userRepositorySupport.searchMypage(no);
-	}
-
-	@Override
-	@Transactional
-	public boolean deleteLike(Long no) {
-		Optional<AnimalLike> animal = animalLikeRepository.findByNo(no);
-		if (animal.isPresent()) {
-			animalLikeRepository.deleteByNo(no);
-			return true;
-		} else {
-			return false;
-		}
-=======
 	public User getUserByNo(Long no) {
 		User user = userRepositorySupport.findUserByNo(no);
 		return user;
->>>>>>> ddf2bf3dee03b6bca13b4da32fedf78ae0fa846d
 	}
 
 }

@@ -3,7 +3,6 @@ package com.ssafy.petmily.api.service;
 import com.ssafy.petmily.api.request.AnimalRegisterPostReq;
 import com.ssafy.petmily.api.request.LikeRegisterPostReq;
 import com.ssafy.petmily.db.entity.animal.Animal;
-import com.ssafy.petmily.db.entity.animal.AnimalJoin;
 import com.ssafy.petmily.db.entity.animal.AnimalLike;
 import com.ssafy.petmily.db.repository.AnimalLikeRepository;
 import com.ssafy.petmily.db.repository.AnimalWaitRepository;
@@ -88,8 +87,36 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
     @Override
-    public AnimalJoin animaldetail(Long no) {
-       AnimalJoin animal = animalWaitRepositorySupport.findAnimalByNo(no);
+    public AnimalLike addlike(LikeRegisterPostReq likeRegisterPostReq) {
+        AnimalLike animalLike = new AnimalLike();
+        animalLike.setNo(likeRegisterPostReq.getNo());
+        ;
+        animalLike.setAnimalno(likeRegisterPostReq.getAnimalno());
+        animalLike.setUserno(likeRegisterPostReq.getUserno());
+        return animalLikeRepository.save(animalLike);
+    }
+
+
+    @Override
+    public List<AnimalLike> searchLikeAnimal(Long userno) {
+        return animalWaitRepositorySupport.findAnimalByUserno(userno);
+    }
+
+    @Override
+    @Transactional
+    public boolean deleteLike(Long no) {
+        Optional<AnimalLike> animal = animalLikeRepository.findByNo(no);
+        if (animal.isPresent()) {
+            animalLikeRepository.deleteByNo(no);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public Animal animaldetail(Long no) {
+       Animal animal = animalWaitRepositorySupport.findAnimalByNo(no);
         return animal;
     }
 
