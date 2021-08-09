@@ -13,6 +13,7 @@ export default createStore({
     email: "",
     findEmail: "",
     isLogin: false,
+    isUser: false,
     isAgency: false,
   },
   mutations: {
