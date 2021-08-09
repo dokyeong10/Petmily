@@ -29,11 +29,4 @@ public class Animal {
     String agencycode;
     String profile_img;
 
-//    @OneToOne(mappedBy = "animal")
-//    Shelter shelter;
-
-    @ManyToOne
-    @JoinColumn(name="agencycode",referencedColumnName = "agencycode",insertable = false, updatable = false)
-    Shelter shelter;
-
 }

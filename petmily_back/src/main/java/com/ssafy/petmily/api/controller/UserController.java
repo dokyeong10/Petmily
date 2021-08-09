@@ -12,6 +12,7 @@ import com.ssafy.petmily.common.auth.SsafyAgencyDetails;
 import com.ssafy.petmily.common.auth.SsafyUserDetails;
 import com.ssafy.petmily.common.response.BaseResponseBody;
 import com.ssafy.petmily.db.entity.agency.Agency;
+import com.ssafy.petmily.db.entity.agency.AgencyJoin;
 import com.ssafy.petmily.db.entity.animal.AnimalLike;
 import com.ssafy.petmily.db.entity.user.User;
 import com.ssafy.petmily.db.entity.user.UserJoin;
@@ -47,6 +48,7 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
+	@Autowired
 	AnimalService animalService;
 
 	@PostMapping("/personal")
@@ -218,5 +220,17 @@ public class UserController {
 			return ResponseEntity.status(401).body(BaseResponseBody.of(500,"즐겨찾는 동물 X"));
 		}
 	}
+
+	// 토큰으로 agency Mypage
+	@GetMapping("/agency/mypage")
+	public ResponseEntity<AgencyJoin> agencyMyPage(@ApiIgnore Authentication authentication){
+		SsafyAgencyDetails agencyDetails = (SsafyAgencyDetails) authentication.getDetails();
+		String agencycode = agencyDetails.getAgencycode();
+		AgencyJoin agencyJoin = userService.getAgencyByCode(agencycode);
+
+		return new ResponseEntity<AgencyJoin>(agencyJoin, HttpStatus.OK);
+
+	}
+
 
 }
