@@ -1,17 +1,18 @@
 <template>
   <JumbotronForms/>
-  <div class="container mb-5">
-    <div style="width: 600px;">
+  <div class="container mb-5 d-flex justify-content-center">
+    <div>
+      <div>
       <div class="d-flex flex-column align-items-start">
         <h1 class="overpass">Sign up to Petmily</h1>
         <h5 class="overpass colored">Agency Member</h5>
       </div>
       <br>
-      <label for="agencyname" class="d-flex flex-row" >기관 이름</label>
+      <label for="agencyname" class="d-flex flex-row mb-2" >기관 이름</label>
       <div class="d-flex" style="width: 400px;">
         <input :value="state.agencyname" type="text" class="form-control radius-border br mb-5" placeholder="기관 이름" id="agencyname" data-bs-toggle="modal" data-bs-target="#agencycodeSearchModal">
         <!-- 기관 코드 검색 모달 -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agencycodeSearchModal" style="height: 38px; width: 80px">
+        <button type="button" class="btn-up" data-bs-toggle="modal" data-bs-target="#agencycodeSearchModal" style="height: 38px; width: 80px">
           검색
         </button>
         <div class="modal fade" id="agencycodeSearchModal" tabindex="-1" aria-labelledby="agencycodeSearchModalLabel" aria-hidden="true">
@@ -23,7 +24,7 @@
               </div>
               <div class="modal-body d-flex">
                 <input v-model="state.agencycodeSearchKeyword" type="text" class="form-control radius-border br" placeholder="검색어를 입력하세요." @keyup.enter="agencycodeSearch">
-                <button type="button" class="btn btn-primary" @click="agencycodeSearch">검색</button>
+                <button type="button" class="btn-up" @click="agencycodeSearch">검색</button>
               </div>
               <ul v-if="state.agencycodeSearchData">
                   <li v-for="value in state.agencycodeSearchData" :key="value.agencycode" @click="getAgencyData(value)" data-bs-dismiss="modal" id="myDiv">기관 이름: {{ value.agencyname }} | 기관 코드: {{ value.agencycode }}</li>
@@ -40,17 +41,21 @@
       <!-- 사진등록 -->
       <div class="mb-4">
         <label class="d-flex flex-row">사진등록</label>
-        <div class="d-flex justify-content-start">
-          <img v-if="state.imgURL" :src="state.imgURL" />
-          <input id="file-selector" ref="file" type="file" @change="handleFileUpload()" />
-          <button @click="upload" class="btn-up" style="color: #FFFFFF;" flat>업로드</button>
+        <div class="justify-content-center">
+          <input id="file-selector" ref="file" type="file" @change="handleFileUpload()" style="width: 323.85px"/>
+          <button @click="upload" class="btn-up" style="color: #FFFFFF; height: 38px; width: 66.38px;" flat>업로드</button>
+          <div class="d-flex justify-content-start" v-if="state.imgURL">
+            <div>
+              업로드 완료!
+            </div>
+          </div>
         </div>
       </div>
 
       <label for="email" class="d-flex flex-row">이메일</label>
       <span class="d-flex" style="width: 400px;">
         <input v-model="state.email" type="text" class="form-control radius-border br" placeholder="petmily@email.com" @keyup.enter="confirmEmail" id="email" style="height: 38px;">
-        <button @click="confirmEmail" type="button" class="mb-5 btn btn-primary" style="height: 38px; width: 80px">인증</button>
+        <button @click="confirmEmail" type="button" class="mb-5 btn-up" style="height: 38px; width: 80px">인증</button>
       </span>
       <span v-if="state.isEmail" style="width: 400px;">
         <label for="emailcode" class="d-flex flex-row">인증번호</label>
@@ -72,6 +77,8 @@
       <label for="phone" class="d-flex flex-row">전화번호</label>
       <input v-model="state.phone" type="text" class="form-control radius-border br mb-5" placeholder="010-1234-5678" id="phone">
       <button class="btn-white" style="color: #FFFFFF;" @click="confirmSignup">회원가입 하기</button>
+    
+    </div>
     </div>
   </div>
 </template>
@@ -214,6 +221,7 @@ export default {
           phone: state.phone,
           agencyname: state.agencyname,
           agencycode: state.agencycode,
+          img: state.imgURL,
         }
       })
       .then(res => {
@@ -333,5 +341,17 @@ ul{
 }
 #myDiv:hover {
   text-decoration: underline;
+}
+.btn-up {
+  color: white;
+  width: 100px;
+  background-color: #a4b5f0;
+  border-right: #a4b5f0 1px solid;
+  border-left: #a4b5f0 1px solid;
+  border-top: #a4b5f0 1px solid;
+  border-bottom: #a4b5f0 1px solid;
+  border-style: none;
+  border-radius: 12px;
+  margin-left: 10px;
 }
 </style>
