@@ -1,5 +1,5 @@
 <template>
-  <div id="nav" class="mt-5" style="height: 1000px;">
+  <div id="nav" class="mt-5">
     <div>
       <div>
         <!-- style="box-shadow: 0 4px 0 0 violet; content-box" 여부 다시 결정 해야함. -->
