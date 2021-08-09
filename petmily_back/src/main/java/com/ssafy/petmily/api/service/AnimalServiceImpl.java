@@ -1,10 +1,11 @@
 package com.ssafy.petmily.api.service;
 
 import com.ssafy.petmily.api.request.AnimalRegisterPostReq;
-import com.ssafy.petmily.api.request.LikeRegisterPostReq;
+import com.ssafy.petmily.api.request.FilePostReq;
 import com.ssafy.petmily.db.entity.animal.Animal;
+import com.ssafy.petmily.db.entity.animal.AnimalFile;
 import com.ssafy.petmily.db.entity.animal.AnimalJoin;
-import com.ssafy.petmily.db.entity.animal.AnimalLike;
+import com.ssafy.petmily.db.repository.AnimalFileRepository;
 import com.ssafy.petmily.db.repository.AnimalLikeRepository;
 import com.ssafy.petmily.db.repository.AnimalWaitRepository;
 import com.ssafy.petmily.db.repository.AnimalWaitRepositorySupport;
@@ -26,6 +27,9 @@ public class AnimalServiceImpl implements AnimalService {
 
     @Autowired
     AnimalLikeRepository animalLikeRepository;
+
+    @Autowired
+    AnimalFileRepository animalFileRepository;
 
     @Override
     public Animal patchAnimal(Long no, Animal animal) {
@@ -96,6 +100,15 @@ public class AnimalServiceImpl implements AnimalService {
     public AnimalJoin animaldetail(Long no) {
         AnimalJoin animal = animalWaitRepositorySupport.findAnimalByNo(no);
         return animal;
+    }
+
+    @Override
+    public AnimalFile fileUpload(FilePostReq filePostReq, String extension) {
+        AnimalFile animalFile = new AnimalFile();
+        animalFile.setAnimalno(filePostReq.getAnimalno());
+        animalFile.setFile(filePostReq.getFile());
+        animalFile.setExtension(extension);
+        return animalFileRepository.save(animalFile);
     }
 
 
