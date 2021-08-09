@@ -9,6 +9,8 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service("communityService")
 public class CommunityServiceImpl implements CommunityService {
 
@@ -25,6 +27,11 @@ public class CommunityServiceImpl implements CommunityService {
         return communityRepository.save(board);
     }
 
+    @Override
+    @Transactional
+    public void deleteBoard(Long no) {
+        communityRepository.deleteByNo(no);
+    }
 
 
 }

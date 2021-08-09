@@ -8,6 +8,7 @@ import com.ssafy.petmily.db.entity.community.Board;
 import com.ssafy.petmily.db.entity.user.User;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,5 +40,19 @@ public class CommunityController {
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
     }
 
+    //게시글 삭제
+    @DeleteMapping("/{no}")
+    @ApiOperation(value = "개인회원삭제", notes = "개인회원삭제")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "성공"),
+            @ApiResponse(code = 401, message = "인증 실패"),
+            @ApiResponse(code = 404, message = "사용자 없음"),
+            @ApiResponse(code = 500, message = "서버 오류")
+    })
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<? extends BaseResponseBody> deleteBoard(@PathVariable Long no){
+        communityService.deleteBoard(no);
+        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+    }
 
 }
