@@ -1,18 +1,14 @@
 <template>
-  <Navbar/>
-  <br/>
-  <br/>
+  <Navbar />
 </template>
 <script>
-import Navbar from '@/views/main/components/Navbar'
+import Navbar from "@/views/main/components/Navbar";
 
 export default {
-  name: 'Main',
+  name: "Main",
   components: {
     Navbar,
-  }
-}
+  },
+};
 </script>
-<style>
-  
-</style>
+<style></style>
