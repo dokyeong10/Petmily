@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -32,5 +33,9 @@ public class AnimalJoin {
     @ManyToOne
     @JoinColumn(name="agencycode",referencedColumnName = "agencycode",insertable = false, updatable = false)
     Shelter shelter;
+
+    @OneToMany
+    @JoinColumn(name="animalno",referencedColumnName = "no",insertable = false, updatable = false)
+    List<AnimalFile> animalFiles;
 
 }

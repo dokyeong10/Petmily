@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-public class AnimalFile implements Serializable {
+public class AnimalFile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long no;

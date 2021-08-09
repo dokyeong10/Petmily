@@ -13,8 +13,7 @@ public interface AnimalService {
     Animal createAnimal(AnimalRegisterPostReq registerInfo);
     void deleteAnimal(Long no);
     List<Animal> searchAllAnimal(String key, String word, long no, boolean isLike);
-    AnimalJoin animaldetail(Long no);
-
+    List<AnimalJoin> animaldetail(Long no);
 
     AnimalFile fileUpload(FilePostReq filePostReq, String extension);
 }

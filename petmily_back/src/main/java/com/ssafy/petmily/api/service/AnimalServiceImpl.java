@@ -97,9 +97,9 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
     @Override
-    public AnimalJoin animaldetail(Long no) {
-        AnimalJoin animal = animalWaitRepositorySupport.findAnimalByNo(no);
-        return animal;
+    public List<AnimalJoin> animaldetail(Long no) {
+        List<AnimalJoin> animalJoins = animalWaitRepositorySupport.findAnimalByNo(no);
+        return animalJoins;
     }
 
     @Override

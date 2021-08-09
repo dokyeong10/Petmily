@@ -86,9 +86,9 @@ public class AnimalWaitRepositorySupport {
         return null;
     }
 
-    public AnimalJoin findAnimalByNo(Long no) {
-        AnimalJoin animal = jpaQueryFactory.select(qAnimalJoin).from(qAnimalJoin)
-                .where(qAnimalJoin.no.eq(no)).fetchOne();
-        return animal;
+    public List<AnimalJoin> findAnimalByNo(Long no) {
+        List<AnimalJoin> animalJoins = jpaQueryFactory.select(qAnimalJoin).from(qAnimalJoin)
+                .where(qAnimalJoin.no.eq(no)).fetch();
+        return animalJoins;
     }
 }
