@@ -73,6 +73,7 @@ public class AnimalServiceImpl implements AnimalService {
         animal.setFind_date(registerInfo.getFind_date());
         animal.setAgencycode(registerInfo.getAgencycode());
         animal.setProfile_img(registerInfo.getProfile_img());
+        animal.setText(registerInfo.getText());
         return animalWaitRepository.save(animal);
     }
 
