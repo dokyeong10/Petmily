@@ -114,5 +114,11 @@ public class AnimalServiceImpl implements AnimalService {
         }
     }
 
+    @Override
+    public Animal animaldetail(Long no) {
+       Animal animal = animalWaitRepositorySupport.findAnimalByNo(no);
+        return animal;
+    }
+
 
 }

@@ -1,6 +1,7 @@
 package com.ssafy.petmily.db.entity.animal;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.ssafy.petmily.db.entity.shelter.Shelter;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -26,10 +27,12 @@ public class Animal {
     boolean neutered;
     Date find_date;
     String agencycode;
-  //  MultipartFile[] fileup;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    Agency agency;
+//    @OneToOne(mappedBy = "animal")
+//    Shelter shelter;
 
+    @ManyToOne
+    @JoinColumn(name="agencycode",referencedColumnName = "agencycode",insertable = false, updatable = false)
+    Shelter shelter;
 
 }

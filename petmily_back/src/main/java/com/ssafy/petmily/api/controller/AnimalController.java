@@ -3,6 +3,7 @@ package com.ssafy.petmily.api.controller;
 import com.ssafy.petmily.api.request.AnimalRegisterPostReq;
 import com.ssafy.petmily.api.request.AnimalSearchPostReq;
 import com.ssafy.petmily.api.request.LikeRegisterPostReq;
+import com.ssafy.petmily.api.response.AnimalRes;
 import com.ssafy.petmily.api.service.AnimalService;
 import com.ssafy.petmily.common.response.BaseResponseBody;
 import com.ssafy.petmily.db.entity.animal.Animal;
@@ -107,6 +108,13 @@ public class AnimalController {
             return ResponseEntity.status(401).body(BaseResponseBody.of(500,"즐겨찾는 동물 X"));
         }
     }
+
+    @GetMapping("/details/{no}")
+    public ResponseEntity<AnimalRes>animaldetail(@PathVariable Long no){
+        Animal animal = animalService.animaldetail(no);
+        return ResponseEntity.status(200).body(AnimalRes.of(animal));
+    }
+
     }
 
 

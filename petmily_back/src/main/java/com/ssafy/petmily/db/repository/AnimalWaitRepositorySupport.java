@@ -10,6 +10,7 @@ import com.ssafy.petmily.db.entity.shelter.QShelter;
 import com.ssafy.petmily.db.entity.user.QUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 @Repository
@@ -30,7 +31,8 @@ public class AnimalWaitRepositorySupport {
                     .where(qAnimalLike.userno.eq(userno)).fetch();
         }
     }
-   public List<Animal> findAllAnimalWait(String key, String word, Long no, boolean isLike) {
+
+    public List<Animal> findAllAnimalWait(String key, String word, Long no, boolean isLike) {
         System.out.println("===================== key : " + key);
         System.out.println("===================== word : " + word);
         System.out.println("===================== no : " + no);
@@ -49,13 +51,13 @@ public class AnimalWaitRepositorySupport {
 
 
         } else {
-            if(key.equals("type")) { // 동물 종류로 검색
+            if (key.equals("type")) { // 동물 종류로 검색
                 if (no <= 0 || !isLike) { // 즐겨찾기 동물이 아닐 때
                     return jpaQueryFactory.select(qAnimal).from(qAnimal)
-                            .where(qAnimal.species.like("%"+word+"%")).fetch();
+                            .where(qAnimal.species.like("%" + word + "%")).fetch();
                 } else if (no > 0 && isLike) { // 즐겨찾기 동물일 때
                     return jpaQueryFactory.select(qAnimal).from(qAnimal)
-                            .where(qAnimal.species.like("%"+word+"%")
+                            .where(qAnimal.species.like("%" + word + "%")
                                     .and(qAnimal.no.in(jpaQueryFactory.select(qAnimalLike.animalno).from(qAnimalLike).where(qUser.no.eq(no))))
                             ).fetch();
                 }
@@ -65,12 +67,12 @@ public class AnimalWaitRepositorySupport {
                 if (no <= 0 || !isLike) { // 즐겨찾기 동물이 아닐 때
                     return jpaQueryFactory.select(qAnimal).from(qAnimal)
                             .where(qAnimal.agencycode
-                                    .in(jpaQueryFactory.select(qShelter.agencycode).from(qShelter).where(qShelter.addr.like("%"+word+"%")))
+                                    .in(jpaQueryFactory.select(qShelter.agencycode).from(qShelter).where(qShelter.addr.like("%" + word + "%")))
                             ).fetch();
                 } else if (no > 0 && isLike) { // 즐겨찾기 동물일 때
                     return jpaQueryFactory.select(qAnimal).from(qAnimal)
                             .where(qAnimal.agencycode
-                                    .in(jpaQueryFactory.select(qShelter.agencycode).from(qShelter).where(qShelter.addr.like("%"+word+"%")))
+                                    .in(jpaQueryFactory.select(qShelter.agencycode).from(qShelter).where(qShelter.addr.like("%" + word + "%")))
                                     .and(qAnimal.no.in(jpaQueryFactory.select(qAnimalLike.animalno).from(qAnimalLike).where(qUser.no.eq(no))))
                             ).fetch();
                 }
@@ -80,12 +82,12 @@ public class AnimalWaitRepositorySupport {
                 if (no <= 0 || !isLike) { // 즐겨찾기 동물이 아닐 때
                     return jpaQueryFactory.select(qAnimal).from(qAnimal)
                             .where(qAnimal.agencycode
-                                    .in(jpaQueryFactory.select(qShelter.agencycode).from(qShelter).where(qShelter.agencyname.like("%"+word+"%")))
+                                    .in(jpaQueryFactory.select(qShelter.agencycode).from(qShelter).where(qShelter.agencyname.like("%" + word + "%")))
                             ).fetch();
                 } else if (no > 0 && isLike) { // 즐겨찾기 동물일 때
                     return jpaQueryFactory.select(qAnimal).from(qAnimal)
                             .where(qAnimal.agencycode
-                                    .in(jpaQueryFactory.select(qShelter.agencycode).from(qShelter).where(qShelter.agencyname.like("%"+word+"%")))
+                                    .in(jpaQueryFactory.select(qShelter.agencycode).from(qShelter).where(qShelter.agencyname.like("%" + word + "%")))
                                     .and(qAnimal.no.in(jpaQueryFactory.select(qAnimalLike.animalno).from(qAnimalLike).where(qAnimalLike.userno.eq(no))))
                             ).fetch();
                 }
@@ -93,5 +95,11 @@ public class AnimalWaitRepositorySupport {
             }
         }
         return null;
+    }
+
+    public Animal findAnimalByNo(Long no) {
+        Animal animal = jpaQueryFactory.select(qAnimal).from(qAnimal)
+                .where(qAnimal.no.eq(no)).fetchOne();
+        return animal;
     }
 }

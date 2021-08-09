@@ -15,4 +15,5 @@ public interface AnimalService {
     AnimalLike addlike(LikeRegisterPostReq likeRegisterPostReq);
     List<AnimalLike> searchLikeAnimal(Long userno);
     boolean deleteLike(Long no);
+    Animal animaldetail(Long no);
 }
