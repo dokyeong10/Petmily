@@ -1,7 +1,6 @@
 package com.ssafy.petmily.api.response;
 
 import com.ssafy.petmily.db.entity.animal.Animal;
-import com.ssafy.petmily.db.entity.animal.AnimalJoin;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -35,7 +34,7 @@ public class AnimalRes {
     @ApiModelProperty(name = "tel")
    String tel;
 
-    public static AnimalRes of(AnimalJoin animal){
+    public static AnimalRes of(Animal animal){
         AnimalRes res = new AnimalRes();
         res.setNo(animal.getNo());
         res.setType(animal.getType());
