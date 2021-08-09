@@ -29,6 +29,8 @@ public class AnimalRegisterPostReq {
     String agencycode;
     @ApiModelProperty(name ="이미지", example = "10303")
     String profile_img;
+    @ApiModelProperty(name ="특이사항", example = "10303")
+    String text;
 
 
 

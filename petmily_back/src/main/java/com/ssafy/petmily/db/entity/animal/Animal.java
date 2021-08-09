@@ -28,6 +28,7 @@ public class Animal {
     Date find_date;
     String agencycode;
     String profile_img;
+    String text;
 
 //    @OneToOne(mappedBy = "animal")
 //    Shelter shelter;
