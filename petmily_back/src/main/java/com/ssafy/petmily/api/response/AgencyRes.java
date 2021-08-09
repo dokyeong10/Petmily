@@ -25,6 +25,8 @@ public class AgencyRes {
     String agencyname;
     @ApiModelProperty(name= "agencycode")
     String agencycode;
+    @ApiModelProperty(name="password")
+    String password;
 
     public static AgencyRes of(Agency agency) {
         AgencyRes res = new AgencyRes();
@@ -34,6 +36,7 @@ public class AgencyRes {
         res.setImg(agency.getImg());
         res.setAgencycode(agency.getAgencycode());
         res.setAgencyname(agency.getAgencyname());
+        res.setPassword(agency.getPassword());
         return res;
     }
 

@@ -43,4 +43,10 @@ public class UserRepositorySupport {
     public void deleteByEmailAndType(String email, String type){
         jpaQueryFactory.delete(qUser).where(qUser.email.eq(email).and(qUser.type.eq(type))).execute();
     }
+
+    public User findUserByNo(Long no) {
+        User user = jpaQueryFactory.select(qUser).from(qUser)
+                .where(qUser.no.eq(no)).fetchOne();
+        return user;
+    }
 }
