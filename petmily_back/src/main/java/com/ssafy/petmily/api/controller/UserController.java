@@ -199,6 +199,7 @@ public class UserController {
 	// 토큰으로 유저 mypage 조회
 	@GetMapping("/mypage")
 	public ResponseEntity<UserJoin>searchLike(@ApiIgnore Authentication authentication){
+		System.out.println(authentication.toString());
 		SsafyUserDetails userDetails = (SsafyUserDetails) authentication.getDetails();
 		long no = userDetails.getNo();
 		UserJoin user = userService.searchMypage(no);
