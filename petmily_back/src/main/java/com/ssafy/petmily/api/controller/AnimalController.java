@@ -78,9 +78,9 @@ public class AnimalController {
 
 
     @GetMapping("/details/{no}")
-    public ResponseEntity<AnimalRes> animaldetail(@PathVariable Long no) {
-        AnimalJoin animal = animalService.animaldetail(no);
-        return ResponseEntity.status(200).body(AnimalRes.of(animal));
+    public ResponseEntity<List<AnimalJoin>> animaldetail(@PathVariable Long no) {
+       List<AnimalJoin> animalJoins = animalService.animaldetail(no);
+        return new ResponseEntity<List<AnimalJoin>>(animalJoins, HttpStatus.OK);
     }
 
     @PostMapping("/file")

@@ -1,11 +1,13 @@
 package com.ssafy.petmily.api.request;
 
+import com.ssafy.petmily.db.entity.animal.AnimalFile;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -31,6 +33,8 @@ public class AnimalRegisterPostReq {
     String profile_img;
     @ApiModelProperty(name ="특이사항", example = "10303")
     String text;
+    @ApiModelProperty(name ="특이사항", example = "10303")
+    List<AnimalFile> animalFiles;
 
 
 
