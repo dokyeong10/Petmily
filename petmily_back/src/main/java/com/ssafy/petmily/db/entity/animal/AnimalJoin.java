@@ -2,6 +2,7 @@ package com.ssafy.petmily.db.entity.animal;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.ssafy.petmily.db.entity.shelter.Shelter;
+import com.ssafy.petmily.db.entity.shelter.ShelterJoin;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +16,8 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class Animal {
+@Table(name = "animal")
+public class AnimalJoin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long no;
@@ -28,5 +30,9 @@ public class Animal {
     Date find_date;
     String agencycode;
 
+
+    @ManyToOne
+    @JoinColumn(name="agencycode",referencedColumnName = "agencycode",insertable = false, updatable = false)
+    Shelter shelter;
 
 }

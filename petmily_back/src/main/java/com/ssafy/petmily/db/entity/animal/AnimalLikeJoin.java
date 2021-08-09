@@ -1,17 +1,20 @@
 package com.ssafy.petmily.db.entity.animal;
 
+import com.ssafy.petmily.db.entity.animal.Animal;
 import com.ssafy.petmily.db.entity.user.User;
+import com.ssafy.petmily.db.entity.user.UserJoin;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@ToString
-public class AnimalLike {
+@Table(name = "animalLike")
+public class AnimalLikeJoin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long no;
@@ -19,4 +22,11 @@ public class AnimalLike {
     Long animalno;
     Long userno;
     boolean state;
+
+
+    @ManyToOne
+    @JoinColumn(name="animalno", referencedColumnName = "no", insertable=false, updatable=false)
+    Animal animal;
+
+
 }

@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Table(name = "agency")
-@JsonIdentityInfo(generator = ObjectIdGenerators.StringIdGenerator.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class AgencyJoin {
     @Id
     String agencycode;

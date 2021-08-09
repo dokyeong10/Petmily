@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.ssafy.petmily.db.entity.agency.AgencyJoin;
 import com.ssafy.petmily.db.entity.animal.Animal;
+import com.ssafy.petmily.db.entity.animal.AnimalJoin;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +17,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "shelter")
-@JsonIdentityInfo(generator = ObjectIdGenerators.StringIdGenerator.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class ShelterJoin implements Serializable {
     @Id
     String agencycode;
@@ -36,5 +37,5 @@ public class ShelterJoin implements Serializable {
 
     @OneToMany
     @JoinColumn(name = "agencycode",referencedColumnName = "agencycode",insertable = false, updatable = false)
-    List<Animal> animals;
+    List<AnimalJoin> animalJoins;
 }

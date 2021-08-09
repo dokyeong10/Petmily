@@ -2,7 +2,9 @@ package com.ssafy.petmily.db.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.petmily.db.entity.user.QUser;
+import com.ssafy.petmily.db.entity.user.QUserJoin;
 import com.ssafy.petmily.db.entity.user.User;
+import com.ssafy.petmily.db.entity.user.UserJoin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,6 +19,7 @@ public class UserRepositorySupport {
     @Autowired
     private JPAQueryFactory jpaQueryFactory;
     QUser qUser = QUser.user;
+    QUserJoin qUserJoin = QUserJoin.userJoin;
 
     public Optional<User> findUserByEmail(String email) {
         User user = jpaQueryFactory.select(qUser).from(qUser)
@@ -44,9 +47,14 @@ public class UserRepositorySupport {
         jpaQueryFactory.delete(qUser).where(qUser.email.eq(email).and(qUser.type.eq(type))).execute();
     }
 
+<<<<<<< HEAD
+    public UserJoin searchMypage(long no){
+        return jpaQueryFactory.select(qUserJoin).from(qUserJoin).where(qUserJoin.no.eq(no)).fetchOne();
+=======
     public User findUserByNo(Long no) {
         User user = jpaQueryFactory.select(qUser).from(qUser)
                 .where(qUser.no.eq(no)).fetchOne();
         return user;
+>>>>>>> ddf2bf3dee03b6bca13b4da32fedf78ae0fa846d
     }
 }
