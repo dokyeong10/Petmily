@@ -1,10 +1,10 @@
 <template>
-  <Main/>
+  <Main />
 </template>
 <script>
-import Main from '@/views/main/Main'
+import Main from "@/views/main/Main";
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Main,
   },
@@ -12,5 +12,5 @@ export default {
   data: () => ({
     //
   }),
-}
+};
 </script>

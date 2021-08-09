@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Jumbotron/>
-    <HomeLiveList/>
-    <HomeAnimalLIst/>
+    <Jumbotron />
+    <HomeLiveList />
+    <HomeAnimalLIst />
   </div>
 </template>
 <script>
@@ -20,5 +20,4 @@ export default {
   setup() {},
 };
 </script>
-<style>
-</style>
+<style></style>
