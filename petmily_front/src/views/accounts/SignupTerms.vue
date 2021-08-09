@@ -9,7 +9,7 @@
           <div class="d-flex justify-content-start">이용 약관 동의</div>
           <div class="d-flex justify-content-center">
             <pre style="overflow:auto; width:800px; height:150px; white-space: pre-wrap;" align="left">
-              제 1 장 총칙
+제 1 장 총칙
 제 1 조 (목 적)
 이 약관은 '펫밀리' (이하 '회사'라 합니다.)가 제공하는 서비스의 이용조건 및 절차, 기타 필요한 사항을 규정함을 목적으로 합니다.
 제 2 조 (약관의 효력 및 변경) 1. 이 약관의 내용은 서비스 화면에 게시하거나 기타의 방법으로 회원에게 공지함으로써 효력이 발생합니다.
@@ -140,7 +140,7 @@
             </pre>
           </div>
           <div class="d-flex justify-content-end">
-            <label><input type="checkbox" value="동의함" v-model="firstAgree" @click="agree">동의함 </label>
+            <label><input type="checkbox" value="동의함" v-model="firstAgree" @click="agree">이용약관에 동의합니다. </label>
           </div>
           <!-- 약관 2 -->
           <div class="d-flex justify-content-start">개인정보수집 및 이용동의</div>
@@ -201,7 +201,7 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
           </div>
           <div class="d-flex justify-content-end">
             <input type="checkbox" value="동의함" v-model="secondAgree">
-            <label for="checkbox">동의함</label>
+            <label for="checkbox">이용약관에 동의합니다.</label>
           </div>
           <div class="d-flex justify-content-evenly">
             <button class="btn-white" style="color: #FFFFFF" @click="goToPrivateForm">개인 회원가입</button>
