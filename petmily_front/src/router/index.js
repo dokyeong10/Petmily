@@ -14,7 +14,8 @@ import FindPassword from '@/views/accounts/FindPassword.vue'
 import ChangePassword from '@/views/accounts/ChangePassword.vue'
 
 // Profile
-import MyProfile from '@/views/accounts/MyProfile.vue'
+import ProfilePrivate from '@/views/accounts/ProfilePrivate.vue'
+import ProfileAgency from '@/views/accounts/ProfileAgency.vue'
 
 
 // Animal
@@ -79,9 +80,14 @@ const routes = [
     component: AnimalRegisterSuccess
   },
   {
-    path: '/myprofile',
-    name: 'myprofile',
-    component: MyProfile
+    path: '/profileprivate',
+    name: 'profileprivate',
+    component: ProfilePrivate
+  },
+  {
+    path: '/profileagency',
+    name: 'profileagency',
+    component: ProfileAgency
   }
   // {
   //   path: '/',

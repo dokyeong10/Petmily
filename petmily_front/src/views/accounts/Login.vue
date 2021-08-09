@@ -162,7 +162,9 @@ export default {
             console.log(res.data);
             localStorage.setItem("jwt", res.data.accessToken);
             store.state.isLogin = true;
+            store.state.isUser = true;
             sessionStorage.setItem("isLogin", store.state.isLogin);
+            sessionStorage.setItem("isUser", store.state.isUser);
             location.href = "/home";
           })
           .catch((err) => {

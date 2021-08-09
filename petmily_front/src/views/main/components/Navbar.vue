@@ -13,7 +13,12 @@
 
         <span v-if="confirmLogin">
           <button class="mx-5 text-decoration-none" @click="logout">로그아웃</button>
-          <v-btn to="/myprofile" class="mx-5 text-decoration-none">마이페이지</v-btn>
+          <span v-if="isUser">
+            <router-link to="/profileprivate" class="mx-5 text-decoration-none">마이페이지</router-link>
+          </span>
+          <span v-if="isAgency">
+            <router-link to="/profileagency" class="mx-5 text-decoration-none">마이페이지</router-link>
+          </span>
         </span>
         <span v-else>
           <router-link to="/login" class="mx-5 text-decoration-none">로그인</router-link>
@@ -25,31 +30,41 @@
   </div>
 </template>
 <script>
-import { onMounted, computed } from "vue";
-import { useRouter } from "vue-router";
+import { onMounted, computed } from "vue"
+import { useRouter } from "vue-router"
 
 export default {
   name: "Navbar",
   setup() {
     const router = useRouter();
-
     const confirmLogin = computed(() => {
       console.log(sessionStorage.getItem("isLogin"));
       return sessionStorage.getItem("isLogin");
     });
 
     const logout = function() {
+
       sessionStorage.removeItem("isLogin");
       localStorage.removeItem("jwt");
+      localStorage.removeItem("email");
       sessionStorage.removeItem("isAgency");
+      sessionStorage.removeItem("isUser");
       router.go();
     };
+
+    const isAgency = computed(() => {
+      return sessionStorage.getItem("isAgency")
+    }) 
+    
+    const isUser = computed(() => {
+      return sessionStorage.getItem("isUser")
+    }) 
 
     onMounted(() => {
       router.push("/home");
     });
 
-    return { confirmLogin, logout };
+    return { confirmLogin, logout, isAgency, isUser };
   },
 };
 </script>
