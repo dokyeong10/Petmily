@@ -7,4 +7,6 @@ public interface CommunityService {
 
 
     Board createBoard(ComuRegisterPostReq comuRegisterPostReq);
+
+    void deleteBoard(Long no);
 }

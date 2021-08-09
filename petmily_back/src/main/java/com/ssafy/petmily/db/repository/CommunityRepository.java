@@ -10,4 +10,6 @@ import java.util.Optional;
 @Repository
 public interface CommunityRepository extends JpaRepository<Board, Long> {
     Optional<Board> findByNo(Long no);
+
+    void deleteByNo(Long no);
 }
