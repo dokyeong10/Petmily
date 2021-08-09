@@ -2,26 +2,29 @@ package com.ssafy.petmily.api.controller;
 
 import com.ssafy.petmily.api.request.ComuRegisterPostReq;
 import com.ssafy.petmily.api.request.FileBoardPostReq;
-import com.ssafy.petmily.api.service.CommunityService;
+import com.ssafy.petmily.api.service.BoardService;
 import com.ssafy.petmily.common.response.BaseResponseBody;
-import com.ssafy.petmily.db.entity.animal.AnimalFile;
+import com.ssafy.petmily.db.entity.animal.AnimalJoin;
 import com.ssafy.petmily.db.entity.community.Board;
 import com.ssafy.petmily.db.entity.community.BoardFile;
+import com.ssafy.petmily.db.entity.community.BoardJoin;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Api(value = "게시글 API", tags = {"Community"})
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/board")
-public class CommunityController {
+public class BoardController {
 
 
     @Autowired
-    CommunityService communityService;
+    BoardService boardService;
 
     @PostMapping("/enroll")
     @ApiOperation(value = "게시글 작성 ", notes = "게시글을 작성한다. ")
@@ -36,7 +39,7 @@ public class CommunityController {
 
         //임의로 리턴된 User 인스턴스. 현재 코드는 회원 가입 성공 여부만 판단하기 때문에 굳이 Insert 된 유저 정보를 응답하지 않음.
 
-        Board board =communityService.createBoard(comuRegisterPostReq);
+        Board board = boardService.createBoard(comuRegisterPostReq);
 
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
     }
@@ -52,7 +55,7 @@ public class CommunityController {
     })
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<? extends BaseResponseBody> deleteBoard(@PathVariable Long no){
-        communityService.deleteBoard(no);
+        boardService.deleteBoard(no);
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
     }
 
@@ -73,9 +76,18 @@ public class CommunityController {
         String[] ext = file.split("\\.");
         extension = ext[(ext.length) - 1];
         System.out.println("exten =="+ extension);
-        BoardFile boardFile = communityService.fileUpload(fileBoardPostReq,extension);
+        BoardFile boardFile = boardService.fileUpload(fileBoardPostReq,extension);
 
 
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
     }
+
+    @GetMapping("/details/{no}")
+    public ResponseEntity<List<BoardJoin>> boarddetail(@PathVariable Long no) {
+        List<BoardJoin> BoardJoins = boardService.boarddetail(no);
+        return new ResponseEntity<List<BoardJoin>>(BoardJoins, HttpStatus.OK);
+    }
+
+
+
 }
