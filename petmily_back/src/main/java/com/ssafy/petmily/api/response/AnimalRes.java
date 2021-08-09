@@ -34,6 +34,10 @@ public class AnimalRes {
     String addr;
     @ApiModelProperty(name = "tel")
     String tel;
+    @ApiModelProperty(name = "text")
+    String text;
+    @ApiModelProperty(name = "profile_img")
+    String profile_img;
 
     public static AnimalRes of(AnimalJoin animal){
         AnimalRes res = new AnimalRes();
@@ -47,6 +51,8 @@ public class AnimalRes {
         res.setAgencyname(animal.getShelter().getAgencyname());
         res.setAddr(animal.getShelter().getAddr());
         res.setTel(animal.getShelter().getTel());
+        res.setText(animal.getText());
+        res.setProfile_img(animal.getProfile_img());
         return res;
     }
 }
