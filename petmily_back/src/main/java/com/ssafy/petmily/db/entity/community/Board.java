@@ -5,6 +5,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
 
@@ -13,13 +15,21 @@ import java.util.Date;
 @Setter
 @ToString
 public class Board {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long no;
 
     Long userno;
     String title;
     String contents;
     Date reg_date;
-    int viewcount;
 
+    public void setNo(Long no) {
+        this.no = no;
+    }
+
+    public Long getNo() {
+        return no;
+    }
 }
