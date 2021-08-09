@@ -25,12 +25,9 @@ public interface UserService {
 	Agency patchAgency(String email, Agency agency);
 	User getUserByEmailAndType(String email);
 	boolean patchPassword(String email, String password);
-<<<<<<< HEAD
 	AnimalLike addlike(LikeRegisterPostReq likeRegisterPostReq);
 	UserJoin searchMypage(Long userno);
 	boolean deleteLike(Long no);
-=======
 
 	User getUserByNo(Long no);
->>>>>>> ddf2bf3dee03b6bca13b4da32fedf78ae0fa846d
 }
