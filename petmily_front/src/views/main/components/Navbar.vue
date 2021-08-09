@@ -12,7 +12,7 @@
         <router-link to="/" class="mx-5 text-decoration-none">라이브</router-link>
 
         <span v-if="confirmLogin">
-          <button class="mx-5 text-decoration-none" @click="logout">로그아웃</button>
+          <button id="btn" type="button" class="btn btn-link mx-5 text-decoration-none" @click="logout" style="margin-bottom: 1px;">로그아웃</button>
           <span v-if="isUser">
             <router-link to="/profileprivate" class="mx-5 text-decoration-none">마이페이지</router-link>
           </span>
@@ -92,6 +92,12 @@ export default {
   font-weight: bold;
   color: #2c3e50;
 }
+
+#btn {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
 
 #nav a.router-link-exact-active {
   color: #42b983;
