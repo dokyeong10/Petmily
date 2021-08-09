@@ -30,23 +30,21 @@ export default {
 
     const setToken = function () {
       const token = localStorage.getItem("jwt");
-      const config = {
-        Authorization: `Bearer ${token}`,
-      };
+      const config = `Bearer ${token}`
       return config;
     };
-
+    console.log(setToken())
     const getUserInfo = async function() {
       await axios({
         method: 'get',
-        url: 'http://localhost:8080/users/personal/me',
+        url: 'http://localhost:8080/users/mypage/',
         headers: {
           Authorization: setToken()
         }
       })
       .then((res) => {
         console.log(1)
-        console.log(res)
+        console.log(res.data)
       })
       .catch((err) => {
         console.log(2)
