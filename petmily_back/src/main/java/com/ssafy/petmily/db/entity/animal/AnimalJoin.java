@@ -25,6 +25,8 @@ public class AnimalJoin {
     boolean neutered;
     Date find_date;
     String agencycode;
+    String profile_img;
+    String text;
 
 
     @ManyToOne
