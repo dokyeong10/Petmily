@@ -1,11 +1,12 @@
 package com.ssafy.petmily.api.controller;
 
 import com.ssafy.petmily.api.request.ComuRegisterPostReq;
-import com.ssafy.petmily.api.request.UserRegisterPostReq;
+import com.ssafy.petmily.api.request.FileBoardPostReq;
 import com.ssafy.petmily.api.service.CommunityService;
 import com.ssafy.petmily.common.response.BaseResponseBody;
+import com.ssafy.petmily.db.entity.animal.AnimalFile;
 import com.ssafy.petmily.db.entity.community.Board;
-import com.ssafy.petmily.db.entity.user.User;
+import com.ssafy.petmily.db.entity.community.BoardFile;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,4 +56,26 @@ public class CommunityController {
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
     }
 
+    //다중사진 업로드
+    @PostMapping("/file")
+    @ApiOperation(value = "게시판 사진 등록", notes = "사진을 등록한다.")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "성공"),
+            @ApiResponse(code = 401, message = "인증 실패"),
+            @ApiResponse(code = 404, message = "사용자 없음"),
+            @ApiResponse(code = 500, message = "서버 오류")
+    })
+    public ResponseEntity<? extends BaseResponseBody> BoardFile(
+            @RequestBody @ApiParam(value = "게시판 사진 업로드", required = true) FileBoardPostReq fileBoardPostReq) {
+        String file = fileBoardPostReq.getFile();
+        System.out.println(file);
+        String extension = "";
+        String[] ext = file.split("\\.");
+        extension = ext[(ext.length) - 1];
+        System.out.println("exten =="+ extension);
+        BoardFile boardFile = communityService.fileUpload(fileBoardPostReq,extension);
+
+
+        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+    }
 }
