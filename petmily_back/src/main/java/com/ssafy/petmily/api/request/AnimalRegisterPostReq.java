@@ -27,6 +27,8 @@ public class AnimalRegisterPostReq {
     Date find_date;
     @ApiModelProperty(name ="보호소코드", example = "10303")
     String agencycode;
+    @ApiModelProperty(name ="이미지", example = "10303")
+    String profile_img;
 
 
 

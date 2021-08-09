@@ -27,5 +27,6 @@ public class Animal {
     boolean neutered;
     Date find_date;
     String agencycode;
+    String profile_img;
 
 }

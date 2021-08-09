@@ -72,6 +72,7 @@ public class AnimalServiceImpl implements AnimalService {
         animal.setNeutered(registerInfo.isNeutered());
         animal.setFind_date(registerInfo.getFind_date());
         animal.setAgencycode(registerInfo.getAgencycode());
+        animal.setProfile_img(registerInfo.getProfile_img());
         return animalWaitRepository.save(animal);
     }
 
