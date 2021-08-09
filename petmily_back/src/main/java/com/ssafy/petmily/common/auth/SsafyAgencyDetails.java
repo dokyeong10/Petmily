@@ -29,6 +29,10 @@ public class SsafyAgencyDetails implements UserDetails {
         return this.agency;
     }
 
+    public String getAgencycode(){
+        return this.agency.getAgencycode();
+    }
+
     @Override
     public String getPassword() {
         return this.agency.getPassword();

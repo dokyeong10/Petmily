@@ -3,11 +3,13 @@ package com.ssafy.petmily.db.entity.agency;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.ssafy.petmily.db.entity.animal.Animal;
 import com.ssafy.petmily.db.entity.shelter.ShelterJoin;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter

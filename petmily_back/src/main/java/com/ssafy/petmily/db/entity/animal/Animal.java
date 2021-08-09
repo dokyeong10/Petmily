@@ -28,11 +28,4 @@ public class Animal {
     Date find_date;
     String agencycode;
 
-//    @OneToOne(mappedBy = "animal")
-//    Shelter shelter;
-
-    @ManyToOne
-    @JoinColumn(name="agencycode",referencedColumnName = "agencycode",insertable = false, updatable = false)
-    Shelter shelter;
-
 }
