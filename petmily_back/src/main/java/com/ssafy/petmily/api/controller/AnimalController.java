@@ -7,6 +7,7 @@ import com.ssafy.petmily.api.response.AnimalRes;
 import com.ssafy.petmily.api.service.AnimalService;
 import com.ssafy.petmily.common.response.BaseResponseBody;
 import com.ssafy.petmily.db.entity.animal.Animal;
+import com.ssafy.petmily.db.entity.animal.AnimalJoin;
 import com.ssafy.petmily.db.entity.animal.AnimalLike;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +63,7 @@ public class AnimalController {
     }
 
     // 동물 리스트 필터링
-  @PostMapping("/")
+    @PostMapping("/")
     public ResponseEntity<List<Animal>> searchAll(@RequestBody AnimalSearchPostReq animalSearchPostReq){
         System.out.println("============================ animal list 요청 데이터 : " + animalSearchPostReq);
         String key = animalSearchPostReq.getKey();
@@ -71,51 +72,16 @@ public class AnimalController {
         boolean isLike = animalSearchPostReq.getIsLike();
         List<Animal> list = animalService.searchAllAnimal(key,word,no,isLike);
         return new ResponseEntity<List<Animal>>(list, HttpStatus.OK);
-  }
-
-
-  //즐겨찾기 등록
-  @PostMapping("/like")
-  @ApiOperation(value = "개인 회원 가입", notes = "<strong>아이디와 패스워드</strong>를 통해 회원가입 한다.")
-  @ApiResponses({
-          @ApiResponse(code = 200, message = "성공"),
-          @ApiResponse(code = 401, message = "인증 실패"),
-          @ApiResponse(code = 404, message = "사용자 없음"),
-          @ApiResponse(code = 500, message = "서버 오류")
-  })
-  public ResponseEntity<? extends BaseResponseBody> Like(@RequestBody LikeRegisterPostReq likeRegisterPostReq){
-      //AnimalWait animalWait = animalService.likes(animal, user);
-      AnimalLike animalLike = animalService.addlike(likeRegisterPostReq);
-      return ResponseEntity.status(200).body(BaseResponseBody.of(200,"Sucess"));
-  }
-
-    // userno로 즐겨찾기
-
-    @GetMapping("/like/{userno}")
-    public ResponseEntity<List<AnimalLike>>searchLike(@PathVariable Long userno){
-        List<AnimalLike> list = animalService.searchLikeAnimal(userno);
-        return new ResponseEntity<List<AnimalLike>>(list, HttpStatus.OK);
     }
 
-    //즐겨찾기 취소
-    @DeleteMapping("/like/{no}")@ApiOperation(value = "즐겨찾기 삭제", notes = "즐겨찾기 삭제")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<? extends BaseResponseBody> deleteLike(@PathVariable Long no) {
-        boolean isOk = animalService.deleteLike(no);
-        if (isOk) {
-            return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
-        }else{
-            return ResponseEntity.status(401).body(BaseResponseBody.of(500,"즐겨찾는 동물 X"));
-        }
-    }
 
     @GetMapping("/details/{no}")
     public ResponseEntity<AnimalRes>animaldetail(@PathVariable Long no){
-        Animal animal = animalService.animaldetail(no);
+        AnimalJoin animal = animalService.animaldetail(no);
         return ResponseEntity.status(200).body(AnimalRes.of(animal));
     }
 
-    }
+}
 
 
 
