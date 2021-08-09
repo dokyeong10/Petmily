@@ -2,22 +2,19 @@
   <br>
   <br>
   <div class="container">
+    <br>
     <div class="d-flex justify-content-center">
-      <div align="left" class="mb-3">
-        <div>Forgot Password!</div>
-        <div><span>Don’t have an account,</span><button style="color: #8699DA" class="bw-color" @click="goToSignup">Sign up</button></div>
+      <div align="left" class="mb-3 mx-5">
+        <div class="font-weight-bold" style="font-size: 30px">Forgot Password!</div>
+        <div><span>Don’t have an account,</span><button style="color: #8699DA" class="bw-color mb-3" @click="goToSignup">Sign up</button></div>
         <form>
-          {{ state.isEmail }}
-          {{ state.isConfirm }}
-          {{ state.findEmail }}
           <span>
-            <input v-model="state.findEmail" class="mb-5 radius-border form-control" type="text" placeholder="email">
-            <button class="btn-white" type="button" style="color: #FFFFFF" @click="confirmEmail">이메일 인증하기</button>
+            <input v-model="state.findEmail" class="mt-4 mb-4 form-control radius-border rounded-pill" type="text" placeholder="email">
+            <button class="btn-login mb-5" type="button" style="color: #FFFFFF" @click="confirmEmail">이메일 인증하기</button>
           </span>
           <span v-if="state.isEmail">
-          {{state.authNum}}
-            <input v-model="state.authNum" class="mt-5 mb-2 radius-border form-control" type="text" placeholder="인증번호">
-            <button class="btn-white" type="button" style="color: #FFFFFF" @click="confirmNumber">인증하기</button>
+            <input v-model="state.authNum" class="mt-4 mb-4 form-control radius-border rounded-pill" type="text" placeholder="인증번호">
+            <button class="btn-login" type="button" style="color: #FFFFFF" @click="confirmNumber">인증하기</button>
           </span>
           <div v-if="state.isConfirm">
             인증되었습니다.
@@ -162,5 +159,19 @@ export default {
   border-bottom: #FFFFFF 1px solid;
   font-weight: bold;
 }
+
+.btn-login {
+  width: 100%;
+  height: 50px;
+  background-color: #a4b5f0;
+  border-right: #a4b5f0 1px solid;
+  border-left: #a4b5f0 1px solid;
+  border-top: #a4b5f0 1px solid;
+  border-bottom: #a4b5f0 1px solid;
+  border-style: none;
+  border-radius: 30px;
+  color: white;
+}
+
 
 </style>
