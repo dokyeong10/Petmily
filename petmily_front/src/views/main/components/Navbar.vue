@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div id="nav" class="mb-1">
+  <div id="nav" class="mt-5">
+    <div>
       <div>
         <!-- style="box-shadow: 0 4px 0 0 violet; content-box" 여부 다시 결정 해야함. -->
         <router-link to="/home" class="mx-5 text-decoration-none"
