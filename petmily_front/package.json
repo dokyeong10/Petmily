@@ -17,6 +17,7 @@
     "vue": "^3.0.0",
     "vue-element-plus": "^2.13.14",
     "vue-router": "^4.0.0-0",
+    "vue3-carousel": "^0.1.24",
     "vuex": "^4.0.0-0",
     "vuex-persistedstate": "^4.0.0"
   },
