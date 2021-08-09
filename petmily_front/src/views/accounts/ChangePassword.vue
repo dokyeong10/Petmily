@@ -1,8 +1,11 @@
 <template>
-  <div>
+  <br>
+  <br>
+  <div class="container">
+    <br>
     <div class="d-flex justify-content-center">
-      <div align="left" class="mb-3">
-        <div>Forgot Password!</div>
+      <div align="left" class="mb-3 mx-5">
+        <div class="font-bold" style="font-size: 30px">Forgot Password!</div>
         <div>
           <span>Don’t have an account,</span
           ><button style="color: #8699DA" class="bw-color" @click="goToSignup">Sign up</button>
@@ -11,7 +14,7 @@
           <div>
             <input
               v-model="state.password"
-              class="mb-5 radius-border form-control"
+              class="mt-4 mb-4 form-control radius-border rounded-pill"
               type="password"
               placeholder="New Password"
             />
@@ -19,13 +22,13 @@
           <div>
             <input
               v-model="state.confirmPassword"
-              class="mt-5 mb-2 radius-border form-control"
+              class="mb-1 form-control radius-border rounded-pill"
               type="password"
               placeholder="Confirm Password"
             />
           </div>
-          <div>
-            <button type="button" @click="changePassword" class="btn-white" style="color: #FFFFFF;">
+          <div class="position-relative mb-5">
+            <button type="button" @click="changePassword" class="btn-login mt-5" style="color: #FFFFFF;">
               비밀번호 바꾸기
             </button>
           </div>
@@ -33,8 +36,8 @@
         <div v-if="isConfirm">
           인증되었습니다.
         </div>
-        <div class="mb-3 position-relative mb-5">
-          <hr />
+        <div class="position-relative mb-5">
+          <hr>
           <div
             class="position-absolute top-50 start-50 translate-middle px-2 bg-white"
             style="font-size:5px;"
@@ -138,6 +141,19 @@ export default {
   border-radius: 12px;
 }
 
+.btn-login {
+  width: 100%;
+  height: 50px;
+  background-color: #a4b5f0;
+  border-right: #a4b5f0 1px solid;
+  border-left: #a4b5f0 1px solid;
+  border-top: #a4b5f0 1px solid;
+  border-bottom: #a4b5f0 1px solid;
+  border-style: none;
+  border-radius: 30px;
+  color: white;
+}
+
 .radius-border {
   border-radius: 12px;
   border-right: #789ade 1px solid;
@@ -146,6 +162,10 @@ export default {
   border-bottom: #789ade 1px solid;
   width: 400px;
   color: #789ade;
+}
+
+.font-bold {
+  font-weight: bold;
 }
 
 .bw-color {

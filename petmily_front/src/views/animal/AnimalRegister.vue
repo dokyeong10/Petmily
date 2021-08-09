@@ -130,8 +130,8 @@ export default {
   name: "AnimalRegister",
   setup() {
     const state = reactive({
-      profile_pic: "",
-      files: [],
+      profile_img: "",
+      fileup: [],
       type: "",
       species: "",
       addr: "",
@@ -170,21 +170,17 @@ export default {
         method: "post",
         url: "http://localhost:8080/animal/register",
         data: {
-          name: {
-            profile_pic: state.profile_pic,
-            type: state.type,
-            species: state.species,
-            find_addr: state.addr,
-            age: state.age,
-            sex: state.sexToggle,
-            neutered: state.neuteredToggle,
-            find_date: state.find_date,
-            userno: state.userno,
-            agencycode: state.agencycode,
-          },
-          files: {
-            files: state.files,
-          },
+          profile_img: state.profile_img,
+          fileup: state.fileup,
+          type: state.type,
+          species: state.species,
+          find_addr: state.addr,
+          age: state.age,
+          sex: state.sexToggle,
+          neutered: state.neuteredToggle,
+          find_date: state.find_date,
+          userno: state.userno,
+          agencycode: state.agencycode,
         },
       })
         .then((res) => {

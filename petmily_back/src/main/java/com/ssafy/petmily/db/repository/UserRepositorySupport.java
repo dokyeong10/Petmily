@@ -47,7 +47,14 @@ public class UserRepositorySupport {
         jpaQueryFactory.delete(qUser).where(qUser.email.eq(email).and(qUser.type.eq(type))).execute();
     }
 
+<<<<<<< HEAD
     public UserJoin searchMypage(long no){
         return jpaQueryFactory.select(qUserJoin).from(qUserJoin).where(qUserJoin.no.eq(no)).fetchOne();
+=======
+    public User findUserByNo(Long no) {
+        User user = jpaQueryFactory.select(qUser).from(qUser)
+                .where(qUser.no.eq(no)).fetchOne();
+        return user;
+>>>>>>> ddf2bf3dee03b6bca13b4da32fedf78ae0fa846d
     }
 }

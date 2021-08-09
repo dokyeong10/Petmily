@@ -1,9 +1,16 @@
 <template>
-  <JumbotronTerms />
-  <div class="container mb-5">
-    <div style="width: 600px;">
+  <JumbotronForms/>
+  
+  <div class="container mb-5 d-flex justify-content-center">
+    <div>
+      <div>
+      <div class="d-flex flex-column align-items-start">
+        <h1 class="overpass">Sign up to Petmily</h1>
+        <h5 class="overpass colored">Individual Member</h5>
+      </div>
+      <br>
       <div class="mb-4">
-        <label for="email" class="d-flex flex-row">이메일</label>
+        <label for="email" class="d-flex flex-row mb-2">이메일</label>
         <span class="d-flex" style="width: 400px;">
           <input
             v-model="state.email"
@@ -26,7 +33,7 @@
       </div>
       <div class="mb-4">
         <span v-if="state.isEmail" style="width: 400px;">
-          <label for="emailcode" class="d-flex flex-row">인증번호</label>
+          <label for="emailcode" class="d-flex flex-row mb-2">인증번호</label>
           <div class="d-flex" style="width: 400px;">
             <input
               v-model="state.number"
@@ -47,13 +54,18 @@
         인증이 완료되었습니다.
       </div>
       <div class="mb-4">
-        <label for="email" class="d-flex flex-row">사진등록</label>
-        <br />
-        <img :src="state.imgURL" />
-        <input id="file-selector" ref="file" type="file" @change="handleFileUpload()" />
-        <button @click="upload" class="btn-up" style="color: #FFFFFF;" flat>업로드</button>
+        <label class="d-flex flex-row mb-2">사진등록</label>
+        <div class="justify-content-center">
+          <input class="mb-2" id="file-selector" ref="file" type="file" @change="handleFileUpload()" style="width: 323.85px"/>
+          <button @click="upload" class="btn-up" style="color: #FFFFFF; height: 38px; width: 66.38px;" flat>업로드</button>
+          <div class="d-flex justify-content-start" v-if="state.imgURL">
+            <div>
+              업로드 완료!
+            </div>
+          </div>
+        </div>
       </div>
-      <label for="username" class="d-flex flex-row">이름</label>
+      <label for="username" class="d-flex flex-row mb-2">이름</label>
       <input
         v-model="state.username"
         type="text"
@@ -61,7 +73,7 @@
         placeholder="홍길동"
         id="username"
       />
-      <label for="password" class="d-flex flex-row">비밀번호</label>
+      <label for="password" class="d-flex flex-row mb-2">비밀번호</label>
       <input
         v-model="state.password"
         type="password"
@@ -69,7 +81,7 @@
         placeholder="••••••••"
         id="password"
       />
-      <label for="confirmPassword" class="d-flex flex-row">비밀번호 재입력</label>
+      <label for="confirmPassword" class="d-flex flex-row mb-2">비밀번호 재입력</label>
       <input
         v-model="state.passwordConfirm"
         type="password"
@@ -77,7 +89,7 @@
         placeholder="••••••••"
         id="confirmPassword"
       />
-      <label for="phone" class="d-flex flex-row">전화번호</label>
+      <label for="phone" class="d-flex flex-row mb-2">전화번호</label>
       <input
         v-model="state.phone"
         type="text"
@@ -89,6 +101,7 @@
         회원가입 하기
       </button>
     </div>
+    </div>
   </div>
 </template>
 <script>
@@ -96,14 +109,10 @@ import { ref, reactive } from "vue";
 import AWS from "aws-sdk";
 import axios from "axios";
 import { useRouter } from "vue-router";
-import JumbotronTerms from "@/views/accounts/components/JumbotronTerms";
+import JumbotronForms from "@/views/accounts/components/JumbotronForms";
 
 export default {
-  data() {
-    return {};
-  },
-  methods: {},
-  components: { JumbotronTerms },
+  components: { JumbotronForms },
   name: "privateform",
 
   setup() {
@@ -263,7 +272,7 @@ export default {
         (err, data) => {
           if (err) {
             console.log(err);
-            return alert("There was error", err.message);
+            return alert("에러가 발생했습니다.", err.message);
           }
           state.imgURL = data.Location;
         }
@@ -284,6 +293,13 @@ export default {
 };
 </script>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@700&display=swap');
+.overpass {
+  font-family: 'Overpass', sans-serif;
+}
+.colored {
+  color: #B8B6F9
+}
 .image-upload {
   width: 120px !important;
   height: 120px !important;

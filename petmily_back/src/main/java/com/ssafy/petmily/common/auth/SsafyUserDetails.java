@@ -16,8 +16,6 @@ import java.util.List;
 public class SsafyUserDetails implements UserDetails {
     @Autowired
     User user;
-
-
     boolean accountNonExpired;
     boolean accountNonLocked;
     boolean credentialNonExpired;
@@ -31,6 +29,9 @@ public class SsafyUserDetails implements UserDetails {
 
     public User getUser() {
         return this.user;
+    }
+    public Long getNo(){
+        return this.user.getNo();
     }
 
     public long getNo(){

@@ -24,6 +24,8 @@ public class UserRes {
 	String username;
 	@ApiModelProperty(name="img")
 	String img;
+	@ApiModelProperty(name="password")
+	String password;
 	
 	public static UserRes of(User user) {
 		UserRes res = new UserRes();
@@ -32,6 +34,7 @@ public class UserRes {
 		res.setPhone(user.getPhone());
 		res.setUsername(user.getUsername());
 		res.setImg(user.getImg());
+		res.setPassword(user.getPassword());
 		return res;
 	}
 }

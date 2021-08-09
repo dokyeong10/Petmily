@@ -1,21 +1,27 @@
 <template>
   <div>
-    <JumbotronTerms/>
-    <div>
-      회원가입에 성공하셨습니다.
+    <JumbotronSuccess/>
+    <div class="d-flex flex-column align-items-center">
+      <img src="@\assets\image-finish.png" style="width: 512px;">
+      <br>
+      <h3>
+        <b>회원 가입이 완료되었습니다.</b>
+      </h3>
     </div>
+    <br>
     <button class="btn-white" @click="goTologin">로그인 하러 가기</button>
   </div>
+  <br>
 </template>
 <script>
 // import { onMounted } from 'vue'
 // import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
-import JumbotronTerms from '@/views/accounts/components/JumbotronTerms'
+import JumbotronSuccess from '@/views/accounts/components/JumbotronSuccess'
 export default {
   name: 'SignupSuccess',
   components: {
-    JumbotronTerms
+    JumbotronSuccess
   },
   setup () {
     // const store = useStore()

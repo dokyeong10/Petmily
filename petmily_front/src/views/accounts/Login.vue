@@ -5,7 +5,7 @@
     <br />
     <div class="d-flex justify-content-center">
       <div align="left" class="mb-3 mx-5">
-        <div class="font-weight-bold" style="font-size: 30px">Welcome Back!</div>
+        <div class="font-bold" style="font-size: 30px">Welcome Back!</div>
         <div>
           <span>Don’t have an account,</span
           ><button style="color: #8699da" class="bw-color" @click="goToSignup">
@@ -15,7 +15,6 @@
         <br>
         <form>
           <div>
-            <label class="ps-2 pb-2">이메일</label>
             <input
               v-model="state.form.email"
               class="mb-4 form-control radius-border rounded-pill"
@@ -24,7 +23,6 @@
             />
           </div>
           <div>
-            <label class="ps-2 pb-2">비밀번호</label>
             <input
               v-model="state.form.password"
               class="mb-2 form-control radius-border rounded-pill"
@@ -66,7 +64,7 @@
             로그인 하기
           </button>
         </div>
-        <div class="mb-3 position-relative mb-5">
+        <div class="position-relative mb-5">
           <hr>
           <div class="position-absolute top-50 start-50 translate-middle px-2 bg-white" style="font-size:5px;">on continue with</div>
         </div>
@@ -208,6 +206,10 @@ img {
   width: 20%;
   height: 21%;
   object-fit: cover;
+}
+
+.font-bold {
+  font-weight: bold;
 }
 
 .btn-white {
