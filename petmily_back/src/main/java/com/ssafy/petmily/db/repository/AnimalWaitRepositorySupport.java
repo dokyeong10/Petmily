@@ -2,10 +2,7 @@ package com.ssafy.petmily.db.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.petmily.db.entity.*;
-import com.ssafy.petmily.db.entity.animal.Animal;
-import com.ssafy.petmily.db.entity.animal.AnimalLike;
-import com.ssafy.petmily.db.entity.animal.QAnimal;
-import com.ssafy.petmily.db.entity.animal.QAnimalLike;
+import com.ssafy.petmily.db.entity.animal.*;
 import com.ssafy.petmily.db.entity.shelter.QShelter;
 import com.ssafy.petmily.db.entity.user.QUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +16,10 @@ public class AnimalWaitRepositorySupport {
     @Autowired
     private JPAQueryFactory jpaQueryFactory;
     QAnimal qAnimal = QAnimal.animal;
+    QAnimalJoin qAnimalJoin = QAnimalJoin.animalJoin;
     QAnimalLike qAnimalLike = QAnimalLike.animalLike;
     QUser qUser = QUser.user;
     QShelter qShelter = QShelter.shelter;
-
-    public List<AnimalLike> findAnimalByUserno(Long userno) {
-        if (userno == 0) {
-            return null;
-        } else {
-            return jpaQueryFactory.select(qAnimalLike).limit(4).from(qAnimalLike)
-                    .where(qAnimalLike.userno.eq(userno)).fetch();
-        }
-    }
 
     public List<Animal> findAllAnimalWait(String key, String word, Long no, boolean isLike) {
         System.out.println("===================== key : " + key);
@@ -97,9 +86,9 @@ public class AnimalWaitRepositorySupport {
         return null;
     }
 
-    public Animal findAnimalByNo(Long no) {
-        Animal animal = jpaQueryFactory.select(qAnimal).from(qAnimal)
-                .where(qAnimal.no.eq(no)).fetchOne();
+    public AnimalJoin findAnimalByNo(Long no) {
+        AnimalJoin animal = jpaQueryFactory.select(qAnimalJoin).from(qAnimalJoin)
+                .where(qAnimalJoin.no.eq(no)).fetchOne();
         return animal;
     }
 }
