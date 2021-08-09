@@ -52,8 +52,11 @@ public class AnimalServiceImpl implements AnimalService {
             if (animal.getFind_date() != null) {
                 fetchedAnimal.get().setFind_date(animal.getFind_date());
             }
-            if (animal.getAgencycode() != null) {
-                fetchedAnimal.get().setAgencycode(animal.getAgencycode());
+            if (animal.getText() != null) {
+                fetchedAnimal.get().setText(animal.getText());
+            }
+            if (animal.getProfile_img() != null) {
+                fetchedAnimal.get().setProfile_img(animal.getProfile_img());
             }
             return animalWaitRepository.save(fetchedAnimal.get());
         } else {
