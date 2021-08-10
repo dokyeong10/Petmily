@@ -3,47 +3,26 @@ package com.ssafy.petmily.api.service;
 import com.ssafy.petmily.api.request.ComuRegisterPostReq;
 import com.ssafy.petmily.db.entity.community.Board;
 import com.ssafy.petmily.db.entity.community.Reply;
-import com.ssafy.petmily.db.repository.CommunityRepository;
+import com.ssafy.petmily.db.repository.BoardRepository;
 import com.ssafy.petmily.db.repository.ReplyRepository;
 import com.ssafy.petmily.db.repository.ReplyRepositorySupport;
-import io.swagger.annotations.ApiModel;
-import lombok.Getter;
-import lombok.Setter;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Calendar;
-import java.util.Date;
 
-@Service("communityService")
+@Service
 public class CommunityServiceImpl implements CommunityService {
 
     @Autowired
-    CommunityRepository communityRepository;
+    BoardRepository boardRepository;
 
     @Autowired
     ReplyRepository replyRepository;
 
     @Autowired
     ReplyRepositorySupport replyRepositorySupport;
-
-    @Override
-    public Board createBoard(ComuRegisterPostReq comuRegisterPostReq) {
-        Board board = new Board();
-        board.setUserno(comuRegisterPostReq.getUserno());
-        board.setTitle(comuRegisterPostReq.getTitle());
-        board.setContents(comuRegisterPostReq.getContents());
-        board.setReg_date(Calendar.getInstance().getTime());
-        return communityRepository.save(board);
-    }
-
-    @Override
-    @Transactional
-    public void deleteBoard(Long no) {
-        communityRepository.deleteByNo(no);
-    }
 
     @Override
     public void createAgencyRepl(String agencycode, String contents, long no) {
@@ -69,9 +48,9 @@ public class CommunityServiceImpl implements CommunityService {
         }
 
         // 해당 게시글 댓글 수 증가
-        Board board = communityRepository.findByNo(no).get();
+        Board board = boardRepository.findByNo(no).get();
         board.updateRepl();
-        communityRepository.save(board);
+        boardRepository.save(board);
 
         return;
     }
@@ -97,9 +76,9 @@ public class CommunityServiceImpl implements CommunityService {
         }
 
         // 해당 게시글 댓글 수 증가
-        Board board = communityRepository.findByNo(no).get();
+        Board board = boardRepository.findByNo(no).get();
         board.updateRepl();
-        communityRepository.save(board);
+        boardRepository.save(board);
 
         return;
     }
