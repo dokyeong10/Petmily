@@ -9,6 +9,7 @@ import com.ssafy.petmily.db.repository.AnimalFileRepository;
 import com.ssafy.petmily.db.repository.AnimalLikeRepository;
 import com.ssafy.petmily.db.repository.AnimalWaitRepository;
 import com.ssafy.petmily.db.repository.AnimalWaitRepositorySupport;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -68,6 +69,8 @@ public class AnimalServiceImpl implements AnimalService {
         }
     }
 
+
+    // 동물 등록
     @Override
     public Animal createAnimal(AnimalRegisterPostReq registerInfo) {
         Animal animal = new Animal();
@@ -105,7 +108,11 @@ public class AnimalServiceImpl implements AnimalService {
     @Override
     public AnimalFile fileUpload(FilePostReq filePostReq, String extension) {
         AnimalFile animalFile = new AnimalFile();
-        animalFile.setAnimalno(filePostReq.getAnimalno());
+        Animal animal = new Animal();
+        long max =  animalWaitRepositorySupport.getMaxNo();
+        System.out.println(max+" ===============");
+        animalFile.setAnimalno(max);
+        //animalFile.setAnimalno(filePostReq.getAnimalno());
         animalFile.setFile(filePostReq.getFile());
         animalFile.setExtension(extension);
         return animalFileRepository.save(animalFile);

@@ -13,6 +13,9 @@ import java.util.List;
 @Setter
 @ApiModel("AnimalRegisterPostRequest")
 public class AnimalRegisterPostReq {
+
+    @ApiModelProperty(name ="번호", example = "PK")
+    Long no;
     @ApiModelProperty(name ="종류", example = "강아지")
     String type;
     @ApiModelProperty(name ="종", example = "진돗개")

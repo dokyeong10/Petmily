@@ -83,6 +83,7 @@ public class AnimalController {
         return new ResponseEntity<List<AnimalJoin>>(animalJoins, HttpStatus.OK);
     }
 
+    // 사진 다중 등록
     @PostMapping("/file")
     @ApiOperation(value = "동물 등록", notes = "동물을 등록한다.")
     @ApiResponses({
