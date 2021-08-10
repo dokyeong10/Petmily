@@ -215,5 +215,11 @@ public class UserServiceImpl implements UserService {
 		return agencyJoin;
 	}
 
+	@Override
+	public Agency getAgencyByAgencyCode(String agencycode) {
+		Agency agency = agencyRepositorySupport.findAgencyByAgecnycode(agencycode);
+		return agency;
+	}
+
 
 }

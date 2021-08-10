@@ -1,9 +1,9 @@
 <template>
   <div class="Jbgc col-4">
-      <div class="card border-light lifecard mb-5" align="center" style="background-color:#FAF9FE">
-      <img src="@\assets\dog.png" class="card-img-top guardimg" align="center">
+    <div class="card border-light lifecard mb-5" align="center" style="background-color:#FAF9FE">
+      <img src="@\assets\dog.png" class="card-img-top guardimg" align="center" />
       <div class="card-body d-flex flex-column justify-content-between">
-        <h5 class="card-title font-bold">{{ guardians.agencyname }}</h5>
+        <h4 class="card-title font-bold">{{ guardians.agencyname }}</h4>
         <div class="card-text" style="margin-top:0px">{{ guardians.tel }}</div>
         <div class="card-text">{{ guardians.addr }}</div>
         <button class="btn-login" type="button" style="color: #FFFFFF">Read More</button>
@@ -15,12 +15,12 @@
 <script>
 export default {
   props: {
-    guardians: Object
+    guardians: Object,
   },
   setup(props) {
-    console.log(props)
-  }
-}
+    console.log(props);
+  },
+};
 </script>
 
 <style>
@@ -29,7 +29,7 @@ export default {
 }
 
 .Jbgc {
-  background-color: #FAF9FE;
+  background-color: #faf9fe;
 }
 
 .btn-login {
