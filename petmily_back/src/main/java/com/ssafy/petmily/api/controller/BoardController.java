@@ -118,21 +118,31 @@ public class BoardController {
     }
 
     // 답글 등록
-//    @PostMapping("/reply/re/register")
-//    public ResponseEntity<? extends BaseResponseBody> registerReRepl(@ApiIgnore Authentication authentication, @RequestBody ReplyRegisterPostReq replyRegisterPostReq){
-//        String contents = replyRegisterPostReq.getContents();
-//        boolean isAgency = replyRegisterPostReq.getIsAgency();
-//        long no = replyRegisterPostReq.getNo();
-//        System.out.println("===================== contents : " + contents + " | isAgency : "+ isAgency + " | no : " + no);
-//
-//        // 기관 회원일 경우
-//        if(isAgency){
-//
-//        }else{ // 일반 회원일 경우
-//
-//        }
-//
-//    }
+    @PostMapping("/reply/re/register")
+    public ResponseEntity<? extends BaseResponseBody> registerReRepl(@ApiIgnore Authentication authentication, @RequestBody ReplyRegisterPostReq replyRegisterPostReq){
+        String contents = replyRegisterPostReq.getContents();
+        boolean isAgency = replyRegisterPostReq.getIsAgency();
+        long no = replyRegisterPostReq.getNo();
+        System.out.println("===================== contents : " + contents + " | isAgency : "+ isAgency + " | no : " + no);
+
+        // 기관 회원일 경우
+        if(isAgency){
+            SsafyAgencyDetails agencyDetails = (SsafyAgencyDetails) authentication.getDetails();
+            String agencycode = agencyDetails.getAgencycode();
+
+            communityService.createAgencyReplRe(agencycode,contents,no);
+            return ResponseEntity.status(200).body(BaseResponseBody.of(200,"Success"));
+
+        }else{ // 일반 회원일 경우
+            SsafyUserDetails userDetails = (SsafyUserDetails) authentication.getDetails();
+            long userno = userDetails.getNo();
+
+            communityService.createUserReplRe(userno, contents, no);
+            return ResponseEntity.status(200).body(BaseResponseBody.of(200,"Success"));
+        }
+
+    }
+
     @GetMapping("/details/{no}")
     public ResponseEntity<List<BoardJoin>> boarddetail(@PathVariable Long no) {
         List<BoardJoin> BoardJoins = boardService.boarddetail(no);
