@@ -33,6 +33,9 @@ public class BoardController {
     @Autowired
     BoardService boardService;
 
+    @Autowired
+    CommunityService communityService;
+
     @PostMapping("/enroll")
     @ApiOperation(value = "게시글 작성 ", notes = "게시글을 작성한다. ")
     @ApiResponses({
