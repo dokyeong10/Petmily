@@ -94,14 +94,16 @@ public class AnimalController {
     })
     public ResponseEntity<? extends BaseResponseBody> AnimalFile(
             @RequestBody @ApiParam(value = "동물 정보", required = true) FilePostReq filePostReq) {
-        String file = filePostReq.getFile();
-        System.out.println(file);
-        String extension = "";
-        String[] ext = file.split("\\.");
+        String files[] = filePostReq.getFiles();
+        System.out.println(files.toString());
+        for (int i = 0; i < files.length; i++) {
+            String extension = "";
+            String[] ext = files[i].split("\\.");
+            extension = ext[(ext.length) - 1];
+            AnimalFile animalfile = animalService.fileUpload(files[i], extension);
+        }
 
-        extension = ext[(ext.length) - 1];
 
-        AnimalFile animalfile = animalService.fileUpload(filePostReq, extension);
 
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
     }

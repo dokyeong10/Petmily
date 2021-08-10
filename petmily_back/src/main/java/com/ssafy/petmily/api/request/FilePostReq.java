@@ -11,6 +11,7 @@ import lombok.Setter;
 public class FilePostReq {
 //    @ApiModelProperty(name="animalno", example="animalno")
 //    Long animalno;
+
     @ApiModelProperty(name="file", example="file")
-   String file;
+   String files[];
 }
