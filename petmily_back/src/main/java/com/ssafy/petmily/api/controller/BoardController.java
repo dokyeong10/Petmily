@@ -1,18 +1,13 @@
 package com.ssafy.petmily.api.controller;
 
-import com.ssafy.petmily.api.request.ComuRegisterPostReq;
-import com.ssafy.petmily.api.request.ReplyRegisterPostReq;
-import com.ssafy.petmily.api.request.UserRegisterPostReq;
+import com.ssafy.petmily.api.request.*;
 import com.ssafy.petmily.api.service.CommunityService;
 import com.ssafy.petmily.common.auth.SsafyAgencyDetails;
 import com.ssafy.petmily.common.auth.SsafyUserDetails;
-import com.ssafy.petmily.api.request.FileBoardPostReq;
 import com.ssafy.petmily.api.service.BoardService;
 import com.ssafy.petmily.common.response.BaseResponseBody;
 import com.ssafy.petmily.db.entity.animal.AnimalJoin;
-import com.ssafy.petmily.db.entity.community.Board;
-import com.ssafy.petmily.db.entity.community.BoardFile;
-import com.ssafy.petmily.db.entity.community.BoardJoin;
+import com.ssafy.petmily.db.entity.community.*;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,6 +31,8 @@ public class BoardController {
     @Autowired
     CommunityService communityService;
 
+
+    // 게시글 등록
     @PostMapping("/enroll")
     @ApiOperation(value = "게시글 작성 ", notes = "게시글을 작성한다. ")
     @ApiResponses({
@@ -97,56 +94,59 @@ public class BoardController {
     public ResponseEntity<? extends BaseResponseBody> registerRepl(@ApiIgnore Authentication authentication, @RequestBody ReplyRegisterPostReq replyRegisterPostReq){
         String contents = replyRegisterPostReq.getContents();
         boolean isAgency = replyRegisterPostReq.getIsAgency();
-        long no = replyRegisterPostReq.getNo();
-        System.out.println("===================== contents : " + contents + " | isAgency : "+ isAgency + " | no : " + no);
+        long bno = replyRegisterPostReq.getBno();
+        System.out.println("===================== contents : " + contents + " | isAgency : "+ isAgency + " | bno : " + bno);
 
         // 기관 회원일 경우
         if(isAgency){
             SsafyAgencyDetails agencyDetails = (SsafyAgencyDetails) authentication.getDetails();
             String agencycode = agencyDetails.getAgencycode();
 
-            communityService.createAgencyRepl(agencycode,contents,no);
+            communityService.createAgencyRepl(agencycode,contents,bno);
 
             return ResponseEntity.status(200).body(BaseResponseBody.of(200,"Success"));
 
         }else{ // 일반 회원일 경우
             SsafyUserDetails userDetails = (SsafyUserDetails) authentication.getDetails();
             Long userno = userDetails.getNo();
-            communityService.createUserRepl(userno, contents, no);
+            communityService.createUserRepl(userno, contents, bno);
             return ResponseEntity.status(200).body(BaseResponseBody.of(200,"Success"));
         }
     }
 
     // 답글 등록
     @PostMapping("/reply/re/register")
-    public ResponseEntity<? extends BaseResponseBody> registerReRepl(@ApiIgnore Authentication authentication, @RequestBody ReplyRegisterPostReq replyRegisterPostReq){
-        String contents = replyRegisterPostReq.getContents();
-        boolean isAgency = replyRegisterPostReq.getIsAgency();
-        long no = replyRegisterPostReq.getNo();
-        System.out.println("===================== contents : " + contents + " | isAgency : "+ isAgency + " | no : " + no);
+    public ResponseEntity<? extends BaseResponseBody> registerReRepl(@ApiIgnore Authentication authentication, @RequestBody ReplyReRegisterPostReq replyReRegisterPostReq){
+        String contents = replyReRegisterPostReq.getContents();
+        boolean isAgency = replyReRegisterPostReq.getIsAgency();
+        long bno = replyReRegisterPostReq.getBno();
+        long replno = replyReRegisterPostReq.getReplno();
+        System.out.println("===================== contents : " + contents + " | isAgency : "+ isAgency + " | bno : " + bno + " | replno : " + replno);
 
         // 기관 회원일 경우
         if(isAgency){
+            System.out.println("========================= 기관 회원");
             SsafyAgencyDetails agencyDetails = (SsafyAgencyDetails) authentication.getDetails();
             String agencycode = agencyDetails.getAgencycode();
 
-            communityService.createAgencyReplRe(agencycode,contents,no);
+            communityService.createAgencyReplRe(agencycode,contents,bno, replno);
             return ResponseEntity.status(200).body(BaseResponseBody.of(200,"Success"));
 
         }else{ // 일반 회원일 경우
+            System.out.println("========================= 일반 회원");
             SsafyUserDetails userDetails = (SsafyUserDetails) authentication.getDetails();
             long userno = userDetails.getNo();
 
-            communityService.createUserReplRe(userno, contents, no);
+            communityService.createUserReplRe(userno, contents, bno, replno);
             return ResponseEntity.status(200).body(BaseResponseBody.of(200,"Success"));
         }
-
     }
 
+    // 게시글 상세 정보 with 댓글 List
     @GetMapping("/details/{no}")
-    public ResponseEntity<List<BoardJoin>> boarddetail(@PathVariable Long no) {
-        List<BoardJoin> BoardJoins = boardService.boarddetail(no);
-        return new ResponseEntity<List<BoardJoin>>(BoardJoins, HttpStatus.OK);
+    public ResponseEntity<BoardJoin> boarddetail(@PathVariable Long no) {
+        BoardJoin BoardJoins = boardService.boarddetail(no);
+        return new ResponseEntity<BoardJoin>(BoardJoins, HttpStatus.OK);
     }
 
 

@@ -17,5 +17,5 @@ public interface BoardService {
 
     BoardFile fileUpload(FileBoardPostReq fileBoardPostReq, String extension);
 
-    List<BoardJoin> boarddetail(Long no);
+    BoardJoin boarddetail(Long no);
 }
