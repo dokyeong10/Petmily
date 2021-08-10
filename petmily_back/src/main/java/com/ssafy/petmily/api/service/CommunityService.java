@@ -7,6 +7,7 @@ public interface CommunityService {
 
 
     Board createBoard(ComuRegisterPostReq comuRegisterPostReq);
-
     void deleteBoard(Long no);
+    void createAgencyRepl(String agencycode, String contents, long no);
+    void createUserRepl(long userno, String contents, long no);
 }

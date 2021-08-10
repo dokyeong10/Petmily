@@ -1,13 +1,9 @@
 package com.ssafy.petmily.db.entity.community;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
@@ -24,6 +20,12 @@ public class Board {
     String title;
     String contents;
     Date reg_date;
+    @Builder.Default
+    Long replycnt = (long) 0;
+
+    public void updateRepl(){
+        this.replycnt = replycnt+1;
+    }
 
     public void setNo(Long no) {
         this.no = no;

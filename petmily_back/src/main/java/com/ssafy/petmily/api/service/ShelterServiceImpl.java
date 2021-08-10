@@ -24,4 +24,10 @@ public class ShelterServiceImpl implements ShelterService{
         return shelterRepositorySupport.searchShelterDetail(code);
     }
 
+    @Override
+    public List<Shelter> getAllShelter() {
+        return shelterRepositorySupport.getAllShelter();
+    }
+
+
 }

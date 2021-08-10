@@ -31,4 +31,8 @@ public class ShelterRepositorySupport {
                 .where(qShelterJoin.agencycode.eq(code)).fetchOne();
     }
 
+    public List<Shelter> getAllShelter(){
+        return jpaQueryFactory.select(qShelter).from(qShelter).fetch();
+    }
+
 }
