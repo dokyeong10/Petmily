@@ -106,14 +106,14 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
     @Override
-    public AnimalFile fileUpload(FilePostReq filePostReq, String extension) {
+    public AnimalFile fileUpload(String filedir, String extension) {
         AnimalFile animalFile = new AnimalFile();
         Animal animal = new Animal();
         long max =  animalWaitRepositorySupport.getMaxNo();
         System.out.println(max+" ===============");
         animalFile.setAnimalno(max);
         //animalFile.setAnimalno(filePostReq.getAnimalno());
-        animalFile.setFile(filePostReq.getFile());
+        animalFile.setFile(filedir);
         animalFile.setExtension(extension);
         return animalFileRepository.save(animalFile);
     }

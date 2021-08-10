@@ -15,5 +15,5 @@ public interface AnimalService {
     List<Animal> searchAllAnimal(String key, String word, long no, boolean isLike);
     List<AnimalJoin> animaldetail(Long no);
 
-    AnimalFile fileUpload(FilePostReq filePostReq, String extension);
+    AnimalFile fileUpload(String filedir, String extension);
 }
