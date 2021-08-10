@@ -205,6 +205,21 @@ export default {
       .catch(err => {
         console.log(err)
       })
+      // for (var i = 0; i < state.imgURL.length; i++) {
+      axios({
+        method: "post",
+        url: "http://localhost:8080/animal/file",
+        data: {
+          files: state.imgURL
+        }
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      // }
 
       axios({
         method: "post",
@@ -229,25 +244,6 @@ export default {
         .catch((err) => {
           console.log(err);
         });
-        for (var i = 0; i < state.imgURL.length; i++) {
-          console.log(state.imgURL)
-          console.log(state.imgURL[i])
-          console.log(state.imgURL.[i])
-      
-          axios({
-            method: "post",
-            url: "http://localhost:8080/animal/file",
-            data: {
-              file: state.imgURL.[i]
-            }
-          })
-          .then((res) => {
-            console.log(res.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-        }
     };
 
     
