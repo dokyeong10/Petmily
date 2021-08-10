@@ -9,4 +9,5 @@ public interface ShelterService {
 
     List<Shelter> searchShelterCode(String word);
     ShelterJoin searchShelterDetail(String code);
+    List<Shelter> getAllShelter();
 }
