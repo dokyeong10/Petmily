@@ -7,8 +7,8 @@
       </div>
       <div class="d-flex align-items-start">
         <div class="d-flex flex-column align-items-start">
-          <label for="type">필터</label>
-          <select name="type" id="type">
+          <label for="filter">필터</label>
+          <select name="filter" id="filter" @change="toggleFilter">
             <option value="null">선택</option>
             <option value="type">동물</option>
             <option value="addr">지역</option>

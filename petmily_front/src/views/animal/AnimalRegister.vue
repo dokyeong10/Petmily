@@ -156,6 +156,7 @@ export default {
       userno: "",
       agencycode: "",
       text: "",
+      animalno: "",
 
       profile: "",
       file: [],
@@ -198,7 +199,7 @@ export default {
         }
       })
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         state.agencycode = res.data.agencycode
       })
       .catch(err => {
@@ -216,7 +217,6 @@ export default {
           sex: state.sexToggle,
           neutered: state.neuteredToggle,
           find_date: state.find_date,
-          userno: state.userno,
           agencycode: state.agencycode,
           text: state.text,
           profile_img: state.profileURL,
@@ -229,6 +229,25 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+        for (var i = 0; i < state.imgURL.length; i++) {
+          console.log(state.imgURL)
+          console.log(state.imgURL[i])
+          console.log(state.imgURL.[i])
+      
+          axios({
+            method: "post",
+            url: "http://localhost:8080/animal/file",
+            data: {
+              file: state.imgURL.[i]
+            }
+          })
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        }
     };
 
     
@@ -245,6 +264,32 @@ export default {
     };
 
     const upload = function() {
+      // db에 있는 마지막 animalno 받아오는 부분
+      // axios({
+      //   method: "",
+      //   url: "",
+      // })
+      // .then(res => {
+      //   state.animalno = res.data.animalno ++
+      // })
+      // .catch(err => {
+      //   console.log(err)
+      // })
+      // // animalno를 보내주는 부분
+      // axios({
+      //   method: "post",
+      //   url: "http://localhost:8080/animal/register",
+      //   data: {
+      //     animalno: state.animalno,
+      //   }
+      // })
+      // .then(res => {
+      //   console.log(res.data)
+      // })
+      // .catch(err => {
+      //   console.log(err)
+      // })
+
       AWS.config.update({
         region: state.bucketRegion,
         credentials: new AWS.CognitoIdentityCredentials({
