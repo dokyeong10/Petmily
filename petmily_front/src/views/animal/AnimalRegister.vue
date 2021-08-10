@@ -199,7 +199,7 @@ export default {
         }
       })
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         state.agencycode = res.data.agencycode
       })
       .catch(err => {
@@ -229,20 +229,25 @@ export default {
         .catch((err) => {
           console.log(err);
         });
-
-        axios({
-          method: "post",
-          url: "http://localhost:8080/animal/file",
-          data: {
-            file: state.imgURL
-          }
-        })
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        for (var i = 0; i < state.imgURL.length; i++) {
+          console.log(state.imgURL)
+          console.log(state.imgURL[i])
+          console.log(state.imgURL.[i])
+      
+          axios({
+            method: "post",
+            url: "http://localhost:8080/animal/file",
+            data: {
+              file: state.imgURL.[i]
+            }
+          })
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        }
     };
 
     
