@@ -68,6 +68,7 @@ export default {
           console.log(err)
         })
       } else if (sessionStorage.getItem('isAgency')) {
+        console.log(71)
         axios({
           method: 'post',
           url: 'http://localhost:8080/auth/agency/me',
@@ -80,6 +81,9 @@ export default {
         })
         .then(res => {
           console.log(res)
+          if (res.data) {
+            router.push('/agencymodify')
+          }
         })
         .catch(err => {
           console.log(err)

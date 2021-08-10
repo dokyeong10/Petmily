@@ -31,57 +31,79 @@
             <div>업로드 완료!</div>
           </div>
         </div>
+        <label for="agencyname" class="d-flex flex-row mb-2">보호소 이름</label>
+        <span class="d-flex" style="width: 400px;">
+          <input
+            v-model="state.agencyname"
+            type="text"
+            class="form-control radius-border br mb-5"
+            id="agencyname"
+            style="height: 38px;"
+            readonly
+          />
+        </span>
+        <label for="agencycode" class="d-flex flex-row mb-2">보호소 코드</label>
+        <span class="d-flex" style="width: 400px;">
+          <input
+            v-model="state.agencycode"
+            type="text"
+            class="form-control radius-border br mb-5"
+            id="agencycode"
+            style="height: 38px;"
+            readonly
+          />
+        </span>
         <label for="email" class="d-flex flex-row mb-2">이메일</label>
         <span class="d-flex" style="width: 400px;">
           <input
             v-model="state.email"
             type="text"
-            class="form-control radius-border br"
+            class="form-control radius-border br mb-5"
             id="email"
             style="height: 38px;"
             readonly
           />
         </span>
+        <label for="username" class="d-flex flex-row mb-2">이름</label>
+        </div>
+        <input
+          v-model="state.username"
+          type="text"
+          class="form-control radius-border br mb-5"
+          placeholder="바꿀 이름을 입력하세요"
+          id="username"
+        />
+        <label for="password" class="d-flex flex-row mb-2">비밀번호</label>
+        <input
+          v-model="state.password"
+          type="password"
+          class="form-control radius-border br mb-5"
+          placeholder="••••••••"
+          id="password"
+        /> 
+        <label for="confirmPassword" class="d-flex flex-row mb-2">비밀번호 재입력</label>
+        <input
+          v-model="state.passwordConfirm"
+          type="password"
+          class="form-control radius-border br mb-5"
+          placeholder="••••••••"
+          id="confirmPassword"
+        />
+        <label for="phone" class="d-flex flex-row mb-2">전화번호</label>
+        <input
+          v-model="state.phone"
+          type="text"
+          class="form-control br radius-border mb-5"
+          placeholder="바꾸실 번호를 입력하세요."
+          id="phone"
+        />
+        <button class="btn-white" style="color: #FFFFFF;" @click="modifyAgencyInfo">
+          수정하기
+        </button>
+        <button class="btn-white" style="color: #FFFFFF;" @click="deleteAgencyInfo">
+          탈퇴하기
+        </button>
       </div>
-      <label for="username" class="d-flex flex-row mb-2">이름</label>
-      <input
-        v-model="state.username"
-        type="text"
-        class="form-control radius-border br mb-5"
-        placeholder="바꿀 이름을 입력하세요"
-        id="username"
-      />
-      <label for="password" class="d-flex flex-row mb-2">비밀번호</label>
-      <input
-        v-model="state.password"
-        type="password"
-        class="form-control radius-border br mb-5"
-        placeholder="••••••••"
-        id="password"
-      /> 
-      <label for="confirmPassword" class="d-flex flex-row mb-2">비밀번호 재입력</label>
-      <input
-        v-model="state.passwordConfirm"
-        type="password"
-        class="form-control radius-border br mb-5"
-        placeholder="••••••••"
-        id="confirmPassword"
-      />
-      <label for="phone" class="d-flex flex-row mb-2">전화번호</label>
-      <input
-        v-model="state.phone"
-        type="text"
-        class="form-control br radius-border mb-5"
-        placeholder="바꾸실 번호를 입력하세요."
-        id="phone"
-      />
-      <button class="btn-white" style="color: #FFFFFF;" @click="modifyPrivateInfo">
-        수정하기
-      </button>
-      <button class="btn-white" style="color: #FFFFFF;" @click="deletePrivateInfo">
-        탈퇴하기
-      </button>
-    </div>
     </div>
   </div>
 </template>
@@ -101,6 +123,8 @@ export default {
       passwordConfirm: "",
       username: "",
       phone: "",
+      agencyname: "",
+      agencycode: "",
 
       profile: "",
       albumBucketName: "petmily",
@@ -126,10 +150,10 @@ export default {
       return config
     }
 
-    const getPrivateInfo = async function () {
+    const getAgencyInfo = async function () {
       await axios({
         method: "get",
-        url: "http://localhost:8080/users/personal/me/",
+        url: "http://localhost:8080/users/agency/me/",
         headers: {
           Authorization: setToken()
         }
@@ -137,6 +161,8 @@ export default {
       .then(res => {
         console.log(res)
         if(res.data) {
+          state.agencyname = res.data.agencyname
+          state.agencycode = res.data.agencycode
           state.email = res.data.email
           state.phone = res.data.phone
           state.username = res.data.username
@@ -147,20 +173,20 @@ export default {
         console.log(err)
       })
     }
-    getPrivateInfo()
+    getAgencyInfo()
 
     const handleProfileUpload = function () {
       state.profile = profile.value.files[0];
     };
 
-    const modifyPrivateInfo = function () {
+    const modifyAgencyInfo = function () {
       if (state.password != state.passwordConfirm) {
         alert('비밀번호가 일치하지 않습니다.')
         return
       }
       axios({
         method: "patch",
-        url: `http://localhost:8080/users/personal/${state.email}`,
+        url: `http://localhost:8080/users/agency/${state.email}`,
         data: {
           email: state.email,
           password: state.password,
@@ -171,7 +197,7 @@ export default {
       })
       .then(res => {
         console.log(res)
-        router.push('/proflieprivate')
+        router.push('/profileagency')
       })
       .catch(err => {
         console.log(err)
@@ -210,13 +236,14 @@ export default {
       );
     };
 
-    const deletePrivateInfo = function () {
+    const deleteAgencyInfo = function () {
 
+      // 회원 탈퇴 시 모달창... 띄울까 말까.. 고민해봐야 합니다..
       alert("탈퇴시 회원과 관련된 모든 정보가 삭제됩니다. 탈퇴하겠습니까?")
 
       axios({
         method: 'delete',
-        url: `http://localhost:8080/users/personal/${state.email}`
+        url: `http://localhost:8080/users/agency/${state.email}`
       })
       .then( res => {
         console.log(res)
@@ -229,7 +256,7 @@ export default {
       })
     }
 
-    return { state, getPrivateInfo, modifyPrivateInfo, handleProfileUpload, profileUpload, profile, deletePrivateInfo }
+    return { state, getAgencyInfo, modifyAgencyInfo, handleProfileUpload, profileUpload, profile, deleteAgencyInfo }
   }
 }
 </script>
