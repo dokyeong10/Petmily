@@ -25,6 +25,9 @@ import AnimalList from '@/views/animal/AnimalList.vue'
 import AnimalRegister from '@/views/animal/AnimalRegister.vue'
 import AnimalRegisterSuccess from '@/views/animal/AnimalRegisterSuccess.vue'
 
+//live
+import Live from '@/views/live/Live'
+
 const routes = [
   {
     path: '/home',
@@ -105,7 +108,12 @@ const routes = [
     path: '/agencymodify',
     name: 'agencymodify',
     component: AgencyModify
-  }
+  },
+  {
+    path: '/live',
+    name: 'live',
+    component: Live
+}
   // {
   //   path: '/',
   //   name: 'Home',
