@@ -16,7 +16,9 @@ import ChangePassword from '@/views/accounts/ChangePassword.vue'
 // Profile
 import ProfilePrivate from '@/views/accounts/ProfilePrivate.vue'
 import ProfileAgency from '@/views/accounts/ProfileAgency.vue'
-
+import ConfirmPassword from '@/views/accounts/ConfirmPassword.vue'
+import PrivateModify from '@/views/accounts/PrivateModify.vue'
+import AgencyModify from '@/views/accounts/AgencyModify.vue'
 
 // Animal
 import AnimalList from '@/views/animal/AnimalList.vue'
@@ -93,10 +95,25 @@ const routes = [
     component: ProfileAgency
   },
   {
+    path: '/confirmpassword',
+    name: 'confirmpassword',
+    component: ConfirmPassword
+  },
+  {
+    path: '/privatemodify',
+    name: 'privatemodify',
+    component: PrivateModify
+  },
+  {
+    path: '/agencymodify',
+    name: 'agencymodify',
+    component: AgencyModify
+  },
+  {
     path: '/live',
     name: 'live',
     component: Live
-  }
+}
   // {
   //   path: '/',
   //   name: 'Home',
