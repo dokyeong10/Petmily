@@ -91,4 +91,15 @@ public class AnimalWaitRepositorySupport {
                 .where(qAnimalJoin.no.eq(no)).fetch();
         return animalJoins;
     }
+
+    public long getMaxNo() {
+        long num =0;
+       if(jpaQueryFactory.select(qAnimal.no.max()).from(qAnimal).fetchOne() ==null){
+           num =0;
+       }else{
+           num =jpaQueryFactory.select(qAnimal.no.max()).from(qAnimal).fetchOne();
+       }
+
+        return num;
+    }
 }
