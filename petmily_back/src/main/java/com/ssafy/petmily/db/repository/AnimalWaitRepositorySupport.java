@@ -86,9 +86,20 @@ public class AnimalWaitRepositorySupport {
         return null;
     }
 
-    public AnimalJoin findAnimalByNo(Long no) {
-        AnimalJoin animal = jpaQueryFactory.select(qAnimalJoin).from(qAnimalJoin)
-                .where(qAnimalJoin.no.eq(no)).fetchOne();
-        return animal;
+    public List<AnimalJoin> findAnimalByNo(Long no) {
+        List<AnimalJoin> animalJoins = jpaQueryFactory.select(qAnimalJoin).from(qAnimalJoin)
+                .where(qAnimalJoin.no.eq(no)).fetch();
+        return animalJoins;
+    }
+
+    public long getMaxNo() {
+        long num =0;
+       if(jpaQueryFactory.select(qAnimal.no.max()).from(qAnimal).fetchOne() ==null){
+           num =0;
+       }else{
+           num =jpaQueryFactory.select(qAnimal.no.max()).from(qAnimal).fetchOne();
+       }
+
+        return num;
     }
 }

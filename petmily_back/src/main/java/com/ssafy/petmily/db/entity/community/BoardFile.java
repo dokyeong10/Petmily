@@ -1,4 +1,4 @@
-package com.ssafy.petmily.db.entity.animal;
+package com.ssafy.petmily.db.entity.community;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,12 +14,12 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-public class AnimalFile {
+public class BoardFile{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long no;
 
-    Long animalno;
+    Long boardno;
     String file;
     String extension;
 
