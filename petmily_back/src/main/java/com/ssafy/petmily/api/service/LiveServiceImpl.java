@@ -40,4 +40,9 @@ public class LiveServiceImpl implements LiveService{
     public List<LiveRoom> getLiveList() {
         return liveRepositorySupport.getLiveList();
     }
+
+    @Override
+    public List<LiveRoom> getFourLiveList() {
+        return liveRepositorySupport.getFourLiveList();
+    }
 }

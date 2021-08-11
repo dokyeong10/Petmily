@@ -86,9 +86,9 @@ public class AnimalWaitRepositorySupport {
         return null;
     }
 
-    public List<AnimalJoin> findAnimalByNo(Long no) {
-        List<AnimalJoin> animalJoins = jpaQueryFactory.select(qAnimalJoin).from(qAnimalJoin)
-                .where(qAnimalJoin.no.eq(no)).fetch();
+    public AnimalJoin findAnimalByNo(Long no) {
+        AnimalJoin animalJoins = jpaQueryFactory.select(qAnimalJoin).from(qAnimalJoin)
+                .where(qAnimalJoin.no.eq(no)).fetchOne();
         return animalJoins;
     }
 
@@ -101,5 +101,10 @@ public class AnimalWaitRepositorySupport {
        }
 
         return num;
+    }
+
+    public List<Animal> getThreeAnimal(){
+        return jpaQueryFactory.select(qAnimal).from(qAnimal)
+                .orderBy(qAnimal.find_date.asc()).limit(3).fetch();
     }
 }

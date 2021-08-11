@@ -99,9 +99,9 @@ public class AnimalController {
 
 
     @GetMapping("/details/{no}")
-    public ResponseEntity<List<AnimalJoin>> animaldetail(@PathVariable Long no) {
-       List<AnimalJoin> animalJoins = animalService.animaldetail(no);
-        return new ResponseEntity<List<AnimalJoin>>(animalJoins, HttpStatus.OK);
+    public ResponseEntity<AnimalJoin> animaldetail(@PathVariable Long no) {
+       AnimalJoin animalJoins = animalService.animaldetail(no);
+        return new ResponseEntity<AnimalJoin>(animalJoins, HttpStatus.OK);
     }
 
 }

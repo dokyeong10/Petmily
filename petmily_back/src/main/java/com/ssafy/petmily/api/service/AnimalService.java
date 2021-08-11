@@ -12,7 +12,8 @@ public interface AnimalService {
     Animal createAnimal(AnimalRegisterPostReq registerInfo);
     void deleteAnimal(Long no);
     List<Animal> searchAllAnimal(String key, String word, long no, boolean isLike);
-    List<AnimalJoin> animaldetail(Long no);
+    AnimalJoin animaldetail(Long no);
+    List<Animal> getThreeAnimal();
 
     AnimalFile fileUpload(String filedir, String extension);
 }
