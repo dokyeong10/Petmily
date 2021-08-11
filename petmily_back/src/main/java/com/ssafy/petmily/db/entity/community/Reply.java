@@ -32,8 +32,4 @@ public class Reply {
     public void updateGroup(long no){
         this.grp = no;
     }
-
-    public void updateContents(String input){
-        this.contents = input;
-    }
 }
