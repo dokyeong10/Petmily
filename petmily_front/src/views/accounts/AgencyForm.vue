@@ -61,7 +61,7 @@
         <label for="emailcode" class="d-flex flex-row mb-2">인증번호</label>
         <div class="d-flex" style="width: 400px;">
           <input v-model="state.number" type="text" class="form-control radius-border br" placeholder="인증번호를 입력해주세요." @keyup.enter="confirmNumber" id="emailcode" style="height: 38px;">
-          <button @click="confirmNumber" type="button" class="mb-5 btn btn-up" style="height: 38px; width: 160px">인증하기</button>
+          <button @click="confirmNumber" type="button" class="mb-5 btn btn-primary" style="height: 38px; width: 160px">인증하기</button>
         </div>
       </span>
       <div v-if="state.isConfirm" class="mb-5">
