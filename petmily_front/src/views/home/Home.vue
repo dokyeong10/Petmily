@@ -18,7 +18,7 @@
           <div class="row w-100" align="center">
             <LifeGuardians
               v-for="(guardians, idx) in guardiansInfo.guardians"
-              :ref="guardiansInfo.guardians"
+              
               :key="idx + 'b'"
               :guardians="guardians"
             />

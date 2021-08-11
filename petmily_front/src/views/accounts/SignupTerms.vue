@@ -1,6 +1,6 @@
 <template>
   <JumbotronTerms/>
-  <img src="@\assets\petmily_signup.png">
+  <img class="img" src="@\assets\petmily_signup.png">
   <div class="container">
     <!-- 약관 1 -->
     <div style="width: 800px; height: 800px;">

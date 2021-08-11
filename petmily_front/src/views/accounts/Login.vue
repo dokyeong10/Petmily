@@ -74,27 +74,27 @@
             <a
               style="color: #ffffff; text-decoration-line: none"
               href="http://localhost:8080/oauth2/authorization/google"
-              ><img src="@\assets\google.png" style="width:30px;height:30px;border-radius: 50%;"></a
+              ><img class="img" src="@\assets\google.png" style="width:30px;height:30px;border-radius: 50%;"></a
             >
           </button>
           <button class="btn-logo">
             <a
               style="color: #ffffff; text-decoration-line: none"
               href="http://localhost:8080/oauth2/authorization/kakao"
-              ><img src="@\assets\KakaoTalk.png" style="width:30px;height:30px;border-radius: 50%;"></a
+              ><img class="img" src="@\assets\KakaoTalk.png" style="width:30px;height:30px;border-radius: 50%;"></a
             >
           </button>
           <button class="btn-logo">
             <a
               style="color: #ffffff; text-decoration-line: none"
               href="http://localhost:8080/oauth2/authorization/naver"
-              ><img src="@\assets\naver.png" style="width:30px;height:30px;border-radius: 50%;"></a
+              ><img class ="img" src="@\assets\naver.png" style="width:30px;height:30px;border-radius: 50%;"></a
             >
           </button>
         </div>
       </div>
       <img
-        class="ms-3"
+        class="img ms-3"
         style="border-radius: 12px; width: 400px"
         alt="petmily login"
         src="@/assets/login.png"
@@ -204,7 +204,7 @@ export default {
 <style>
 
 
-img {
+.img {
   width: 20%;
   height: 21%;
   object-fit: cover;
