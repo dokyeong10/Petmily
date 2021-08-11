@@ -12,12 +12,15 @@ import lombok.Setter;
 public class AgencyLoginPostRes extends BaseResponseBody {
     @ApiModelProperty(name="JWT 인증 토큰",example="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN..." )
     String accessToken;
+    @ApiModelProperty(name="기관 코드",example="3010000" )
+    String agencycode;
 
-    public static AgencyLoginPostRes of(Integer statusCode, String message, String accessToken){
+    public static AgencyLoginPostRes of(Integer statusCode, String message, String accessToken, String agencycode){
         AgencyLoginPostRes res = new AgencyLoginPostRes();
         res.setStatusCode(statusCode);
         res.setMessage(message);
         res.setAccessToken(accessToken);
+        res.setAgencycode(agencycode);
         return res;
     }
 }

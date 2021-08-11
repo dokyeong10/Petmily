@@ -149,6 +149,16 @@ public class BoardController {
         return new ResponseEntity<BoardJoin>(BoardJoins, HttpStatus.OK);
     }
 
+    // 댓글 삭제
+    @DeleteMapping("/reply/delete")
+    public ResponseEntity<? extends BaseResponseBody> deleteRepl(@RequestBody ReplySearchPostReq replySearchPostReq){
+        long replno = replySearchPostReq.getReplno();
+        long bno = replySearchPostReq.getBno();
+
+        communityService.deleteRepl(replno, bno);
+        return ResponseEntity.status(200).body(BaseResponseBody.of(200,"Success"));
+    }
+
 
 
 }
