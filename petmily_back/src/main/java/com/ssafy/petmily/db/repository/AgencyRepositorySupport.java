@@ -36,4 +36,11 @@ public class AgencyRepositorySupport {
         return jpaQueryFactory.select(qAgencyJoin).from(qAgencyJoin)
                 .where(qAgencyJoin.agencycode.like(agencycode)).fetchOne();
     }
+
+
+    public Agency findAgencyByAgecnycode(String agencycode) {
+        Agency agency = jpaQueryFactory.select(qAgency).from(qAgency)
+                .where(qAgency.agencycode.eq(agencycode)).fetchOne();
+        return agency;
+    }
 }

@@ -1,7 +1,6 @@
 package com.ssafy.petmily.api.service;
 
 import com.ssafy.petmily.api.request.AnimalRegisterPostReq;
-import com.ssafy.petmily.api.request.FilePostReq;
 import com.ssafy.petmily.db.entity.animal.Animal;
 import com.ssafy.petmily.db.entity.animal.AnimalFile;
 import com.ssafy.petmily.db.entity.animal.AnimalJoin;
@@ -9,7 +8,6 @@ import com.ssafy.petmily.db.repository.AnimalFileRepository;
 import com.ssafy.petmily.db.repository.AnimalLikeRepository;
 import com.ssafy.petmily.db.repository.AnimalWaitRepository;
 import com.ssafy.petmily.db.repository.AnimalWaitRepositorySupport;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -84,6 +82,7 @@ public class AnimalServiceImpl implements AnimalService {
         animal.setAgencycode(registerInfo.getAgencycode());
         animal.setProfile_img(registerInfo.getProfile_img());
         animal.setText(registerInfo.getText());
+        System.out.println("============================ animal register : " + animal.toString());
         return animalWaitRepository.save(animal);
     }
 

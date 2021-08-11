@@ -1,7 +1,6 @@
 package com.ssafy.petmily.api.service;
 
 import com.ssafy.petmily.api.request.AnimalRegisterPostReq;
-import com.ssafy.petmily.api.request.FilePostReq;
 import com.ssafy.petmily.db.entity.animal.Animal;
 import com.ssafy.petmily.db.entity.animal.AnimalFile;
 import com.ssafy.petmily.db.entity.animal.AnimalJoin;

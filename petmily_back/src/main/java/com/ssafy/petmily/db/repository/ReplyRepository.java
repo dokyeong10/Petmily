@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReplyRepository extends JpaRepository<Reply, Long> {
+    Reply findByNo(long no);
+    void deleteByNo(long no);
+    Reply findByGrp(long grp);
 }

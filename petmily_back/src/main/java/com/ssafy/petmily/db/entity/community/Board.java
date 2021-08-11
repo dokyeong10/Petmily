@@ -17,14 +17,15 @@ public class Board {
     Long no;
 
     Long userno;
+    String agencycode;
     String title;
     String contents;
     Date reg_date;
     @Builder.Default
     Long replycnt = (long) 0;
 
-    public void updateRepl(){
-        this.replycnt = replycnt+1;
+    public void updateRepl(int num){
+        this.replycnt = replycnt+num;
     }
 
     public void setNo(Long no) {

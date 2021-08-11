@@ -8,17 +8,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @ApiModel("ReplyRegisterPostReq")
-public class ReplyRegisterPostReq {
+public class ReplySearchPostReq {
 
-    @ApiModelProperty(name ="댓글 내용", example = "댓글이에용")
-    String contents;
     @ApiModelProperty(name ="게시글 key", example = "3")
     long bno;
-    @ApiModelProperty(name ="기관인지 일반인지?", example = "false")
-    boolean isAgency;
-
-    public boolean getIsAgency(){
-        return this.isAgency;
-    }
+    @ApiModelProperty(name ="특정 댓글 번호", example = "2")
+    long replno;
 
 }

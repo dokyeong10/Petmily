@@ -117,6 +117,9 @@ public class UserController {
 		SsafyAgencyDetails userDetails = (SsafyAgencyDetails)  authentication.getDetails();
 		String email = userDetails.getUsername();
 		Agency agency = userService.getAgencyByEmail(email);
+
+		System.out.println("================== agency me : " + agency.toString());
+
 		return ResponseEntity.status(200).body(AgencyRes.of(agency));
 	}
 
