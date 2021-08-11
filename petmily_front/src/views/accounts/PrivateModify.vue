@@ -87,13 +87,11 @@
 </template>
 <script>
 import { reactive, ref, watchEffect } from 'vue'
-import { useRouter } from 'vue-router'
 import AWS from 'aws-sdk'
 import axios from 'axios'
 export default {
   name: 'PrivateModify',
   setup () {
-    const router = useRouter()
     const state = reactive({
       email: "",
       img: "",
@@ -210,26 +208,8 @@ export default {
       );
     };
 
-    const deletePrivateInfo = function () {
-
-      alert("탈퇴시 회원과 관련된 모든 정보가 삭제됩니다. 탈퇴하겠습니까?")
-
-      axios({
-        method: 'delete',
-        url: `http://localhost:8080/users/personal/${state.email}`
-      })
-      .then( res => {
-        console.log(res)
-        sessionStorage.removeItem("isLogin");
-        localStorage.removeItem("jwt");
-        localStorage.removeItem("email");
-        sessionStorage.removeItem("isAgency");
-        sessionStorage.removeItem("isUser");
-        router.go('/home')
-      })
-    }
-
-    return { state, getPrivateInfo, modifyPrivateInfo, handleProfileUpload, profileUpload, profile, deletePrivateInfo }
+    console.log(state)
+    return { state, getPrivateInfo, modifyPrivateInfo, handleProfileUpload, profileUpload, profile }
   }
 }
 </script>
