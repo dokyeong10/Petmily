@@ -1,16 +1,16 @@
 <template>
   <br />
-  <div class="container mt-5 justify-content-center" style="height: 650px;">
-    <div class="d-flex ">
-      <div class="d-flex flex-column align-items-start">
-        <div class="d-flex">
-          <div class="ms-5 font-bold" align="left" style="font-size: 26px;color: #AB0B14;">
-            Live
-          </div>
-          <img src="@\assets\circle.png" style="width: 19px; height: 19px;" />
+  <div class="container mt-5" style="height: 650px;">
+    <div class="d-flex justify-content-center">
+      <div class="d-flex align-items-center w-50">
+        <div class="font-bold" align="left" style="font-size: 26px;color: #AB0B14;">
+          Live
         </div>
-        <div class="mb-4" align="left" style="font-size: 30px;">진행 중인 라이브</div>
+        <img src="@\assets\circle.png" style="width: 19px; height: 19px;" />
       </div>
+    </div>
+    <div class="d-flex align-items-center w-50">
+      <div class="mb-4" align="center" style="font-size: 30px;">진행 중인 라이브</div>
     </div>
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner ">
