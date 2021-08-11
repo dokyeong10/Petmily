@@ -2,6 +2,7 @@ package com.ssafy.petmily.api.service;
 
 import com.ssafy.petmily.db.entity.shelter.Shelter;
 import com.ssafy.petmily.db.entity.shelter.ShelterJoin;
+import com.ssafy.petmily.db.entity.shelter.ShelterMain;
 import com.ssafy.petmily.db.repository.ShelterRepositorySupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,11 @@ public class ShelterServiceImpl implements ShelterService{
     @Override
     public List<Shelter> getAllShelter() {
         return shelterRepositorySupport.getAllShelter();
+    }
+
+    @Override
+    public List<ShelterMain> getAllShelterMain() {
+        return shelterRepositorySupport.getAllShelterMain();
     }
 
 

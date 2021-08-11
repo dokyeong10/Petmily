@@ -8,4 +8,5 @@ public interface LiveService {
 
     boolean createLiveRoom(String agencycode, String title, String img, String description);
     List<LiveRoom> getLiveList();
+    List<LiveRoom> getFourLiveList();
 }
