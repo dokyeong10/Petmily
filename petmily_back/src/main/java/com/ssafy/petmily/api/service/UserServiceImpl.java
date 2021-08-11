@@ -44,6 +44,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	AnimalWaitRepositorySupport animalWaitRepositorySupport;
 
+	@Autowired
+	AnimalLikeRepositorySupport animalLikeRepositorySupprot;
+
 	@Override
 	public User createUser(UserRegisterPostReq userRegisterInfo) {
 		User user = new User();
@@ -178,8 +181,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public AnimalLike addlike(LikeRegisterPostReq likeRegisterPostReq) {
 		AnimalLike animalLike = new AnimalLike();
-		animalLike.setNo(likeRegisterPostReq.getNo());
-		;
+		long max =  animalLikeRepositorySupprot.getMaxNo();
+		animalLike.setNo(max+1);
+		System.out.println("========"+max);
 		animalLike.setAnimalno(likeRegisterPostReq.getAnimalno());
 		animalLike.setUserno(likeRegisterPostReq.getUserno());
 		return animalLikeRepository.save(animalLike);
