@@ -1,5 +1,11 @@
 package com.ssafy.petmily.api.service;
 
+import com.ssafy.petmily.db.entity.Live.LiveRoom;
+
+import java.util.List;
+
 public interface LiveService {
-    void createLiveRoom(String agencycode, String title, String img, String description);
+
+    boolean createLiveRoom(String agencycode, String title, String img, String description);
+    List<LiveRoom> getLiveList();
 }
