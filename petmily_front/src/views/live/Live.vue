@@ -6,14 +6,26 @@
         <div class="form-group mb-5">
           <p>
             <label>기관 이름</label>
-            <input v-model="myUserName" class="form-control" type="text" required />
+            <input
+              v-model="myUserName"
+              class="form-control"
+              type="text"
+              required
+            />
           </p>
           <p>
             <label>라이브 이름</label>
-            <input v-model="mySessionId" class="form-control" type="text" required />
+            <input
+              v-model="mySessionId"
+              class="form-control"
+              type="text"
+              required
+            />
           </p>
           <p class="text-center">
-            <button class="btn btn-lg btn-success" @click="joinSession()">방 생성!</button>
+            <button class="btn btn-lg btn-success" @click="joinSession()">
+              방 생성!
+            </button>
           </p>
         </div>
       </div>
@@ -36,13 +48,13 @@
       <div id="video-container" class="col-md-6">
         <user-video
           :stream-manager="publisher"
-          @click.native="updateMainVideoStreamManager(publisher)"
+          @click="updateMainVideoStreamManager(publisher)"
         />
         <user-video
           v-for="sub in subscribers"
           :key="sub.stream.connection.connectionId"
           :stream-manager="sub"
-          @click.native="updateMainVideoStreamManager(sub)"
+          @click="updateMainVideoStreamManager(sub)"
         />
       </div>
     </div>
@@ -137,7 +149,11 @@ export default {
             this.session.publish(this.publisher);
           })
           .catch((error) => {
-            console.log("There was an error connecting to the session:", error.code, error.message);
+            console.log(
+              "There was an error connecting to the session:",
+              error.code,
+              error.message
+            );
           });
       });
 
@@ -175,7 +191,9 @@ export default {
      */
 
     getToken(mySessionId) {
-      return this.createSession(mySessionId).then((sessionId) => this.createToken(sessionId));
+      return this.createSession(mySessionId).then((sessionId) =>
+        this.createToken(sessionId)
+      );
     },
 
     // See https://docs.openvidu.io/en/stable/reference-docs/REST-API/#post-openviduapisessions
