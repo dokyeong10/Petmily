@@ -27,14 +27,4 @@ public class BoardRepositorySupport {
         return boardJoins;
     }
 
-    public long getMaxNo() {
-        long num =0;
-        if(jpaQueryFactory.select(qBoard.no.max()).from(qBoard).fetchOne() ==null){
-            num =0;
-        }else{
-            num =jpaQueryFactory.select(qBoard.no.max()).from(qBoard).fetchOne();
-        }
-
-        return num;
-    }
 }

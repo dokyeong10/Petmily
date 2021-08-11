@@ -15,7 +15,7 @@ public interface BoardService {
 
     void deleteBoard(Long no);
 
-    BoardFile fileUpload(String filedir, String extension);
+    BoardFile fileUpload(FileBoardPostReq fileBoardPostReq, String extension);
 
     BoardJoin boarddetail(Long no);
 }
