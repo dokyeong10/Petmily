@@ -24,8 +24,8 @@ public class Board {
     @Builder.Default
     Long replycnt = (long) 0;
 
-    public void updateRepl(int num){
-        this.replycnt = replycnt+num;
+    public void updateRepl(){
+        this.replycnt = replycnt+1;
     }
 
     public void setNo(Long no) {
