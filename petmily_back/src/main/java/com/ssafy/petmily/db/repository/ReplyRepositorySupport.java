@@ -45,5 +45,15 @@ public class ReplyRepositorySupport {
                 .groupBy(qReply.grp).fetchOne();
     }
 
+    public Reply getReplParent(long grp){
+        return jpaQueryFactory.select(qReply).from(qReply)
+                .where(qReply.no.eq(grp)).fetchOne();
+    }
+
+    public long getReReplcnt(long parentNo){
+        return jpaQueryFactory.select(qReply.count()).from(qReply)
+                .where(qReply.no.ne(parentNo).and(qReply.grp.eq(parentNo))).fetchOne();
+    }
+
 
 }

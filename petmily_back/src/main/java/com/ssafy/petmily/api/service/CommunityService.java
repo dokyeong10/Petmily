@@ -14,4 +14,5 @@ public interface CommunityService {
     void createUserRepl(long userno, String contents, long bno);
     void createAgencyReplRe(String agencycode, String contesnts, long bno, long replno);
     void createUserReplRe(long userno, String contents, long bno, long replno);
+    void deleteRepl(long replno, long bno);
 }

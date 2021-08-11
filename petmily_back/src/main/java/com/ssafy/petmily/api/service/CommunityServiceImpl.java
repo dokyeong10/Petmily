@@ -8,6 +8,7 @@ import com.ssafy.petmily.db.repository.BoardRepository;
 import com.ssafy.petmily.db.repository.ReplyRepository;
 import com.ssafy.petmily.db.repository.ReplyRepositorySupport;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -51,7 +52,7 @@ public class CommunityServiceImpl implements CommunityService {
 
         // 해당 게시글 댓글 수 증가
         Board board = boardRepository.findByNo(bno).get();
-        board.updateRepl();
+        board.updateRepl(1);
         boardRepository.save(board);
 
         return;
@@ -80,7 +81,7 @@ public class CommunityServiceImpl implements CommunityService {
 
         // 해당 게시글 댓글 수 증가
         Board board = boardRepository.findByNo(bno).get();
-        board.updateRepl();
+        board.updateRepl(1);
         boardRepository.save(board);
 
         return;
@@ -105,7 +106,7 @@ public class CommunityServiceImpl implements CommunityService {
 
         // 해당 게시글 댓글 수 + 1 증가
         Board board = boardRepository.findByNo(no).get();
-        board.updateRepl();
+        board.updateRepl(1);
         boardRepository.save(board);
 
         return;
@@ -130,12 +131,69 @@ public class CommunityServiceImpl implements CommunityService {
 
         // 해당 게시글 댓글 수 증가
         Board board = boardRepository.findByNo(bno).get();
-        board.updateRepl();
+        board.updateRepl(1);
         boardRepository.save(board);
 
         return;
     }
 
+    @Override
+    @Transactional
+    public void deleteRepl(long replno, long bno) {
+        // 댓글 조회 (모댓글인지 답글인지 판단)
+        Reply reply = replyRepository.findByNo(replno);
+        long grpdeep = reply.getGrpdeep();
+        long grp = reply.getGrp();
+
+        if(grpdeep == 0){ // 모댓글일 때
+            System.out.println("=================== 모댓글!");
+            // 답글의 갯수를 가져옴
+            long childcnt = replyRepositorySupport.getReReplcnt(replno);
+            System.out.println("======================= 내 댓글의 답글 수 : " + childcnt);
+
+
+            // 답글이 없을 때
+            if(childcnt == 0){
+                // 테이블에서 삭제
+                replyRepository.deleteByNo(replno);
+            }else{
+                // 댓글의 내용을 "" 로 바꾸고 저장
+                reply.updateContents("");
+                replyRepository.save(reply);
+            }
+
+            // 게시글 댓글 수 감소
+            Board board = boardRepository.findByNo(bno).get();
+            board.updateRepl(-1);
+            boardRepository.save(board);
+
+        }else if(grpdeep == 1){ // 자식 답글일 때
+            System.out.println("=================== 자식 답글!");
+            replyRepository.deleteByNo(replno);
+
+            // 모댓글 조회
+            Reply parent = replyRepositorySupport.getReplParent(grp);
+            String contents = parent.getContents();
+            long parentNo = parent.getNo();
+            System.out.println("======================= 내 부모 댓글 : " + parent.toString());
+
+            // 모댓글이 삭제된 경우
+            if(contents.equals("")){
+                // 답글의 갯수 조회
+                long cnt = replyRepositorySupport.getReReplcnt(parentNo);
+
+                if(cnt == 0) { // 답글이 더이상 없으면
+                    replyRepository.deleteByNo(parentNo); // 모댓글 테이블에서 제거
+                }
+            }
+
+                // 게시글 댓글 수 감소
+                Board board = boardRepository.findByNo(bno).get();
+                board.updateRepl(-1);
+                boardRepository.save(board);
+
+        }
+    }
 
 
 }
