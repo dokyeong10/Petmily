@@ -9,7 +9,6 @@ import com.ssafy.petmily.db.entity.community.BoardJoin;
 import com.ssafy.petmily.db.repository.BoardFileRepository;
 import com.ssafy.petmily.db.repository.BoardRepository;
 import com.ssafy.petmily.db.repository.BoardRepositorySupport;
-import com.ssafy.petmily.db.repository.ReplyRepositorySupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,9 +26,6 @@ public class BoardServiceImpl implements BoardService {
 
     @Autowired
     BoardRepositorySupport boardRepositorySupport;
-
-    @Autowired
-    ReplyRepositorySupport replyRepositorySupport;
 
     @Override
     public Board createBoard(ComuRegisterPostReq comuRegisterPostReq) {
@@ -58,9 +54,8 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public BoardJoin boarddetail(Long no) {
-        BoardJoin boardJoins = boardRepositorySupport.findBoardByNo(no);
-        boardJoins.setReplyJoins(replyRepositorySupport.getReplList(no));
+    public List<BoardJoin> boarddetail(Long no) {
+        List<BoardJoin> boardJoins = boardRepositorySupport.findBoardByNo(no);
         return boardJoins;
     }
 
