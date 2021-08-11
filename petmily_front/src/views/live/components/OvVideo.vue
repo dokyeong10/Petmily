@@ -1,17 +1,17 @@
 <template>
-  <video autoplay />
+	<video autoplay/>
 </template>
 
 <script>
 export default {
-  name: "OvVideo",
+	name: 'OvVideo',
 
-  props: {
-    streamManager: Object,
-  },
+	props: {
+		streamManager: Object,
+	},
 
-  mounted() {
-    this.streamManager.addVideoElement(this.$el);
-  },
+	mounted () {
+		this.streamManager.addVideoElement(this.$el);
+	},
 };
 </script>
