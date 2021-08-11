@@ -31,5 +31,4 @@ public interface UserService {
 	boolean deleteLike(Long no);
 	User getUserByNo(Long no);
 	AgencyJoin getAgencyByCode(String agencycode);
-    Agency getAgencyByAgencyCode(String agencycode);
 }

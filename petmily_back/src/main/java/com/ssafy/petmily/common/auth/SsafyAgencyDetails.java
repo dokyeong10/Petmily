@@ -25,7 +25,6 @@ public class SsafyAgencyDetails implements UserDetails {
         this.agency = agency;
     }
 
-
     public Agency getAgency() {
         return this.agency;
     }
