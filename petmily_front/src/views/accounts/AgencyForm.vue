@@ -8,7 +8,7 @@
         <h5 class="overpass colored">Agency Member</h5>
       </div>
       <br>
-      <label for="agencyname" class="d-flex flex-row mb-2" >기관 이름</label>
+      <label for="agencyname" class="d-flex flex-row mb-2 semibold" >기관 이름</label>
       <div class="d-flex" style="width: 400px;">
         <input :value="state.agencyname" type="text" class="form-control radius-border br mb-5" placeholder="기관 이름" id="agencyname" data-bs-toggle="modal" data-bs-target="#agencycodeSearchModal">
         <!-- 기관 코드 검색 모달 -->
@@ -36,11 +36,11 @@
           </div>
         </div>
       </div>
-      <label for="agencycode" class="d-flex flex-row mb-2">기관 코드</label>
+      <label for="agencycode" class="d-flex flex-row mb-2 semibold">기관 코드</label>
       <input :value="state.agencycode" type="text" class="form-control radius-border br mb-5" placeholder="기관 코드" id="agencycode">
       <!-- 사진등록 -->
       <div class="mb-4">
-        <label class="d-flex flex-row mb-2">사진등록</label>
+        <label class="d-flex flex-row mb-2 semibold">사진등록</label>
         <div class="justify-content-center">
           <input class="mb-2" id="file-selector" ref="file" type="file" @change="handleFileUpload()" style="width: 323.85px"/>
           <button @click="upload" class="btn-up" style="color: #FFFFFF; height: 38px; width: 66.38px;" flat>업로드</button>
@@ -52,13 +52,13 @@
         </div>
       </div>
 
-      <label for="email" class="d-flex flex-row mb-2">이메일</label>
+      <label for="email" class="d-flex flex-row mb-2 semibold">이메일</label>
       <span class="d-flex" style="width: 400px;">
         <input v-model="state.email" type="text" class="form-control radius-border br" placeholder="petmily@email.com" @keyup.enter="confirmEmail" id="email" style="height: 38px;">
         <button @click="confirmEmail" type="button" class="mb-5 btn-up" style="height: 38px; width: 80px">인증</button>
       </span>
       <span v-if="state.isEmail" style="width: 400px;">
-        <label for="emailcode" class="d-flex flex-row mb-2">인증번호</label>
+        <label for="emailcode" class="d-flex flex-row mb-2 semibold">인증번호</label>
         <div class="d-flex" style="width: 400px;">
           <input v-model="state.number" type="text" class="form-control radius-border br" placeholder="인증번호를 입력해주세요." @keyup.enter="confirmNumber" id="emailcode" style="height: 38px;">
           <button @click="confirmNumber" type="button" class="mb-5 btn btn-up" style="height: 38px; width: 160px">인증하기</button>
@@ -67,14 +67,14 @@
       <div v-if="state.isConfirm" class="mb-5">
         인증이 완료되었습니다.
       </div>
-      <label for="username" class="d-flex flex-row mb-2">담당자 이름</label>
+      <label for="username" class="d-flex flex-row mb-2 semibold">담당자 이름</label>
       <input v-model="state.username" type="text" class="form-control radius-border br mb-5" placeholder="담당자 이름" id="username">
       <div v-if="isUsername">담당자 이름은 필수 항목입니다.</div>
-      <label for="password" class="d-flex flex-row mb-2">비밀번호</label>
+      <label for="password" class="d-flex flex-row mb-2 semibold">비밀번호</label>
       <input v-model="state.password" type="password" class="form-control radius-border br mb-5" placeholder="••••••••" id="password">
-      <label for="confirmPassword" class="d-flex flex-row mb-2">비밀번호 재입력</label>
+      <label for="confirmPassword" class="d-flex flex-row mb-2 semibold">비밀번호 재입력</label>
       <input v-model="state.passwordConfirm" type="password" class="form-control radius-border br mb-5" placeholder="••••••••" id="confirmPassword">
-      <label for="phone" class="d-flex flex-row mb-2">전화번호</label>
+      <label for="phone" class="d-flex flex-row mb-2 semibold">전화번호</label>
       <input v-model="state.phone" type="text" class="form-control radius-border br mb-5" placeholder="010-1234-5678" id="phone">
       <button class="btn-white" style="color: #FFFFFF;" @click="confirmSignup">회원가입 하기</button>
     
@@ -353,5 +353,8 @@ ul{
   border-style: none;
   border-radius: 12px;
   margin-left: 10px;
+}
+.semibold {
+  font-weight: 600;
 }
 </style>

@@ -10,7 +10,7 @@
       </div>
       <br>
       <div class="mb-4">
-        <label for="email" class="d-flex flex-row mb-2">이메일</label>
+        <label for="email" class="d-flex flex-row mb-2 semibold">이메일</label>
         <span class="d-flex" style="width: 400px;">
           <input
             v-model="state.email"
@@ -33,7 +33,7 @@
       </div>
       <div class="mb-4">
         <span v-if="state.isEmail" style="width: 400px;">
-          <label for="emailcode" class="d-flex flex-row mb-2">인증번호</label>
+          <label for="emailcode" class="d-flex flex-row mb-2 semibold">인증번호</label>
           <div class="d-flex" style="width: 400px;">
             <input
               v-model="state.number"
@@ -54,7 +54,7 @@
         인증이 완료되었습니다.
       </div>
       <div class="mb-4">
-        <label class="d-flex flex-row mb-2">사진등록</label>
+        <label class="d-flex flex-row mb-2 semibold">사진등록</label>
         <div class="justify-content-center">
           <input class="mb-2" id="file-selector" ref="file" type="file" @change="handleFileUpload()" style="width: 323.85px"/>
           <button @click="upload" class="btn-up" style="color: #FFFFFF; height: 38px; width: 66.38px;" flat>업로드</button>
@@ -65,7 +65,7 @@
           </div>
         </div>
       </div>
-      <label for="username" class="d-flex flex-row mb-2">이름</label>
+      <label for="username" class="d-flex flex-row mb-2 semibold">이름</label>
       <input
         v-model="state.username"
         type="text"
@@ -73,7 +73,7 @@
         placeholder="홍길동"
         id="username"
       />
-      <label for="password" class="d-flex flex-row mb-2">비밀번호</label>
+      <label for="password" class="d-flex flex-row mb-2 semibold">비밀번호</label>
       <input
         v-model="state.password"
         type="password"
@@ -81,7 +81,7 @@
         placeholder="••••••••"
         id="password"
       />
-      <label for="confirmPassword" class="d-flex flex-row mb-2">비밀번호 재입력</label>
+      <label for="confirmPassword" class="d-flex flex-row mb-2 semibold">비밀번호 재입력</label>
       <input
         v-model="state.passwordConfirm"
         type="password"
@@ -89,7 +89,7 @@
         placeholder="••••••••"
         id="confirmPassword"
       />
-      <label for="phone" class="d-flex flex-row mb-2">전화번호</label>
+      <label for="phone" class="d-flex flex-row mb-2 semibold">전화번호</label>
       <input
         v-model="state.phone"
         type="text"
@@ -368,5 +368,9 @@ export default {
   border-bottom: #789ade 1px solid;
   width: 400px;
   color: #789ade;
+}
+
+.semibold {
+  font-weight: 600;
 }
 </style>

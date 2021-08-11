@@ -51,11 +51,11 @@
                   <p class="card-text">{{ animal.text }}</p>
                   <p class="card-text"><small class="text-muted">{{ animal.find_date.substring(0, 10) }} {{ animal.find_date.substring(11, 19) }}</small></p>
                   <div v-if="isLogin && !isAgency" class="card-text">
-                    <div v-if="state.isFavorite">
-                      <font-awesome-icon :icon="['fas','heart']" />
+                    <div v-if="state.favoriteData && state.favoriteData[state.userno] && state.favoriteData[state.userno][animal.no]" >
+                      <font-awesome-icon :icon="['fas','heart']" id="myDiv" style="color: red;" @click="cancelFavorite(animal)" />
                     </div>
-                    <div v-else @click="addToFavorite">
-                      <font-awesome-icon :icon="['far','heart']" />
+                    <div v-else>
+                      <font-awesome-icon :icon="['far','heart']" id="myDiv" style="color: red;" @click="addToFavorite(animal)" />
                     </div>
                   </div>
                 </div>
@@ -92,12 +92,11 @@ export default {
         }
       })
       .then((res) => {
-        console.log(1)
-        console.log(res)
+        state.userno = res.data.no
+        console.log(state.userno)
       })
       .catch((err) => {
         console.log(err)
-        console.log(2)
       })
     } 
     getUserInfo()
@@ -106,10 +105,13 @@ export default {
     const state = reactive({
       key: "",
       word: "",
+      userno: "",
       isClickedSearch: false,
       data: {},
+      favoriteData: {},
       isFavorite: false,
     })
+    
     const goToAnimalRegister = function () {
       router.push('/animalregister')
     }
@@ -141,15 +143,57 @@ export default {
       state.isClickedSearch = true
     }
 
-    const addToFavorite = () => {
-      
+    const addToFavorite = function (animal) {
+      axios({
+        method: "post",
+        url: "http://localhost:8080/users/like",
+        data: {
+          animalno: animal.no,
+          userno: state.userno,
+        }
+      })
+      .then(res => {
+        console.log(res)
+        const obj = {}
+        obj[animal.no] = res.data.no
+        state.favoriteData[state.userno] = obj
+        console.log(state.favoriteData)
+      })
+      .catch(err => {
+        console.log(err)
+      })
     }
-    return { state, goToAnimalRegister, isAgency, isLogin, search, addToFavorite, getUserInfo, }
+
+    const cancelFavorite = function (animal) {
+      const favoriteNo = state.favoriteData[state.userno][animal.no]
+      console.log(favoriteNo)
+      axios({
+        method: "delete",
+        url: `http://localhost:8080/users/like/${favoriteNo}`,
+      })
+      .then(res => {
+        console.log(res)
+        state.favoriteData[state.userno][animal.no] = null
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
+    return { state, goToAnimalRegister, isAgency, isLogin, search, getUserInfo, addToFavorite, cancelFavorite, }
   }
 }
 </script>
 <style>
   .Jbgc {
   background-color: #FAF9FE;
+  }
+  #myDiv {
+    cursor: pointer;
+  }
+  #myDiv:hover {
+    font-weight: 600;
+  }
+  .semibold {
+  font-weight: 600;
   }
 </style>
