@@ -17,6 +17,7 @@ public class Board {
     Long no;
 
     Long userno;
+    String agencycode;
     String title;
     String contents;
     Date reg_date;
