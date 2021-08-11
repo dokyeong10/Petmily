@@ -19,7 +19,7 @@
         <div class="container">
           <div class="row row-cols-1 row-cols-md-2 g-4">
             <AgencyRegisterAnimal
-            v-for="(animal, idx) in regAnimal.animal" :ref="regAnimal.animal"
+            v-for="(animal, idx) in regAnimal.animal"
             :key="idx"
             :animal="animal"
             />

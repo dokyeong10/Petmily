@@ -20,7 +20,7 @@
       <div class="container">
         <div class="row row-cols-1 row-cols-md-2 g-4">
           <PrivateFavoriteAnimal
-            v-for="(animal, idx) in animalLikes.likes" :ref="animalLikes.likes"
+            v-for="(animal, idx) in animalLikes.likes" 
             :key="idx"
             :animal="animal"
           />
@@ -31,7 +31,7 @@
 </template>
 <script>
 import axios from "axios";
-import { reactive, ref } from 'vue';
+import { reactive } from 'vue';
 import { useRouter } from 'vue-router'
 import PrivateFavoriteAnimal from "@/views/accounts/components/PrivateFavoriteAnimal";
 import PrivateProfileForm from "@/views/accounts/components/PrivateProfileForm";
@@ -86,9 +86,6 @@ export default {
               animalLikes.likes.push(res.data.animalLikesJoins[i].animal)
             }
             // console.log(animalLikes)
-          } else {
-            isExist.value = false
-            console.log(isExist.value)
           }
         })
         .catch((err) => {

@@ -26,7 +26,7 @@ export default {
   props: {
     userInfo: Object
   },
-  setup(props) {
+  setup() {
     // console.log(props.userInfo)
   }
 }
