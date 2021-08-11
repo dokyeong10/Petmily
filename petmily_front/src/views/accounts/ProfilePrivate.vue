@@ -20,12 +20,7 @@
       <div class="container">
         <div class="row row-cols-1 row-cols-md-2 g-4">
           <PrivateFavoriteAnimal
-<<<<<<< HEAD
             v-for="(animal, idx) in animalLikes.likes"
-            :ref="animalLikes.likes"
-=======
-            v-for="(animal, idx) in animalLikes.likes" 
->>>>>>> be8bfb4de0ac58bd389ca22de2144aacff6e88e8
             :key="idx"
             :animal="animal"
           />
@@ -36,13 +31,8 @@
 </template>
 <script>
 import axios from "axios";
-<<<<<<< HEAD
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
-=======
-import { reactive } from 'vue';
-import { useRouter } from 'vue-router'
->>>>>>> be8bfb4de0ac58bd389ca22de2144aacff6e88e8
 import PrivateFavoriteAnimal from "@/views/accounts/components/PrivateFavoriteAnimal";
 import PrivateProfileForm from "@/views/accounts/components/PrivateProfileForm";
 import MyProfileMyPage from "@/views/accounts/components/MyProfileMyPage";
@@ -67,13 +57,13 @@ export default {
       likes: [],
     });
 
-    const setToken = function () {
+    const setToken = function() {
       const token = localStorage.getItem("jwt");
       const config = `Bearer ${token}`;
       return config;
     };
     // console.log(setToken());
-    const getUserInfo = async function () {
+    const getUserInfo = async function() {
       await axios({
         method: "get",
         url: "http://localhost:8080/users/mypage/",
@@ -103,7 +93,7 @@ export default {
     };
     getUserInfo();
 
-    const goToConfirmPassword = function () {
+    const goToConfirmPassword = function() {
       router.push("/confirmpassword");
     };
 
@@ -118,5 +108,4 @@ export default {
   },
 };
 </script>
-<style>
-</style>
+<style></style>
