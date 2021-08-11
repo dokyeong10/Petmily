@@ -5,15 +5,12 @@ import com.ssafy.petmily.api.request.AgencyRegisterPostReq;
 import com.ssafy.petmily.api.request.LikeRegisterPostReq;
 import com.ssafy.petmily.api.request.UserRegisterPostReq;
 import com.ssafy.petmily.api.response.AgencyRes;
-import com.ssafy.petmily.api.response.AnimalLikePostRes;
-import com.ssafy.petmily.api.response.UserLoginPostRes;
 import com.ssafy.petmily.api.response.UserRes;
 import com.ssafy.petmily.api.service.AnimalService;
 import com.ssafy.petmily.api.service.UserService;
 import com.ssafy.petmily.common.auth.SsafyAgencyDetails;
 import com.ssafy.petmily.common.auth.SsafyUserDetails;
 import com.ssafy.petmily.common.response.BaseResponseBody;
-import com.ssafy.petmily.common.util.JwtTokenUtil;
 import com.ssafy.petmily.db.entity.agency.Agency;
 import com.ssafy.petmily.db.entity.agency.AgencyJoin;
 import com.ssafy.petmily.db.entity.animal.AnimalLike;
@@ -201,9 +198,7 @@ public class UserController {
 	public ResponseEntity<? extends BaseResponseBody> Like(@RequestBody LikeRegisterPostReq likeRegisterPostReq){
 		//AnimalWait animalWait = animalService.likes(animal, user);
 		AnimalLike animalLike = userService.addlike(likeRegisterPostReq);
-		System.out.println(animalLike.getNo());
-		long no =  animalLike.getNo();
-		return ResponseEntity.ok(AnimalLikePostRes.of(200, "Success", no ));
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200,"Sucess"));
 	}
 
 	// 토큰으로 유저 mypage 조회

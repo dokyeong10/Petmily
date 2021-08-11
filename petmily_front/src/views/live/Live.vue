@@ -93,35 +93,49 @@
 </template>
 
 <script>
-import AWS from "aws-sdk";
-import { ref, reactive } from "vue";
-
 import axios from "axios";
+import { OpenVidu } from "openvidu-browser";
+import UserVideo from "./components/UserVideo";
+
+axios.defaults.headers.post["Content-Type"] = "application/json";
+
+const OPENVIDU_SERVER_URL = "https://i5a408.p.ssafy.io";
+const OPENVIDU_SERVER_SECRET = "petmily";
 
 export default {
-  name: "Live",
-  setup() {
-    const file = ref(null);
+  name: "App",
 
-    const state = reactive({
-      file: null,
-      imgURL: "",
-      albumBucketName: "petmily",
-      bucketRegion: "ap-northeast-2",
-      IdentityPoolId: "ap-northeast-2:50493919-440f-47aa-8403-c78182e3ed3e",
-    });
+  components: {
+    UserVideo,
+  },
 
-    // 이미지 업로드 구문 ///
-    const handleFileUpload = function() {
-      state.file = file.value.files[0];
+  data() {
+    return {
+      OV: undefined,
+      session: undefined,
+      mainStreamManager: undefined,
+      publisher: undefined,
+      subscribers: [],
+
+      mySessionId: "SessionA",
+      myUserName: "Participant" + Math.floor(Math.random() * 100),
     };
+  },
 
-    const upload = function() {
-      AWS.config.update({
-        region: state.bucketRegion,
-        credentials: new AWS.CognitoIdentityCredentials({
-          IdentityPoolId: state.IdentityPoolId,
-        }),
+  methods: {
+    joinSession() {
+      // --- Get an OpenVidu object ---
+      this.OV = new OpenVidu();
+
+      // --- Init a session ---
+      this.session = this.OV.initSession();
+
+      // --- Specify the actions when events take place in the session ---
+
+      // On every new Stream received...
+      this.session.on("streamCreated", ({ stream }) => {
+        const subscriber = this.session.subscribe(stream);
+        this.subscribers.push(subscriber);
       });
 
       const s3 = new AWS.S3({
@@ -130,25 +144,27 @@ export default {
           Bucket: state.albumBucketName,
         },
       });
-      let photoKey = state.file.name;
-      s3.upload(
-        {
-          Key: photoKey,
-          Body: state.file,
-          ACL: "public-read",
-        },
-        (err, data) => {
-          if (err) {
-            console.log(err);
-            return alert("에러가 발생했습니다.", err.message);
-          }
-          state.imgURL = data.Location;
-        }
-      );
-    };
+    },
 
-    return { state, handleFileUpload, upload, file };
+    // See https://docs.openvidu.io/en/stable/reference-docs/REST-API/#post-openviduapisessionsltsession_idgtconnection
+    createToken(sessionId) {
+      return new Promise((resolve, reject) => {
+        axios
+          .post(
+            `${OPENVIDU_SERVER_URL}/openvidu/api/sessions/${sessionId}/connection`,
+            {},
+            {
+              auth: {
+                username: "OPENVIDUAPP",
+                password: OPENVIDU_SERVER_SECRET,
+              },
+            }
+          )
+          .then((response) => response.data)
+          .then((data) => resolve(data.token))
+          .catch((error) => reject(error.response));
+      });
+    },
   },
 };
 </script>
-// <style></style>
