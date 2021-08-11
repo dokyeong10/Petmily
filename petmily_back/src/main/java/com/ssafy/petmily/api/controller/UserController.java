@@ -5,6 +5,8 @@ import com.ssafy.petmily.api.request.AgencyRegisterPostReq;
 import com.ssafy.petmily.api.request.LikeRegisterPostReq;
 import com.ssafy.petmily.api.request.UserRegisterPostReq;
 import com.ssafy.petmily.api.response.AgencyRes;
+import com.ssafy.petmily.api.response.AnimalLikePostResponse;
+import com.ssafy.petmily.api.response.UserLoginPostRes;
 import com.ssafy.petmily.api.response.UserRes;
 import com.ssafy.petmily.api.service.AnimalService;
 import com.ssafy.petmily.api.service.UserService;
@@ -198,7 +200,8 @@ public class UserController {
 	public ResponseEntity<? extends BaseResponseBody> Like(@RequestBody LikeRegisterPostReq likeRegisterPostReq){
 		//AnimalWait animalWait = animalService.likes(animal, user);
 		AnimalLike animalLike = userService.addlike(likeRegisterPostReq);
-		return ResponseEntity.status(200).body(BaseResponseBody.of(200,"Sucess"));
+		long no = animalLike.getNo();
+		return ResponseEntity.status(200).body(AnimalLikePostResponse.of(200, "Success", no));
 	}
 
 	// 토큰으로 유저 mypage 조회
