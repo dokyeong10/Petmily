@@ -1,11 +1,20 @@
 <template>
   <div>
     <Jumbotron />
-    <HomeLiveList />
+    <div class="container">
+      <div align="center">
+        <HomeLiveList />
+      </div>
+    </div>
     <div class="container">
       <div class="row justify-content-center mb-5">
         <div class="font-bold mb-5" style="font-size:25px">우리 아이의 가족이 되어주세요!</div>
-        <HomeAnimalLIst v-for="item in items" :key="item + 'a'" />
+        <HomeAnimalLIst 
+          v-for="(animals, idx) in animalInfo.animals"
+          
+          :key="idx + 'c'"
+          :animals="animals"
+        />
       </div>
     </div>
     <div class="Jbgc">
@@ -90,6 +99,9 @@ export default {
   setup() {
     const items = [1, 2, 3];
     const developers = [1, 2, 3, 4, 5];
+    const animalInfo = reactive({
+      animals: [],
+    })
     const guardiansInfo = reactive({
       guardians: [],
     });
@@ -107,8 +119,24 @@ export default {
           console.log(error);
         });
     };
+    const getAnimalInfo = async function() {
+      axios({
+        method: "post",
+        url: "http://localhost:8080/animal/",
+        data: {
+        }
+      })
+      .then((res) => {
+        console.log(res)
+        animalInfo.animals = res.data;
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    };
     getGuardiansInfo();
-    return { items, guardiansInfo, developers };
+    getAnimalInfo();
+    return { items, guardiansInfo, developers, animalInfo };
   },
 };
 </script>

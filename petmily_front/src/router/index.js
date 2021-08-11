@@ -22,6 +22,7 @@ import AgencyModify from '@/views/accounts/AgencyModify.vue'
 
 // Animal
 import AnimalList from '@/views/animal/AnimalList.vue'
+import AnimalDetail from '@/views/animal/AnimalDetail.vue'
 import AnimalRegister from '@/views/animal/AnimalRegister.vue'
 import AnimalRegisterSuccess from '@/views/animal/AnimalRegisterSuccess.vue'
 
@@ -75,6 +76,11 @@ const routes = [
     path: '/animallist',
     name: 'animallist',
     component: AnimalList
+  },
+  {
+    path: '/animal/details/:id',
+    name: 'animaldetail',
+    component: AnimalDetail
   },
   {
     path: '/animalregister',
