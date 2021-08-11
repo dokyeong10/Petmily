@@ -2,9 +2,6 @@
   <div>
     <Jumbotron />
     <HomeLiveList />
-<<<<<<< HEAD
-    <HomeAnimalLIst />
-=======
     <div class="container">
       <div class="row justify-content-center mb-5">
         <div class="font-bold mb-5" style="font-size:25px">우리 아이의 가족이 되어주세요!</div>
@@ -72,13 +69,15 @@
     <br />
     <br />
     <br />
->>>>>>> origin/emergency_backup_push_branch
   </div>
 </template>
 <script>
+import { reactive } from "vue";
+import axios from "axios";
 import HomeLiveList from "@/views/home/components/HomeLiveList";
 import HomeAnimalLIst from "@/views/home/components/HomeAnimalLIst";
 import Jumbotron from "@/views/home/components/Jumbotron";
+import LifeGuardians from "@/views/home/components/LifeGuardians";
 
 export default {
   name: "Home",
@@ -86,8 +85,45 @@ export default {
     Jumbotron,
     HomeLiveList,
     HomeAnimalLIst,
+    LifeGuardians,
   },
-  setup() {},
+  setup() {
+    const items = [1, 2, 3];
+    const developers = [1, 2, 3, 4, 5];
+    const guardiansInfo = reactive({
+      guardians: [],
+    });
+    const getGuardiansInfo = async function() {
+      await axios({
+        method: "get",
+        url: "http://localhost:8080/shelter/",
+      })
+        .then((res) => {
+          console.log(res);
+          guardiansInfo.guardians = res.data;
+          // console.log(guardiansInfo.guardians)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    getGuardiansInfo();
+    return { items, guardiansInfo, developers };
+  },
 };
 </script>
-<style></style>
+<style>
+.font-bold {
+  font-weight: bold;
+}
+
+.Jbgc {
+  background-color: #faf9fe;
+}
+
+.developimg {
+  height: 100%;
+  width: 100%;
+  clip-path: circle(30% at 50% 50%);
+}
+</style>

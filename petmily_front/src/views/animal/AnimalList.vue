@@ -1,9 +1,5 @@
 <template>
   <div>
-<<<<<<< HEAD
-    <AnimalCategory/>
-    <AnimalListItem/>
-=======
     <div class="Jbgc" style="height: 350px;">
       <div class="d-flex flex-column" style="width: 1200px;">
         <div class="d-flex flex-column align-items-start">
@@ -69,20 +65,18 @@
         </div>
       </div>
     </div>
->>>>>>> origin/emergency_backup_push_branch
   </div>
 </template>
 <script>
-import AnimalCategory from '@/views/animal/components/AnimalCategory'
-import AnimalListItem from '@/views/animal/components/AnimalListItem'
+
+
+import { reactive } from "vue";
+import { useRouter } from 'vue-router' 
+import { computed } from '@vue/runtime-core'
+import axios from "axios";
 
 export default {
   name: 'animallist',
-<<<<<<< HEAD
-  components: {
-    AnimalCategory,
-    AnimalListItem
-=======
   setup () {
     const setToken = function () {
       const token = localStorage.getItem("jwt");
@@ -151,11 +145,11 @@ export default {
       
     }
     return { state, goToAnimalRegister, isAgency, isLogin, search, addToFavorite, getUserInfo, }
->>>>>>> origin/emergency_backup_push_branch
   }
 }
-
 </script>
 <style>
-  
+  .Jbgc {
+  background-color: #FAF9FE;
+  }
 </style>

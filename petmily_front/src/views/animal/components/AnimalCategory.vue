@@ -1,29 +1,5 @@
 <template>
-  <div class="Jbgc" style="height: 350px;">
-    <div class="d-flex flex-column" style="width: 1200px;">
-      <div class="d-flex flex-column align-items-start">
-        <h3>유기동물 목록</h3>
-        <h5>당신의 따뜻한 품을 기다리고 있습니다.</h5>
-      </div>
-      <div class="d-flex align-items-start">
-        <div class="d-flex flex-column align-items-start">
-          <label for="filter">필터</label>
-          <select name="filter" id="filter" @change="toggleFilter">
-            <option value="null">선택</option>
-            <option value="type">동물</option>
-            <option value="addr">지역</option>
-            <option value="agencyname">보호소</option>
-          </select>
-        </div>
-      </div>
-      <div class="d-flex align-items-end flex-column mb-3">
-        <div v-if="isAgency">
-          <button @click="goToAnimalRegister" class="mb-auto p-2" type="button">동물 등록 하기</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <br>
+  <div></div>
 </template>
 <script>
 import { useRouter } from 'vue-router' 

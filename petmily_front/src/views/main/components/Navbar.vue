@@ -9,15 +9,29 @@
         <router-link to="/home" class="mx-5 text-decoration-none">Home</router-link>
         <router-link to="/animallist" class="mx-5 text-decoration-none">유기동물</router-link>
         <router-link to="/" class="mx-5 text-decoration-none">커뮤니티</router-link>
-        <router-link to="/" class="mx-5 text-decoration-none">라이브</router-link>
+        <router-link to="/live" class="ms-3 me-5 text-decoration-none"
+          ><img src="@\assets\live.png" style="width:20px;height:40px;" />라이브</router-link
+        >
 
         <span v-if="confirmLogin">
-          <button id="btn" type="button" class="btn btn-link mx-5 text-decoration-none" @click="logout" style="margin-bottom: 1px;">로그아웃</button>
+          <button
+            id="btn"
+            type="button"
+            class="btn btn-link mx-5 text-decoration-none"
+            @click="logout"
+            style="margin-bottom: 1px;"
+          >
+            로그아웃
+          </button>
           <span v-if="isUser">
-            <router-link to="/profileprivate" class="mx-5 text-decoration-none">마이페이지</router-link>
+            <router-link to="/profileprivate" class="mx-5 text-decoration-none"
+              >마이페이지</router-link
+            >
           </span>
           <span v-if="isAgency">
-            <router-link to="/profileagency" class="mx-5 text-decoration-none">마이페이지</router-link>
+            <router-link to="/profileagency" class="mx-5 text-decoration-none"
+              >마이페이지</router-link
+            >
           </span>
         </span>
         <span v-else>
@@ -30,8 +44,8 @@
   </div>
 </template>
 <script>
-import { onMounted, computed } from "vue"
-import { useRouter } from "vue-router"
+import { onMounted, computed } from "vue";
+import { useRouter } from "vue-router";
 
 export default {
   name: "Navbar",
@@ -43,7 +57,6 @@ export default {
     });
 
     const logout = function() {
-
       sessionStorage.removeItem("isLogin");
       localStorage.removeItem("jwt");
       localStorage.removeItem("email");
@@ -53,12 +66,12 @@ export default {
     };
 
     const isAgency = computed(() => {
-      return sessionStorage.getItem("isAgency")
-    }) 
-    
+      return sessionStorage.getItem("isAgency");
+    });
+
     const isUser = computed(() => {
-      return sessionStorage.getItem("isUser")
-    }) 
+      return sessionStorage.getItem("isUser");
+    });
 
     onMounted(() => {
       router.push("/home");
@@ -97,7 +110,6 @@ export default {
   font-weight: bold;
   color: #2c3e50;
 }
-
 
 #nav a.router-link-exact-active {
   color: #42b983;
