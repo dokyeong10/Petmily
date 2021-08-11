@@ -99,7 +99,7 @@ export default {
         url: "http://localhost:8080/shelter/",
       })
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           guardiansInfo.guardians = res.data;
           // console.log(guardiansInfo.guardians)
         })

@@ -8,7 +8,7 @@
     <div class="Jbgc mx-auto" style="height: 400px; width: 800px;">
       <div class="d-inline position-relative inner30 d-flex justify-content-evenly align-items-center">     
         <div>
-          <!-- <img :src="agencyInfo.img" style="height: 200px; width: 200px;"> -->
+          <img :src="agencyInfo.img" style="height: 200px; width: 200px;">
         </div>
         <div align="left">
           <p>AGENCY   {{ agencyInfo.agencyname }}</p>
