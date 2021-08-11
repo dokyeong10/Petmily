@@ -1,56 +1,29 @@
 <template>
-  <JumbotronAnimalRegister />
+  <JumbotronAnimalRegister/>
   <div class="container">
     <div class="mb-5 d-flex justify-content-center">
       <div>
         <label class="d-flex flex-row mb-2 semibold">프로필 사진 등록</label>
         <div class="justify-content-center mb-2">
-          <input
-            class="mb-2"
-            id="file-selector"
-            ref="profile"
-            type="file"
-            @change="handleProfileUpload()"
-            style="width: 323.85px"
-          />
-          <button
-            @click="profileUpload"
-            class="btn-up"
-            style="color: #ffffff; height: 38px; width: 66.38px"
-            flat
-          >
-            업로드
-          </button>
+          <input class="mb-2" id="file-selector" ref="profile" type="file" @change="handleProfileUpload()" style="width: 323.85px"/>
+          <button @click="profileUpload" class="btn-up" style="color: #FFFFFF; height: 38px; width: 66.38px;" flat>업로드</button>
           <div class="d-flex justify-content-start" v-if="state.profileURL">
-            <div>업로드 완료!</div>
+            <div>
+              업로드 완료!
+            </div>
           </div>
         </div>
-        <label class="d-flex flex-row mb-2 semibold"
-          >사진 또는 동영상 등록</label
-        >
+        <label class="d-flex flex-row mb-2 semibold">사진 또는 동영상 등록</label>
         <div class="justify-content-center mb-2">
-          <input
-            multiple="multiple"
-            class="mb-2"
-            id="file-selector"
-            ref="file"
-            type="file"
-            @change="handleFileUpload()"
-            style="width: 323.85px"
-          />
-          <button
-            @click="upload"
-            class="btn-up"
-            style="color: #ffffff; height: 38px; width: 66.38px"
-            flat
-          >
-            업로드
-          </button>
+          <input multiple="multiple" class="mb-2" id="file-selector" ref="file" type="file" @change="handleFileUpload()" style="width: 323.85px"/>
+          <button @click="upload" class="btn-up" style="color: #FFFFFF; height: 38px; width: 66.38px;" flat>업로드</button>
           <div class="d-flex justify-content-start" v-if="state.imgURL.length">
-            <div>업로드 완료!</div>
+            <div>
+              업로드 완료!
+            </div>
           </div>
         </div>
-
+          
         <label class="d-flex flex-row mb-2 semibold">종류</label>
         <input
           v-model="state.type"
@@ -132,7 +105,7 @@
           class="form-control radius-border mb-2"
           type="text"
           placeholder="특이사항"
-          style="height: 76px"
+          style="height: 76px;"
         />
         <label class="d-flex flex-row mb-2 semibold">발견 날짜</label>
         <input
@@ -147,13 +120,15 @@
       </div>
     </div>
   </div>
+  
 </template>
 <script>
-import { ref, reactive } from "vue";
-import AWS from "aws-sdk";
-import axios from "axios";
-import { useRouter } from "vue-router";
-import JumbotronAnimalRegister from "@/views/animal/components/JumbotronAnimalRegister";
+import { ref, reactive } from "vue"
+import AWS from "aws-sdk"
+import axios from "axios"
+import { useRouter } from "vue-router"
+import JumbotronAnimalRegister from '@/views/animal/components/JumbotronAnimalRegister'
+
 
 // 기관번호 자동으로 받아오는 방법
 // postman에서 get으로 되어있는 주소로 jwt 토큰 값을 보내면 유저의 객체가 온다
@@ -167,8 +142,8 @@ export default {
       const config = `Bearer ${token}`;
       return config;
     };
-    const file = ref(null);
-    const profile = ref(null);
+    const file = ref(null)
+    const profile = ref(null)
 
     const state = reactive({
       type: "",
@@ -192,7 +167,6 @@ export default {
       imgURL: [],
     });
     const router = useRouter();
-
     const confirmAnimalRegister = function () {
       const reg = /.{1,}/;
       const reg_num = /^[0-9]{1,}$/;
@@ -215,14 +189,41 @@ export default {
       if (!reg.test(state.find_date)) {
         return alert("날짜를 입력해주세요.");
       }
+      
+      // 기관정보 받아오기
+      axios({
+        method: "get",
+        url: "http://localhost:8080/users/agency/me",
+        headers: {
+          Authorization: setToken(),
+        }
+      })
+      .then(res => {
+        // console.log(res.data)
+        state.agencycode = res.data.agencycode
+      })
+      .catch(err => {
+        console.log(err)
+      })
+      // for (var i = 0; i < state.imgURL.length; i++) {
+      axios({
+        method: "post",
+        url: "http://localhost:8080/animal/file",
+        data: {
+          files: state.imgURL
+        }
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      // }
 
-      // agencycode 찾기 & 동물 등록
       axios({
         method: "post",
         url: "http://localhost:8080/animal/register",
-        headers: {
-          Authorization: setToken(),
-        },
         data: {
           type: state.type,
           species: state.species,
@@ -231,9 +232,9 @@ export default {
           sex: state.sexToggle,
           neutered: state.neuteredToggle,
           find_date: state.find_date,
+          agencycode: state.agencycode,
           text: state.text,
           profile_img: state.profileURL,
-          files: state.imgURL,
         },
       })
         .then((res) => {
@@ -245,18 +246,20 @@ export default {
         });
     };
 
+    
+
     // 이미지 업로드 구문 ///
-    const handleProfileUpload = function () {
+    const handleProfileUpload = function() {
       state.profile = profile.value.files[0];
     };
 
-    const handleFileUpload = function () {
-      file.value.files.forEach(function (element) {
-        state.file.push(element);
-      });
+    const handleFileUpload = function() {
+      file.value.files.forEach( function (element) {
+        state.file.push(element)
+      })
     };
 
-    const upload = function () {
+    const upload = function() {
       // db에 있는 마지막 animalno 받아오는 부분
       // axios({
       //   method: "",
@@ -296,11 +299,11 @@ export default {
           Bucket: state.albumBucketName,
         },
       });
-      let photoKey = [];
-      state.file.forEach(function (file) {
-        photoKey.push(file.name);
-      });
-
+      let photoKey = []
+      state.file.forEach( function (file) {
+        photoKey.push(file.name)
+      })
+      
       for (var i = 0; i < file.value.files.length; i++) {
         s3.upload(
           {
@@ -318,7 +321,7 @@ export default {
         );
       }
     };
-    const profileUpload = function () {
+    const profileUpload = function() {
       AWS.config.update({
         region: state.bucketRegion,
         credentials: new AWS.CognitoIdentityCredentials({
@@ -344,9 +347,10 @@ export default {
             console.log(err);
             return alert("에러가 발생했습니다.", err.message);
           }
-          state.profileURL = data.Location;
+          state.profileURL= data.Location;
         }
       );
+    
     };
 
     return {
