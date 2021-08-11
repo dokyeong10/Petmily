@@ -1,5 +1,4 @@
 <template>
-
   <div class="col">
     <div class="card-group">
       <div class="card">

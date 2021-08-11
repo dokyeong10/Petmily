@@ -28,6 +28,8 @@ import AnimalRegisterSuccess from '@/views/animal/AnimalRegisterSuccess.vue'
 //live
 import Live from '@/views/live/Live'
 
+import ShelterDetail from '@/views/shelter/ShelterDetail.vue'
+
 const routes = [
   {
     path: '/home',
@@ -113,7 +115,12 @@ const routes = [
     path: '/live',
     name: 'live',
     component: Live
-}
+  },
+  {
+    path: '/shelterdetail/:agencycode',
+    name: 'shelterdetail',
+    component: ShelterDetail
+  }
   // {
   //   path: '/',
   //   name: 'Home',
