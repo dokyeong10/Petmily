@@ -36,8 +36,8 @@ public class AnimalRegisterPostReq {
     String profile_img;
     @ApiModelProperty(name ="특이사항", example = "10303")
     String text;
-    @ApiModelProperty(name="file", example="file")
-    String files[];
+    @ApiModelProperty(name ="특이사항", example = "10303")
+    List<AnimalFile> animalFiles;
 
 
 
