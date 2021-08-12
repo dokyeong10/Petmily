@@ -1,38 +1,46 @@
 <template>
-  <span class="card mx-3 mb-5" style="width: 18rem;">
-    <img src="@\assets\dog.png" class="card-img-top" style="height: 250px;" @click="goDetail"/>
+  <span class=" mx-3 mb-5" style="width: 18rem; background-color:#FAF9FE">
+    <img :src="animals.profile_img" class="card-img-top" style="height: 250px;" @click="goDetail" />
     <div class="card-body">
-      <h5 class="card-title font-bold" align="left">{{ animals.type }}</h5>
-      <div class="card-text" align="left" style="margin-top:0px">나이: {{ animals.age }}</div>
+      <h5 class="card-title font-bold mb-4" align="left">{{ animals.type }}</h5>
+      <div class="card-text mb-2" align="left" style="margin-top:0px">
+        <span class="font-bold me-2">나이: </span>{{ animals.age }}
+      </div>
       <span v-if="animals.sex">
-        <div class="card-text" align="left">성별: 암컷</div>
+        <div class="card-text mb-2" align="left">
+          <span class="font-bold me-2">성별:</span> <span> 암컷</span>
+        </div>
       </span>
       <span v-else>
-        <div class="card-text" align="left">성별: 수컷</div>
+        <div class="card-text mb-2" align="left">
+          <span class="font-bold me-2">성별:</span> <span>수컷</span>
+        </div>
       </span>
-      <div class="card-text" align="left">종류: {{ animals.species }}</div>
+      <div class="card-text " align="left">
+        <span class="font-bold me-2">종류:</span> {{ animals.species }}
+      </div>
     </div>
-    <button @click="goDetail">상세보기</button>
+    <button class="btn-login mb-3" style="height:35px;" @click="goDetail">상세보기</button>
   </span>
 </template>
 <script>
-import { useRouter } from 'vue-router' 
+import { useRouter } from "vue-router";
 
 export default {
   props: {
     animals: Object,
   },
   setup(props) {
-    const router = useRouter()
+    const router = useRouter();
     const goDetail = function() {
       router.push({
         name: "animaldetail",
         params: {
-          id: props.animals.no
-        }
-      })
-    }
-  return { goDetail }
+          id: props.animals.no,
+        },
+      });
+    };
+    return { goDetail };
   },
 };
 </script>
