@@ -19,12 +19,14 @@
     "element-ui": "^2.15.3",
     "js-cookie": "^3.0.0",
     "openvidu-browser": "^2.19.0",
+    "sockjs-client": "^1.5.0",
     "vue": "^3.0.0",
     "vue-element-plus": "^2.13.14",
     "vue-router": "^4.0.0-0",
     "vue3-carousel": "^0.1.24",
     "vuex": "^4.0.0-0",
-    "vuex-persistedstate": "^4.0.0"
+    "vuex-persistedstate": "^4.0.0",
+    "webstomp-client": "^1.2.6"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
