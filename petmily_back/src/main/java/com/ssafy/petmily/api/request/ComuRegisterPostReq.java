@@ -22,8 +22,6 @@ public class ComuRegisterPostReq {
     String title;
     @ApiModelProperty(name="내용", example = "contents")
     String contents;
-    @ApiModelProperty(name="등록날짜", example = "reg_date")
-    Date reg_date;
     @ApiModelProperty(name="file", example="file")
     String files[];
 

@@ -2,10 +2,7 @@ package com.ssafy.petmily.db.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.petmily.db.entity.animal.AnimalJoin;
-import com.ssafy.petmily.db.entity.community.BoardJoin;
-import com.ssafy.petmily.db.entity.community.QBoard;
-import com.ssafy.petmily.db.entity.community.QBoardJoin;
-import com.ssafy.petmily.db.entity.community.QReplyJoin;
+import com.ssafy.petmily.db.entity.community.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -36,5 +33,9 @@ public class BoardRepositorySupport {
         }
 
         return num;
+    }
+
+    public List<Board> getBoardList(){
+        return jpaQueryFactory.select(qBoard).from(qBoard).fetch();
     }
 }

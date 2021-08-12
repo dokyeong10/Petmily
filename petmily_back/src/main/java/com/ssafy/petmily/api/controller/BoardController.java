@@ -32,8 +32,16 @@ public class BoardController {
     @Autowired
     CommunityService communityService;
 
+    // 게시글 리스트 조회
+    @GetMapping("/")
+    public ResponseEntity<List<Board>> getBoardList(){
+        List<Board> list = boardService.getBoadList();
 
-//    //개인 회원 게시글 등록
+        return new ResponseEntity<List<Board>>(list, HttpStatus.OK);
+    }
+
+
+    //개인 회원 게시글 등록
     @PostMapping("/enroll/personal")
      public ResponseEntity<? extends BaseResponseBody> enoll(
             @RequestBody @ApiParam(value="글 등록", required = true) ComuRegisterPostReq comuRegisterPostReq,@ApiIgnore Authentication authentication )

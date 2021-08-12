@@ -18,4 +18,6 @@ public interface BoardService {
     BoardFile fileUpload(String filedir, String extension);
 
     BoardJoin boarddetail(Long no);
+
+    List<Board> getBoadList();
 }
