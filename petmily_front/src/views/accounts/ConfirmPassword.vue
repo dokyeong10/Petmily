@@ -1,10 +1,10 @@
 <template>
   <div class="Jbgc d-flex mx-auto justify-content-center align-items-center" style="height: 350px;">
     <div>
-      <h1> Confirm Password </h1>
+      <h1>Confirm Password</h1>
     </div>
   </div>
-  <br>
+  <br />
   <p>본인 확인을 위해 비밀번호를 입력하세요</p>
   <div class="d-flex justify-content-center">
     <input
@@ -27,75 +27,72 @@
   </div>
 </template>
 <script>
-import { ref } from 'vue'
-import axios from 'axios'
-import { useRouter } from 'vue-router'
+import { ref } from "vue";
+import axios from "axios";
+import { useRouter } from "vue-router";
 export default {
-  name: 'ConfirmPassword',
-  setup () {
-    const router = useRouter()
-    const password = ref("")
+  name: "ConfirmPassword",
+  setup() {
+    const router = useRouter();
+    const password = ref("");
 
-    const setToken = function () {
-      const token = localStorage.getItem('jwt')
-      const config = `Bearer ${token}`
-      return config
-    }
+    const setToken = function() {
+      const token = localStorage.getItem("jwt");
+      const config = `Bearer ${token}`;
+      return config;
+    };
 
     const confirmPassword = function() {
-      console.log(password.value)
+      console.log(password.value);
 
-      if (sessionStorage.getItem('isUser')) {
+      if (sessionStorage.getItem("isUser")) {
         axios({
-          method: 'post',
-          url: 'http://localhost:8080/auth/personal/me',
+          method: "post",
+          url: "http://localhost:8080/auth/personal/me",
           data: {
-            password: password.value
+            password: password.value,
           },
           headers: {
-            Authorization: setToken()
-          }
+            Authorization: setToken(),
+          },
         })
-        .then(res => {
-          console.log(res)
-          if (res.data) {
-            router.push('/privatemodify')
-          } else {
-            alert('비밀번호를 다시 입력해주세요')
-          }
-        })
-        .catch(err => {
-          console.log(err)
-        })
-      } else if (sessionStorage.getItem('isAgency')) {
-        console.log(71)
+          .then((res) => {
+            console.log(res);
+            if (res.data) {
+              router.push("/privatemodify");
+            } else {
+              alert("비밀번호를 다시 입력해주세요");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else if (sessionStorage.getItem("isAgency")) {
+        console.log(71);
         axios({
-          method: 'post',
-          url: 'http://localhost:8080/auth/agency/me',
+          method: "post",
+          url: "http://localhost:8080/auth/agency/me",
           data: {
-            password: password.value
+            password: password.value,
           },
           headers: {
-            Authorization: setToken()
-          }
+            Authorization: setToken(),
+          },
         })
-        .then(res => {
-          console.log(res)
-          if (res.data) {
-            router.push('/agencymodify')
-          }
-        })
-        .catch(err => {
-          console.log(err)
-        })
+          .then((res) => {
+            console.log(res);
+            if (res.data) {
+              router.push("/agencymodify");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
-    }
-    
+    };
 
-    return { password, confirmPassword }
-  }
-}
+    return { password, confirmPassword };
+  },
+};
 </script>
-<style>
-  
-</style>
+<style></style>
