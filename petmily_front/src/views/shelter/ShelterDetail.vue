@@ -1,12 +1,8 @@
 <template>
   <div>
-    <ShelterJumbotron
-    :agencyInfo="agencyInfo"
-    />
-    <ShelterLocation
-    :location="location"
-    />
-    <h2> 보호소에서 등록한 동물 </h2>
+    <ShelterJumbotron :agencyInfo="agencyInfo" />
+    <ShelterLocation :location="location" />
+    <h2>보호소에서 등록한 동물</h2>
     <div class="d-grid w-100" align="center">
       <div class="row w-100" align="center">
         <ShelterAnimals
@@ -19,23 +15,23 @@
   </div>
 </template>
 <script>
-import { reactive } from 'vue'
-import { useRouter } from 'vue-router'
-import axios from 'axios'
+import { reactive } from "vue";
+import { useRouter } from "vue-router";
+import axios from "axios";
 
-import ShelterJumbotron from '@/views/shelter/components/ShelterJumbotron.vue'
-import ShelterLocation from '@/views/shelter/components/ShelterLocation.vue'
-import ShelterAnimals from '@/views/shelter/components/ShelterAnimals.vue'
+import ShelterJumbotron from "@/views/shelter/components/ShelterJumbotron.vue";
+import ShelterLocation from "@/views/shelter/components/ShelterLocation.vue";
+import ShelterAnimals from "@/views/shelter/components/ShelterAnimals.vue";
 
 export default {
-  name: 'ShelterDetail',
+  name: "ShelterDetail",
   components: {
     ShelterJumbotron,
     ShelterLocation,
-    ShelterAnimals
+    ShelterAnimals,
   },
-  setup () {
-    const router = useRouter()
+  setup() {
+    const router = useRouter();
     const agencyInfo = reactive({
       // 보호소 데이터
       agencyname: "",
@@ -52,51 +48,49 @@ export default {
       img: "",
       phone: "",
       username: "",
-    })
+    });
 
     const location = reactive({
       lat: null,
       lng: null,
-    })
+    });
 
     const agencyAnimals = reactive({
-      animals: []
-    })
+      animals: [],
+    });
 
-    const getAgencyInfo = async function () {
+    const getAgencyInfo = async function() {
       await axios({
-        method: 'get',
-        url: 'http://localhost:8080/shelter/detail/' + router.currentRoute._value.params.agencycode
+        method: "get",
+        url: "http://localhost:8080/shelter/detail/" + router.currentRoute._value.params.agencycode,
       })
-      .then(res => {
-        if (res.data) {
-          agencyInfo.agencyname = res.data.agencyname
-          agencyInfo.address = res.data.addr
-          agencyInfo.starttime = res.data.week_open_time
-          agencyInfo.endtime = res.data.week_end_time
-          agencyInfo.closeday = res.data.closeday
-          agencyInfo.tel = res.data.tel
-          location.lat = res.data.lat
-          location.lng = res.data.lng
-          agencyAnimals.animals = res.data.animals
-          agencyInfo.email = res.data.agencyJoin.email
-          agencyInfo.img = res.data.agencyJoin.img
-          agencyInfo.phone = res.data.agencyJoin.phone
-          agencyInfo.username = res.data.agencyJoin.username
-          agencyInfo.agencycode = res.data.agencycode
-          console.log(agencyAnimals.animals)
-        }
-      })
-      .catch(err => {
-        console.log(err)
-      })
-    }
+        .then((res) => {
+          if (res.data) {
+            agencyInfo.agencyname = res.data.agencyname;
+            agencyInfo.address = res.data.addr;
+            agencyInfo.starttime = res.data.week_open_time;
+            agencyInfo.endtime = res.data.week_end_time;
+            agencyInfo.closeday = res.data.closeday;
+            agencyInfo.tel = res.data.tel;
+            location.lat = res.data.lat;
+            location.lng = res.data.lng;
+            agencyAnimals.animals = res.data.animals;
+            agencyInfo.email = res.data.agencyJoin.email;
+            agencyInfo.img = res.data.agencyJoin.img;
+            agencyInfo.phone = res.data.agencyJoin.phone;
+            agencyInfo.username = res.data.agencyJoin.username;
+            agencyInfo.agencycode = res.data.agencycode;
+            console.log(agencyAnimals.animals);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
 
-    getAgencyInfo()  
-    return { agencyInfo, location, agencyAnimals }
-  }
-}
+    getAgencyInfo();
+    return { agencyInfo, location, agencyAnimals };
+  },
+};
 </script>
-<style>
-  
-</style>
+<style></style>

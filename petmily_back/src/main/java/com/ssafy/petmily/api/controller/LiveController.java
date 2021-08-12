@@ -45,7 +45,7 @@ public class LiveController {
 		if(isExist){
 			return ResponseEntity.status(200).body(BaseResponseBody.of(200,"Success"));
 		}
-		return ResponseEntity.status(200).body((BaseResponseBody.of(500,"Already Exist Room")));
+		return ResponseEntity.status(500).body((BaseResponseBody.of(500,"Already Exist Room")));
 
 	}
 
