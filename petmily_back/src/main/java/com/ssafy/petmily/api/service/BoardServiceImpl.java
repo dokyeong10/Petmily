@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Calendar;
 import java.util.List;
 
 @Service("communityService")
@@ -38,7 +39,7 @@ public class BoardServiceImpl implements BoardService {
         board.setAgencycode(comuRegisterPostReq.getAgencycode());
         board.setTitle(comuRegisterPostReq.getTitle());
         board.setContents(comuRegisterPostReq.getContents());
-        board.setReg_date(comuRegisterPostReq.getReg_date());
+        board.setReg_date(Calendar.getInstance().getTime());
         System.out.println("============================ user board : " + board.toString());
 
         return boardRepository.save(board);
@@ -67,6 +68,11 @@ public class BoardServiceImpl implements BoardService {
         BoardJoin boardJoins = boardRepositorySupport.findBoardByNo(no);
         boardJoins.setReplyJoins(replyRepositorySupport.getReplList(no));
         return boardJoins;
+    }
+
+    @Override
+    public List<Board> getBoadList() {
+        return boardRepositorySupport.getBoardList();
     }
 
 
