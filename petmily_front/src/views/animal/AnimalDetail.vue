@@ -38,7 +38,7 @@ export default {
       })
       .then((res) => {
         aniDetail.aniInfo = res.data;
-        console.log(aniDetail, 1)
+        console.log(aniDetail)
         // console.log(aniDetail.aniInfo)
       })
       .catch((error) => {
