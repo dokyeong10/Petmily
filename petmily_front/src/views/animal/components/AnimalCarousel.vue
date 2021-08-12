@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-5">
     <div class="container mt-5" style="height: 650px;">
       <div class="d-flex justify-content-center">
       <div class="d-flex align-items-center w-50">
@@ -18,20 +18,20 @@
         </div>
       </div>
       <button
-        class="carousel-control-prev"
+        class="carousel-control-prev w-100"
         type="button"
         data-bs-target="#carouselExampleControls"
         data-bs-slide="prev"
       >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="carousel-control-prev-icon w-100" aria-hidden="true"></span>
       </button>
       <button
-        class="carousel-control-next"
+        class="carousel-control-next w-100"
         type="button"
         data-bs-target="#carouselExampleControls"
         data-bs-slide="next"
       >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="carousel-control-next-icon w-100" aria-hidden="true"></span>
       </button>
     <br>
     <br>
@@ -39,7 +39,7 @@
     <div class="fw-bold" style="font-size:2rem" align="left">
       보호센터 정보
     </div>
-    <div class="position-relative mb-5 fw-bold"  align="left">
+    <div v-if="aniInfo" class="position-relative mb-5 fw-bold"  align="left">
       <hr>
       <div class="mb-3">
        센터명: {{ aniInfo.shelter.agencyname }}
@@ -54,16 +54,18 @@
     </div>
     </div>
   </div>
-  </div>
+  <div class="me-5" align="right">
     <button
       type="button"
       @click="changePassword"
-      class="btn-login w-25"
+      class="btn-login w-25 mb-5"
       style="color: #FFFFFF;"
     >
       <span class="me-3">상세보기</span>
       <img src="@\assets\more.png" style="width: 19px; height: 19px;" />
     </button>
+  </div>
+  </div>
   </div>
 </template>
 
@@ -74,8 +76,7 @@ export default {
   props: {
     aniInfo: Object
   },
-  setup(props) {
-    console.log(props)
+  setup() {
 
   },
 }
