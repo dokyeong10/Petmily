@@ -9,9 +9,8 @@
     <div class="container">
       <div class="row justify-content-center mb-5">
         <div class="font-bold mb-5" style="font-size:25px">우리 아이의 가족이 되어주세요!</div>
-        <HomeAnimalLIst 
+        <HomeAnimalLIst
           v-for="(animals, idx) in animalInfo.animals"
-          
           :key="idx + 'c'"
           :animals="animals"
         />
@@ -27,7 +26,6 @@
           <div class="row w-100" align="center">
             <LifeGuardians
               v-for="(guardians, idx) in guardiansInfo.guardians"
-              
               :key="idx + 'b'"
               :guardians="guardians"
             />
@@ -101,7 +99,7 @@ export default {
     const developers = [1, 2, 3, 4, 5];
     const animalInfo = reactive({
       animals: [],
-    })
+    });
     const guardiansInfo = reactive({
       guardians: [],
     });
@@ -123,16 +121,15 @@ export default {
       axios({
         method: "post",
         url: "http://localhost:8080/animal/",
-        data: {
-        }
+        data: {},
       })
-      .then((res) => {
-        console.log(res)
-        animalInfo.animals = res.data;
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+        .then((res) => {
+          console.log(res);
+          animalInfo.animals = res.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
     getGuardiansInfo();
     getAnimalInfo();

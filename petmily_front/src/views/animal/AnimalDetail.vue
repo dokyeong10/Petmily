@@ -1,54 +1,48 @@
 <template>
   <div>
-  <JumboTronAnimalDetail 
-    v-for="(aniInfo, idx) in aniDetail.aniInfo"
-    
-    :key="idx"
-    :aniInfo="aniInfo"
-  />
-  <AnimalCarousel
-    v-for="(aniInfo, idx) in aniDetail.aniInfo"
-    :key="idx"
-    :aniInfo="aniInfo"
-  />
+    <JumbotronAnimalDetail v-if="aniDetail.aniInfo" :aniInfo="aniDetail.aniInfo" />
+    <AnimalCarousel v-if="aniDetail.aniInfo" :aniInfo="aniDetail.aniInfo" />
+    <AnimalAdoptionProcess />
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 import { reactive } from "vue";
-import { useRouter } from 'vue-router' 
-import AnimalCarousel from '@/views/animal/components/AnimalCarousel.vue'
-import JumboTronAnimalDetail from '@/views/animal/components/JumbotronAnimalDetail.vue'
+import { useRouter } from "vue-router";
+import AnimalCarousel from "@/views/animal/components/AnimalCarousel.vue";
+import JumbotronAnimalDetail from "@/views/animal/components/JumbotronAnimalDetail.vue";
+import AnimalAdoptionProcess from "@/views/animal/components/AnimalAdoptionProcess.vue";
 
 export default {
   components: {
-    JumboTronAnimalDetail,
+    JumbotronAnimalDetail,
     AnimalCarousel,
+    AnimalAdoptionProcess,
   },
   setup() {
-    const router = useRouter()
+    const router = useRouter();
     const aniDetail = reactive({
-      aniInfo: "",
-    })
+      aniInfo: null,
+    });
     const getAnimal = async function() {
-      axios({
+      await axios({
         method: "get",
-        url: 'http://localhost:8080/animal/details/' + router.currentRoute._value.params.id
+        url: "http://localhost:8080/animal/details/" + router.currentRoute._value.params.id,
       })
-      .then((res) => {
-        aniDetail.aniInfo = res.data;
-        console.log(res)
-        console.log(res)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-    }
-    getAnimal()
-    return { aniDetail }
-  }
-}
+        .then((res) => {
+          aniDetail.aniInfo = res.data;
+          console.log(aniDetail);
+          // console.log(aniDetail.aniInfo)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    getAnimal();
+    return { aniDetail };
+  },
+};
 </script>
 
 <style>

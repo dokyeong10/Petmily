@@ -12,7 +12,7 @@
             Sign up
           </button>
         </div>
-        <br>
+        <br />
         <form>
           <div>
             <input
@@ -42,12 +42,7 @@
                 />개인
               </label>
               <label>
-                <input
-                  type="radio"
-                  name="login"
-                  v-model="state.toggle"
-                  value="true"
-                />기관
+                <input type="radio" name="login" v-model="state.toggle" value="true" />기관
               </label>
             </div>
             <button
@@ -65,8 +60,13 @@
           </button>
         </div>
         <div class="position-relative mb-5">
-          <hr>
-          <div class="position-absolute top-50 start-50 translate-middle px-2 bg-white" style="font-size:5px;">on continue with</div>
+          <hr />
+          <div
+            class="position-absolute top-50 start-50 translate-middle px-2 bg-white"
+            style="font-size:5px;"
+          >
+            on continue with
+          </div>
         </div>
         <div class="d-flex justify-content-evenly">
           <!-- 소셜로그인 로그인 만들기 -->
@@ -74,22 +74,31 @@
             <a
               style="color: #ffffff; text-decoration-line: none"
               href="http://localhost:8080/oauth2/authorization/google"
-              ><img class="img" src="@\assets\google.png" style="width:30px;height:30px;border-radius: 50%;"></a
-            >
+              ><img
+                class="img"
+                src="@\assets\google.png"
+                style="width:30px;height:30px;border-radius: 50%;"
+            /></a>
           </button>
           <button class="btn-logo">
             <a
               style="color: #ffffff; text-decoration-line: none"
               href="http://localhost:8080/oauth2/authorization/kakao"
-              ><img class="img" src="@\assets\KakaoTalk.png" style="width:30px;height:30px;border-radius: 50%;"></a
-            >
+              ><img
+                class="img"
+                src="@\assets\KakaoTalk.png"
+                style="width:30px;height:30px;border-radius: 50%;"
+            /></a>
           </button>
           <button class="btn-logo">
             <a
               style="color: #ffffff; text-decoration-line: none"
               href="http://localhost:8080/oauth2/authorization/naver"
-              ><img class ="img" src="@\assets\naver.png" style="width:30px;height:30px;border-radius: 50%;"></a
-            >
+              ><img
+                class="img"
+                src="@\assets\naver.png"
+                style="width:30px;height:30px;border-radius: 50%;"
+            /></a>
           </button>
         </div>
       </div>
@@ -121,17 +130,13 @@ export default {
         align: "left",
       },
       rules: {
-        id: [
-          { required: true, message: "Please input Email", trigger: "blur" },
-        ],
-        password: [
-          { required: true, message: "Please input password", trigger: "blur" },
-        ],
+        id: [{ required: true, message: "Please input Email", trigger: "blur" }],
+        password: [{ required: true, message: "Please input password", trigger: "blur" }],
       },
       toggle: false,
     });
 
-    const setToken = function () {
+    const setToken = function() {
       const token = localStorage.getItem("jwt");
       const config = {
         Authorization: `JWT ${token}`,
@@ -139,15 +144,15 @@ export default {
       return config;
     };
 
-    const goToSignup = function () {
+    const goToSignup = function() {
       router.push("/signupterms");
     };
 
-    const goToFindPassword = function () {
+    const goToFindPassword = function() {
       router.push("/findpassword");
     };
 
-    const clickLogin = function () {
+    const clickLogin = function() {
       if (!state.toggle) {
         axios({
           method: "post",
@@ -202,8 +207,6 @@ export default {
 };
 </script>
 <style>
-
-
 .img {
   width: 20%;
   height: 21%;
@@ -264,23 +267,22 @@ export default {
 }
 
 .checkbox-round {
-    width: 1rem;
-    height: 1rem;
-    background-color: white;
-    border-radius: 50%;
-    vertical-align: middle;
-    border: 1px solid #ddd;
-    -webkit-appearance: none;
-    outline: none;
-    cursor: pointer;
+  width: 1rem;
+  height: 1rem;
+  background-color: white;
+  border-radius: 50%;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
 }
 
 .checkbox-round:checked {
-    background-color: #789ade;
+  background-color: #789ade;
 }
 
 .checkbox-container {
-width: 25rem;
+  width: 25rem;
 }
-
 </style>

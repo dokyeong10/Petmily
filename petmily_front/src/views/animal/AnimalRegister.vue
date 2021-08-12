@@ -25,9 +25,7 @@
             <div>업로드 완료!</div>
           </div>
         </div>
-        <label class="d-flex flex-row mb-2 semibold"
-          >사진 또는 동영상 등록</label
-        >
+        <label class="d-flex flex-row mb-2 semibold">사진 또는 동영상 등록</label>
         <div class="justify-content-center mb-2">
           <input
             multiple="multiple"
@@ -86,12 +84,7 @@
                 />수컷</label
               >
               <label
-                ><input
-                  type="radio"
-                  name="sex"
-                  v-model="state.sexToggle"
-                  value="true"
-                />암컷</label
+                ><input type="radio" name="sex" v-model="state.sexToggle" value="true" />암컷</label
               >
             </span>
           </div>
@@ -162,7 +155,7 @@ export default {
   components: { JumbotronAnimalRegister },
   name: "AnimalRegister",
   setup() {
-    const setToken = function () {
+    const setToken = function() {
       const token = localStorage.getItem("jwt");
       const config = `Bearer ${token}`;
       return config;
@@ -193,7 +186,7 @@ export default {
     });
     const router = useRouter();
 
-    const confirmAnimalRegister = function () {
+    const confirmAnimalRegister = function() {
       const reg = /.{1,}/;
       const reg_num = /^[0-9]{1,}$/;
 
@@ -246,17 +239,17 @@ export default {
     };
 
     // 이미지 업로드 구문 ///
-    const handleProfileUpload = function () {
+    const handleProfileUpload = function() {
       state.profile = profile.value.files[0];
     };
 
-    const handleFileUpload = function () {
-      file.value.files.forEach(function (element) {
+    const handleFileUpload = function() {
+      file.value.files.forEach(function(element) {
         state.file.push(element);
       });
     };
 
-    const upload = function () {
+    const upload = function() {
       // db에 있는 마지막 animalno 받아오는 부분
       // axios({
       //   method: "",
@@ -297,7 +290,7 @@ export default {
         },
       });
       let photoKey = [];
-      state.file.forEach(function (file) {
+      state.file.forEach(function(file) {
         photoKey.push(file.name);
       });
 
@@ -318,7 +311,7 @@ export default {
         );
       }
     };
-    const profileUpload = function () {
+    const profileUpload = function() {
       AWS.config.update({
         region: state.bucketRegion,
         credentials: new AWS.CognitoIdentityCredentials({

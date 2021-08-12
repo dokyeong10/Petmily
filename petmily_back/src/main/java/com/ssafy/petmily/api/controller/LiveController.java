@@ -2,6 +2,7 @@ package com.ssafy.petmily.api.controller;
 
 
 import com.ssafy.petmily.api.request.LiveRegisterPostReq;
+import com.ssafy.petmily.api.response.LivePostRequest;
 import com.ssafy.petmily.api.service.LiveService;
 import com.ssafy.petmily.common.auth.SsafyAgencyDetails;
 import com.ssafy.petmily.common.response.BaseResponseBody;
@@ -43,7 +44,7 @@ public class LiveController {
 		boolean isExist = liveService.createLiveRoom(agencycode, title, img, description);
 
 		if(isExist){
-			return ResponseEntity.status(200).body(BaseResponseBody.of(200,"Success"));
+			return ResponseEntity.status(200).body(LivePostRequest.of(200,"Success",agencycode));
 		}
 		return ResponseEntity.status(500).body((BaseResponseBody.of(500,"Already Exist Room")));
 
