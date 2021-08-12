@@ -27,14 +27,10 @@ import AnimalRegister from '@/views/animal/AnimalRegister.vue'
 import AnimalRegisterSuccess from '@/views/animal/AnimalRegisterSuccess.vue'
 
 //live
-<<<<<<< petmily_front/src/router/index.js
-import Live from '@/views/live/Live'
-
-// Shelter
-=======
 import Live from '@/views/live/Live.vue'
 import LiveRoom from '@/views/live/LiveRoom.vue'
->>>>>>> petmily_front/src/router/index.js
+
+// Shelter
 import ShelterDetail from '@/views/shelter/ShelterDetail.vue'
 
 // Community
@@ -138,7 +134,6 @@ const routes = [
     component: ShelterDetail
   },
   {
-<<<<<<< petmily_front/src/router/index.js
     path: '/community',
     name: 'community',
     component: Community
