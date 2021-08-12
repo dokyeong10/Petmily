@@ -5,13 +5,16 @@
         <div id="join-dialog" class="jumbotron vertical-center mt-5">
           <div class="font-bold mt-4 mb-5" style="font-size:40px">라이브 입장</div>
           <div class="form-group">
-            <div class="font-bold mb-3 d-flex flex-row" style="font-size:18px">닉네임</div>
+            <div class="font-bold mb-3 d-flex flex-row" style="font-size:18px">
+              닉네임
+            </div>
             <input
               v-model="myUserName"
               class="form-control mb-5"
               style="height:45px;"
               type="text"
               required
+              placeholder="닉네임 입력"
             />
 
             <div class="font-bold mb-3 d-flex flex-row" style="font-size:18px">방번호</div>
@@ -19,7 +22,7 @@
               <input v-model="mySessionId" class="form-control" type="text" readonly />
             </p>
             <p class="text-center">
-              <button class="btn-white mt-4" style="height:45px;" @click="joinSession()">
+              <button class="btn-white mt-4 mb-5" style="height:45px;" @click="joinSession()">
                 Join!
               </button>
             </p>
@@ -36,19 +39,20 @@
           type="button"
           id="buttonLeaveSession"
           @click="leaveSession"
-          value="Leave session"
+          value="라이브 나가기"
         />
       </div>
-      <div id="main-video" class="col-md-2">
-        <user-video :stream-manager="mainStreamManager" />
+      <div id="main-video" class="col">
+        <user-video :stream-manager="mainStreamManager" class="LiveImg" />
       </div>
-      <div id="video-container" class="col-md-6">
+      <div id="video-container" class="col">
         <user-video :stream-manager="publisher" @click="updateMainVideoStreamManager(publisher)" />
         <user-video
           v-for="sub in subscribers"
           :key="sub.stream.connection.connectionId"
           :stream-manager="sub"
           @click="updateMainVideoStreamManager(sub)"
+          class="LiveImg"
         />
       </div>
     </div>
@@ -85,7 +89,7 @@ export default {
       URL: location.pathname,
 
       mySessionId: location.pathname.substring(10, location.pathname.length),
-      myUserName: "원하는 닉네임을 입력하세요",
+      myUserName: "",
     };
   },
 
@@ -248,3 +252,8 @@ export default {
   },
 };
 </script>
+<style>
+.LiveImg {
+  display: inline;
+}
+</style>

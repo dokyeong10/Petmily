@@ -1,7 +1,7 @@
 <template>
   <br />
   <div class="d-flex jusify-content-start mx-auto" style="width: 800px">
-    <h2>내 프로필</h2>
+    <div class="font-bold mt-2 mb-4" style="font-size:30px">내 프로필</div>
   </div>
   <div>
     <div class="Jbgc mx-auto" style="height: 400px; width: 800px">
@@ -12,9 +12,18 @@
           <img :src="userInfo.img" style="height: 200px; width: 200px" />
         </div>
         <div align="left">
-          <p>NAME {{ userInfo.username }}</p>
-          <p>EMAIL {{ userInfo.email }}</p>
-          <p>PHONE {{ userInfo.phone }}</p>
+          <p>
+            <span class="profileContent">NAME : </span>
+            <span class="profileVal ms-3">{{ userInfo.username }}</span>
+          </p>
+          <p>
+            <span class="profileContent">EMAIL : </span>
+            <span class="profileVal ms-3">{{ userInfo.email }}</span>
+          </p>
+          <p>
+            <span class="profileContent">PHONE : </span>
+            <span class="profileVal">{{ userInfo.phone }}</span>
+          </p>
         </div>
       </div>
     </div>
@@ -53,5 +62,13 @@ export default {
   border-radius: 12px;
   border-color: #b8b6f9;
   background-color: #b8b6f9;
+}
+.profileContent {
+  font-size: 25px;
+  font: bold;
+  margin: 15px;
+}
+.profileVal {
+  font-size: 20px;
 }
 </style>
