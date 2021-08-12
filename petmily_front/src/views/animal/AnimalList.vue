@@ -18,48 +18,80 @@
                 <option value="agencyname">보호소</option>
               </select>
             </div>
-              <div name="search">
-                <div v-if="state.key != 'all'" class="d-flex flex-column align-items-start" >
-                  <label for="search">검색</label>
-                  <input type="text" v-model="state.word" placeholder="검색어를 입력하세요."/>
-                </div>
+            <div name="search">
+              <div v-if="state.key != 'all'" class="d-flex flex-column align-items-start">
+                <label for="search">검색</label>
+                <input type="text" v-model="state.word" placeholder="검색어를 입력하세요." />
               </div>
-              <button class="btn-up" @click="search" style="height: 30px; margin-top: 24px;">검색</button>
+            </div>
+            <button class="btn-up" @click="search" style="height: 30px; margin-top: 24px;">
+              검색
+            </button>
           </div>
-          <div class="d-flex justify-content-start" v-if="!state.key && state.isClickedSearch" style="color: red;">
+          <div
+            class="d-flex justify-content-start"
+            v-if="!state.key && state.isClickedSearch"
+            style="color: red;"
+          >
             필터를 선택해주세요!
           </div>
-          
         </div>
         <div class="d-flex align-items-end flex-column-reverse" style="height: 220px;">
           <div v-if="isAgency">
-            <button @click="goToAnimalRegister" class="mt-3 mb-auto p-2" type="button">동물 등록 하기</button>
+            <button @click="goToAnimalRegister" class="mt-3 mb-auto p-2" type="button">
+              동물 등록 하기
+            </button>
           </div>
         </div>
       </div>
     </div>
-    <br>
-    <div class="container" >
+    <br />
+    <div class="container">
       <div class="row">
         <div class="col-md-6" v-for="(animal, no) in state.data" :key="no">
-          <div v-if="no < state.numberOfItems*state.page && no >= state.numberOfItems*(state.page-1)">
+          <div
+            v-if="
+              no < state.numberOfItems * state.page && no >= state.numberOfItems * (state.page - 1)
+            "
+          >
             <div class="card mb-3" style="max-width: 540px;">
               <div class="row g-0">
                 <div class="col-md-4">
-                  <img :src="animal.profile_img" class="img-fluid rounded-start" alt="...">
+                  <img :src="animal.profile_img" class="img-fluid rounded-start" alt="..." />
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
                     <h5 class="card-title">{{ animal.type }}</h5>
                     <p class="card-text">{{ animal.species }}</p>
                     <p class="card-text">{{ animal.text }}</p>
-                    <p class="card-text"><small class="text-muted">{{ animal.find_date.substring(0, 10) }} {{ animal.find_date.substring(11, 19) }}</small></p>
+                    <p class="card-text">
+                      <small class="text-muted"
+                        >{{ animal.find_date.substring(0, 10) }}
+                        {{ animal.find_date.substring(11, 19) }}</small
+                      >
+                    </p>
                     <div v-if="isLogin && !isAgency" class="card-text">
-                      <div v-if="state.favoriteData && state.favoriteData[state.userno] && state.favoriteData[state.userno][animal.no]" >
-                        <font-awesome-icon :icon="['fas','heart']" id="myDiv" style="color: red;" @click="cancelFavorite(animal)" />
+                      <div
+                        v-if="
+                          state.favoriteData &&
+                            state.favoriteData[state.userno] &&
+                            state.favoriteData[state.userno][animal.no]
+                        "
+                      >
+                        <font-awesome-icon
+                          :icon="['fas', 'heart']"
+                          id="myDiv"
+                          style="color: red;"
+                          @click="cancelFavorite(animal)"
+                        />
                       </div>
                       <div v-else>
-                        <font-awesome-icon :icon="['far','heart']" id="myDiv" style="color: red;" @click="addToFavorite(animal)" />
+                        <font-awesome-icon
+                          :icon="['far', 'heart']"
+                          id="myDiv"
+                          style="color: red;"
+                          @click="addToFavorite(animal)"
+                        />
                       </div>
                     </div>
                   </div>
@@ -72,31 +104,31 @@
     </div>
   </div>
   <div class="d-flex justify-content-center">
-    <a id="myA" v-if="state.page>1" @click="pageDown">Prev</a>
-      <div v-for="(n, idx) in state.numberOfPages" :key="idx">
-        <div v-if="n <= state.page-state.page % 10 + 10 && n > state.page-state.page % 10">
-          <div v-if="state.page == n">
-            <a id="myA" @click="goToPage(n)" style="font-weight: 600;">{{ n }}</a>
-          </div>
-          <div v-else>
-            <a id="myA" @click="goToPage(n)">{{ n }}</a>
-          </div>
-        </div>  
+    <a id="myA" v-if="state.page > 1" @click="pageDown">Prev</a>
+    <div v-for="(n, idx) in state.numberOfPages" :key="idx">
+      <div v-if="n <= state.page - (state.page % 10) + 10 && n > state.page - (state.page % 10)">
+        <div v-if="state.page == n">
+          <a id="myA" @click="goToPage(n)" style="font-weight: 600;">{{ n }}</a>
+        </div>
+        <div v-else>
+          <a id="myA" @click="goToPage(n)">{{ n }}</a>
+        </div>
       </div>
-    <a id="myA" v-if="state.data.length - state.numberOfItems*state.page > 0" @click="pageUp">Next</a>
+    </div>
+    <a id="myA" v-if="state.data.length - state.numberOfItems * state.page > 0" @click="pageUp"
+      >Next</a
+    >
   </div>
 </template>
 <script>
-
-
 import { reactive, onMounted } from "vue";
-import { useRouter } from 'vue-router' 
-import { computed } from '@vue/runtime-core'
+import { useRouter } from "vue-router";
+import { computed } from "@vue/runtime-core";
 import axios from "axios";
 
 export default {
-  name: 'animallist',
-  setup () {
+  name: "animallist",
+  setup() {
     onMounted(() => {
       axios({
         method: "post",
@@ -104,46 +136,50 @@ export default {
         data: {
           key: "all",
           word: "",
-        }
+        },
       })
-      .then(res => {
-        console.log(res)
-        state.data = res.data
-        state.numberOfItems = 4
-        if (state.data.length % state.numberOfItems) {
-          state.numberOfPages = (state.data.length - state.data.length % state.numberOfItems) / state.numberOfItems + 1
-        } else {
-          state.numberOfPages = (state.data.length - state.data.length % state.numberOfItems) / state.numberOfItems
-        }
-      })
-      .catch(err => {
-        console.log(err)
-      })
-    })
-    const setToken = function () {
+        .then((res) => {
+          console.log(res);
+          state.data = res.data;
+          state.numberOfItems = 4;
+          if (state.data.length % state.numberOfItems) {
+            state.numberOfPages =
+              (state.data.length - (state.data.length % state.numberOfItems)) /
+                state.numberOfItems +
+              1;
+          } else {
+            state.numberOfPages =
+              (state.data.length - (state.data.length % state.numberOfItems)) / state.numberOfItems;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+    const setToken = function() {
       const token = localStorage.getItem("jwt");
       const config = `Bearer ${token}`;
       return config;
     };
-    const getUserInfo = async function () {
+    const getUserInfo = async function() {
       await axios({
         method: "get",
         url: "http://localhost:8080/users/personal/me",
         headers: {
           Authorization: setToken(),
-        }
+        },
       })
-      .then((res) => {
-        state.userno = res.data.no
-        console.log(state.userno)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    } 
-    getUserInfo()
+        .then((res) => {
+          state.userno = res.data.no;
+          console.log(state.userno);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getUserInfo();
 
-    const router = useRouter()
+    const router = useRouter();
     const state = reactive({
       key: "",
       word: "",
@@ -155,111 +191,127 @@ export default {
       numberOfItems: 4,
       page: 1,
       numberOfPages: 0,
-    })
-    
-    const goToAnimalRegister = function () {
-      router.push('/animalregister')
-    }
+    });
+
+    const goToAnimalRegister = function() {
+      router.push("/animalregister");
+    };
 
     const isAgency = computed(() => {
-      console.log(sessionStorage.getItem('isAgency'))
-      return sessionStorage.getItem('isAgency')
-    })
-    
+      console.log(sessionStorage.getItem("isAgency"));
+      return sessionStorage.getItem("isAgency");
+    });
+
     const isLogin = computed(() => {
-      return sessionStorage.getItem('isLogin')
-    })
-    const search = function () {
+      return sessionStorage.getItem("isLogin");
+    });
+    const search = function() {
       axios({
         method: "post",
         url: "http://localhost:8080/animal/",
         data: {
           key: state.key,
           word: state.word,
-        }
+        },
       })
-      .then(res => {
-        console.log(res)
-        state.data = res.data
-        if (state.data.length % state.numberOfItems) {
-          state.numberOfPages = (state.data.length - state.data.length % state.numberOfItems) / state.numberOfItems + 1
-        } else {
-          state.numberOfPages = (state.data.length - state.data.length % state.numberOfItems) / state.numberOfItems
-        }
-      })
-      .catch(err => {
-        console.log(err)
-      })
-      state.isClickedSearch = true
-    }
+        .then((res) => {
+          console.log(res);
+          state.data = res.data;
+          if (state.data.length % state.numberOfItems) {
+            state.numberOfPages =
+              (state.data.length - (state.data.length % state.numberOfItems)) /
+                state.numberOfItems +
+              1;
+          } else {
+            state.numberOfPages =
+              (state.data.length - (state.data.length % state.numberOfItems)) / state.numberOfItems;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      state.isClickedSearch = true;
+    };
 
-    const addToFavorite = function (animal) {
+    const addToFavorite = function(animal) {
       axios({
         method: "post",
         url: "http://localhost:8080/users/like",
         data: {
           animalno: animal.no,
           userno: state.userno,
-        }
+        },
       })
-      .then(res => {
-        console.log(res)
-        const obj = {}
-        obj[animal.no] = res.data.no
-        state.favoriteData[state.userno] = obj
-        console.log(state.favoriteData)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-    }
+        .then((res) => {
+          console.log(res);
+          const obj = {};
+          obj[animal.no] = res.data.no;
+          state.favoriteData[state.userno] = obj;
+          console.log(state.favoriteData);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
 
-    const cancelFavorite = function (animal) {
-      const favoriteNo = state.favoriteData[state.userno][animal.no]
-      console.log(favoriteNo)
+    const cancelFavorite = function(animal) {
+      const favoriteNo = state.favoriteData[state.userno][animal.no];
+      console.log(favoriteNo);
       axios({
         method: "delete",
         url: `http://localhost:8080/users/like/${favoriteNo}`,
       })
-      .then(res => {
-        console.log(res)
-        state.favoriteData[state.userno][animal.no] = null
-      })
-      .catch(err => {
-        console.log(err)
-      })
-    }
+        .then((res) => {
+          console.log(res);
+          state.favoriteData[state.userno][animal.no] = null;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
 
-    const pageUp = function () {
-      state.page++
-    }
-    const pageDown = function () {
-      state.page--
-    }
-    const goToPage = function (n) {
-      state.page = n
-    }
-    return { state, goToAnimalRegister, isAgency, isLogin, search, getUserInfo, addToFavorite, cancelFavorite, pageUp, pageDown, goToPage, }
-  }
-}
+    const pageUp = function() {
+      state.page++;
+    };
+    const pageDown = function() {
+      state.page--;
+    };
+    const goToPage = function(n) {
+      state.page = n;
+    };
+    return {
+      state,
+      goToAnimalRegister,
+      isAgency,
+      isLogin,
+      search,
+      getUserInfo,
+      addToFavorite,
+      cancelFavorite,
+      pageUp,
+      pageDown,
+      goToPage,
+    };
+  },
+};
 </script>
 <style>
-  .Jbgc {
-  background-color: #FAF9FE;
-  }
-  #myDiv {
-    cursor: pointer;
-  }
-  #myDiv:hover {
-    font-weight: 600;
-  }
-  .semibold {
-    font-weight: 600;
-  }
-  #myA {
-    cursor: pointer;
-  }
-  #myA:hover {
-    text-decoration: underline;
-  }
+.Jbgc {
+  background-color: #faf9fe;
+}
+#myDiv {
+  cursor: pointer;
+}
+#myDiv:hover {
+  font-weight: 600;
+}
+.semibold {
+  font-weight: 600;
+}
+#myA {
+  cursor: pointer;
+}
+#myA:hover {
+  text-decoration: underline;
+}
 </style>

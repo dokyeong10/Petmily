@@ -1,16 +1,25 @@
 <template>
-  <div class="col-3 mt-3">
+  <div class="col-2 mt-3">
     <div class="card border-light" align="center" style="background-color:#FAF9FE">
       <div class="card-body d-flex flex-column justify-content-between">
-        <h3 class="card-title font-bold mt-3 mb-3">{{ live.title }}</h3>
+        <h3 class="card-title font-bold mt-3 mb-4" style="font-size : 20px;">{{ live.title }}</h3>
+
         <img
+          v-if="live.img != null"
           :src="live.img"
           class="card-img-top mb-3 justify-content-between imglive"
           style="border-radius:15px;height: 250px;"
           align="center"
           @click="goToRoom"
+        /><img
+          v-else
+          src="@/assets/dogyellow.png"
+          class="card-img-top mb-3 justify-content-between imglive"
+          style="border-radius:15px;height: 250px;"
+          align="center"
+          @click="goToRoom"
         />
-        <div class="card-text font-bold mb-2 mt-2" style="font-size:20px; ">
+        <div class="card-text font-bold mb-2 mt-2" style="font-size:15px; ">
           {{ live.description }}
         </div>
         <div class="card-text">
@@ -35,7 +44,6 @@ export default {
   setup(props) {
     const router = useRouter();
     const goToRoom = () => {
-      console.log(1212121);
       router.push({
         name: "liveroom",
         params: {

@@ -192,15 +192,20 @@ export default {
         },
       })
         .then((res) => {
-          console.log(res.data);
-          alert("라이브방 생성 성공!");
-          // router.push("/signupsuccess");
-          location.href = "/LiveRoom/" + state.agencycode;
+          console.log(res.agencycode);
+          console.log("====================");
+          console.log(res);
+          console.log("====================");
+          console.log(res.data.agencycode);
+          // document.querySelector("#LiveModal").classList.add("hidden");
+          location.reload();
+          router.push(`/liveroom/${res.data.agencycode}`);
+          //location.href = "/LiveRoom/" + state.agencycode;
         })
         .catch((err) => {
           console.log(err);
           alert("이미 라이브중인 기관입니다!");
-          document.querySelector("#LiveModal").classList.add("hidden");
+          // document.querySelector("#LiveModal").classList.add("hidden");
           // router.replace("/livelist");
         });
     };
