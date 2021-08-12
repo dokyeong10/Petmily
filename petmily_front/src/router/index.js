@@ -29,7 +29,12 @@ import AnimalRegisterSuccess from '@/views/animal/AnimalRegisterSuccess.vue'
 //live
 import Live from '@/views/live/Live'
 
+// Shelter
 import ShelterDetail from '@/views/shelter/ShelterDetail.vue'
+
+// Community
+import Community from '@/views/community/Community.vue'
+import CommunityRegister from '@/views/community/CommunityRegister.vue'
 
 const routes = [
   {
@@ -126,6 +131,16 @@ const routes = [
     path: '/shelterdetail/:agencycode',
     name: 'shelterdetail',
     component: ShelterDetail
+  },
+  {
+    path: '/community',
+    name: 'community',
+    component: Community
+  },
+  {
+    path: '/communityregister',
+    name: 'communityregister',
+    component: CommunityRegister
   }
   // {
   //   path: '/',
