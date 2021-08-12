@@ -11,7 +11,7 @@
           />
           <button class="btn-chatting">채팅상담</button>
         </div>
-        <div class="d-flex flex-column mt-5">
+        <div v-if="aniInfo" class="d-flex flex-column mt-5">
           <div class=" mt-1 mb-3 font-bold" align="left" style="font-size: 17px;">
             이름: {{ aniInfo.species }}
           </div>
@@ -52,8 +52,7 @@ export default {
   props: {
     aniInfo: Object
   },
-  setup(props) {
-    console.log(props)
+  setup() {
   },
 }
 </script>
