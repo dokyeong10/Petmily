@@ -6,29 +6,31 @@
         <h4 class="card-title font-bold">{{ guardians.agencyname }}</h4>
         <div class="card-text" style="margin-top:0px">{{ guardians.tel }}</div>
         <div class="card-text">{{ guardians.addr }}</div>
-        <button class="btn-login" type="button" style="color: #FFFFFF" @click="goToShleterDetail">Read More</button>
+        <button class="btn-login" type="button" style="color: #FFFFFF" @click="goToShleterDetail">
+          Read More
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { useRouter } from 'vue-router'
+import { useRouter } from "vue-router";
 export default {
   props: {
     guardians: Object,
   },
   setup(props) {
-    const router = useRouter()
+    const router = useRouter();
     const goToShleterDetail = () => {
       router.push({
-        name: 'shelterdetail',
+        name: "shelterdetail",
         params: {
-          agencycode: props.guardians.agencycode
-        }
-      })
-    }
-    return { goToShleterDetail }
+          agencycode: props.guardians.agencycode,
+        },
+      });
+    };
+    return { goToShleterDetail };
   },
 };
 </script>
