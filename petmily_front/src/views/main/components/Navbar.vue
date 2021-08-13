@@ -14,7 +14,7 @@
         <router-link to="/animallist" class="mx-5 text-decoration-none"
           >유기동물</router-link
         >
-        <router-link to="/" class="mx-5 text-decoration-none"
+        <router-link to="/community" class="mx-5 text-decoration-none"
           >커뮤니티</router-link
         >
         <router-link to="/live" class="ms-3 me-5 text-decoration-none"
