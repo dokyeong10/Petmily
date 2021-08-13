@@ -7,6 +7,7 @@ import com.ssafy.petmily.api.request.UserRegisterPostReq;
 import com.ssafy.petmily.db.entity.agency.Agency;
 import com.ssafy.petmily.db.entity.agency.AgencyJoin;
 import com.ssafy.petmily.db.entity.animal.AnimalLike;
+import com.ssafy.petmily.db.entity.animal.AnimalLikeJoin;
 import com.ssafy.petmily.db.entity.user.User;
 import com.ssafy.petmily.db.entity.user.UserJoin;
 
@@ -32,4 +33,5 @@ public interface UserService {
 	User getUserByNo(Long no);
 	AgencyJoin getAgencyByCode(String agencycode);
     Agency getAgencyByAgencyCode(String agencycode);
+    List<AnimalLikeJoin> getAnimalLikeList(Long no);
 }
