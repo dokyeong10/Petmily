@@ -170,7 +170,7 @@ export default {
       //   return alert("방사진을 등록해주세요.");
       // }
 
-      if (state.img && !state.imgURL) {
+      if (state.file && !state.imgURL) {
         return alert("업로드 버튼을 눌러주세요.");
       }
       if (!reg.test(state.title)) {
@@ -192,15 +192,8 @@ export default {
         },
       })
         .then((res) => {
-          console.log(res.agencycode);
-          console.log("====================");
-          console.log(res);
-          console.log("====================");
-          console.log(res.data.agencycode);
-          // document.querySelector("#LiveModal").classList.add("hidden");
           location.reload();
           router.push(`/liveroom/${res.data.agencycode}`);
-          //location.href = "/LiveRoom/" + state.agencycode;
         })
         .catch((err) => {
           console.log(err);

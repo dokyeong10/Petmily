@@ -1,11 +1,11 @@
 <template>
   <div class="Jbgc col-4">
     <div class="card border-light lifecard mb-5" align="center" style="background-color:#FAF9FE">
-      <img src="@\assets\dog.png" class="card-img-top guardimg" align="center" />
+      <img src="@\assets\shelter.png" class="card-img-top guardimg" align="center" />
       <div class="card-body d-flex flex-column justify-content-between">
-        <h4 class="card-title font-bold">{{ guardians.agencyname }}</h4>
+        <h5 class="card-title font-bold">{{ guardians.agencyname }}</h5>
         <div class="card-text" style="margin-top:0px">{{ guardians.tel }}</div>
-        <div class="card-text">{{ guardians.addr }}</div>
+        <div class="card-text mb-3">{{ guardians.addr }}</div>
         <button class="btn-login" type="button" style="color: #FFFFFF" @click="goToShleterDetail">
           Read More
         </button>

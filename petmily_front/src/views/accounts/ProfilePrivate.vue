@@ -14,7 +14,7 @@
     </div>
     <br />
     <div class="d-flex jusify-content-start mx-auto" style="width: 800px">
-      <h2>즐겨찾기 한 동물</h2>
+      <div class="font-bold mt-2 mb-4" style="font-size:30px">즐겨찾기 한 동물</div>
     </div>
     <div class="mx-auto" style="height: 400px; width: 800px">
       <div class="container">
