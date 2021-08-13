@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 // main
 import Home from "@/views/home/Home";
+import Error from "@/views/Error.vue";
 
 // Login & Signup & ChangePassword
 import Login from "@/views/accounts/Login";
@@ -185,7 +186,16 @@ const routes = [
     path: "/boarddetail/:boardno",
     name: 'boarddetail',
     component: BoardDetail
-  }
+  },
+  {
+    path: "/error",
+    name: 'error',
+    component: Error
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    redirect: '/error',
+},
   // {
   //   path: '/',
   //   name: 'Home',

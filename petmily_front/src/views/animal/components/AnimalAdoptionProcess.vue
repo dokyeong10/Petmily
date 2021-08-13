@@ -132,7 +132,20 @@
           </div>
         </div>
       </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+
     </div>
+  </div>
+  <div class="container mt-5 mb-5" align="left">
+    <div class="fw-bold mx-5" style="font-size:15px">· 동물 입양은 반드시 가족 구성원 전원의 동의를 얻어야 합니다.</div>
+    <div class="fw-bold mx-5" style="font-size:15px">· 미성년자가 입양을 신청한 경우, 본인 및 가족 구성원 중 알레르기가 있거나 동물에게 위해가 될 수 있는 정신 질환을</div>
+    <div class="fw-bold mx-5" style="font-size:15px">  가진 경우 입장자 선정에서 제외됩니다.</div>
   </div>
 </template>
 
