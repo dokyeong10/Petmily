@@ -5,7 +5,7 @@ module.exports = {
     port: 8081,
     open: true,
     proxy: {
-      "/a": {
+      "/": {
         target: "http://i5a408.p.ssafy.io:8080/",
       },
     },
