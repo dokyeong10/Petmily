@@ -34,10 +34,10 @@ public class BoardController {
 
     // 게시글 리스트 조회
     @GetMapping("/")
-    public ResponseEntity<List<Board>> getBoardList(){
-        List<Board> list = boardService.getBoadList();
+    public ResponseEntity<List<BoardJoin>> getBoardList(){
+        List<BoardJoin> list = boardService.getBoadList();
 
-        return new ResponseEntity<List<Board>>(list, HttpStatus.OK);
+        return new ResponseEntity<List<BoardJoin>>(list, HttpStatus.OK);
     }
 
 

@@ -19,5 +19,5 @@ public interface BoardService {
 
     BoardJoin boarddetail(Long no);
 
-    List<Board> getBoadList();
+    List<BoardJoin> getBoadList();
 }
