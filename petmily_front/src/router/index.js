@@ -42,6 +42,7 @@ import ShelterDetail from "@/views/shelter/ShelterDetail.vue";
 // Community
 import Community from "@/views/community/Community.vue";
 import CommunityRegister from "@/views/community/CommunityRegister.vue";
+import BoardDetail from "@/views/community/BoardDetail.vue";
 
 const routes = [
   {
@@ -180,6 +181,11 @@ const routes = [
     name: "liveroom",
     component: LiveRoom,
   },
+  {
+    path: "/boarddetail/:boardno",
+    name: 'boarddetail',
+    component: BoardDetail
+  }
   // {
   //   path: '/',
   //   name: 'Home',
