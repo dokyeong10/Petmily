@@ -14,13 +14,14 @@ public class ReplyReRegisterPostReq {
     String contents;
     @ApiModelProperty(name ="게시글 key", example = "3")
     long bno;
-    @ApiModelProperty(name ="기관인지 일반인지?", example = "false")
-    boolean isAgency;
     @ApiModelProperty(name ="답글 대상의 댓글 번호 ", example = "4")
     long replno;
 
-    public boolean getIsAgency(){
-        return this.isAgency;
-    }
+    @ApiModelProperty(name ="기관 코드", example = "3010000")
+    String agencycode;
+
+    @ApiModelProperty(name ="유저 번호", example = "10")
+    long userno;
+
 
 }
