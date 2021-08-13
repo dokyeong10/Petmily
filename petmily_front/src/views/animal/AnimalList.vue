@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="Jbgc" style="height: 350px">
+    <div class="Jbgc mb-5" style="height: 300px">
       <div class="container" style="height: 350px; max-width: 800px">
         <div class="d-flex flex-column">
           <div class="d-flex flex-column align-items-start mt-5">
@@ -89,6 +89,7 @@
                     :src="animal.profile_img"
                     onerror="this.src='https://petmily.s3.ap-northeast-2.amazonaws.com/PetmilyLogo.png'"
                     class="img-fluid rounded-start"
+                    style="width: 240px; height: 240px"
                     alt="..."
                   />
                 </div>
