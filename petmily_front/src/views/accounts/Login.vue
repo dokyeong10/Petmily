@@ -170,7 +170,7 @@ export default {
             store.state.isUser = true;
             sessionStorage.setItem("isLogin", store.state.isLogin);
             sessionStorage.setItem("isUser", store.state.isUser);
-            location.href = "/home";
+            location.href = "/";
           })
           .catch((err) => {
             console.log(err);
@@ -193,7 +193,7 @@ export default {
             store.state.isAgency = true;
             sessionStorage.setItem("isLogin", store.state.isLogin);
             sessionStorage.setItem("isAgency", store.state.isAgency);
-            location.href = "/home";
+            location.href = "/";
           })
           .catch((err) => {
             console.log(err);

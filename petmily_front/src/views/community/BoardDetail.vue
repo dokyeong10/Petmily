@@ -1,15 +1,25 @@
 <template>
   <div>
     <BoardDetailJumbotron/>
-    <BoardDetailUser
-      :userInfo="userInfo"
-    />
-    <BoardDetailContents
-      :boardInfo="boardInfo"
-    />
-    <BoardDetailReview
-      :replyJoins="replyJoins"
-    />
+    <div v-if="userInfo.user != null">
+      <BoardDetailUser
+        :userInfo="userInfo.user"
+        :boardFiles="boardFiles"
+        :boardInfo="boardInfo"
+      />
+    </div>
+      <div v-else>
+      <BoardDetailUser
+        :userInfo="userInfo.agency"
+        :boardFiles="boardFiles"
+        :boardInfo="boardInfo"
+      />
+    </div>
+    <div>
+      <BoardDetailReview
+        :replyJoins="replyJoins"
+      />
+    </div>
   </div>
 </template>
 <script>
@@ -20,7 +30,6 @@ import axois from 'axios'
 // components
 import BoardDetailJumbotron from '@/views/community/components/BoardDetailJumbotron.vue'
 import BoardDetailUser from '@/views/community/components/BoardDetailUser.vue'
-import BoardDetailContents from '@/views/community/components/BoardDetailContents.vue'
 import BoardDetailReview from '@/views/community/components/BoardDetailReview.vue'
 
 export default {
@@ -28,7 +37,6 @@ export default {
   components: {
     BoardDetailJumbotron,
     BoardDetailUser,
-    BoardDetailContents,
     BoardDetailReview
   },
   setup () {
@@ -40,15 +48,18 @@ export default {
     })
     
     const userInfo = reactive({
-      data: null
+      user: null,
+      agency: null
     })
     
     const boardFiles = reactive({
-      data: null
+      img: [],
+      video: []
     })
     
     const replyJoins = reactive({
-      data: null
+      data: null,
+      no: null
     })
       
     onMounted(() => {
@@ -59,13 +70,28 @@ export default {
       .then(res => {
         console.log(res)
         boardInfo.title = res.data.title
-        boardInfo.contents = res.data.content
+        boardInfo.contents = res.data.contents
         boardInfo.reg_date = res.data.reg_date.substring(0, 10)
-        userInfo.data = res.data.user
+        userInfo.user = res.data.user
+        userInfo.agency = res.data.agency
         replyJoins.data = res.data.replyJoins
-        console.log(boardInfo)
-        console.log(userInfo.data)
-        console.log(replyJoins.data)
+        replyJoins.no = res.data.no
+        boardFiles.data = res.data.boardFiles
+        console.log(res.data.boardFiles[0].extension === 'png')
+        res.data.boardFiles.forEach(element => {
+          if ( element.extension === 'png' || element.extension === 'gif' || element.extension === 'jpg' || element.extension === 'jpeg' || element.extension === 'bmp') {
+            boardFiles.img.push(element) 
+            } else {
+            boardFiles.video.push(element) 
+            }
+          } 
+        );
+        console.log(boardFiles)
+
+        // console.log(userInfo.user)
+        // console.log(userInfo.agency)
+        // console.log(boardFiles.data)
+        // console.log(replyJoins.data)
       })
       .catch(err => {
         console.log(err)

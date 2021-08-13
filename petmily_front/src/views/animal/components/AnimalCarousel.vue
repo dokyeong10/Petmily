@@ -8,31 +8,31 @@
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner ">
         <div class="carousel-item active">
-          <img src="@\assets\dog.png" class="w-100"/>
+          <img src="@\assets\dog.png" class="w-75"/>
         </div>
         <div class="carousel-item">
-          <img src="@\assets\dog.png" class="w-100" />
+          <img src="@\assets\dog.png" class="w-75" />
         </div>
         <div class="carousel-item">
-          <img src="@\assets\dog.png" class="w-100" />
+          <img src="@\assets\dog.png" class="w-75" />
         </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleControls"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleControls"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
       </div>
-      <button
-        class="carousel-control-prev w-100"
-        type="button"
-        data-bs-target="#carouselExampleControls"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon w-100" aria-hidden="true"></span>
-      </button>
-      <button
-        class="carousel-control-next w-100"
-        type="button"
-        data-bs-target="#carouselExampleControls"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon w-100" aria-hidden="true"></span>
-      </button>
     <br>
     <br>
     <br>

@@ -1,7 +1,4 @@
 <template>
-  <br>
-  <br>
-  <br>
   <div class="container">
     <label class="mx-auto d-flex flex-row mb-2 semibold" style="width: 600px">댓글</label>
     <div class="d-flex justify-content-center">
@@ -9,7 +6,7 @@
         <form class="pb-3">
           <p>
             <textarea
-              v-model="state.review"
+              v-model="state.contents"
               class="form-control r-border"
               placeholder="댓글을 입력하세요."
             >
@@ -24,7 +21,7 @@
                 @keyup.enter="registerReview"
                 style="color: #FFFFFF;"
               >
-                  등록하기
+                  댓글 등록하기
               </button>
           </form>
         </div>
@@ -34,6 +31,7 @@
 </template>
 <script>
 import { reactive } from 'vue'
+import axios from 'vuex'
 export default {
   name: 'BoardDetailReview',
   props: {
@@ -41,11 +39,19 @@ export default {
   },
   setup () {
     const state = reactive({
-      review: ""
+      contents: ""
     })
 
     const registerReview = function () {
-
+      axios({
+        method: 'post',
+        url: 'http://localhost:8080/board/reply/register',
+        data: {
+          contents: state.contents
+        }
+      })
+      .then(res => {
+      })
     }
 
     return { state, registerReview }
