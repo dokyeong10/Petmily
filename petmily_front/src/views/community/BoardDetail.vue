@@ -59,7 +59,8 @@ export default {
     
     const replyJoins = reactive({
       data: null,
-      no: null
+      no: null,
+      bno: router.currentRoute._value.params.no
     })
       
     onMounted(() => {

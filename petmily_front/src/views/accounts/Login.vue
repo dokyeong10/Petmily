@@ -180,6 +180,9 @@ export default {
             localStorage.setItem("userno", res.data.userno);
             store.state.isLogin = true;
             store.state.isUser = true;
+            localStorage.setItem("isLogin", store.state.isLogin);
+            localStorage.setItem("isUser", store.state.isUser);
+            localStorage.setItem("isAgency", store.state.isAgency);
             sessionStorage.setItem("isLogin", store.state.isLogin);
             sessionStorage.setItem("isUser", store.state.isUser);
             location.href = "/";
@@ -204,6 +207,9 @@ export default {
             localStorage.setItem("agencycode", res.data.agencycode);
             store.state.isLogin = true;
             store.state.isAgency = true;
+            localStorage.setItem("isLogin", store.state.isLogin);
+            localStorage.setItem("isUser", store.state.isUser);
+            localStorage.setItem("isAgency", store.state.isAgency);
             sessionStorage.setItem("isLogin", store.state.isLogin);
             sessionStorage.setItem("isAgency", store.state.isAgency);
             location.href = "/";
