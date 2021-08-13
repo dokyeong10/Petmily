@@ -77,14 +77,9 @@ export default {
     });
 
     const logout = function () {
-      sessionStorage.removeItem("isLogin");
-      localStorage.removeItem("jwt");
-      localStorage.removeItem("email");
-      localStorage.removeItem("userno");
-      localStorage.removeItem("agencycode");
-      sessionStorage.removeItem("isAgency");
-      sessionStorage.removeItem("isUser");
-      router.go();
+      localStorage.clear()
+      sessionStorage.clear()
+      router.go('/');
     };
 
     const isAgency = computed(() => {
@@ -94,7 +89,6 @@ export default {
     const isUser = computed(() => {
       return sessionStorage.getItem("isUser");
     });
-
 
     computed(() => {
       store.state.isLogin = sessionStorage.getItem('isLogin')
