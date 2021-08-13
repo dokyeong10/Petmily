@@ -57,7 +57,7 @@
   <div class="me-5" align="right">
     <button
       type="button"
-      @click="changePassword"
+      @click="goToShleterDetail"
       class="btn-login w-25 mb-5"
       style="color: #FFFFFF;"
     >
@@ -70,13 +70,24 @@
 </template>
 
 <script>
-// import { useRouter } from 'vue-router' 
+import { useRouter } from 'vue-router' 
 
 export default {
   props: {
     aniInfo: Object
   },
-  setup() {
+  setup(props) {
+    console.log(props)
+    const router = useRouter()
+    const goToShleterDetail = () => {
+      router.push({
+        name: "shelterdetail",
+        params: {
+          agencycode: props.aniInfo.shelter.agencycode,
+        },
+      });
+    };
+    return { goToShleterDetail };
 
   },
 }

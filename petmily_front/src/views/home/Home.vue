@@ -76,6 +76,7 @@
     <br />
     <br />
     <br />
+    
   </div>
 </template>
 <script>
@@ -85,6 +86,7 @@ import HomeLiveList from "@/views/home/components/HomeLiveList";
 import HomeAnimalLIst from "@/views/home/components/HomeAnimalLIst";
 import Jumbotron from "@/views/home/components/Jumbotron";
 import LifeGuardians from "@/views/home/components/LifeGuardians";
+
 
 export default {
   name: "Home",
