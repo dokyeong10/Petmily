@@ -95,7 +95,28 @@
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
-                    <h5 class="card-title">{{ animal.type }}</h5>
+                    <div class="d-flex justify-content-center"><h5 class="card-title mb-0 me-2">{{ animal.type }}</h5>
+                      <div v-if="isLogin && !isAgency" class="card-text">
+                        <div
+                          v-if="favoriteFilter(animal)"
+                        >
+                          <font-awesome-icon
+                            :icon="['fas', 'heart']"
+                            id="myDiv"
+                            style="color: red; font-size: 25;"
+                            @click="cancelFavorite(animal)"
+                          />
+                        </div>
+                        <div v-else>
+                          <font-awesome-icon
+                            :icon="['far', 'heart']"
+                            id="myDiv"
+                            style="color: red; font-size: 25;"
+                            @click="addToFavorite(animal)"
+                          />
+                        </div>
+                      </div>
+                    </div>
                     <p class="card-text">{{ animal.species }}</p>
                     <p class="card-text">{{ animal.text }}</p>
                     <p class="card-text">
@@ -104,26 +125,7 @@
                         {{ animal.find_date.substring(11, 19) }}</small
                       >
                     </p>
-                    <div v-if="isLogin && !isAgency" class="card-text">
-                      <div
-                        v-if="favoriteFilter(animal)"
-                      >
-                        <font-awesome-icon
-                          :icon="['fas', 'heart']"
-                          id="myDiv"
-                          style="color: red"
-                          @click="cancelFavorite(animal)"
-                        />
-                      </div>
-                      <div v-else>
-                        <font-awesome-icon
-                          :icon="['far', 'heart']"
-                          id="myDiv"
-                          style="color: red"
-                          @click="addToFavorite(animal)"
-                        />
-                      </div>
-                    </div>
+                    
                     <button
                       class="btn-detail mb-3"
                       style="height: 35px"
