@@ -1,6 +1,6 @@
 <template>
   <span class=" mx-3 mb-5" style="width: 18rem; background-color:#FAF9FE">
-    <img :src="animals.profile_img" class="card-img-top" style="height: 250px;" @click="goDetail" />
+    <img :src="animals.profile_img" onerror="this.src='https://petmily.s3.ap-northeast-2.amazonaws.com/PetmilyLogo.png'" class="card-img-top" style="height: 250px;" @click="goDetail" />
     <div class="card-body">
       <h5 class="card-title font-bold mb-4" align="left">{{ animals.type }}</h5>
       <div class="card-text mb-2" align="left" style="margin-top:0px">

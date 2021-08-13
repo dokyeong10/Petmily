@@ -47,7 +47,7 @@
     </div>
     <br />
     <div class="container">
-      <div class="row">
+      <div class="row ">
         <div class="col-md-6" v-for="(animal, no) in state.data" :key="no">
           <div
             v-if="
@@ -57,7 +57,7 @@
             <div class="card mb-3" style="max-width: 540px;">
               <div class="row g-0">
                 <div class="col-md-4">
-                  <img :src="animal.profile_img" class="img-fluid rounded-start" alt="..." />
+                  <img :src="animal.profile_img" onerror="this.src='https://petmily.s3.ap-northeast-2.amazonaws.com/PetmilyLogo.png'" class="img-fluid rounded-start" alt="..." />
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
@@ -94,6 +94,7 @@
                         />
                       </div>
                     </div>
+                    <button class="btn-detail mb-3" style="height:35px;" @click="goDetail(animal)">상세보기</button>
                   </div>
                 </div>
               </div>
@@ -108,7 +109,7 @@
     <div v-for="(n, idx) in state.numberOfPages" :key="idx">
       <div v-if="n <= state.page - (state.page % 10) + 10 && n > state.page - (state.page % 10)">
         <div v-if="state.page == n">
-          <a id="myA" @click="goToPage(n)" style="font-weight: 600;">{{ n }}</a>
+          <a style="font-weight: 600;">{{ n }}</a>
         </div>
         <div v-else>
           <a id="myA" @click="goToPage(n)">{{ n }}</a>
@@ -198,7 +199,6 @@ export default {
     };
 
     const isAgency = computed(() => {
-      console.log(sessionStorage.getItem("isAgency"));
       return sessionStorage.getItem("isAgency");
     });
 
@@ -279,6 +279,15 @@ export default {
     const goToPage = function(n) {
       state.page = n;
     };
+    const goDetail = function(animal) {
+      router.push({
+        name: "animaldetail",
+        params: {
+          id: animal.no,
+        },
+      });
+    };
+
     return {
       state,
       goToAnimalRegister,
@@ -291,6 +300,7 @@ export default {
       pageUp,
       pageDown,
       goToPage,
+      goDetail,
     };
   },
 };
@@ -313,5 +323,17 @@ export default {
 }
 #myA:hover {
   text-decoration: underline;
+}
+.btn-detail {
+  width: 40%;
+  height: 50%;
+  background-color: #a4b5f0;
+  border-right: #a4b5f0 1px solid;
+  border-left: #a4b5f0 1px solid;
+  border-top: #a4b5f0 1px solid;
+  border-bottom: #a4b5f0 1px solid;
+  border-style: none;
+  border-radius: 30px;
+  color: white;
 }
 </style>
