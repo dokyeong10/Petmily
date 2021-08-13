@@ -1,43 +1,56 @@
 <template>
-  <div>
-    <div>
-      <!-- prev -->
-      <div v-if="pageloc > 1">
-        <button @click="minusNum">prev</button>
-      </div>
-      <!-- 버튼 부분 -->
-      <div></div>
-      <!-- next -->
-      <div v-if="pageloc < pageMax">
-        <button @click="minusNum">next</button>
+  <div class="container">
+    <div class="row">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Content</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody v-for="(board, no) in state.data" :key="no">
+            <tr v-if="no < state.numberOfItems * state.page && no >= state.numberOfItems * (state.page - 1)" @click="goToBoardDetail">
+              <td>{{ board.title }}</td>
+              <td>{{ board.contents }}</td>
+              <td>{{ board.reg_date.substring(0, 10) }}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <a id="myA" v-if="state.page > 1" @click="pageDown">Prev</a>
+    <div v-for="(n, idx) in state.numberOfPages" :key="idx">
+      <div v-if="n <= state.page - (state.page % 10) + 10 && n > state.page - (state.page % 10)">
+        <div v-if="state.page == n">
+          <a style="font-weight: 600;" >{{ n }}</a>
+        </div>
+        <div v-else>
+          <a id="myA" @click="goToPage(n)">{{ n }}</a>
+        </div>
       </div>
     </div>
+    <a id="myA" v-if="state.data.length - state.numberOfItems * state.page > 0" @click="pageUp"
+      >Next</a>
   </div>
 </template>
 <script>
-import { ref, reactive, onMounted } from "vue";
+import { reactive, onMounted, computed } from "vue";
+import { useRouter } from 'vue-router'
 import axios from "axios";
 export default {
   name: "CommunityPagenation",
   setup() {
-    let pageloc = ref(1);
-    let pageMax = ref(1);
-    let len = ref(null);
-
-    const boardList = reactive({
-      boards: [],
+    const router = useRouter()
+    const state = reactive({
+      data: [],
+      favoriteData: {},
+      isFavorite: false,
+      numberOfItems: 4,
+      page: 1,
+      numberOfPages: 0,
     });
-
-    const boardNum = reactive({
-      arrayNum: [],
-    });
-
-    const minusNum = () => {
-      return (pageloc -= 1);
-    };
-    const plusNum = () => {
-      return (pageloc += 1);
-    };
 
     onMounted(() => {
       axios({
@@ -46,31 +59,50 @@ export default {
       })
         .then((res) => {
           console.log(res.data);
-          len = res.data.length;
-          console.log(len);
-          pageMax = parseInt(len / 10) + 1;
-          console.log(pageMax);
-          boardList.boards = res.data;
+          state.data = res.data;
+          state.numberOfItems = 10;
+          if (state.data.length % state.numberOfItems) {
+            state.numberOfPages =
+              (state.data.length - (state.data.length % state.numberOfItems)) /
+                state.numberOfItems +
+              1;
+          } else {
+            state.numberOfPages =
+              (state.data.length - (state.data.length % state.numberOfItems)) / state.numberOfItems;
+          }
         })
         .catch((err) => {
           console.log(err);
         });
-      movePage();
     });
 
-    console.log(boardNum.arrayNum);
-    const movePage = async function(pageloc) {
-      for (let i = pageloc - 1; i < pageloc + 9; i++) {
-        if (i < len) {
-          boardNum.arrayNum.push(i);
-        } else {
-          return;
-        }
-      }
+    const pageUp = function() {
+      state.page++;
+    };
+    const pageDown = function() {
+      state.page--;
+    };
+    const goToPage = function(n) {
+      state.page = n;
     };
 
-    return { pageloc, pageMax, minusNum, plusNum, boardNum, movePage };
+    const isLogin = computed(() => {
+      return sessionStorage.getItem("isLogin");
+    });
+
+    const goToBoardDetail = () => { router.push() }
+
+    return { state, pageUp, pageDown, goToPage, isLogin };
   },
 };
 </script>
-<style></style>
+<style scoped>
+#myA {
+  cursor: pointer;
+}
+
+tbody:hover {
+  border: 2px solid #789ade;
+  cursor: pointer;
+}
+</style>
