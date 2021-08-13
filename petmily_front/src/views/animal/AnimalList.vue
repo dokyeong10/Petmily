@@ -217,7 +217,7 @@ export default {
     const state = reactive({
       key: "",
       word: "",
-      userno: state.userno,
+      userno: getUserInfo(),
       // isClickedSearch: false,
       data: {},
       favoriteData: {},
