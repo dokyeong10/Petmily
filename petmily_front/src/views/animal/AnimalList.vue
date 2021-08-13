@@ -1,12 +1,13 @@
 <template>
   <div>
     <div class="Jbgc" style="height: 350px;">
-      <div class="container" style="height: 350px;">
+      <div class="container" style="height: 350px; max-width: 800px;">
         <div class="d-flex flex-column">
-          <div class="d-flex flex-column align-items-start">
-            <h3>유기동물 목록</h3>
+          <div class="d-flex flex-column align-items-start mt-5">
+            <h2>유기동물 목록</h2>
             <h5>당신의 따뜻한 품을 기다리고 있습니다.</h5>
           </div>
+          <br>
           <div class="d-flex align-items-start">
             <div class="d-flex flex-column align-items-start">
               <label for="filter">필터</label>
@@ -36,7 +37,7 @@
             필터를 선택해주세요!
           </div>
         </div>
-        <div class="d-flex align-items-end flex-column-reverse" style="height: 220px;">
+        <div class="d-flex align-items-end flex-column-reverse" style="height: 140px;">
           <div v-if="isAgency">
             <button @click="goToAnimalRegister" class="mt-3 mb-auto p-2" type="button">
               동물 등록 하기
@@ -54,7 +55,7 @@
               no < state.numberOfItems * state.page && no >= state.numberOfItems * (state.page - 1)
             "
           >
-            <div class="card mb-3" style="max-width: 540px;">
+            <div class="card mb-3" style="max-width: 636px;">
               <div class="row g-0">
                 <div class="col-md-4">
                   <img :src="animal.profile_img" onerror="this.src='https://petmily.s3.ap-northeast-2.amazonaws.com/PetmilyLogo.png'" class="img-fluid rounded-start" alt="..." />
