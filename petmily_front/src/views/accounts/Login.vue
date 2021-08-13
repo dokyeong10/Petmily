@@ -30,7 +30,9 @@
               placeholder="password"
             />
           </div>
-          <div class="checkbox-container d-flex align-items-center justify-content-between">
+          <div
+            class="checkbox-container d-flex align-items-center justify-content-between"
+          >
             <div>
               <label class="mx-3">
                 <input
@@ -42,7 +44,12 @@
                 />개인
               </label>
               <label>
-                <input type="radio" name="login" v-model="state.toggle" value="true" />기관
+                <input
+                  type="radio"
+                  name="login"
+                  v-model="state.toggle"
+                  value="true"
+                />기관
               </label>
             </div>
             <button
@@ -63,7 +70,7 @@
           <hr />
           <div
             class="position-absolute top-50 start-50 translate-middle px-2 bg-white"
-            style="font-size:5px;"
+            style="font-size: 5px"
           >
             on continue with
           </div>
@@ -77,7 +84,7 @@
               ><img
                 class="img"
                 src="@\assets\google.png"
-                style="width:30px;height:30px;border-radius: 50%;"
+                style="width: 30px; height: 30px; border-radius: 50%"
             /></a>
           </button>
           <button class="btn-logo">
@@ -87,7 +94,7 @@
               ><img
                 class="img"
                 src="@\assets\KakaoTalk.png"
-                style="width:30px;height:30px;border-radius: 50%;"
+                style="width: 30px; height: 30px; border-radius: 50%"
             /></a>
           </button>
           <button class="btn-logo">
@@ -97,7 +104,7 @@
               ><img
                 class="img"
                 src="@\assets\naver.png"
-                style="width:30px;height:30px;border-radius: 50%;"
+                style="width: 30px; height: 30px; border-radius: 50%"
             /></a>
           </button>
         </div>
@@ -130,13 +137,17 @@ export default {
         align: "left",
       },
       rules: {
-        id: [{ required: true, message: "Please input Email", trigger: "blur" }],
-        password: [{ required: true, message: "Please input password", trigger: "blur" }],
+        id: [
+          { required: true, message: "Please input Email", trigger: "blur" },
+        ],
+        password: [
+          { required: true, message: "Please input password", trigger: "blur" },
+        ],
       },
       toggle: false,
     });
 
-    const setToken = function() {
+    const setToken = function () {
       const token = localStorage.getItem("jwt");
       const config = {
         Authorization: `JWT ${token}`,
@@ -144,15 +155,15 @@ export default {
       return config;
     };
 
-    const goToSignup = function() {
+    const goToSignup = function () {
       router.push("/signupterms");
     };
 
-    const goToFindPassword = function() {
+    const goToFindPassword = function () {
       router.push("/findpassword");
     };
 
-    const clickLogin = function() {
+    const clickLogin = function () {
       if (!state.toggle) {
         axios({
           method: "post",
@@ -166,6 +177,7 @@ export default {
           .then((res) => {
             console.log(res.data);
             localStorage.setItem("jwt", res.data.accessToken);
+            localStorage.setItem("userno", res.data.userno);
             store.state.isLogin = true;
             store.state.isUser = true;
             sessionStorage.setItem("isLogin", store.state.isLogin);
@@ -189,6 +201,7 @@ export default {
           .then((res) => {
             console.log(res.data);
             localStorage.setItem("jwt", res.data.accessToken);
+            localStorage.setItem("agencycode", res.data.agencycode);
             store.state.isLogin = true;
             store.state.isAgency = true;
             sessionStorage.setItem("isLogin", store.state.isLogin);

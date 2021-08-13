@@ -78,6 +78,8 @@ export default {
       sessionStorage.removeItem("isLogin");
       localStorage.removeItem("jwt");
       localStorage.removeItem("email");
+      localStorage.removeItem("userno");
+      localStorage.removeItem("agencycode");
       sessionStorage.removeItem("isAgency");
       sessionStorage.removeItem("isUser");
       router.go();

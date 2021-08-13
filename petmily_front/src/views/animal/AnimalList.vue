@@ -1,45 +1,71 @@
 <template>
   <div>
-    <div class="Jbgc" style="height: 350px;">
-      <div class="container" style="height: 350px; max-width: 800px;">
+    <div class="Jbgc" style="height: 350px">
+      <div class="container" style="height: 350px; max-width: 800px">
         <div class="d-flex flex-column">
           <div class="d-flex flex-column align-items-start mt-5">
             <h2>유기동물 목록</h2>
             <h5>당신의 따뜻한 품을 기다리고 있습니다.</h5>
           </div>
-          <br>
+          <br />
           <div class="d-flex align-items-start">
             <div class="d-flex flex-column align-items-start">
               <label for="filter">필터</label>
-              <select name="filter" id="filter" v-model="state.key" style="height: 30px;">
-                <option value="" selected disabled>선택</option>
-                <option value="all">전체목록</option>
+              <select
+                name="filter"
+                id="filter"
+                v-model="state.key"
+                style="height: 30px; margin-right: 10px"
+              >
+                <option value="" selected>선택</option>
+                <!-- <option value="all">전체목록</option> -->
                 <option value="type">품종</option>
                 <option value="addr">지역</option>
                 <option value="agencyname">보호소</option>
               </select>
             </div>
             <div name="search">
-              <div v-if="state.key != 'all'" class="d-flex flex-column align-items-start">
+              <div class="d-flex flex-column align-items-start">
                 <label for="search">검색</label>
-                <input type="text" v-model="state.word" placeholder="검색어를 입력하세요." />
+                <input
+                  type="text"
+                  v-model="state.word"
+                  placeholder="검색어를 입력하세요."
+                  @keyup.enter="search"
+                />
               </div>
             </div>
-            <button class="btn-up" @click="search" style="height: 30px; margin-top: 24px;">
+            <button
+              class="btn-up"
+              @click="search"
+              style="height: 30px; margin-top: 24px"
+            >
               검색
             </button>
+            <div class="mt-4 ms-4">
+              <label for="isLike">즐겨찾기한 동물</label>
+              <input type="checkbox" class="ms-1" v-model="state.isLike" />
+            </div>
           </div>
-          <div
+          <!-- <div
             class="d-flex justify-content-start"
             v-if="!state.key && state.isClickedSearch"
-            style="color: red;"
+            style="color: red"
           >
             필터를 선택해주세요!
-          </div>
+          </div> -->
         </div>
-        <div class="d-flex align-items-end flex-column-reverse" style="height: 140px;">
+        <div
+          class="d-flex align-items-end flex-column-reverse"
+          style="height: 140px"
+        >
           <div v-if="isAgency">
-            <button @click="goToAnimalRegister" class="mt-3 mb-auto p-2" type="button">
+            <button
+              @click="goToAnimalRegister"
+              class="btn-detail mt-3 mb-auto p-2"
+              type="button"
+              style="height: 35px; width: 130px"
+            >
               동물 등록 하기
             </button>
           </div>
@@ -48,17 +74,23 @@
     </div>
     <br />
     <div class="container">
-      <div class="row ">
+      <div class="row">
         <div class="col-md-6" v-for="(animal, no) in state.data" :key="no">
           <div
             v-if="
-              no < state.numberOfItems * state.page && no >= state.numberOfItems * (state.page - 1)
+              no < state.numberOfItems * state.page &&
+              no >= state.numberOfItems * (state.page - 1)
             "
           >
-            <div class="card mb-3" style="max-width: 636px;">
+            <div class="card mb-3" style="max-width: 636px">
               <div class="row g-0">
                 <div class="col-md-4">
-                  <img :src="animal.profile_img" onerror="this.src='https://petmily.s3.ap-northeast-2.amazonaws.com/PetmilyLogo.png'" class="img-fluid rounded-start" alt="..." />
+                  <img
+                    :src="animal.profile_img"
+                    onerror="this.src='https://petmily.s3.ap-northeast-2.amazonaws.com/PetmilyLogo.png'"
+                    class="img-fluid rounded-start"
+                    alt="..."
+                  />
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
@@ -75,14 +107,14 @@
                       <div
                         v-if="
                           state.favoriteData &&
-                            state.favoriteData[state.userno] &&
-                            state.favoriteData[state.userno][animal.no]
+                          state.favoriteData[state.userno] &&
+                          state.favoriteData[state.userno][animal.no]
                         "
                       >
                         <font-awesome-icon
                           :icon="['fas', 'heart']"
                           id="myDiv"
-                          style="color: red;"
+                          style="color: red"
                           @click="cancelFavorite(animal)"
                         />
                       </div>
@@ -90,12 +122,18 @@
                         <font-awesome-icon
                           :icon="['far', 'heart']"
                           id="myDiv"
-                          style="color: red;"
+                          style="color: red"
                           @click="addToFavorite(animal)"
                         />
                       </div>
                     </div>
-                    <button class="btn-detail mb-3" style="height:35px;" @click="goDetail(animal)">상세보기</button>
+                    <button
+                      class="btn-detail mb-3"
+                      style="height: 35px"
+                      @click="goDetail(animal)"
+                    >
+                      상세보기
+                    </button>
                   </div>
                 </div>
               </div>
@@ -108,16 +146,24 @@
   <div class="d-flex justify-content-center">
     <a id="myA" v-if="state.page > 1" @click="pageDown">Prev</a>
     <div v-for="(n, idx) in state.numberOfPages" :key="idx">
-      <div v-if="n <= state.page - (state.page % 10) + 10 && n > state.page - (state.page % 10)">
+      <div
+        v-if="
+          n <= state.page - (state.page % 10) + 10 &&
+          n > state.page - (state.page % 10)
+        "
+      >
         <div v-if="state.page == n">
-          <a style="font-weight: 600;">{{ n }}</a>
+          <a style="font-weight: 600">{{ n }}</a>
         </div>
         <div v-else>
           <a id="myA" @click="goToPage(n)">{{ n }}</a>
         </div>
       </div>
     </div>
-    <a id="myA" v-if="state.data.length - state.numberOfItems * state.page > 0" @click="pageUp"
+    <a
+      id="myA"
+      v-if="state.data.length - state.numberOfItems * state.page > 0"
+      @click="pageUp"
       >Next</a
     >
   </div>
@@ -138,6 +184,8 @@ export default {
         data: {
           key: "all",
           word: "",
+          isLike: state.isLike,
+          no: getUserInfo(),
         },
       })
         .then((res) => {
@@ -151,51 +199,36 @@ export default {
               1;
           } else {
             state.numberOfPages =
-              (state.data.length - (state.data.length % state.numberOfItems)) / state.numberOfItems;
+              (state.data.length - (state.data.length % state.numberOfItems)) /
+              state.numberOfItems;
           }
         })
         .catch((err) => {
           console.log(err);
         });
     });
-    const setToken = function() {
-      const token = localStorage.getItem("jwt");
-      const config = `Bearer ${token}`;
-      return config;
+
+    const getUserInfo = function () {
+      const no = localStorage.getItem("userno");
+      return no;
     };
-    const getUserInfo = async function() {
-      await axios({
-        method: "get",
-        url: "http://localhost:8080/users/personal/me",
-        headers: {
-          Authorization: setToken(),
-        },
-      })
-        .then((res) => {
-          state.userno = res.data.no;
-          console.log(state.userno);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    getUserInfo();
 
     const router = useRouter();
     const state = reactive({
       key: "",
       word: "",
       userno: "",
-      isClickedSearch: false,
+      // isClickedSearch: false,
       data: {},
       favoriteData: {},
       isFavorite: false,
       numberOfItems: 4,
       page: 1,
       numberOfPages: 0,
+      isLike: false,
     });
 
-    const goToAnimalRegister = function() {
+    const goToAnimalRegister = function () {
       router.push("/animalregister");
     };
 
@@ -206,13 +239,15 @@ export default {
     const isLogin = computed(() => {
       return sessionStorage.getItem("isLogin");
     });
-    const search = function() {
+    const search = function () {
       axios({
         method: "post",
         url: "http://localhost:8080/animal/",
         data: {
           key: state.key,
           word: state.word,
+          isLike: state.isLike,
+          no: getUserInfo(),
         },
       })
         .then((res) => {
@@ -225,16 +260,17 @@ export default {
               1;
           } else {
             state.numberOfPages =
-              (state.data.length - (state.data.length % state.numberOfItems)) / state.numberOfItems;
+              (state.data.length - (state.data.length % state.numberOfItems)) /
+              state.numberOfItems;
           }
         })
         .catch((err) => {
           console.log(err);
         });
-      state.isClickedSearch = true;
+      // state.isClickedSearch = true;
     };
 
-    const addToFavorite = function(animal) {
+    const addToFavorite = function (animal) {
       axios({
         method: "post",
         url: "http://localhost:8080/users/like",
@@ -255,7 +291,7 @@ export default {
         });
     };
 
-    const cancelFavorite = function(animal) {
+    const cancelFavorite = function (animal) {
       const favoriteNo = state.favoriteData[state.userno][animal.no];
       console.log(favoriteNo);
       axios({
@@ -271,16 +307,16 @@ export default {
         });
     };
 
-    const pageUp = function() {
+    const pageUp = function () {
       state.page++;
     };
-    const pageDown = function() {
+    const pageDown = function () {
       state.page--;
     };
-    const goToPage = function(n) {
+    const goToPage = function (n) {
       state.page = n;
     };
-    const goDetail = function(animal) {
+    const goDetail = function (animal) {
       router.push({
         name: "animaldetail",
         params: {
