@@ -44,7 +44,7 @@
             </button>
             <div class="mt-4 ms-4">
               <label for="isLike">즐겨찾기한 동물</label>
-              <input type="checkbox" class="ms-1" v-model="state.isLike" />
+              <input type="checkbox" class="ms-1" v-model="state.isLike" @click="getFavoriteOnly" />
             </div>
           </div>
           <!-- <div
@@ -106,11 +106,7 @@
                     </p>
                     <div v-if="isLogin && !isAgency" class="card-text">
                       <div
-                        v-if="
-                          state.favoriteData &&
-                          state.favoriteData[state.userno] &&
-                          state.favoriteData[state.userno][animal.no]
-                        "
+                        v-if="favoriteFilter(animal)"
                       >
                         <font-awesome-icon
                           :icon="['fas', 'heart']"
@@ -190,7 +186,6 @@ export default {
         },
       })
         .then((res) => {
-          console.log(res);
           state.data = res.data;
           state.numberOfItems = 4;
           if (state.data.length % state.numberOfItems) {
@@ -213,6 +208,29 @@ export default {
       const no = localStorage.getItem("userno");
       return no;
     };
+    const getFavoriteInfo = function () {
+      axios({
+        method: "get",
+        url: `http://localhost:8080/users/like/${localStorage.getItem("userno")}`
+      })
+        .then((res) => {
+          state.favoriteData = res.data
+          state.favoriteArray = []
+          state.favoriteData.forEach(element => {
+            if (!state.favoriteArray.includes(element.animalno)) {
+              state.favoriteArray.push(element.animalno)
+            }
+          });
+          state.favoriteArray.sort(function(a, b) {
+            return a - b;
+          })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      
+    }
+    getFavoriteInfo();
 
     const router = useRouter();
     const state = reactive({
@@ -222,12 +240,84 @@ export default {
       // isClickedSearch: false,
       data: {},
       favoriteData: {},
-      isFavorite: false,
+      favoriteArray: [],
+      tempFavoriteNumber: "",
       numberOfItems: 4,
       page: 1,
       numberOfPages: 0,
       isLike: false,
     });
+
+    const getAll = function () {
+      axios({
+        method: "post",
+        url: "http://localhost:8080/animal/",
+        data: {
+          key: "all",
+          word: "",
+          isLike: false,
+          no: state.userno,
+        },
+      })
+        .then((res) => {
+          state.data = res.data;
+          state.numberOfItems = 4;
+          if (state.data.length % state.numberOfItems) {
+            state.numberOfPages =
+              (state.data.length - (state.data.length % state.numberOfItems)) /
+                state.numberOfItems +
+              1;
+          } else {
+            state.numberOfPages =
+              (state.data.length - (state.data.length % state.numberOfItems)) /
+              state.numberOfItems;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    const getFavoriteOnly = function () {
+      if (state.isLike) {
+        getAll()
+      } else {
+        axios({
+          method: "post",
+          url: "http://localhost:8080/animal/",
+          data: {
+            key: state.key,
+            word: state.word,
+            isLike: state.isLike,
+            no: state.userno,
+          },
+        })
+          .then((res) => {
+            console.log(state.isLike)
+              state.page = 1
+              state.data = []
+              res.data.forEach(element => {
+                if (state.favoriteArray.includes(element.no))
+                state.data.push(element)
+                state.data.sort(function(a, b) {
+                  if (a.no < b.no) return -1;
+                  if (a.no > b.no) return 1;
+                  return 0;
+                })
+              })
+              state.numberOfItems = 4;
+              if (state.data.length % state.numberOfItems) {
+                state.numberOfPages =
+                  (state.data.length - (state.data.length % state.numberOfItems)) /
+                    state.numberOfItems +
+                  1;
+              } else {
+                state.numberOfPages =
+                  (state.data.length - (state.data.length % state.numberOfItems)) /
+                  state.numberOfItems;
+              }
+          })
+      }
+    }
 
     const goToAnimalRegister = function () {
       router.push("/animalregister");
@@ -252,7 +342,7 @@ export default {
         },
       })
         .then((res) => {
-          console.log(res);
+          
           state.data = res.data;
           if (state.data.length % state.numberOfItems) {
             state.numberOfPages =
@@ -281,11 +371,8 @@ export default {
         },
       })
         .then((res) => {
-          console.log(res);
-          const obj = {};
-          obj[animal.no] = res.data.no;
-          state.favoriteData[state.userno] = obj;
-          console.log(state.favoriteData);
+          getFavoriteInfo();
+          console.log(res)
         })
         .catch((err) => {
           console.log(err);
@@ -293,15 +380,18 @@ export default {
     };
 
     const cancelFavorite = function (animal) {
-      const favoriteNo = state.favoriteData[state.userno][animal.no];
-      console.log(favoriteNo);
+      state.favoriteData.forEach(element => {
+        if (element.animalno === animal.no) {
+          state.tempFavoriteNumber = element.no;
+        }
+      })
       axios({
         method: "delete",
-        url: `http://localhost:8080/users/like/${favoriteNo}`,
+        url: `http://localhost:8080/users/like/${state.tempFavoriteNumber}`,
       })
         .then((res) => {
           console.log(res);
-          state.favoriteData[state.userno][animal.no] = null;
+          getFavoriteInfo();
         })
         .catch((err) => {
           console.log(err);
@@ -326,6 +416,14 @@ export default {
       });
     };
 
+    const favoriteFilter = function (animal) {
+      if (state.favoriteArray.includes(animal.no)) {
+        return true
+      } else {
+        return false
+      }
+    }
+
     return {
       state,
       goToAnimalRegister,
@@ -339,6 +437,10 @@ export default {
       pageDown,
       goToPage,
       goDetail,
+      getFavoriteInfo,
+      getAll,
+      getFavoriteOnly,
+      favoriteFilter,
     };
   },
 };
