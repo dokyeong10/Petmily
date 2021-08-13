@@ -4,13 +4,27 @@
       <div>
         <!-- style="box-shadow: 0 4px 0 0 violet; content-box" 여부 다시 결정 해야함. -->
         <router-link to="/home" class="mx-5 text-decoration-none"
-          ><img src="@\assets\PetmilyLogo.png" style="width: 50px; height: 50px;border-radius: 50%;"
+          ><img
+            src="@\assets\PetmilyLogo.png"
+            style="width: 50px; height: 50px; border-radius: 50%"
         /></router-link>
-        <router-link to="/home" class="mx-5 text-decoration-none">Home</router-link>
-        <router-link to="/animallist" class="mx-5 text-decoration-none">유기동물</router-link>
-        <router-link to="/" class="mx-5 text-decoration-none">커뮤니티</router-link>
+        <router-link to="/home" class="mx-5 text-decoration-none"
+          >Home</router-link
+        >
+        <router-link to="/animallist" class="mx-5 text-decoration-none"
+          >유기동물</router-link
+        >
+        <router-link to="/" class="mx-5 text-decoration-none"
+          >커뮤니티</router-link
+        >
         <router-link to="/live" class="ms-3 me-5 text-decoration-none"
-          ><img src="@\assets\live.png" style="width:20px;height:40px;" />라이브</router-link
+          ><img
+            src="@\assets\live.png"
+            style="width: 20px; height: 40px"
+          />라이브</router-link
+        >
+        <router-link to="/chatmain" class="mx-5 text-decoration-none"
+          >채팅방</router-link
         >
 
         <span v-if="confirmLogin">
@@ -19,7 +33,7 @@
             type="button"
             class="btn btn-link mx-5 text-decoration-none"
             @click="logout"
-            style="margin-bottom: 1px;"
+            style="margin-bottom: 1px"
           >
             로그아웃
           </button>
@@ -35,8 +49,12 @@
           </span>
         </span>
         <span v-else>
-          <router-link to="/login" class="mx-5 text-decoration-none">로그인</router-link>
-          <router-link to="/signupterms" class="mx-5 text-decoration-none">회원가입</router-link>
+          <router-link to="/login" class="mx-5 text-decoration-none"
+            >로그인</router-link
+          >
+          <router-link to="/signupterms" class="mx-5 text-decoration-none"
+            >회원가입</router-link
+          >
         </span>
       </div>
     </div>
@@ -56,7 +74,7 @@ export default {
       return sessionStorage.getItem("isLogin");
     });
 
-    const logout = function() {
+    const logout = function () {
       sessionStorage.removeItem("isLogin");
       localStorage.removeItem("jwt");
       localStorage.removeItem("email");
