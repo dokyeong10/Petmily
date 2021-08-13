@@ -35,7 +35,7 @@ public class BoardRepositorySupport {
         return num;
     }
 
-    public List<Board> getBoardList(){
-        return jpaQueryFactory.select(qBoard).from(qBoard).fetch();
+    public List<BoardJoin> getBoardList(){
+        return jpaQueryFactory.select(qBoardJoin).from(qBoardJoin).fetch();
     }
 }
