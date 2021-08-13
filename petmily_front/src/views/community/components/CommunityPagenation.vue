@@ -4,15 +4,16 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Title</th>
-              <th scope="col">Content</th>
-              <th scope="col">Date</th>
+              <th scope="col">제목</th>
+              <th scope="col">작성자</th>
+              <th scope="col">작성일</th>
             </tr>
           </thead>
           <tbody v-for="(board, no) in state.data" :key="no">
-            <tr v-if="no < state.numberOfItems * state.page && no >= state.numberOfItems * (state.page - 1)" @click="goToBoardDetail">
+            <tr v-if="no < state.numberOfItems * state.page && no >= state.numberOfItems * (state.page - 1)" @click="goToBoardDetail(board.no)">
               <td>{{ board.title }}</td>
-              <td>{{ board.contents }}</td>
+              <td v-if="board.agency != null">{{ board.agency.username }}</td>
+              <td v-else>{{ board.user.username }}</td>
               <td>{{ board.reg_date.substring(0, 10) }}</td>
             </tr>
           </tbody>
@@ -38,15 +39,15 @@
 <script>
 import { reactive, onMounted, computed } from "vue";
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 import axios from "axios";
 export default {
   name: "CommunityPagenation",
   setup() {
     const router = useRouter()
+    const store = useStore ()
     const state = reactive({
       data: [],
-      favoriteData: {},
-      isFavorite: false,
       numberOfItems: 4,
       page: 1,
       numberOfPages: 0,
@@ -70,6 +71,11 @@ export default {
             state.numberOfPages =
               (state.data.length - (state.data.length % state.numberOfItems)) / state.numberOfItems;
           }
+
+          state.data.sort(function(a, b) {
+            return new Date(b.reg_date) - new Date(a.reg_date)
+          }) 
+
         })
         .catch((err) => {
           console.log(err);
@@ -87,12 +93,21 @@ export default {
     };
 
     const isLogin = computed(() => {
-      return sessionStorage.getItem("isLogin");
+      return sessionStorage.getItem('isLogin');
     });
 
-    const goToBoardDetail = () => { router.push() }
+    const goToBoardDetail = function(no) {
+      if(sessionStorage.getItem('isLogin')) {
+          router.push({
+            name: 'boarddetail',
+            params: { boardno: no }
+          })
+        } else {
+          alert("로그인이 필요한 서비스입니다.")
+        }
+      }
 
-    return { state, pageUp, pageDown, goToPage, isLogin };
+    return { state, pageUp, pageDown, goToPage, isLogin, goToBoardDetail };
   },
 };
 </script>
