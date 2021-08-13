@@ -185,7 +185,7 @@ export default {
           key: "all",
           word: "",
           isLike: state.isLike,
-          no: getUserInfo(),
+          no: state.userno,
         },
       })
         .then((res) => {
@@ -217,7 +217,7 @@ export default {
     const state = reactive({
       key: "",
       word: "",
-      userno: "",
+      userno: getUserInfo(),
       // isClickedSearch: false,
       data: {},
       favoriteData: {},
@@ -247,7 +247,7 @@ export default {
           key: state.key,
           word: state.word,
           isLike: state.isLike,
-          no: getUserInfo(),
+          no: state.userno,
         },
       })
         .then((res) => {
