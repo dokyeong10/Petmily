@@ -24,6 +24,8 @@ import AnimalList from "@/views/animal/AnimalList.vue";
 import AnimalDetail from "@/views/animal/AnimalDetail.vue";
 import AnimalRegister from "@/views/animal/AnimalRegister.vue";
 import AnimalRegisterSuccess from "@/views/animal/AnimalRegisterSuccess.vue";
+import AnimalModify from "@/views/animal/AnimalModify.vue";
+import AnimalDeleteSuccess from "@/views/animal/AnimalDeleteSuccess.vue";
 
 //live
 import Live from "@/views/live/Live.vue";
@@ -101,6 +103,17 @@ const routes = [
     path: "/animalregistersuccess",
     name: "animalregistersuccess",
     component: AnimalRegisterSuccess,
+  },
+  {
+    path: "/animal/:no",
+    name: "animalmodify",
+    component: AnimalModify,
+    props: true,
+  },
+  {
+    path: "/animaldeletesuccess",
+    name: "animaldelete",
+    component: AnimalDeleteSuccess,
   },
   {
     path: "/profileprivate",

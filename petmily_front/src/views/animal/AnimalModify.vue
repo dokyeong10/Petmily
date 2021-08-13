@@ -1,5 +1,5 @@
 <template>
-  <JumbotronAnimalRegister />
+  <JumbotronAnimalModify />
   <div class="container">
     <div class="mb-5 d-flex justify-content-center">
       <div>
@@ -134,27 +134,55 @@
           type="datetime-local"
           placeholder="발견 날짜"
         />
-        <button class="btn-white" type="button" @click="confirmAnimalRegister">
-          등록하기
+        <button class="btn-white" type="button" @click="confirmAnimalModify">
+          수정 완료
         </button>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import AWS from "aws-sdk";
 import axios from "axios";
 import { useRouter } from "vue-router";
-import JumbotronAnimalRegister from "@/views/animal/components/JumbotronAnimalRegister";
+import JumbotronAnimalModify from "@/views/animal/components/JumbotronAnimalModify";
 
 // 기관번호 자동으로 받아오는 방법
 // postman에서 get으로 되어있는 주소로 jwt 토큰 값을 보내면 유저의 객체가 온다
 // 그 객체 안에 기관번호가 담겨있다.
 export default {
-  components: { JumbotronAnimalRegister },
+  components: { JumbotronAnimalModify },
   name: "AnimalRegister",
-  setup() {
+  props: {
+    no: Number,
+  },
+  setup(props) {
+    onMounted (() => {
+      state.animalno = props.no
+      axios({
+        method: "get",
+        url: `http://localhost:8080/animal/details/${props.no}`
+      })
+      .then((res) => {
+        console.log(res)
+        state.type = res.data.type
+        state.species = res.data.species
+        state.addr = res.data.find_addr
+        state.age = res.data.age
+        state.sexToggle = res.data.sex
+        state.neuteredToggle = res.data.neutered
+        state.find_date = res.data.find_date
+        state.agencycode = res.data.agencycode
+        state.profileURL = res.data.profile_img
+        state.text = res.data.text
+        state.imgURL = res.data.animalFiles
+        console.log(state)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    })
     const setToken = function() {
       const token = localStorage.getItem("jwt");
       const config = `Bearer ${token}`;
@@ -186,13 +214,9 @@ export default {
     });
     const router = useRouter();
 
-    const confirmAnimalRegister = function() {
+    const confirmAnimalModify = function() {
       const reg = /.{1,}/;
       const reg_num = /^[0-9]{1,}$/;
-
-      if (!state.profile) {
-        return alert("프로필 사진은 필수 항목입니다.");
-      }
 
       if (state.profile && !state.profileURL) {
         return alert("프로필 사진에서 업로드 버튼을 눌러주세요.");
@@ -221,8 +245,8 @@ export default {
 
       // agencycode 찾기 & 동물 등록
       axios({
-        method: "post",
-        url: "http://localhost:8080/animal/register",
+        method: "patch",
+        url: `http://localhost:8080/animal/${state.animalno}`,
         headers: {
           Authorization: setToken(),
         },
@@ -329,7 +353,7 @@ export default {
 
     return {
       state,
-      confirmAnimalRegister,
+      confirmAnimalModify,
       handleProfileUpload,
       handleFileUpload,
       upload,
