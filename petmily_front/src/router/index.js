@@ -26,26 +26,20 @@ import AnimalRegister from "@/views/animal/AnimalRegister.vue";
 import AnimalRegisterSuccess from "@/views/animal/AnimalRegisterSuccess.vue";
 
 //live
-<<<<<<< HEAD
-import Live from "@/views/live/Live";
-
-import ShelterDetail from "@/views/shelter/ShelterDetail.vue";
+import Live from "@/views/live/Live.vue";
+import LiveRoom from "@/views/live/LiveRoom.vue";
 
 // Chat
 import Chat from "@/views/chat/Chat.vue";
 import ChatRoom from "@/views/chat/ChatRoom.vue";
 import ChatRooms from "@/views/chat/ChatRooms.vue";
-=======
-import Live from '@/views/live/Live.vue'
-import LiveRoom from '@/views/live/LiveRoom.vue'
 
 // Shelter
-import ShelterDetail from '@/views/shelter/ShelterDetail.vue'
->>>>>>> a5f85213efb107bf4f53840268a65c4cf5b37e5c
+import ShelterDetail from "@/views/shelter/ShelterDetail.vue";
 
 // Community
-import Community from '@/views/community/Community.vue'
-import CommunityRegister from '@/views/community/CommunityRegister.vue'
+import Community from "@/views/community/Community.vue";
+import CommunityRegister from "@/views/community/CommunityRegister.vue";
 
 const routes = [
   {
@@ -154,25 +148,25 @@ const routes = [
     component: ChatRooms,
   },
   {
-    path: '/shelterdetail/:agencycode',
-    name: 'shelterdetail',
-    component: ShelterDetail
+    path: "/shelterdetail/:agencycode",
+    name: "shelterdetail",
+    component: ShelterDetail,
   },
   {
-    path: '/community',
-    name: 'community',
-    component: Community
+    path: "/community",
+    name: "community",
+    component: Community,
   },
   {
-    path: '/communityregister',
-    name: 'communityregister',
-    component: CommunityRegister
+    path: "/communityregister",
+    name: "communityregister",
+    component: CommunityRegister,
   },
   {
-    path: '/liveroom/:agencycode',
-    name: 'liveroom',
-    component: LiveRoom
-  }
+    path: "/liveroom/:agencycode",
+    name: "liveroom",
+    component: LiveRoom,
+  },
   // {
   //   path: '/',
   //   name: 'Home',
