@@ -7,6 +7,7 @@ import com.ssafy.petmily.api.request.UserRegisterPostReq;
 import com.ssafy.petmily.db.entity.agency.Agency;
 import com.ssafy.petmily.db.entity.agency.AgencyJoin;
 import com.ssafy.petmily.db.entity.animal.AnimalLike;
+import com.ssafy.petmily.db.entity.animal.AnimalLikeJoin;
 import com.ssafy.petmily.db.entity.user.User;
 import com.ssafy.petmily.db.entity.user.UserJoin;
 import com.ssafy.petmily.db.repository.*;
@@ -222,6 +223,11 @@ public class UserServiceImpl implements UserService {
 	public Agency getAgencyByAgencyCode(String agencycode) {
 		Agency agency = agencyRepositorySupport.findAgencyByAgecnycode(agencycode);
 		return agency;
+	}
+
+	@Override
+	public List<AnimalLikeJoin> getAnimalLikeList(Long no) {
+		return userRepositorySupport.getAnimalLikeList(no);
 	}
 
 
