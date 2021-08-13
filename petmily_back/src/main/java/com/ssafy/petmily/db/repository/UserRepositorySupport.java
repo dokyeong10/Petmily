@@ -1,6 +1,10 @@
 package com.ssafy.petmily.db.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.ssafy.petmily.db.entity.animal.AnimalLike;
+import com.ssafy.petmily.db.entity.animal.AnimalLikeJoin;
+import com.ssafy.petmily.db.entity.animal.QAnimalLike;
+import com.ssafy.petmily.db.entity.animal.QAnimalLikeJoin;
 import com.ssafy.petmily.db.entity.user.QUser;
 import com.ssafy.petmily.db.entity.user.QUserJoin;
 import com.ssafy.petmily.db.entity.user.User;
@@ -8,6 +12,7 @@ import com.ssafy.petmily.db.entity.user.UserJoin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -20,6 +25,7 @@ public class UserRepositorySupport {
     private JPAQueryFactory jpaQueryFactory;
     QUser qUser = QUser.user;
     QUserJoin qUserJoin = QUserJoin.userJoin;
+    QAnimalLikeJoin qAnimalLikeJoin = QAnimalLikeJoin.animalLikeJoin;
 
     public Optional<User> findUserByEmail(String email) {
         User user = jpaQueryFactory.select(qUser).from(qUser)
@@ -55,6 +61,11 @@ public class UserRepositorySupport {
         User user = jpaQueryFactory.select(qUser).from(qUser)
                 .where(qUser.no.eq(no)).fetchOne();
         return user;
+    }
+
+    public List<AnimalLikeJoin> getAnimalLikeList(Long no){
+        return jpaQueryFactory.select(qAnimalLikeJoin).from(qAnimalLikeJoin)
+                .where(qAnimalLikeJoin.userno.eq(no)).fetch();
     }
 
 
