@@ -14,16 +14,14 @@
           </p>
         </form>
         <div class="d-flex justify-content-end">
-          <form class="">
-            <button
-                class="btn-white pe-3"
-                @click="registerReview"
-                @keyup.enter="registerReview"
-                style="color: #FFFFFF;"
-              >
-                  댓글 등록하기
-              </button>
-          </form>
+          
+        <button
+            class="btn-white pe-3"
+            @click="registerReview"
+            style="color: #FFFFFF;"
+          >
+              댓글 등록하기
+        </button>
         </div>
       </div>
     </div>
@@ -31,27 +29,54 @@
 </template>
 <script>
 import { reactive } from 'vue'
-import axios from 'vuex'
+import axios from 'axios'
 export default {
   name: 'BoardDetailReview',
   props: {
     replyJoins: Object
   },
-  setup () {
+  setup (props) {
     const state = reactive({
       contents: ""
     })
-
+    
     const registerReview = function () {
-      axios({
-        method: 'post',
-        url: 'http://localhost:8080/board/reply/register',
-        data: {
-          contents: state.contents
-        }
-      })
-      .then(res => {
-      })
+      console.log(localStorage.getItem("isUser"))
+      if (localStorage.getItem("isUser") === 'true') {
+        console.log('여기')
+        axios({
+          method: 'post',
+          url: 'http://localhost:8080/board/reply/register',
+          data: {
+            contents: state.contents,
+            bno: props.replyJoins.no,
+            userno: localStorage.getItem("userno")
+          }
+        })
+        .then(res => {
+          
+          console.log(res)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      } else {
+        axios({
+          method: 'post',
+          url: 'http://localhost:8080/board/reply/register',
+          data: {
+            contents: state.contents,
+            bno: props.replyJoins.no,
+            agencycode: localStorage.getItem("agencycode")
+          }
+        })
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      }
     }
 
     return { state, registerReview }
