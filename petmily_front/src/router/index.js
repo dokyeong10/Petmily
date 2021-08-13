@@ -47,7 +47,7 @@ import BoardDetail from "@/views/community/BoardDetail.vue";
 
 const routes = [
   {
-    path: "/home",
+    path: "/",
     name: "home",
     component: Home,
   },

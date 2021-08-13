@@ -27,7 +27,7 @@ export default {
     const router = useRouter()
 
     const goToHome = function () {
-      router.push('/home')
+      router.push('/')
     }
 
     return { goToHome }
