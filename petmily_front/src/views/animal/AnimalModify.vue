@@ -118,7 +118,7 @@
           type="text"
           placeholder="발견 주소"
         />
-        
+
         <label class="d-flex flex-row mb-2 semibold">특이사항</label>
         <input
           v-model="state.text"
@@ -158,31 +158,31 @@ export default {
     no: Number,
   },
   setup(props) {
-    onMounted (() => {
-      state.animalno = props.no
+    onMounted(() => {
+      state.animalno = props.no;
       axios({
         method: "get",
-        url: `http://localhost:8080/animal/details/${props.no}`
+        url: `http://localhost:8080/animal/details/${props.no}`,
       })
-      .then((res) => {
-        console.log(res)
-        state.type = res.data.type
-        state.species = res.data.species
-        state.addr = res.data.find_addr
-        state.age = res.data.age
-        state.sexToggle = res.data.sex
-        state.neuteredToggle = res.data.neutered
-        state.find_date = res.data.find_date
-        state.agencycode = res.data.agencycode
-        state.profileURL = res.data.profile_img
-        state.text = res.data.text
-        state.imgURL = res.data.animalFiles
-        console.log(state)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    })
+        .then((res) => {
+          console.log(res);
+          state.type = res.data.type;
+          state.species = res.data.species;
+          state.addr = res.data.find_addr;
+          state.age = res.data.age;
+          state.sexToggle = res.data.sex;
+          state.neuteredToggle = res.data.neutered;
+          state.find_date = res.data.find_date;
+          state.agencycode = res.data.agencycode;
+          state.profileURL = res.data.profile_img;
+          state.text = res.data.text;
+          state.imgURL = res.data.animalFiles;
+          console.log(state);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
     const setToken = function() {
       const token = localStorage.getItem("jwt");
       const config = `Bearer ${token}`;
@@ -284,7 +284,6 @@ export default {
     };
 
     const upload = function() {
-
       AWS.config.update({
         region: state.bucketRegion,
         credentials: new AWS.CognitoIdentityCredentials({

@@ -30,9 +30,7 @@
               placeholder="password"
             />
           </div>
-          <div
-            class="checkbox-container d-flex align-items-center justify-content-between"
-          >
+          <div class="checkbox-container d-flex align-items-center justify-content-between">
             <div>
               <label class="mx-3">
                 <input
@@ -44,12 +42,7 @@
                 />개인
               </label>
               <label>
-                <input
-                  type="radio"
-                  name="login"
-                  v-model="state.toggle"
-                  value="true"
-                />기관
+                <input type="radio" name="login" v-model="state.toggle" value="true" />기관
               </label>
             </div>
             <button
@@ -137,17 +130,13 @@ export default {
         align: "left",
       },
       rules: {
-        id: [
-          { required: true, message: "Please input Email", trigger: "blur" },
-        ],
-        password: [
-          { required: true, message: "Please input password", trigger: "blur" },
-        ],
+        id: [{ required: true, message: "Please input Email", trigger: "blur" }],
+        password: [{ required: true, message: "Please input password", trigger: "blur" }],
       },
       toggle: false,
     });
 
-    const setToken = function () {
+    const setToken = function() {
       const token = localStorage.getItem("jwt");
       const config = {
         Authorization: `JWT ${token}`,
@@ -155,15 +144,15 @@ export default {
       return config;
     };
 
-    const goToSignup = function () {
+    const goToSignup = function() {
       router.push("/signupterms");
     };
 
-    const goToFindPassword = function () {
+    const goToFindPassword = function() {
       router.push("/findpassword");
     };
 
-    const clickLogin = function () {
+    const clickLogin = function() {
       if (!state.toggle) {
         axios({
           method: "post",

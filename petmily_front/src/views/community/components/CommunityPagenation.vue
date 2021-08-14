@@ -1,22 +1,27 @@
 <template>
   <div class="container">
     <div class="row">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Title</th>
-              <th scope="col">Content</th>
-              <th scope="col">Date</th>
-            </tr>
-          </thead>
-          <tbody v-for="(board, no) in state.data" :key="no">
-            <tr v-if="no < state.numberOfItems * state.page && no >= state.numberOfItems * (state.page - 1)" @click="goToBoardDetail">
-              <td>{{ board.title }}</td>
-              <td>{{ board.contents }}</td>
-              <td>{{ board.reg_date.substring(0, 10) }}</td>
-            </tr>
-          </tbody>
-        </table>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Content</th>
+            <th scope="col">Date</th>
+          </tr>
+        </thead>
+        <tbody v-for="(board, no) in state.data" :key="no">
+          <tr
+            v-if="
+              no < state.numberOfItems * state.page && no >= state.numberOfItems * (state.page - 1)
+            "
+            @click="goToBoardDetail"
+          >
+            <td>{{ board.title }}</td>
+            <td>{{ board.contents }}</td>
+            <td>{{ board.reg_date.substring(0, 10) }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
   <div class="d-flex justify-content-center">
@@ -24,7 +29,7 @@
     <div v-for="(n, idx) in state.numberOfPages" :key="idx">
       <div v-if="n <= state.page - (state.page % 10) + 10 && n > state.page - (state.page % 10)">
         <div v-if="state.page == n">
-          <a style="font-weight: 600;" >{{ n }}</a>
+          <a style="font-weight: 600;">{{ n }}</a>
         </div>
         <div v-else>
           <a id="myA" @click="goToPage(n)">{{ n }}</a>
@@ -32,17 +37,18 @@
       </div>
     </div>
     <a id="myA" v-if="state.data.length - state.numberOfItems * state.page > 0" @click="pageUp"
-      >Next</a>
+      >Next</a
+    >
   </div>
 </template>
 <script>
 import { reactive, onMounted, computed } from "vue";
-import { useRouter } from 'vue-router'
+import { useRouter } from "vue-router";
 import axios from "axios";
 export default {
   name: "CommunityPagenation",
   setup() {
-    const router = useRouter()
+    const router = useRouter();
     const state = reactive({
       data: [],
       favoriteData: {},
@@ -90,7 +96,9 @@ export default {
       return sessionStorage.getItem("isLogin");
     });
 
-    const goToBoardDetail = () => { router.push() }
+    const goToBoardDetail = () => {
+      router.push();
+    };
 
     return { state, pageUp, pageDown, goToPage, isLogin };
   },
