@@ -1,14 +1,19 @@
 <template>
-  <JumbotronTerms/>
-  <img class="img" src="@\assets\petmily_signup.png">
+  <JumbotronTerms />
+  <img class="img" src="@\assets\petmily_signup.png" style="width: 300px" />
   <div class="container">
     <!-- 약관 1 -->
     <div style="width: 800px; height: 800px;">
       <div>
         <div class="position-absolute start-50 translate-middle-x">
-          <div class="d-flex justify-content-start">이용 약관 동의</div>
+          <div class="d-flex justify-content-start font-bold mt-5 mb-3">
+            이용 약관 동의
+          </div>
           <div class="d-flex justify-content-center">
-            <pre style="overflow:auto; width:800px; height:150px; white-space: pre-wrap;" align="left">
+            <pre
+              style="overflow:auto; width:800px; height:180px; white-space: pre-wrap;"
+              align="left"
+            >
 제 1 장 총칙
 제 1 조 (목 적)
 이 약관은 '펫밀리' (이하 '회사'라 합니다.)가 제공하는 서비스의 이용조건 및 절차, 기타 필요한 사항을 규정함을 목적으로 합니다.
@@ -139,13 +144,23 @@
 
             </pre>
           </div>
-          <div class="d-flex justify-content-end">
-            <label><input type="checkbox" value="동의함" v-model="firstAgree" @click="agree">이용약관에 동의합니다. </label>
+          <div class="d-flex justify-content-end mt-3">
+            <label
+              ><input
+                type="checkbox"
+                value="동의함"
+                v-model="firstAgree"
+                @click="agree"
+              />이용약관에 동의합니다.
+            </label>
           </div>
           <!-- 약관 2 -->
-          <div class="d-flex justify-content-start">개인정보수집 및 이용동의</div>
+          <div class="d-flex justify-content- mt-4 mb-3 font-bold">개인정보수집 및 이용동의</div>
           <div class="d-flex justify-content-center">
-            <pre style="overflow:auto; width:800px; height:150px; white-space: pre-wrap;" align="left">
+            <pre
+              style="overflow:auto; width:800px; height:180px; white-space: pre-wrap;"
+              align="left"
+            >
 개인정보보호법에 따라 펫밀리에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
 1. 수집하는 개인정보
 이용자는 회원가입을 하지 않아도 정보 검색, 뉴스 보기 등 대부분의 펫밀리 서비스를 회원과 동일하게 이용할 수 있습니다. 
@@ -199,13 +214,17 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
 이용자는 개인정보의 수집 및 이용 동의를 거부할 권리가 있습니다. 회원가입 시 수집하는 최소한의 개인정보, 즉, 필수 항목에 대한 수집 및 이용 동의를 거부하실 경우, 회원가입이 어려울 수 있습니다.
             </pre>
           </div>
-          <div class="d-flex justify-content-end">
-            <input type="checkbox" value="동의함" v-model="secondAgree">
+          <div class="d-flex justify-content-end mb-5 mt-2">
+            <input type="checkbox" value="동의함" v-model="secondAgree" />
             <label for="checkbox">이용약관에 동의합니다.</label>
           </div>
           <div class="d-flex justify-content-evenly">
-            <button class="btn-white" style="color: #FFFFFF" @click="goToPrivateForm">개인 회원가입</button>
-            <button class="btn-white" style="color: #FFFFFF" @click="goToAgencyForm">기관 회원가입</button>
+            <button class="btn-white" style="color: #FFFFFF" @click="goToPrivateForm">
+              개인 회원가입
+            </button>
+            <button class="btn-white" style="color: #FFFFFF" @click="goToAgencyForm">
+              기관 회원가입
+            </button>
           </div>
         </div>
       </div>
@@ -213,50 +232,49 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
   </div>
 </template>
 <script>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import JumbotronTerms from "@/views/accounts/components/JumbotronTerms"
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import JumbotronTerms from "@/views/accounts/components/JumbotronTerms";
 
 export default {
-  name: 'SignupTerms',
+  name: "SignupTerms",
   components: {
     JumbotronTerms,
   },
-  setup () {
-    const firstAgree = ref(false)
-    const secondAgree = ref(false)
-    const router = useRouter()
+  setup() {
+    const firstAgree = ref(false);
+    const secondAgree = ref(false);
+    const router = useRouter();
 
+    const goToPrivateForm = function() {
+      if (firstAgree.value && secondAgree.value) {
+        router.push("/privateform");
+      } else {
+        alert("약관에 동의해주세요");
+      }
+    };
 
-    const goToPrivateForm = function () {
-        if (firstAgree.value && secondAgree.value) {
-          router.push('/privateform')
-        } else {
-          alert("약관에 동의해주세요")
-        }    
-    }
+    const goToAgencyForm = function() {
+      if (firstAgree.value && secondAgree.value) {
+        router.push("/agencyform");
+      } else {
+        alert("약관에 동의해주세요");
+      }
+    };
 
-
-    const goToAgencyForm = function () {
-        if (firstAgree.value && secondAgree.value) {
-          router.push('/agencyform')
-        } else {
-          alert("약관에 동의해주세요")
-        }    
-    }
-
-    return {firstAgree, secondAgree, goToAgencyForm, goToPrivateForm}
-    } 
-  }
+    return { firstAgree, secondAgree, goToAgencyForm, goToPrivateForm };
+  },
+};
 </script>
 <style>
 .btn-white {
   width: 200px;
-  background-color: #A4B5F0;
-  border-right: #A4B5F0 1px solid;
-  border-left: #A4B5F0 1px solid;
-  border-top: #A4B5F0 1px solid;
-  border-bottom: #A4B5F0 1px solid;
+  height: 30px;
+  background-color: #a4b5f0;
+  border-right: #a4b5f0 1px solid;
+  border-left: #a4b5f0 1px solid;
+  border-top: #a4b5f0 1px solid;
+  border-bottom: #a4b5f0 1px solid;
   border-style: none;
   border-radius: 12px;
 }
