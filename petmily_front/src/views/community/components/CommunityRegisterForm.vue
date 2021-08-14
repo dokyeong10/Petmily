@@ -42,6 +42,7 @@
             v-model="state.contents"
             cols="50"
             rows="10"
+            style="overflow:auto; white-space: pre-wrap;"
             class="form-control radius-border"
             placeholder="내용을 입력하세요."
           >

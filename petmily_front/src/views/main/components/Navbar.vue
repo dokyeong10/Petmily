@@ -3,12 +3,12 @@
     <div id="nav" class="mb-1">
       <div>
         <!-- style="box-shadow: 0 4px 0 0 violet; content-box" 여부 다시 결정 해야함. -->
-        <router-link to="/home" class="mx-5 text-decoration-none"
+        <router-link to="/" class="mx-5 text-decoration-none"
           ><img
             src="@\assets\PetmilyLogo.png"
             style="width: 50px; height: 50px; border-radius: 50%"
         /></router-link>
-        <router-link to="/home" class="mx-5 text-decoration-none"
+        <router-link to="/" class="mx-5 text-decoration-none"
           >Home</router-link
         >
         <router-link to="/animallist" class="mx-5 text-decoration-none"
@@ -64,25 +64,22 @@
 <script>
 import { onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from 'vuex'
 
 export default {
   name: "Navbar",
   setup() {
     const router = useRouter();
+    const store = useStore();
     const confirmLogin = computed(() => {
       console.log(sessionStorage.getItem("isLogin"));
       return sessionStorage.getItem("isLogin");
     });
 
     const logout = function () {
-      sessionStorage.removeItem("isLogin");
-      localStorage.removeItem("jwt");
-      localStorage.removeItem("email");
-      localStorage.removeItem("userno");
-      localStorage.removeItem("agencycode");
-      sessionStorage.removeItem("isAgency");
-      sessionStorage.removeItem("isUser");
-      router.go();
+      localStorage.clear()
+      sessionStorage.clear()
+      router.go('/');
     };
 
     const isAgency = computed(() => {
@@ -93,9 +90,12 @@ export default {
       return sessionStorage.getItem("isUser");
     });
 
-    onMounted(() => {
-      router.push("/home");
-    });
+    computed(() => {
+      store.state.isLogin = sessionStorage.getItem('isLogin')
+      store.state.isAgency = sessionStorage.getItem('isAgency')
+      store.state.isUser = sessionStorage.getItem('isUser')
+      return
+    })
 
     return { confirmLogin, logout, isAgency, isUser };
   },
