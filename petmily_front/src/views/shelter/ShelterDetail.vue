@@ -62,7 +62,9 @@ export default {
     const getAgencyInfo = async function() {
       await axios({
         method: "get",
-        url: "http://localhost:8080/shelter/detail/" + router.currentRoute._value.params.agencycode,
+        url:
+          "https://i5a408.p.ssafy.io:8080/shelter/detail/" +
+          router.currentRoute._value.params.agencycode,
       })
         .then((res) => {
           if (res.data) {

@@ -55,21 +55,21 @@
           <button class="btn-logo">
             <a
               style="color: #ffffff; text-decoration-line: none"
-              href="http://localhost:8080/oauth2/authorization/google"
+              href="https://i5a408.p.ssafy.io:8080/oauth2/authorization/google"
               ><img src="@\assets\google.png" style="width:30px;height:30px;border-radius: 50%;"
             /></a>
           </button>
           <button class="btn-logo">
             <a
               style="color: #ffffff; text-decoration-line: none"
-              href="http://localhost:8080/oauth2/authorization/kakao"
+              href="https://i5a408.p.ssafy.io:8080/oauth2/authorization/kakao"
               ><img src="@\assets\KakaoTalk.png" style="width:30px;height:30px;border-radius: 50%;"
             /></a>
           </button>
           <button class="btn-logo">
             <a
               style="color: #ffffff; text-decoration-line: none"
-              href="http://localhost:8080/oauth2/authorization/naver"
+              href="https://i5a408.p.ssafy.io:8080/oauth2/authorization/naver"
               ><img src="@\assets\naver.png" style="width:30px;height:30px;border-radius: 50%;"
             /></a>
           </button>
@@ -113,7 +113,7 @@ export default {
       } else {
         axios({
           method: "patch",
-          url: "http://localhost:8080/users/findpwd/change",
+          url: "https://i5a408.p.ssafy.io:8080/users/findpwd/change",
           data: {
             email: store.state.findEmail,
             password: state.password,

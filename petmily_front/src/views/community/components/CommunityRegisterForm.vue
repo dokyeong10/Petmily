@@ -146,7 +146,7 @@ export default {
       if (isUser) {
         axios({
           method: "post",
-          url: "http://localhost:8080/board/enroll/personal",
+          url: "https://i5a408.p.ssafy.io:8080/board/enroll/personal",
           data: {
             title: state.title,
             contents: state.contents,
@@ -168,7 +168,7 @@ export default {
       } else {
         axios({
           method: "post",
-          url: "http://localhost:8080/board/enroll/agency",
+          url: "https://i5a408.p.ssafy.io:8080/board/enroll/agency",
           data: {
             title: state.title,
             contents: state.contents,

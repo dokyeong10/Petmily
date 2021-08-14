@@ -59,21 +59,21 @@
           <button class="btn-logo">
             <a
               style="color: #ffffff; text-decoration-line: none"
-              href="http://localhost:8080/oauth2/authorization/google"
+              href="https://i5a408.p.ssafy.io:8080/oauth2/authorization/google"
               ><img src="@\assets\google.png" style="width:30px;height:30px;border-radius: 50%;"
             /></a>
           </button>
           <button class="btn-logo">
             <a
               style="color: #ffffff; text-decoration-line: none"
-              href="http://localhost:8080/oauth2/authorization/kakao"
+              href="https://i5a408.p.ssafy.io:8080/oauth2/authorization/kakao"
               ><img src="@\assets\KakaoTalk.png" style="width:30px;height:30px;border-radius: 50%;"
             /></a>
           </button>
           <button class="btn-logo">
             <a
               style="color: #ffffff; text-decoration-line: none"
-              href="http://localhost:8080/oauth2/authorization/naver"
+              href="https://i5a408.p.ssafy.io:8080/oauth2/authorization/naver"
               ><img src="@\assets\naver.png" style="width:30px;height:30px;border-radius: 50%;"
             /></a>
           </button>
@@ -109,7 +109,7 @@ export default {
       console.log(state.findEmail);
       axios({
         method: "post",
-        url: "http://localhost:8080/email/send/findpwd",
+        url: "https://i5a408.p.ssafy.io:8080/email/send/findpwd",
         data: {
           email: state.findEmail,
         },
@@ -132,7 +132,7 @@ export default {
       console.log(state.authNum);
       axios({
         method: "post",
-        url: "http://localhost:8080/email/check/authcode",
+        url: "https://i5a408.p.ssafy.io:8080/email/check/authcode",
         data: {
           email: store.state.findEmail,
           authCode: state.authNum,

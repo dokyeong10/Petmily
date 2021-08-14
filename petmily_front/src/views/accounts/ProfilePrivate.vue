@@ -66,7 +66,7 @@ export default {
     const getUserInfo = async function() {
       await axios({
         method: "get",
-        url: "http://localhost:8080/users/mypage/",
+        url: "https://i5a408.p.ssafy.io:8080/users/mypage/",
         headers: {
           Authorization: setToken(),
         },

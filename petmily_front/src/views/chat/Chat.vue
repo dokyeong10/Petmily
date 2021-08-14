@@ -24,7 +24,7 @@ export default {
       axios({
         method: "post",
         url: "/api/chat/login",
-        baseURL: "http://localhost:8080/",
+        baseURL: "https://i5a408.p.ssafy.io:8080/",
         headers: { "content-type": "application/json" },
         data: { id: this.id, nickname: this.nickname },
       }).then(
@@ -45,7 +45,7 @@ export default {
       axios({
         method: "post",
         url: "/api/chat/user",
-        baseURL: "http://localhost:8080/",
+        baseURL: "https://i5a408.p.ssafy.io:8080/",
         headers: { "content-type": "application/json" },
         data: { id: this.id, nickname: this.nickname },
       }).then(

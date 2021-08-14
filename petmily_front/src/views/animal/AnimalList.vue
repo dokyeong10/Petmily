@@ -35,11 +35,7 @@
                 />
               </div>
             </div>
-            <button
-              class="btn-up"
-              @click="search"
-              style="height: 30px; margin-top: 24px"
-            >
+            <button class="btn-up" @click="search" style="height: 30px; margin-top: 24px">
               검색
             </button>
             <div class="mt-4 ms-4">
@@ -55,10 +51,7 @@
             필터를 선택해주세요!
           </div> -->
         </div>
-        <div
-          class="d-flex align-items-end flex-column-reverse"
-          style="height: 140px"
-        >
+        <div class="d-flex align-items-end flex-column-reverse" style="height: 140px">
           <div v-if="isAgency">
             <button
               @click="goToAnimalRegister"
@@ -78,8 +71,7 @@
         <div class="col-md-6" v-for="(animal, no) in state.data" :key="no">
           <div
             v-if="
-              no < state.numberOfItems * state.page &&
-              no >= state.numberOfItems * (state.page - 1)
+              no < state.numberOfItems * state.page && no >= state.numberOfItems * (state.page - 1)
             "
           >
             <div class="card mb-3" style="max-width: 636px">
@@ -107,8 +99,8 @@
                       <div
                         v-if="
                           state.favoriteData &&
-                          state.favoriteData[state.userno] &&
-                          state.favoriteData[state.userno][animal.no]
+                            state.favoriteData[state.userno] &&
+                            state.favoriteData[state.userno][animal.no]
                         "
                       >
                         <font-awesome-icon
@@ -127,11 +119,7 @@
                         />
                       </div>
                     </div>
-                    <button
-                      class="btn-detail mb-3"
-                      style="height: 35px"
-                      @click="goDetail(animal)"
-                    >
+                    <button class="btn-detail mb-3" style="height: 35px" @click="goDetail(animal)">
                       상세보기
                     </button>
                   </div>
@@ -146,12 +134,7 @@
   <div class="d-flex justify-content-center">
     <a id="myA" v-if="state.page > 1" @click="pageDown">Prev</a>
     <div v-for="(n, idx) in state.numberOfPages" :key="idx">
-      <div
-        v-if="
-          n <= state.page - (state.page % 10) + 10 &&
-          n > state.page - (state.page % 10)
-        "
-      >
+      <div v-if="n <= state.page - (state.page % 10) + 10 && n > state.page - (state.page % 10)">
         <div v-if="state.page == n">
           <a style="font-weight: 600">{{ n }}</a>
         </div>
@@ -160,10 +143,7 @@
         </div>
       </div>
     </div>
-    <a
-      id="myA"
-      v-if="state.data.length - state.numberOfItems * state.page > 0"
-      @click="pageUp"
+    <a id="myA" v-if="state.data.length - state.numberOfItems * state.page > 0" @click="pageUp"
       >Next</a
     >
   </div>
@@ -180,7 +160,7 @@ export default {
     onMounted(() => {
       axios({
         method: "post",
-        url: "http://localhost:8080/animal/",
+        url: "https://i5a408.p.ssafy.io:8080/animal/",
         data: {
           key: "all",
           word: "",
@@ -199,8 +179,7 @@ export default {
               1;
           } else {
             state.numberOfPages =
-              (state.data.length - (state.data.length % state.numberOfItems)) /
-              state.numberOfItems;
+              (state.data.length - (state.data.length % state.numberOfItems)) / state.numberOfItems;
           }
         })
         .catch((err) => {
@@ -208,7 +187,7 @@ export default {
         });
     });
 
-    const getUserInfo = function () {
+    const getUserInfo = function() {
       const no = localStorage.getItem("userno");
       return no;
     };
@@ -228,7 +207,7 @@ export default {
       isLike: false,
     });
 
-    const goToAnimalRegister = function () {
+    const goToAnimalRegister = function() {
       router.push("/animalregister");
     };
 
@@ -239,10 +218,10 @@ export default {
     const isLogin = computed(() => {
       return sessionStorage.getItem("isLogin");
     });
-    const search = function () {
+    const search = function() {
       axios({
         method: "post",
-        url: "http://localhost:8080/animal/",
+        url: "https://i5a408.p.ssafy.io:8080/animal/",
         data: {
           key: state.key,
           word: state.word,
@@ -260,8 +239,7 @@ export default {
               1;
           } else {
             state.numberOfPages =
-              (state.data.length - (state.data.length % state.numberOfItems)) /
-              state.numberOfItems;
+              (state.data.length - (state.data.length % state.numberOfItems)) / state.numberOfItems;
           }
         })
         .catch((err) => {
@@ -270,10 +248,10 @@ export default {
       // state.isClickedSearch = true;
     };
 
-    const addToFavorite = function (animal) {
+    const addToFavorite = function(animal) {
       axios({
         method: "post",
-        url: "http://localhost:8080/users/like",
+        url: "https://i5a408.p.ssafy.io:8080/users/like",
         data: {
           animalno: animal.no,
           userno: state.userno,
@@ -291,12 +269,12 @@ export default {
         });
     };
 
-    const cancelFavorite = function (animal) {
+    const cancelFavorite = function(animal) {
       const favoriteNo = state.favoriteData[state.userno][animal.no];
       console.log(favoriteNo);
       axios({
         method: "delete",
-        url: `http://localhost:8080/users/like/${favoriteNo}`,
+        url: `https://i5a408.p.ssafy.io:8080/users/like/${favoriteNo}`,
       })
         .then((res) => {
           console.log(res);
@@ -307,16 +285,16 @@ export default {
         });
     };
 
-    const pageUp = function () {
+    const pageUp = function() {
       state.page++;
     };
-    const pageDown = function () {
+    const pageDown = function() {
       state.page--;
     };
-    const goToPage = function (n) {
+    const goToPage = function(n) {
       state.page = n;
     };
-    const goDetail = function (animal) {
+    const goDetail = function(animal) {
       router.push({
         name: "animaldetail",
         params: {

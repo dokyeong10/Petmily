@@ -118,7 +118,7 @@
           type="text"
           placeholder="발견 주소"
         />
-        
+
         <label class="d-flex flex-row mb-2 semibold">특이사항</label>
         <input
           v-model="state.text"
@@ -222,7 +222,7 @@ export default {
       // agencycode 찾기 & 동물 등록
       axios({
         method: "post",
-        url: "http://localhost:8080/animal/register",
+        url: "https://i5a408.p.ssafy.io:8080/animal/register",
         headers: {
           Authorization: setToken(),
         },
@@ -260,7 +260,6 @@ export default {
     };
 
     const upload = function() {
-
       AWS.config.update({
         region: state.bucketRegion,
         credentials: new AWS.CognitoIdentityCredentials({

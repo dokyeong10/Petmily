@@ -46,7 +46,7 @@ export default {
     axios({
       method: "get",
       url: "/api/chat/rooms",
-      baseURL: "http://localhost:8080/",
+      baseURL: "https://i5a408.p.ssafy.io:8080/",
     }).then(
       (res) => {
         console.log(res);
@@ -76,7 +76,7 @@ export default {
       axios({
         method: "post",
         url: "/api/chat/room",
-        baseURL: "http://localhost:8080/",
+        baseURL: "https://i5a408.p.ssafy.io:8080/",
         headers: { "content-type": "application/json" },
         data: { id: this.id, title: this.title, masterId: this.id },
       }).then(

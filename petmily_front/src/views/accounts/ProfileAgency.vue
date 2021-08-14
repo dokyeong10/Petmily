@@ -69,7 +69,7 @@ export default {
     const getAgencyInfo = async function() {
       await axios({
         method: "get",
-        url: "http://localhost:8080/users/agency/mypage",
+        url: "https://i5a408.p.ssafy.io:8080/users/agency/mypage",
         headers: {
           Authorization: setToken(),
         },

@@ -48,7 +48,7 @@ export default {
       if (sessionStorage.getItem("isUser")) {
         axios({
           method: "post",
-          url: "http://localhost:8080/auth/personal/me",
+          url: "https://i5a408.p.ssafy.io:8080/auth/personal/me",
           data: {
             password: password.value,
           },
@@ -71,7 +71,7 @@ export default {
         console.log(71);
         axios({
           method: "post",
-          url: "http://localhost:8080/auth/agency/me",
+          url: "https://i5a408.p.ssafy.io:8080/auth/agency/me",
           data: {
             password: password.value,
           },

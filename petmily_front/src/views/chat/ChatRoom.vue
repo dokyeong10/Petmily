@@ -50,7 +50,7 @@ export default {
     axios({
       method: "get",
       url: "/api/chat/room/" + this.roomid,
-      baseURL: "http://localhost:8080/",
+      baseURL: "https://i5a408.p.ssafy.io:8080/",
     }).then(
       (res) => {
         this.title = res.data;
@@ -65,7 +65,7 @@ export default {
     axios({
       method: "get",
       url: "/api/chat/room/message/" + this.roomid + "?page=" + this.idx,
-      baseURL: "http://localhost:8080/",
+      baseURL: "https://i5a408.p.ssafy.io:8080/",
     }).then(
       (res) => {
         this.msg = [];
@@ -84,7 +84,7 @@ export default {
       }
     );
     // socket 연결
-    let socket = new SockJS("http://localhost:8080/ws");
+    let socket = new SockJS("https://i5a408.p.ssafy.io:8080/ws");
     this.stompClient = Stomp.over(socket);
     this.stompClient.connect(
       {},

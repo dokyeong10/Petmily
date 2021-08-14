@@ -154,7 +154,7 @@ export default {
     const getAgencyInfo = async function() {
       await axios({
         method: "get",
-        url: "http://localhost:8080/users/agency/me/",
+        url: "https://i5a408.p.ssafy.io:8080/users/agency/me/",
         headers: {
           Authorization: setToken(),
         },
@@ -187,7 +187,7 @@ export default {
       }
       axios({
         method: "patch",
-        url: `http://localhost:8080/users/agency/${state.email}`,
+        url: `https://i5a408.p.ssafy.io:8080/users/agency/${state.email}`,
         data: {
           email: state.email,
           password: state.password,
@@ -243,7 +243,7 @@ export default {
 
       axios({
         method: "delete",
-        url: `http://localhost:8080/users/agency/${state.email}`,
+        url: `https://i5a408.p.ssafy.io:8080/users/agency/${state.email}`,
       }).then((res) => {
         console.log(res);
         sessionStorage.removeItem("isLogin");

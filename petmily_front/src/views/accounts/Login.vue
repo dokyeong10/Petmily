@@ -30,9 +30,7 @@
               placeholder="password"
             />
           </div>
-          <div
-            class="checkbox-container d-flex align-items-center justify-content-between"
-          >
+          <div class="checkbox-container d-flex align-items-center justify-content-between">
             <div>
               <label class="mx-3">
                 <input
@@ -44,12 +42,7 @@
                 />개인
               </label>
               <label>
-                <input
-                  type="radio"
-                  name="login"
-                  v-model="state.toggle"
-                  value="true"
-                />기관
+                <input type="radio" name="login" v-model="state.toggle" value="true" />기관
               </label>
             </div>
             <button
@@ -80,7 +73,7 @@
           <button class="btn-logo">
             <a
               style="color: #ffffff; text-decoration-line: none"
-              href="http://localhost:8080/oauth2/authorization/google"
+              href="https://i5a408.p.ssafy.io:8080/oauth2/authorization/google"
               ><img
                 class="img"
                 src="@\assets\google.png"
@@ -90,7 +83,7 @@
           <button class="btn-logo">
             <a
               style="color: #ffffff; text-decoration-line: none"
-              href="http://localhost:8080/oauth2/authorization/kakao"
+              href="https://i5a408.p.ssafy.io:8080/oauth2/authorization/kakao"
               ><img
                 class="img"
                 src="@\assets\KakaoTalk.png"
@@ -100,7 +93,7 @@
           <button class="btn-logo">
             <a
               style="color: #ffffff; text-decoration-line: none"
-              href="http://localhost:8080/oauth2/authorization/naver"
+              href="https://i5a408.p.ssafy.io:8080/oauth2/authorization/naver"
               ><img
                 class="img"
                 src="@\assets\naver.png"
@@ -137,17 +130,13 @@ export default {
         align: "left",
       },
       rules: {
-        id: [
-          { required: true, message: "Please input Email", trigger: "blur" },
-        ],
-        password: [
-          { required: true, message: "Please input password", trigger: "blur" },
-        ],
+        id: [{ required: true, message: "Please input Email", trigger: "blur" }],
+        password: [{ required: true, message: "Please input password", trigger: "blur" }],
       },
       toggle: false,
     });
 
-    const setToken = function () {
+    const setToken = function() {
       const token = localStorage.getItem("jwt");
       const config = {
         Authorization: `JWT ${token}`,
@@ -155,19 +144,19 @@ export default {
       return config;
     };
 
-    const goToSignup = function () {
+    const goToSignup = function() {
       router.push("/signupterms");
     };
 
-    const goToFindPassword = function () {
+    const goToFindPassword = function() {
       router.push("/findpassword");
     };
 
-    const clickLogin = function () {
+    const clickLogin = function() {
       if (!state.toggle) {
         axios({
           method: "post",
-          url: "http://localhost:8080/auth/personal/login",
+          url: "https://i5a408.p.ssafy.io:8080/auth/personal/login",
           data: {
             email: state.form.email,
             password: state.form.password,
@@ -191,7 +180,7 @@ export default {
       } else {
         axios({
           method: "post",
-          url: "http://localhost:8080/auth/agency/login",
+          url: "https://i5a408.p.ssafy.io:8080/auth/agency/login",
           data: {
             email: state.form.email,
             password: state.form.password,

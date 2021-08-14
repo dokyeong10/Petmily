@@ -130,7 +130,7 @@ export default {
     const getPrivateInfo = async function() {
       await axios({
         method: "get",
-        url: "http://localhost:8080/users/personal/me/",
+        url: "https://i5a408.p.ssafy.io:8080/users/personal/me/",
         headers: {
           Authorization: setToken(),
         },
@@ -161,7 +161,7 @@ export default {
       }
       axios({
         method: "patch",
-        url: `http://localhost:8080/users/personal/${state.email}`,
+        url: `https://i5a408.p.ssafy.io:8080/users/personal/${state.email}`,
         data: {
           email: state.email,
           password: state.password,
@@ -216,7 +216,7 @@ export default {
 
       axios({
         method: "delete",
-        url: `http://localhost:8080/users/personal/${state.email}`,
+        url: `https://i5a408.p.ssafy.io:8080/users/personal/${state.email}`,
       }).then((res) => {
         console.log(res);
         sessionStorage.removeItem("isLogin");

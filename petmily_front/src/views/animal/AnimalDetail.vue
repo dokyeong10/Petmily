@@ -28,7 +28,8 @@ export default {
     const getAnimal = async function() {
       await axios({
         method: "get",
-        url: "http://localhost:8080/animal/details/" + router.currentRoute._value.params.id,
+        url:
+          "https://i5a408.p.ssafy.io:8080/animal/details/" + router.currentRoute._value.params.id,
       })
         .then((res) => {
           aniDetail.aniInfo = res.data;

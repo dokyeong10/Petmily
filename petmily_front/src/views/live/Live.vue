@@ -128,7 +128,7 @@ export default {
     const getLiveInfo = async function() {
       await axios({
         method: "get",
-        url: "http://localhost:8080/live/",
+        url: "https://i5a408.p.ssafy.io:8080/live/",
       })
         .then((res) => {
           // console.log(res);
@@ -181,7 +181,7 @@ export default {
       }
       axios({
         method: "post",
-        url: "http://localhost:8080/live/register",
+        url: "https://i5a408.p.ssafy.io:8080/live/register",
         headers: {
           Authorization: setToken(),
         },

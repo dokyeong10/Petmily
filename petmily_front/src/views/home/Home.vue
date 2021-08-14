@@ -76,7 +76,6 @@
     <br />
     <br />
     <br />
-    
   </div>
 </template>
 <script>
@@ -86,7 +85,6 @@ import HomeLiveList from "@/views/home/components/HomeLiveList";
 import HomeAnimalLIst from "@/views/home/components/HomeAnimalLIst";
 import Jumbotron from "@/views/home/components/Jumbotron";
 import LifeGuardians from "@/views/home/components/LifeGuardians";
-
 
 export default {
   name: "Home",
@@ -108,7 +106,7 @@ export default {
     const getGuardiansInfo = async function() {
       await axios({
         method: "get",
-        url: "http://localhost:8080/shelter/",
+        url: "https://i5a408.p.ssafy.io:8080/shelter/",
       })
         .then((res) => {
           // console.log(res);
@@ -122,7 +120,7 @@ export default {
     const getAnimalInfo = async function() {
       axios({
         method: "post",
-        url: "http://localhost:8080/animal/",
+        url: "https://i5a408.p.ssafy.io:8080/animal/",
         data: {},
       })
         .then((res) => {

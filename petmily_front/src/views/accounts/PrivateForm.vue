@@ -161,7 +161,7 @@ export default {
     const confirmEmail = function() {
       axios({
         method: "post",
-        url: "http://localhost:8080/email/send/register",
+        url: "https://i5a408.p.ssafy.io:8080/email/send/register",
         data: {
           email: state.email,
         },
@@ -183,7 +183,7 @@ export default {
     const confirmNumber = function() {
       axios({
         method: "post",
-        url: "http://localhost:8080/email/check/authcode",
+        url: "https://i5a408.p.ssafy.io:8080/email/check/authcode",
         data: {
           email: state.email,
           authCode: state.number,
@@ -239,7 +239,7 @@ export default {
 
       axios({
         method: "post",
-        url: "http://localhost:8080/users/personal",
+        url: "https://i5a408.p.ssafy.io:8080/users/personal",
         data: {
           email: state.email,
           username: state.username,
