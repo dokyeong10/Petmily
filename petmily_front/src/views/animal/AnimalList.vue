@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="Jbgc" style="height: 350px">
+    <div class="Jbgc mb-5" style="height: 300px">
       <div class="container" style="height: 350px; max-width: 800px">
         <div class="d-flex flex-column">
           <div class="d-flex flex-column align-items-start mt-5">
@@ -40,7 +40,7 @@
             </button>
             <div class="mt-4 ms-4">
               <label for="isLike">즐겨찾기한 동물</label>
-              <input type="checkbox" class="ms-1" v-model="state.isLike" />
+              <input type="checkbox" class="ms-1" v-model="state.isLike" @click="getFavoriteOnly" />
             </div>
           </div>
           <!-- <div
@@ -81,12 +81,33 @@
                     :src="animal.profile_img"
                     onerror="this.src='https://petmily.s3.ap-northeast-2.amazonaws.com/PetmilyLogo.png'"
                     class="img-fluid rounded-start"
+                    style="width: 240px; height: 240px"
                     alt="..."
                   />
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
-                    <h5 class="card-title">{{ animal.type }}</h5>
+                    <div class="d-flex justify-content-center">
+                      <h5 class="card-title mb-0 me-2">{{ animal.type }}</h5>
+                      <div v-if="isLogin && !isAgency" class="card-text">
+                        <div v-if="favoriteFilter(animal)">
+                          <font-awesome-icon
+                            :icon="['fas', 'heart']"
+                            id="myDiv"
+                            style="color: red; font-size: 25;"
+                            @click="cancelFavorite(animal)"
+                          />
+                        </div>
+                        <div v-else>
+                          <font-awesome-icon
+                            :icon="['far', 'heart']"
+                            id="myDiv"
+                            style="color: red; font-size: 25;"
+                            @click="addToFavorite(animal)"
+                          />
+                        </div>
+                      </div>
+                    </div>
                     <p class="card-text">{{ animal.species }}</p>
                     <p class="card-text">{{ animal.text }}</p>
                     <p class="card-text">
@@ -95,30 +116,7 @@
                         {{ animal.find_date.substring(11, 19) }}</small
                       >
                     </p>
-                    <div v-if="isLogin && !isAgency" class="card-text">
-                      <div
-                        v-if="
-                          state.favoriteData &&
-                            state.favoriteData[state.userno] &&
-                            state.favoriteData[state.userno][animal.no]
-                        "
-                      >
-                        <font-awesome-icon
-                          :icon="['fas', 'heart']"
-                          id="myDiv"
-                          style="color: red"
-                          @click="cancelFavorite(animal)"
-                        />
-                      </div>
-                      <div v-else>
-                        <font-awesome-icon
-                          :icon="['far', 'heart']"
-                          id="myDiv"
-                          style="color: red"
-                          @click="addToFavorite(animal)"
-                        />
-                      </div>
-                    </div>
+
                     <button class="btn-detail mb-3" style="height: 35px" @click="goDetail(animal)">
                       상세보기
                     </button>
@@ -165,11 +163,10 @@ export default {
           key: "all",
           word: "",
           isLike: state.isLike,
-          no: getUserInfo(),
+          no: state.userno,
         },
       })
         .then((res) => {
-          console.log(res);
           state.data = res.data;
           state.numberOfItems = 4;
           if (state.data.length % state.numberOfItems) {
@@ -191,21 +188,111 @@ export default {
       const no = localStorage.getItem("userno");
       return no;
     };
+    const getFavoriteInfo = function() {
+      axios({
+        method: "get",
+        url: `http://localhost:8080/users/like/${localStorage.getItem("userno")}`,
+      })
+        .then((res) => {
+          state.favoriteData = res.data;
+          state.favoriteArray = [];
+          state.favoriteData.forEach((element) => {
+            if (!state.favoriteArray.includes(element.animalno)) {
+              state.favoriteArray.push(element.animalno);
+            }
+          });
+          state.favoriteArray.sort(function(a, b) {
+            return a - b;
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getFavoriteInfo();
 
     const router = useRouter();
     const state = reactive({
       key: "",
       word: "",
-      userno: "",
+      userno: getUserInfo(),
       // isClickedSearch: false,
       data: {},
       favoriteData: {},
-      isFavorite: false,
+      favoriteArray: [],
+      tempFavoriteNumber: "",
       numberOfItems: 4,
       page: 1,
       numberOfPages: 0,
       isLike: false,
     });
+
+    const getAll = function() {
+      axios({
+        method: "post",
+        url: "http://localhost:8080/animal/",
+        data: {
+          key: "all",
+          word: "",
+          isLike: false,
+          no: state.userno,
+        },
+      })
+        .then((res) => {
+          state.data = res.data;
+          state.numberOfItems = 4;
+          if (state.data.length % state.numberOfItems) {
+            state.numberOfPages =
+              (state.data.length - (state.data.length % state.numberOfItems)) /
+                state.numberOfItems +
+              1;
+          } else {
+            state.numberOfPages =
+              (state.data.length - (state.data.length % state.numberOfItems)) / state.numberOfItems;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    const getFavoriteOnly = function() {
+      if (state.isLike) {
+        getAll();
+      } else {
+        axios({
+          method: "post",
+          url: "http://localhost:8080/animal/",
+          data: {
+            key: state.key,
+            word: state.word,
+            isLike: state.isLike,
+            no: state.userno,
+          },
+        }).then((res) => {
+          console.log(state.isLike);
+          state.page = 1;
+          state.data = [];
+          res.data.forEach((element) => {
+            if (state.favoriteArray.includes(element.no)) state.data.push(element);
+            state.data.sort(function(a, b) {
+              if (a.no < b.no) return -1;
+              if (a.no > b.no) return 1;
+              return 0;
+            });
+          });
+          state.numberOfItems = 4;
+          if (state.data.length % state.numberOfItems) {
+            state.numberOfPages =
+              (state.data.length - (state.data.length % state.numberOfItems)) /
+                state.numberOfItems +
+              1;
+          } else {
+            state.numberOfPages =
+              (state.data.length - (state.data.length % state.numberOfItems)) / state.numberOfItems;
+          }
+        });
+      }
+    };
 
     const goToAnimalRegister = function() {
       router.push("/animalregister");
@@ -226,11 +313,10 @@ export default {
           key: state.key,
           word: state.word,
           isLike: state.isLike,
-          no: getUserInfo(),
+          no: state.userno,
         },
       })
         .then((res) => {
-          console.log(res);
           state.data = res.data;
           if (state.data.length % state.numberOfItems) {
             state.numberOfPages =
@@ -258,11 +344,8 @@ export default {
         },
       })
         .then((res) => {
+          getFavoriteInfo();
           console.log(res);
-          const obj = {};
-          obj[animal.no] = res.data.no;
-          state.favoriteData[state.userno] = obj;
-          console.log(state.favoriteData);
         })
         .catch((err) => {
           console.log(err);
@@ -270,15 +353,18 @@ export default {
     };
 
     const cancelFavorite = function(animal) {
-      const favoriteNo = state.favoriteData[state.userno][animal.no];
-      console.log(favoriteNo);
+      state.favoriteData.forEach((element) => {
+        if (element.animalno === animal.no) {
+          state.tempFavoriteNumber = element.no;
+        }
+      });
       axios({
         method: "delete",
-        url: `https://i5a408.p.ssafy.io:8080/users/like/${favoriteNo}`,
+        url: `http://localhost:8080/users/like/${state.tempFavoriteNumber}`,
       })
         .then((res) => {
           console.log(res);
-          state.favoriteData[state.userno][animal.no] = null;
+          getFavoriteInfo();
         })
         .catch((err) => {
           console.log(err);
@@ -303,6 +389,14 @@ export default {
       });
     };
 
+    const favoriteFilter = function(animal) {
+      if (state.favoriteArray.includes(animal.no)) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+
     return {
       state,
       goToAnimalRegister,
@@ -316,6 +410,10 @@ export default {
       pageDown,
       goToPage,
       goDetail,
+      getFavoriteInfo,
+      getAll,
+      getFavoriteOnly,
+      favoriteFilter,
     };
   },
 };

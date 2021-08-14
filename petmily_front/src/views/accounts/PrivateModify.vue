@@ -224,7 +224,7 @@ export default {
         localStorage.removeItem("email");
         sessionStorage.removeItem("isAgency");
         sessionStorage.removeItem("isUser");
-        router.go("/home");
+        router.go("/");
       });
     };
 
