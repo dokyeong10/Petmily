@@ -35,11 +35,7 @@
                 />
               </div>
             </div>
-            <button
-              class="btn-up"
-              @click="search"
-              style="height: 30px; margin-top: 24px"
-            >
+            <button class="btn-up" @click="search" style="height: 30px; margin-top: 24px">
               검색
             </button>
             <div class="mt-4 ms-4">
@@ -55,10 +51,7 @@
             필터를 선택해주세요!
           </div> -->
         </div>
-        <div
-          class="d-flex align-items-end flex-column-reverse"
-          style="height: 140px"
-        >
+        <div class="d-flex align-items-end flex-column-reverse" style="height: 140px">
           <div v-if="isAgency">
             <button
               @click="goToAnimalRegister"
@@ -78,8 +71,7 @@
         <div class="col-md-6" v-for="(animal, no) in state.data" :key="no">
           <div
             v-if="
-              no < state.numberOfItems * state.page &&
-              no >= state.numberOfItems * (state.page - 1)
+              no < state.numberOfItems * state.page && no >= state.numberOfItems * (state.page - 1)
             "
           >
             <div class="card mb-3" style="max-width: 636px">
@@ -95,11 +87,10 @@
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
-                    <div class="d-flex justify-content-center"><h5 class="card-title mb-0 me-2">{{ animal.type }}</h5>
+                    <div class="d-flex justify-content-center">
+                      <h5 class="card-title mb-0 me-2">{{ animal.type }}</h5>
                       <div v-if="isLogin && !isAgency" class="card-text">
-                        <div
-                          v-if="favoriteFilter(animal)"
-                        >
+                        <div v-if="favoriteFilter(animal)">
                           <font-awesome-icon
                             :icon="['fas', 'heart']"
                             id="myDiv"
@@ -125,12 +116,8 @@
                         {{ animal.find_date.substring(11, 19) }}</small
                       >
                     </p>
-                    
-                    <button
-                      class="btn-detail mb-3"
-                      style="height: 35px"
-                      @click="goDetail(animal)"
-                    >
+
+                    <button class="btn-detail mb-3" style="height: 35px" @click="goDetail(animal)">
                       상세보기
                     </button>
                   </div>
@@ -145,12 +132,7 @@
   <div class="d-flex justify-content-center">
     <a id="myA" v-if="state.page > 1" @click="pageDown">Prev</a>
     <div v-for="(n, idx) in state.numberOfPages" :key="idx">
-      <div
-        v-if="
-          n <= state.page - (state.page % 10) + 10 &&
-          n > state.page - (state.page % 10)
-        "
-      >
+      <div v-if="n <= state.page - (state.page % 10) + 10 && n > state.page - (state.page % 10)">
         <div v-if="state.page == n">
           <a style="font-weight: 600">{{ n }}</a>
         </div>
@@ -159,10 +141,7 @@
         </div>
       </div>
     </div>
-    <a
-      id="myA"
-      v-if="state.data.length - state.numberOfItems * state.page > 0"
-      @click="pageUp"
+    <a id="myA" v-if="state.data.length - state.numberOfItems * state.page > 0" @click="pageUp"
       >Next</a
     >
   </div>
@@ -197,8 +176,7 @@ export default {
               1;
           } else {
             state.numberOfPages =
-              (state.data.length - (state.data.length % state.numberOfItems)) /
-              state.numberOfItems;
+              (state.data.length - (state.data.length % state.numberOfItems)) / state.numberOfItems;
           }
         })
         .catch((err) => {
@@ -206,32 +184,31 @@ export default {
         });
     });
 
-    const getUserInfo = function () {
+    const getUserInfo = function() {
       const no = localStorage.getItem("userno");
       return no;
     };
-    const getFavoriteInfo = function () {
+    const getFavoriteInfo = function() {
       axios({
         method: "get",
-        url: `http://localhost:8080/users/like/${localStorage.getItem("userno")}`
+        url: `http://localhost:8080/users/like/${localStorage.getItem("userno")}`,
       })
         .then((res) => {
-          state.favoriteData = res.data
-          state.favoriteArray = []
-          state.favoriteData.forEach(element => {
+          state.favoriteData = res.data;
+          state.favoriteArray = [];
+          state.favoriteData.forEach((element) => {
             if (!state.favoriteArray.includes(element.animalno)) {
-              state.favoriteArray.push(element.animalno)
+              state.favoriteArray.push(element.animalno);
             }
           });
           state.favoriteArray.sort(function(a, b) {
             return a - b;
-          })
+          });
         })
         .catch((err) => {
-          console.log(err)
-        })
-      
-    }
+          console.log(err);
+        });
+    };
     getFavoriteInfo();
 
     const router = useRouter();
@@ -250,7 +227,7 @@ export default {
       isLike: false,
     });
 
-    const getAll = function () {
+    const getAll = function() {
       axios({
         method: "post",
         url: "http://localhost:8080/animal/",
@@ -271,17 +248,16 @@ export default {
               1;
           } else {
             state.numberOfPages =
-              (state.data.length - (state.data.length % state.numberOfItems)) /
-              state.numberOfItems;
+              (state.data.length - (state.data.length % state.numberOfItems)) / state.numberOfItems;
           }
         })
         .catch((err) => {
           console.log(err);
         });
-    }
-    const getFavoriteOnly = function () {
+    };
+    const getFavoriteOnly = function() {
       if (state.isLike) {
-        getAll()
+        getAll();
       } else {
         axios({
           method: "post",
@@ -292,36 +268,33 @@ export default {
             isLike: state.isLike,
             no: state.userno,
           },
-        })
-          .then((res) => {
-            console.log(state.isLike)
-              state.page = 1
-              state.data = []
-              res.data.forEach(element => {
-                if (state.favoriteArray.includes(element.no))
-                state.data.push(element)
-                state.data.sort(function(a, b) {
-                  if (a.no < b.no) return -1;
-                  if (a.no > b.no) return 1;
-                  return 0;
-                })
-              })
-              state.numberOfItems = 4;
-              if (state.data.length % state.numberOfItems) {
-                state.numberOfPages =
-                  (state.data.length - (state.data.length % state.numberOfItems)) /
-                    state.numberOfItems +
-                  1;
-              } else {
-                state.numberOfPages =
-                  (state.data.length - (state.data.length % state.numberOfItems)) /
-                  state.numberOfItems;
-              }
-          })
+        }).then((res) => {
+          console.log(state.isLike);
+          state.page = 1;
+          state.data = [];
+          res.data.forEach((element) => {
+            if (state.favoriteArray.includes(element.no)) state.data.push(element);
+            state.data.sort(function(a, b) {
+              if (a.no < b.no) return -1;
+              if (a.no > b.no) return 1;
+              return 0;
+            });
+          });
+          state.numberOfItems = 4;
+          if (state.data.length % state.numberOfItems) {
+            state.numberOfPages =
+              (state.data.length - (state.data.length % state.numberOfItems)) /
+                state.numberOfItems +
+              1;
+          } else {
+            state.numberOfPages =
+              (state.data.length - (state.data.length % state.numberOfItems)) / state.numberOfItems;
+          }
+        });
       }
-    }
+    };
 
-    const goToAnimalRegister = function () {
+    const goToAnimalRegister = function() {
       router.push("/animalregister");
     };
 
@@ -332,7 +305,7 @@ export default {
     const isLogin = computed(() => {
       return sessionStorage.getItem("isLogin");
     });
-    const search = function () {
+    const search = function() {
       axios({
         method: "post",
         url: "http://localhost:8080/animal/",
@@ -344,7 +317,6 @@ export default {
         },
       })
         .then((res) => {
-          
           state.data = res.data;
           if (state.data.length % state.numberOfItems) {
             state.numberOfPages =
@@ -353,8 +325,7 @@ export default {
               1;
           } else {
             state.numberOfPages =
-              (state.data.length - (state.data.length % state.numberOfItems)) /
-              state.numberOfItems;
+              (state.data.length - (state.data.length % state.numberOfItems)) / state.numberOfItems;
           }
         })
         .catch((err) => {
@@ -363,7 +334,7 @@ export default {
       // state.isClickedSearch = true;
     };
 
-    const addToFavorite = function (animal) {
+    const addToFavorite = function(animal) {
       axios({
         method: "post",
         url: "http://localhost:8080/users/like",
@@ -374,19 +345,19 @@ export default {
       })
         .then((res) => {
           getFavoriteInfo();
-          console.log(res)
+          console.log(res);
         })
         .catch((err) => {
           console.log(err);
         });
     };
 
-    const cancelFavorite = function (animal) {
-      state.favoriteData.forEach(element => {
+    const cancelFavorite = function(animal) {
+      state.favoriteData.forEach((element) => {
         if (element.animalno === animal.no) {
           state.tempFavoriteNumber = element.no;
         }
-      })
+      });
       axios({
         method: "delete",
         url: `http://localhost:8080/users/like/${state.tempFavoriteNumber}`,
@@ -400,16 +371,16 @@ export default {
         });
     };
 
-    const pageUp = function () {
+    const pageUp = function() {
       state.page++;
     };
-    const pageDown = function () {
+    const pageDown = function() {
       state.page--;
     };
-    const goToPage = function (n) {
+    const goToPage = function(n) {
       state.page = n;
     };
-    const goDetail = function (animal) {
+    const goDetail = function(animal) {
       router.push({
         name: "animaldetail",
         params: {
@@ -418,13 +389,13 @@ export default {
       });
     };
 
-    const favoriteFilter = function (animal) {
+    const favoriteFilter = function(animal) {
       if (state.favoriteArray.includes(animal.no)) {
-        return true
+        return true;
       } else {
-        return false
+        return false;
       }
-    }
+    };
 
     return {
       state,

@@ -1,6 +1,6 @@
 <template>
   <div class="Jbgc" style="height: 600px;">
-    <br/>
+    <br />
     <div class="container">
       <div class="d-flex justify-content-start">
         <div class="me-5">
@@ -21,13 +21,23 @@
           <div class=" mt-1 mb-3 font-bold" align="left" style="font-size: 17px;">
             나이: {{ aniInfo.age }}
           </div>
-          <div class=" mt-1 mb-3 font-bold" align="left" style="font-size: 17px;" v-if="aniInfo.sex">
+          <div
+            class=" mt-1 mb-3 font-bold"
+            align="left"
+            style="font-size: 17px;"
+            v-if="aniInfo.sex"
+          >
             성별: 수컷
           </div>
           <div class=" mt-1 mb-3 font-bold" align="left" style="font-size: 17px;" v-else>
             성별: 암컷
           </div>
-          <div class=" mt-1 mb-3 font-bold" align="left" style="font-size: 17px;" v-if="aniInfo.neutered">
+          <div
+            class=" mt-1 mb-3 font-bold"
+            align="left"
+            style="font-size: 17px;"
+            v-if="aniInfo.neutered"
+          >
             중성화: O
           </div>
           <div class=" mt-1 mb-3 font-bold" align="left" style="font-size: 17px;" v-else>
@@ -38,28 +48,53 @@
           </div>
         </div>
       </div>
-      <br>
+      <br />
       <div v-if="aniInfo.agencycode == state.agencycode" class="d-flex justify-content-end">
         <button class="me-3 btn-modify" @click="animalModify">수정하기</button>
         <!-- Button trigger modal -->
-        <button type="button" class="btn-delete" data-bs-toggle="modal" data-bs-target="#animalDeleteModal">
+        <button
+          type="button"
+          class="btn-delete"
+          data-bs-toggle="modal"
+          data-bs-target="#animalDeleteModal"
+        >
           삭제하기
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="animalDeleteModal" tabindex="-1" aria-labelledby="animalDeleteModalLabel" aria-hidden="true">
+        <div
+          class="modal fade"
+          id="animalDeleteModal"
+          tabindex="-1"
+          aria-labelledby="animalDeleteModalLabel"
+          aria-hidden="true"
+        >
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="animalDeleteModalLabel">삭제 확인</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
               </div>
               <div class="modal-body">
                 정말 삭제하시겠습니까?
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="animalDelete">삭제</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                  @click="animalDelete"
+                >
+                  삭제
+                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                  취소
+                </button>
               </div>
             </div>
           </div>
@@ -76,7 +111,7 @@ import axios from "axios";
 
 export default {
   props: {
-    aniInfo: Object
+    aniInfo: Object,
   },
   setup(props) {
     onMounted(() => {
@@ -90,47 +125,47 @@ export default {
         url: "http://localhost:8080/users/agency/me",
         headers: {
           Authorization: setToken(),
-        }
+        },
       })
-      .then((res) => {
-        state.agencycode = res.data.agencycode
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    })
+        .then((res) => {
+          state.agencycode = res.data.agencycode;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
     const router = useRouter();
 
     const state = reactive({
       agencycode: "",
-    })
+    });
 
-    const animalModify = function () {
+    const animalModify = function() {
       router.push({
         name: "animalmodify",
         params: {
           no: props.aniInfo.no,
         },
       });
-    }
-    const animalDelete = function () {
+    };
+    const animalDelete = function() {
       axios({
         method: "delete",
         url: `http://localhost:8080/animal/${props.aniInfo.no}`,
       })
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       router.push({
         name: "animaldelete",
       });
-    }
-    return { state, animalModify, animalDelete, }
+    };
+    return { state, animalModify, animalDelete };
   },
-}
+};
 </script>
 
 <style>
@@ -145,7 +180,7 @@ export default {
 .btn-modify {
   width: 15%;
   height: 30px;
-  background-color: #A4B5F0;
+  background-color: #a4b5f0;
   border-style: none;
   border-radius: 30px;
   color: white;
@@ -153,7 +188,7 @@ export default {
 .btn-delete {
   width: 15%;
   height: 30px;
-  background-color: #FF8B8B;
+  background-color: #ff8b8b;
   border-style: none;
   border-radius: 30px;
   color: white;

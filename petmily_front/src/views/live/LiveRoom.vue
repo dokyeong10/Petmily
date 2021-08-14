@@ -2,7 +2,7 @@
   <div class="Jbgc" style="height: 100%;">
     <div id="main-container" class=" container">
       <div id="join" v-if="!session">
-        <div id="join-dialog" class="jumbotron vertical-center mt-5">
+        <div id="join-dialog" class="">
           <div class="font-bold mt-4 mb-5" style="font-size:40px">라이브 입장</div>
           <div class="form-group">
             <div class="font-bold mb-3 d-flex flex-row" style="font-size:18px">
@@ -32,28 +32,62 @@
     </div>
 
     <div id="session" v-if="session">
-      <div id="session-header">
+      <div id="session-header" class="">
         <!-- <h1 id="session-title">{{ mySessionId }}</h1> -->
-        <input
-          class="btn btn-large btn-danger"
-          type="button"
-          id="buttonLeaveSession"
-          @click="leaveSession"
-          value="라이브 나가기"
-        />
       </div>
-      <div id="main-video" class="col">
-        <user-video :stream-manager="mainStreamManager" class="LiveImg" />
+      <div class="mb-4">
+        <div class="d-flex">
+          <input
+            class="btn-out"
+            type="button"
+            id="buttonLeaveSession"
+            @click="leaveSession"
+            value="라이브 나가기"
+          />
+        </div>
       </div>
-      <div id="video-container" class="col">
-        <user-video :stream-manager="publisher" @click="updateMainVideoStreamManager(publisher)" />
-        <user-video
-          v-for="sub in subscribers"
-          :key="sub.stream.connection.connectionId"
-          :stream-manager="sub"
-          @click="updateMainVideoStreamManager(sub)"
-          class="LiveImg"
-        />
+      <div class="row">
+        <div id="main-video" class="main-video col-10">
+          <!-- <user-video :stream-manager="mainStreamManager" /> -->
+
+          <div id="video-container" class="col">
+            <user-video
+              v-if="this.isHost"
+              :stream-manager="publisher"
+              @click="updateMainVideoStreamManager(publisher)"
+            />
+            <user-video
+              v-else
+              v-for="sub in subscribers"
+              :key="sub.stream.connection.connectionId"
+              :stream-manager="sub"
+              @click="updateMainVideoStreamManager(sub)"
+            />
+          </div>
+        </div>
+        <div class="col-2">
+          <input
+            v-if="!chatting"
+            class="btn-chat"
+            type="button"
+            id="buttonChatting"
+            @click="chattingOnOff()"
+            value="chatting on"
+          />
+          <input
+            v-else
+            class="btn-chat"
+            type="button"
+            id="buttonChatting"
+            @click="chattingOnOff()"
+            value="chatting off"
+          />
+
+          <div>
+            <MessageList :msgs="msgs" />
+            <MessageForm @sendMsg="sendMsg" :user-name="myUserName" />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -63,11 +97,13 @@
 import axios from "axios";
 import { OpenVidu } from "openvidu-browser";
 import UserVideo from "./components/UserVideo";
+import MessageForm from "./components/messageForm";
+import MessageList from "./components/messageList";
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
-const OPENVIDU_SERVER_URL = "https://i5a408.p.ssafy.io";
-const OPENVIDU_SERVER_SECRET = "petmily";
+const OPENVIDU_SERVER_URL = "https://i5b101.p.ssafy.io:443";
+const OPENVIDU_SERVER_SECRET = "MY_SECRET";
 
 export default {
   name: "LiveRoom",
@@ -77,6 +113,8 @@ export default {
 
   components: {
     UserVideo,
+    MessageForm,
+    MessageList,
   },
 
   data() {
@@ -90,10 +128,53 @@ export default {
 
       mySessionId: location.pathname.substring(10, location.pathname.length),
       myUserName: "",
+
+      //chatting
+      msgs: [],
+      vOnOff: true,
+      aOnOff: true,
+      size: true,
+      chatting: false,
+      isHost: false,
     };
+  },
+  created() {
+    this.isHost = localStorage.getItem("agencycode") === this.mySessionId ? true : false;
+    console.log(this.mySessionId);
+    console.log(localStorage.getItem("agencycode"));
+    console.log(this.isHost);
+    console.log(localStorage.getItem("agencycode") === this.mySessionId ? true : false);
   },
 
   methods: {
+    chattingOnOff() {
+      this.chatting = !this.chatting;
+      console.log(" 공유 여부 ");
+      console.log(this.subscribers[1].stream.typeOfVideo);
+    },
+    audioOnOff() {
+      this.publisher.publishAudio(!this.aOnOff);
+      this.aOnOff = !this.aOnOff;
+    },
+    videoOnOff() {
+      this.publisher.publishVideo(!this.vOnOff);
+      this.vOnOff = !this.vOnOff;
+    },
+    sendMsg(msg) {
+      // Sender of the message (after 'session.connect')
+      this.session
+        .signal({
+          data: msg, // Any string (optional)
+          to: [], // Array of Connection objects (optional. Broadcast to everyone if empty)
+          type: "my-chat", // The type of message (optional)
+        })
+        .then(() => {
+          console.log("Message successfully sent");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
     joinSession() {
       // --- Get an OpenVidu object ---
       this.OV = new OpenVidu();
@@ -121,6 +202,14 @@ export default {
       this.session.on("exception", ({ exception }) => {
         console.warn(exception);
       });
+      this.session.on("signal:my-chat", (event) => {
+        // console.log(event.data); // Message
+        // console.log(event.from); // Connection object of the sender
+        // console.log(event.type); // The type of message ("my-chat")
+        const tmp = this.msgs.slice();
+        tmp.push(event.data);
+        this.msgs = tmp;
+      });
 
       // --- Connect to the session with a valid user token ---
 
@@ -137,13 +226,14 @@ export default {
               videoSource: undefined, // The source of video. If undefined default webcam
               publishAudio: true, // Whether you want to start publishing with your audio unmuted or not
               publishVideo: true, // Whether you want to start publishing with your video enabled or not
-              resolution: "640x480", // The resolution of your video
+              resolution: "1280x1280", // The resolution of your video
               frameRate: 30, // The frame rate of your video
               insertMode: "APPEND", // How the video is inserted in the target element 'video-container'
               mirror: false, // Whether to mirror your local video or not
             });
 
             this.mainStreamManager = publisher;
+
             this.publisher = publisher;
 
             // --- Publish your stream ---
@@ -176,6 +266,9 @@ export default {
       this.mainStreamManager = stream;
     },
 
+    deleteMainVideoStreamManager() {
+      this.mainOnOff = false;
+    },
     /**
      * --------------------------
      * SERVER-SIDE RESPONSIBILITY
@@ -232,11 +325,14 @@ export default {
 
     // See https://docs.openvidu.io/en/stable/reference-docs/REST-API/#post-openviduapisessionsltsession_idgtconnection
     createToken(sessionId) {
+      let myrole = this.isHost ? "PUBLISHER" : "SUBSCRIBER";
       return new Promise((resolve, reject) => {
         axios
           .post(
             `${OPENVIDU_SERVER_URL}/openvidu/api/sessions/${sessionId}/connection`,
-            {},
+            {
+              role: myrole,
+            },
             {
               auth: {
                 username: "OPENVIDUAPP",
@@ -255,5 +351,27 @@ export default {
 <style>
 .LiveImg {
   display: inline;
+}
+.btn-chat {
+  color: white;
+  width: 90%;
+  height: 40px;
+  background-color: #a4b5f0;
+  border-right: #a4b5f0 1px solid;
+  border-left: #a4b5f0 1px solid;
+  border-top: #a4b5f0 1px solid;
+  border-bottom: #a4b5f0 1px solid;
+  border-style: none;
+  border-radius: 12px;
+  margin-bottom: 6px;
+}
+.btn-out {
+  color: rgb(255, 255, 255);
+  width: 150px;
+  height: 50px;
+  background-color: #8376fc;
+  border-style: none;
+  border-radius: 12px;
+  margin-left: 10px;
 }
 </style>
