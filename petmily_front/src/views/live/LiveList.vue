@@ -13,7 +13,7 @@
           @click="goToRoom"
         /><img
           v-else
-          src="@/assets/dogyellow.png"
+          src="@/assets/PetmilyLogo.png"
           class="card-img-top mb-3 justify-content-between imglive"
           style="border-radius:15px;height: 250px;"
           align="center"

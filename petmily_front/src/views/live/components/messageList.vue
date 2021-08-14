@@ -1,7 +1,7 @@
 <template>
-  <el-scrollbar class="container">
-    <Message v-for="(msg, index) in msgs" :key="index" :msg="msg" />
-  </el-scrollbar>
+  <div class="container">
+    <Message v-for="(msg, index) in msgs" :key="index" :msg="msg" style="color:black" />
+  </div>
   <!-- <div class="container">
     <Message v-for="(msg, index) in msgs" :key="index" :msg="msg" />
   </div> -->
@@ -24,8 +24,9 @@ export default {
 
 <style scoped>
 .container {
-  height: 500px;
-  width: 500px;
-  background: rgba(255, 209, 2, 0.61);
+  height: 620px;
+  width: 90%;
+  background: rgba(207, 190, 207, 0.61);
+  overflow: scroll;
 }
 </style>

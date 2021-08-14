@@ -193,6 +193,7 @@ export default {
       })
         .then((res) => {
           location.reload();
+          this.$refs["LiveModal"].hide();
           router.push(`/liveroom/${res.data.agencycode}`);
         })
         .catch((err) => {

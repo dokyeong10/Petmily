@@ -1,22 +1,21 @@
 <template>
-  <el-form @keyup.enter="submitForm" label-width="100px">
-    <el-row>
-      <el-col :span="19">
-        <el-input
+  <form @keypress="if (event.keyCode == 13) submitForm;" label-width="100px">
+    <div class="chatbox d-flex-lg-row">
+      <span>
+        <input
           type="textarea"
-          :rows="2"
           placeholder="채팅을 입력하세요."
+          class="chat"
           v-model="messageForm.message"
-        >
-        </el-input>
-      </el-col>
-      <el-col :span="2">
-        <el-button class="my-btn" type="primary" @click="submitForm"
-          >입력</el-button
-        >
-      </el-col>
-    </el-row>
-  </el-form>
+        />
+      </span>
+      <span>
+        <button class="my-btn btn-up mt-1" type="primary" @click="submitForm">
+          입력
+        </button></span
+      >
+    </div>
+  </form>
 </template>
 
 <script>
@@ -24,13 +23,13 @@ export default {
   data() {
     return {
       messageForm: {
-        message: ""
-      }
+        message: "",
+      },
     };
   },
 
   props: {
-    userName: String
+    userName: String,
   },
 
   methods: {
@@ -41,13 +40,21 @@ export default {
         this.$emit("sendMsg", "[" + this.userName + "] : " + msg);
       }
       this.messageForm.message = "";
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
 .my-btn {
-  height: 100%;
+  height: 40px;
+  width: 90%;
 }
+.chat {
+  width: 90%;
+  height: 50px;
+}
+/* .chatbox {
+  width: 100%;
+} */
 </style>

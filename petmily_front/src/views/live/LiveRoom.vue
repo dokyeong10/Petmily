@@ -2,7 +2,7 @@
   <div class="Jbgc" style="height: 100%;">
     <div id="main-container" class=" container">
       <div id="join" v-if="!session">
-        <div id="join-dialog" class="jumbotron vertical-center mt-5">
+        <div id="join-dialog" class="">
           <div class="font-bold mt-4 mb-5" style="font-size:40px">라이브 입장</div>
           <div class="form-group">
             <div class="font-bold mb-3 d-flex flex-row" style="font-size:18px">
@@ -32,11 +32,13 @@
     </div>
 
     <div id="session" v-if="session">
-      <div id="session-header">
+      <div id="session-header" class="">
         <!-- <h1 id="session-title">{{ mySessionId }}</h1> -->
-        <div class="d-flex m-5">
+      </div>
+      <div class="mb-4">
+        <div class="d-flex">
           <input
-            class="btn btn-large btn-danger"
+            class="btn-out"
             type="button"
             id="buttonLeaveSession"
             @click="leaveSession"
@@ -44,62 +46,48 @@
           />
         </div>
       </div>
-      <div id="main-video" class="main-video">
-        <user-video :stream-manager="mainStreamManager" />
-      </div>
-      <!-- <div id="video-container" class="col">
-        <user-video :stream-manager="publisher" @click="updateMainVideoStreamManager(publisher)" />
-        <user-video
-          v-for="sub in subscribers"
-          :key="sub.stream.connection.connectionId"
-          :stream-manager="sub"
-          @click="updateMainVideoStreamManager(sub)"
-          class="LiveImg"
-        />
-      </div> -->
-      <input
-        v-if="!chatting"
-        class="btn btn-large btn-danger"
-        type="button"
-        id="buttonChatting"
-        @click="chattingOnOff()"
-        value="chatting on"
-      />
-      <input
-        v-else
-        class="btn btn-large btn-danger"
-        type="button"
-        id="buttonChatting"
-        @click="chattingOnOff()"
-        value="chatting off"
-      />
-      <input
-        v-if="!connectionUser"
-        class="btn btn-large btn-danger"
-        type="button"
-        id="buttonConnectionUser"
-        @click="connectionUserOnOff()"
-        value="connectionUser on"
-      />
-      <input
-        v-else
-        class="btn btn-large btn-danger"
-        type="button"
-        id="buttonConnectionUser"
-        @click="connectionUserOnOff()"
-        value="connectionUser off"
-      />
-      <div v-if="chatting">
-        <MessageList :msgs="msgs" />
-        <MessageForm @sendMsg="sendMsg" :user-name="myUserName" />
-      </div>
-      <div id="conferenceFooter">
-        <button v-if="vOnOff" type="success" circle @click="videoOnOff()"></button>
-        <button v-else type="danger" circle @click="videoOnOff()"></button>
-        <button v-if="aOnOff" type="success" circle @click="audioOnOff()"></button>
-        <button v-else type="danger" circle @click="audioOnOff()"></button>
-        <button type="success" circle @click="toggleScreanshare()"></button>
-        <button type="danger" circle @click="leaveSession"></button>
+      <div class="row">
+        <div id="main-video" class="main-video col-10">
+          <!-- <user-video :stream-manager="mainStreamManager" /> -->
+
+          <div id="video-container" class="col">
+            <user-video
+              v-if="this.isHost"
+              :stream-manager="publisher"
+              @click="updateMainVideoStreamManager(publisher)"
+            />
+            <user-video
+              v-else
+              v-for="sub in subscribers"
+              :key="sub.stream.connection.connectionId"
+              :stream-manager="sub"
+              @click="updateMainVideoStreamManager(sub)"
+            />
+          </div>
+        </div>
+        <div class="col-2">
+          <input
+            v-if="!chatting"
+            class="btn-chat"
+            type="button"
+            id="buttonChatting"
+            @click="chattingOnOff()"
+            value="chatting on"
+          />
+          <input
+            v-else
+            class="btn-chat"
+            type="button"
+            id="buttonChatting"
+            @click="chattingOnOff()"
+            value="chatting off"
+          />
+
+          <div>
+            <MessageList :msgs="msgs" />
+            <MessageForm @sendMsg="sendMsg" :user-name="myUserName" />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -134,7 +122,7 @@ export default {
       OV: undefined,
       session: undefined,
       mainStreamManager: undefined,
-      // publisher: undefined,
+      publisher: undefined,
       subscribers: [],
       URL: location.pathname,
 
@@ -147,7 +135,15 @@ export default {
       aOnOff: true,
       size: true,
       chatting: false,
+      isHost: false,
     };
+  },
+  created() {
+    this.isHost = localStorage.getItem("agencycode") === this.mySessionId ? true : false;
+    console.log(this.mySessionId);
+    console.log(localStorage.getItem("agencycode"));
+    console.log(this.isHost);
+    console.log(localStorage.getItem("agencycode") === this.mySessionId ? true : false);
   },
 
   methods: {
@@ -230,19 +226,19 @@ export default {
               videoSource: undefined, // The source of video. If undefined default webcam
               publishAudio: true, // Whether you want to start publishing with your audio unmuted or not
               publishVideo: true, // Whether you want to start publishing with your video enabled or not
-              resolution: "720x450", // The resolution of your video
+              resolution: "1280x1280", // The resolution of your video
               frameRate: 30, // The frame rate of your video
               insertMode: "APPEND", // How the video is inserted in the target element 'video-container'
               mirror: false, // Whether to mirror your local video or not
             });
 
             this.mainStreamManager = publisher;
-            this.session.publish(this.mainStreamManager);
-            //this.publisher = publisher;
+
+            this.publisher = publisher;
 
             // --- Publish your stream ---
 
-            // this.session.publish(this.publisher);
+            this.session.publish(this.publisher);
           })
           .catch((error) => {
             console.log("There was an error connecting to the session:", error.code, error.message);
@@ -258,7 +254,7 @@ export default {
 
       this.session = undefined;
       this.mainStreamManager = undefined;
-      //this.publisher = undefined;
+      this.publisher = undefined;
       this.subscribers = [];
       this.OV = undefined;
 
@@ -329,11 +325,14 @@ export default {
 
     // See https://docs.openvidu.io/en/stable/reference-docs/REST-API/#post-openviduapisessionsltsession_idgtconnection
     createToken(sessionId) {
+      let myrole = this.isHost ? "PUBLISHER" : "SUBSCRIBER";
       return new Promise((resolve, reject) => {
         axios
           .post(
             `${OPENVIDU_SERVER_URL}/openvidu/api/sessions/${sessionId}/connection`,
-            {},
+            {
+              role: myrole,
+            },
             {
               auth: {
                 username: "OPENVIDUAPP",
@@ -352,5 +351,27 @@ export default {
 <style>
 .LiveImg {
   display: inline;
+}
+.btn-chat {
+  color: white;
+  width: 90%;
+  height: 40px;
+  background-color: #a4b5f0;
+  border-right: #a4b5f0 1px solid;
+  border-left: #a4b5f0 1px solid;
+  border-top: #a4b5f0 1px solid;
+  border-bottom: #a4b5f0 1px solid;
+  border-style: none;
+  border-radius: 12px;
+  margin-bottom: 6px;
+}
+.btn-out {
+  color: rgb(255, 255, 255);
+  width: 150px;
+  height: 50px;
+  background-color: #8376fc;
+  border-style: none;
+  border-radius: 12px;
+  margin-left: 10px;
 }
 </style>
