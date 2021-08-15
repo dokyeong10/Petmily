@@ -2,7 +2,7 @@
   <div class="col">
     <div class="card-group">
       <div class="card">
-        <!-- <img :src="animal.img" alt="animal"> -->
+        <img :src="animal.profile_img" alt="animal">
         <div class="card-body">
           <p class="card-text">나이: {{ animal.age }}</p>
           <p class="card-text">성별: {{ sex }} </p>

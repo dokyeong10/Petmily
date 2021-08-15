@@ -1,7 +1,7 @@
 <template>
   <div>
-    <JumbotronAnimalDetail v-if="aniDetail.aniInfo" :aniInfo="aniDetail.aniInfo" />
-    <AnimalCarousel v-if="aniDetail.aniInfo" :aniInfo="aniDetail.aniInfo" />
+    <JumbotronAnimalDetail v-if="state.aniInfo" :aniInfo="state.aniInfo" />
+    <AnimalCarousel v-if="state.aniInfo" :aniInfo="state.aniInfo" />
     <AnimalAdoptionProcess />
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {
   },
   setup() {
     const router = useRouter();
-    const aniDetail = reactive({
+    const state = reactive({
       aniInfo: null,
     });
     const getAnimal = async function() {
@@ -31,16 +31,16 @@ export default {
         url: "http://localhost:8080/animal/details/" + router.currentRoute._value.params.id,
       })
         .then((res) => {
-          aniDetail.aniInfo = res.data;
-          console.log(aniDetail);
-          // console.log(aniDetail.aniInfo)
+          state.aniInfo = res.data;
+          console.log(state);
+          // console.log(state.aniInfo)
         })
         .catch((error) => {
           console.log(error);
         });
     };
     getAnimal();
-    return { aniDetail };
+    return { state };
   },
 };
 </script>
