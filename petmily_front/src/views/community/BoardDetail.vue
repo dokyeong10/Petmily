@@ -14,17 +14,23 @@
     <div>
       <BoardDetailReview :replyJoins="replyJoins" />
     </div>
+    <div>
+      <BoardDetailCommentList
+      :replyJoins="replyJoins.data"/>
+    </div>
   </div>
 </template>
 <script>
 import { useRouter } from "vue-router";
 import { onMounted, reactive } from "vue";
-import axois from "axios";
+import axios from "axios";
+
 
 // components
 import BoardDetailJumbotron from "@/views/community/components/BoardDetailJumbotron.vue";
 import BoardDetailUser from "@/views/community/components/BoardDetailUser.vue";
 import BoardDetailReview from "@/views/community/components/BoardDetailReview.vue";
+import BoardDetailCommentList from "@/views/community/components/BoardDetailCommentList.vue";
 
 export default {
   name: "BoardDetail",
@@ -32,6 +38,7 @@ export default {
     BoardDetailJumbotron,
     BoardDetailUser,
     BoardDetailReview,
+    BoardDetailCommentList,
   },
   setup() {
     const router = useRouter();
@@ -54,11 +61,11 @@ export default {
     const replyJoins = reactive({
       data: null,
       no: null,
-      bno: router.currentRoute._value.params.no,
+      bno: router.currentRoute._value.params.boardno,
     });
 
     onMounted(() => {
-      axois({
+      axios({
         method: "get",
         url: "http://localhost:8080/board/details/" + router.currentRoute._value.params.boardno,
       })
@@ -72,7 +79,7 @@ export default {
           replyJoins.data = res.data.replyJoins;
           replyJoins.no = res.data.no;
           boardFiles.data = res.data.boardFiles;
-          console.log(res.data.boardFiles[0].extension === "png");
+          // console.log(res.data.boardFiles[0].extension === "png");
           res.data.boardFiles.forEach((element) => {
             if (
               element.extension === "png" ||
@@ -86,12 +93,11 @@ export default {
               boardFiles.video.push(element);
             }
           });
-          console.log(boardFiles);
-
+          // console.log(boardFiles);
           // console.log(userInfo.user)
           // console.log(userInfo.agency)
           // console.log(boardFiles.data)
-          // console.log(replyJoins.data)
+          console.log(replyJoins.data)
         })
         .catch((err) => {
           console.log(err);

@@ -50,14 +50,14 @@ public class AnimalController {
         // 파일 등록
         String files[] = registerInfo.getFiles();
         for (int i = 0; i < files.length; i++) {
-            System.out.println("============================ file name : "+files[i]);
+            System.out.println("============================ file name : " + files[i]);
         }
 
         for (int i = 0; i < files.length; i++) {
             String extension = "";
             String[] ext = files[i].split("\\.");
             extension = ext[(ext.length) - 1];
-            System.out.println("============================ file extention : "+ extension);
+            System.out.println("============================ file extention : " + extension);
             AnimalFile animalfile = animalService.fileUpload(files[i], extension);
         }
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
@@ -117,7 +117,7 @@ public class AnimalController {
 
     @GetMapping("/details/{no}")
     public ResponseEntity<AnimalJoin> animaldetail(@PathVariable Long no) {
-       AnimalJoin animalJoins = animalService.animaldetail(no);
+        AnimalJoin animalJoins = animalService.animaldetail(no);
         return new ResponseEntity<AnimalJoin>(animalJoins, HttpStatus.OK);
     }
 

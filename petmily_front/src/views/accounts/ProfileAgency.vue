@@ -11,9 +11,12 @@
     </div>
     <br />
     <div class="d-flex jusify-content-start mx-auto" style="width: 800px">
-      <h2>등록한 동물</h2>
+      <div class="mt-4 mb-4 font-bold" style="font-size:30px">
+        등록한 동물
+      </div>
     </div>
-    <div class="mx-auto" style="height: 400px; width: 800px;">
+
+    <div class="mx-auto Jbgc" style="width: 800px;">
       <div class="container">
         <div class="row row-cols-1 row-cols-md-2 g-4">
           <AgencyRegisterAnimal

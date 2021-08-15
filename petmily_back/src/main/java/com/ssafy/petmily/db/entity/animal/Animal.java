@@ -30,4 +30,5 @@ public class Animal {
     String profile_img;
     String text;
 
+
 }
