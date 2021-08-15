@@ -4,10 +4,7 @@ import com.ssafy.petmily.api.request.AnimalRegisterPostReq;
 import com.ssafy.petmily.db.entity.animal.Animal;
 import com.ssafy.petmily.db.entity.animal.AnimalFile;
 import com.ssafy.petmily.db.entity.animal.AnimalJoin;
-import com.ssafy.petmily.db.repository.AnimalFileRepository;
-import com.ssafy.petmily.db.repository.AnimalLikeRepository;
-import com.ssafy.petmily.db.repository.AnimalWaitRepository;
-import com.ssafy.petmily.db.repository.AnimalWaitRepositorySupport;
+import com.ssafy.petmily.db.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +27,11 @@ public class AnimalServiceImpl implements AnimalService {
     @Autowired
     AnimalFileRepository animalFileRepository;
 
+    @Autowired
+    AnimalFileRepositorySupport animalFileRepositorySupport;
+
     @Override
-    public Animal patchAnimal(Long no, Animal animal) {
+    public Animal patchAnimal(Long no, AnimalRegisterPostReq animal) {
         final Optional<Animal> fetchedAnimal = animalWaitRepository.findByNo(no);
         if (fetchedAnimal.isPresent()) {
             if (animal.getType() != null) {
@@ -110,6 +110,7 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
     @Override
+    @Transactional
     public AnimalFile fileUpload(String filedir, String extension) {
         AnimalFile animalFile = new AnimalFile();
         Animal animal = new Animal();
@@ -120,6 +121,21 @@ public class AnimalServiceImpl implements AnimalService {
         animalFile.setFile(filedir);
         animalFile.setExtension(extension);
         return animalFileRepository.save(animalFile);
+    }
+
+    @Override
+    public AnimalFile fileUpdate(long no, String filedir, String extension) {
+        AnimalFile animalFile = new AnimalFile();
+        animalFile.setAnimalno(no);
+        animalFile.setFile(filedir);
+        animalFile.setExtension(extension);
+        return animalFileRepository.save(animalFile);
+    }
+
+    @Override
+    @Transactional
+    public void deleteFile(Long no) {
+        animalFileRepositorySupport.deleteFile(no);
     }
 
 

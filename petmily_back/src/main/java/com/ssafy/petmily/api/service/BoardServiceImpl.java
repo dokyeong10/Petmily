@@ -51,6 +51,16 @@ public class BoardServiceImpl implements BoardService {
         boardRepository.deleteByNo(no);
     }
 
+    @Override
+    public Board updateBoard(ComuRegisterPostReq comuRegisterPostReq) {
+        Board board = boardRepository.findByNo(comuRegisterPostReq.getNo()).get();
+        if(comuRegisterPostReq.getContents() != null)
+            board.setContents(comuRegisterPostReq.getContents());
+        if(comuRegisterPostReq.getTitle() != null)
+            board.setTitle(comuRegisterPostReq.getTitle());
+       return boardRepository.save(board);
+    }
+
 
     @Override
     public BoardFile fileUpload(String filedir, String extension) {
@@ -58,6 +68,15 @@ public class BoardServiceImpl implements BoardService {
         long max =  boardRepositorySupport.getMaxNo();
         System.out.println(max+" ===============");
         boardFile.setBoardno(max);
+        boardFile.setFile(filedir);
+        boardFile.setExtension(extension);
+        return boardFileRepository.save(boardFile);
+    }
+
+    @Override
+    public BoardFile fileUpdate(long no, String filedir, String extension) {
+        BoardFile boardFile = new BoardFile();
+        boardFile.setBoardno(no);
         boardFile.setFile(filedir);
         boardFile.setExtension(extension);
         return boardFileRepository.save(boardFile);
@@ -73,6 +92,11 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public List<BoardJoin> getBoadList() {
         return boardRepositorySupport.getBoardList();
+    }
+
+    @Override
+    public void deleteFile(long no) {
+        boardRepositorySupport.deleteFile(no);
     }
 
 
