@@ -40,6 +40,7 @@ public class MainPageController {
 	@Autowired
 	ShelterService shelterService;
 
+	// 메인페이지에 모든 데이터 한꺼번에 전달
 	@GetMapping("/main")
 	public ResponseEntity<MainPageRes> getMainPageData(){
 		List<Animal> animals = animalService.getThreeAnimal();
@@ -48,4 +49,27 @@ public class MainPageController {
 
 		return ResponseEntity.status(200).body(MainPageRes.of(liveRooms,animals,shelterMains));
 	}
+
+	// 메인페이지에 동물 리스트 데이터 전달
+	@GetMapping("/animalList")
+	public ResponseEntity<List<Animal>> getThreeAnimal(){
+		List<Animal> animals = animalService.getThreeAnimal();
+
+		return new ResponseEntity<List<Animal>>(animals, HttpStatus.OK);
+	}
+
+	@GetMapping("/liveList")
+	public ResponseEntity<List<LiveRoom>> getFourLiveList(){
+		List<LiveRoom> liveRooms = liveService.getFourLiveList();
+
+		return new ResponseEntity<List<LiveRoom>>(liveRooms, HttpStatus.OK);
+	}
+
+	@GetMapping("/shelterList")
+	public ResponseEntity<List<ShelterMain>> getShelterList(){
+		List<ShelterMain> shelterMains = shelterService.getAllShelterMain();
+
+		return new ResponseEntity<List<ShelterMain>>(shelterMains, HttpStatus.OK);
+	}
+
 }

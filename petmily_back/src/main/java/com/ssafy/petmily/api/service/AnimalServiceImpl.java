@@ -27,8 +27,11 @@ public class AnimalServiceImpl implements AnimalService {
     @Autowired
     AnimalFileRepository animalFileRepository;
 
+    @Autowired
+    AnimalFileRepositorySupport animalFileRepositorySupport;
+
     @Override
-    public Animal patchAnimal(Long no, Animal animal) {
+    public Animal patchAnimal(Long no, AnimalRegisterPostReq animal) {
         final Optional<Animal> fetchedAnimal = animalWaitRepository.findByNo(no);
         if (fetchedAnimal.isPresent()) {
             if (animal.getType() != null) {
@@ -108,6 +111,7 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
     @Override
+    @Transactional
     public AnimalFile fileUpload(String filedir, String extension) {
         AnimalFile animalFile = new AnimalFile();
         Animal animal = new Animal();
@@ -118,6 +122,21 @@ public class AnimalServiceImpl implements AnimalService {
         animalFile.setFile(filedir);
         animalFile.setExtension(extension);
         return animalFileRepository.save(animalFile);
+    }
+
+    @Override
+    public AnimalFile fileUpdate(long no, String filedir, String extension) {
+        AnimalFile animalFile = new AnimalFile();
+        animalFile.setAnimalno(no);
+        animalFile.setFile(filedir);
+        animalFile.setExtension(extension);
+        return animalFileRepository.save(animalFile);
+    }
+
+    @Override
+    @Transactional
+    public void deleteFile(Long no) {
+        animalFileRepositorySupport.deleteFile(no);
     }
 
 

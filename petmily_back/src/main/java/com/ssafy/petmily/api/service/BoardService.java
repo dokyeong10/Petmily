@@ -15,9 +15,15 @@ public interface BoardService {
 
     void deleteBoard(Long no);
 
+    Board updateBoard(ComuRegisterPostReq comuRegisterPostReq);
+
     BoardFile fileUpload(String filedir, String extension);
 
     BoardJoin boarddetail(Long no);
 
     List<BoardJoin> getBoadList();
+
+    void deleteFile(long no);
+
+    BoardFile fileUpdate(long no, String filedir, String extension);
 }

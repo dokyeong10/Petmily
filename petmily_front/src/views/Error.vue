@@ -1,10 +1,10 @@
 <template>
   <div class="Jbgc">
-    <br>
+    <br />
     <div class="container">
       <div class="d-flex justify-content-center mt-5">
         <div class="fw-bold me-5" style="font-size:50px">404 ERROR</div>
-        <img src="@\assets\cat-icon.png">
+        <img src="@\assets\cat-icon.png" />
       </div>
       <div class="mt-5">
         <div class="fw-bold" style="font-size:30px">
@@ -20,24 +20,23 @@
 </template>
 
 <script>
-import { useRouter } from 'vue-router'
+import { useRouter } from "vue-router";
 
 export default {
-  name: 'error',
+  name: "error",
   setup() {
-    const router = useRouter()
+    const router = useRouter();
     const goHome = function() {
-    router.push("/home");
+      location.href = "/";
     };
-    return { goHome }
-  }
-}
+    return { goHome };
+  },
+};
 </script>
 
 <style>
 .Jbgc {
   background-color: #faf9fe;
-
 }
 .btn-login {
   height: 50px;
