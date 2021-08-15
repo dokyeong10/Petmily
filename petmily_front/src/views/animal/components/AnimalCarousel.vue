@@ -9,9 +9,22 @@
             <div id="animalCarousel" class="carousel slide" data-bs-ride="carousel">
               <div v-if="aniInfo.animalFiles">
                 <div class="carousel-inner">
-                  <div class="carousel-item" v-for="(file, idx) in aniInfo.animalFiles" :key="idx" :class="{ active: idx == 0 }">
-                    <div v-if="file.extension == 'jpg' || file.extension == 'jpeg' || file.extension == 'png' || file.extension == 'bmp' || file.extension == 'gif'">
-                      <img :src="file.file" class="w-75" />
+                  <div
+                    class="carousel-item"
+                    v-for="(file, idx) in aniInfo.animalFiles"
+                    :key="idx"
+                    :class="{ active: idx == 0 }"
+                  >
+                    <div
+                      v-if="
+                        file.extension == 'jpg' ||
+                          file.extension == 'jpeg' ||
+                          file.extension == 'png' ||
+                          file.extension == 'bmp' ||
+                          file.extension == 'gif'
+                      "
+                    >
+                      <img :src="file.file" class="w-80" style="height: 300px" />
                     </div>
                     <div v-else>
                       <video :src="file.file" class="w-75" controls autoplay muted></video>
