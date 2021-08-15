@@ -11,4 +11,6 @@ public interface LiveService {
     List<LiveRoom> getFourLiveList();
 
     void deleteLive(String agencycode);
+
+    LiveRoom livedetail(String agencycode);
 }

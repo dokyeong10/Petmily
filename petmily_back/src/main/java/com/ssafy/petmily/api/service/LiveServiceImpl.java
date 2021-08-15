@@ -52,4 +52,10 @@ public class LiveServiceImpl implements LiveService{
     public void deleteLive(String agencycode) {
         liveRepository.deleteByAgencycode(agencycode);
     }
+
+    @Override
+    public LiveRoom livedetail(String agencycode) {
+        LiveRoom liveRoom = liveRepositorySupport.findLiveByAgencycode(agencycode);
+        return liveRoom;
+    }
 }

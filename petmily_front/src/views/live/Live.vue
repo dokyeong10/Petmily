@@ -194,7 +194,6 @@ export default {
         .then((res) => {
           location.replace("/liveroom/" + res.data.agencycode);
           console.log(res.data.agencycode);
-          router.push(`/liveroom/${res.data.agencycode}`);
         })
         .catch((err) => {
           console.log(err);
