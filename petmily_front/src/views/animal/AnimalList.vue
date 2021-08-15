@@ -51,7 +51,7 @@
             필터를 선택해주세요!
           </div> -->
         </div>
-        <div class="d-flex align-items-end flex-column-reverse" style="height: 140px">
+        <div class="d-flex align-items-end flex-column-reverse">
           <div v-if="isAgency">
             <button
               @click="goToAnimalRegister"

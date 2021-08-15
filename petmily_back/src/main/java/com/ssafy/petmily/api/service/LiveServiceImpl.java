@@ -6,6 +6,7 @@ import com.ssafy.petmily.db.repository.LiveRepositorySupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Calendar;
 import java.util.List;
 
@@ -44,5 +45,17 @@ public class LiveServiceImpl implements LiveService{
     @Override
     public List<LiveRoom> getFourLiveList() {
         return liveRepositorySupport.getFourLiveList();
+    }
+
+    @Override
+    @Transactional
+    public void deleteLive(String agencycode) {
+        liveRepository.deleteByAgencycode(agencycode);
+    }
+
+    @Override
+    public LiveRoom livedetail(String agencycode) {
+        LiveRoom liveRoom = liveRepositorySupport.findLiveByAgencycode(agencycode);
+        return liveRoom;
     }
 }

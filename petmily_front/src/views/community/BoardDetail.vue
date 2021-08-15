@@ -13,18 +13,24 @@
     </div>
     <div>
       <BoardDetailReview :replyJoins="replyJoins" />
+      <<<<<<< HEAD =======
+    </div>
+    <div v-if="replyJoins.reply" class="container">
+      <BoardDetailCommentList :replyJoins="replyJoins.reply" :comments="replyJoins.comment" />
+      >>>>>>> c668def4412e8c1da433e87d3c71741476baaab3
     </div>
   </div>
 </template>
 <script>
 import { useRouter } from "vue-router";
 import { onMounted, reactive } from "vue";
-import axois from "axios";
+import axios from "axios";
 
 // components
 import BoardDetailJumbotron from "@/views/community/components/BoardDetailJumbotron.vue";
 import BoardDetailUser from "@/views/community/components/BoardDetailUser.vue";
 import BoardDetailReview from "@/views/community/components/BoardDetailReview.vue";
+import BoardDetailCommentList from "@/views/community/components/BoardDetailCommentList.vue";
 
 export default {
   name: "BoardDetail",
@@ -32,6 +38,7 @@ export default {
     BoardDetailJumbotron,
     BoardDetailUser,
     BoardDetailReview,
+    BoardDetailCommentList,
   },
   setup() {
     const router = useRouter();
@@ -54,15 +61,15 @@ export default {
     const replyJoins = reactive({
       data: null,
       no: null,
-      bno: router.currentRoute._value.params.no,
+      bno: router.currentRoute._value.params.boardno,
+      reply: [],
+      comment: [],
     });
 
     onMounted(() => {
-      axois({
+      axios({
         method: "get",
-        url:
-          "https://i5a408.p.ssafy.io:8080/board/details/" +
-          router.currentRoute._value.params.boardno,
+        url: "http://localhost:8080/board/details/" + router.currentRoute._value.params.boardno,
       })
         .then((res) => {
           console.log(res);
@@ -71,10 +78,20 @@ export default {
           boardInfo.reg_date = res.data.reg_date.substring(0, 10);
           userInfo.user = res.data.user;
           userInfo.agency = res.data.agency;
-          replyJoins.data = res.data.replyJoins;
+          // replyJoins.data = res.data.replyJoins;
+          res.data.replyJoins.forEach((element) => {
+            if (element.grpdeep === 1) {
+              replyJoins.comment.push(element);
+            } else {
+              replyJoins.reply.push(element);
+            }
+          });
+          console.log(replyJoins.comment);
+          console.log(replyJoins.reply);
+
           replyJoins.no = res.data.no;
           boardFiles.data = res.data.boardFiles;
-          console.log(res.data.boardFiles[0].extension === "png");
+          // console.log(res.data.boardFiles[0].extension === "png");
           res.data.boardFiles.forEach((element) => {
             if (
               element.extension === "png" ||
@@ -88,8 +105,7 @@ export default {
               boardFiles.video.push(element);
             }
           });
-          console.log(boardFiles);
-
+          // console.log(boardFiles);
           // console.log(userInfo.user)
           // console.log(userInfo.agency)
           // console.log(boardFiles.data)

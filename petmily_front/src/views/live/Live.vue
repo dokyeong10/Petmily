@@ -192,14 +192,12 @@ export default {
         },
       })
         .then((res) => {
-          location.reload();
-          router.push(`/liveroom/${res.data.agencycode}`);
+          location.replace("/liveroom/" + res.data.agencycode);
+          console.log(res.data.agencycode);
         })
         .catch((err) => {
           console.log(err);
           alert("이미 라이브중인 기관입니다!");
-          // document.querySelector("#LiveModal").classList.add("hidden");
-          // router.replace("/livelist");
         });
     };
 

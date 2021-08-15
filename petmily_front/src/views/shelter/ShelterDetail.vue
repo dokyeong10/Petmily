@@ -1,8 +1,8 @@
 <template>
   <div>
     <ShelterJumbotron :agencyInfo="agencyInfo" />
-    <ShelterLocation :location="location" />
-    <h2>보호소에서 등록한 동물</h2>
+    <ShelterLocation :location="location" :agencyInfo="agencyInfo" />
+    <h2 class="mb-4">보호소에서 등록한 동물</h2>
     <div class="d-grid w-100" align="center">
       <div class="row w-100" align="center">
         <ShelterAnimals

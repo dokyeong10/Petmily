@@ -5,46 +5,51 @@
       <div class="d-flex justify-content-start">
         <div class="me-5">
           <img
-            src="@\assets\dog.png"
+            v-if="aniInfo.profile_img != null"
+            :src="aniInfo.profile_img"
+            class="mt-3 mb-5"
+            style="width: 500px; height: 390px; border-radius: 30px; margin-left :7%"
+          />
+          <img
+            v-else
+            src="@/assets/PetmilyLogo.png"
             class="mt-3 mb-5"
             style="width: 500px; height: 390px; border-radius: 30px; margin-left :7%"
           />
           <button class="btn-chatting">채팅상담</button>
         </div>
-        <div v-if="aniInfo" class="d-flex flex-column mt-5">
-          <div class=" mt-1 mb-3 font-bold" align="left" style="font-size: 17px;">
-            이름: {{ aniInfo.species }}
+        <div v-if="aniInfo" class="d-flex flex-column mt-5 ms-5">
+          <div class="  mb-2 " align="left">
+            <span class="title"> 이름 : </span> <span class="content"> {{ aniInfo.species }}</span>
           </div>
-          <div class=" mt-1 mb-3 font-bold" align="left" style="font-size: 17px;">
-            종류: {{ aniInfo.type }}
+          <div class=" mt-1 mb-2 " align="left">
+            <span class="title"> 종류 : </span> <span class="content"> {{ aniInfo.type }} </span>
           </div>
-          <div class=" mt-1 mb-3 font-bold" align="left" style="font-size: 17px;">
-            나이: {{ aniInfo.age }}
+          <div class=" mt-1 mb-2 " align="left">
+            <span class="title"> 나이 : </span> <span class="content"> {{ aniInfo.age }}</span>
           </div>
-          <div
-            class=" mt-1 mb-3 font-bold"
-            align="left"
-            style="font-size: 17px;"
-            v-if="aniInfo.sex"
-          >
-            성별: 수컷
+          <div class=" mt-1 mb-2 " align="left" v-if="aniInfo.sex">
+            <span class="title"> 성별 : </span> <span class="content"> 수컷</span>
           </div>
-          <div class=" mt-1 mb-3 font-bold" align="left" style="font-size: 17px;" v-else>
-            성별: 암컷
+          <div class=" mt-1 mb-2 " align="left" v-else>
+            <span class="title"> 성별 : </span> <span class="content"> 암컷</span>
           </div>
-          <div
-            class=" mt-1 mb-3 font-bold"
-            align="left"
-            style="font-size: 17px;"
-            v-if="aniInfo.neutered"
-          >
-            중성화: O
+          <div class=" mt-1 mb-2 f" align="left" v-if="aniInfo.neutered">
+            <span class="title"> 중성화 : </span> <span class="content"> O</span>
           </div>
-          <div class=" mt-1 mb-3 font-bold" align="left" style="font-size: 17px;" v-else>
-            중성화: X
+          <div class=" mt-1 mb-2 " align="left" v-else>
+            <span class="title"> 중성화 :</span><span class="content"> X</span>
           </div>
-          <div class=" mt-1 mb-3 font-bold" align="left" style="font-size: 17px;">
-            특이사항: {{ aniInfo.text }}
+          <div class=" mt-1 mb-2 " align="left">
+            <span class="title"> 발견 장소 : </span>
+            <span class="content"> {{ aniInfo.find_addr }}</span>
+          </div>
+          <div class=" mt-1 mb-2 " align="left">
+            <span class="title"> 발견 날짜 : </span>
+            <span class="content"> {{ aniInfo.find_date.substring(0, 10) }}</span>
+          </div>
+          <div class=" mt-1 mb-2 " align="left">
+            <span class="title"> 특이사항 : </span> <span class="content"> {{ aniInfo.text }}</span>
           </div>
         </div>
       </div>
@@ -128,6 +133,7 @@ export default {
         },
       })
         .then((res) => {
+          console.log(props.aniInfo.no);
           state.agencycode = res.data.agencycode;
         })
         .catch((err) => {
@@ -151,7 +157,7 @@ export default {
     const animalDelete = function() {
       axios({
         method: "delete",
-        url: `https://i5a408.p.ssafy.io:8080/animal/${props.aniInfo.no}`,
+        url: `http://localhost:8080/animal/${props.aniInfo.no}`,
       })
         .then((res) => {
           console.log(res);
@@ -192,5 +198,13 @@ export default {
   border-style: none;
   border-radius: 30px;
   color: white;
+}
+.title {
+  font-size: 23px;
+  font-weight: bold;
+  margin-right: 8px;
+}
+.content {
+  font-size: 20px;
 }
 </style>
