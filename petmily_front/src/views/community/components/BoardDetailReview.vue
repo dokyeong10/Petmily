@@ -43,7 +43,7 @@ export default {
     const registerReview = function () {
       console.log(localStorage.getItem("isUser"))
       if (localStorage.getItem("isUser") === 'true') {
-        console.log('여기')
+        // console.log('여기')
         axios({
           method: 'post',
           url: 'http://localhost:8080/board/reply/register',
@@ -54,8 +54,8 @@ export default {
           }
         })
         .then(res => {
-          
           console.log(res)
+          router.go()
         })
         .catch(err => {
           console.log(err)

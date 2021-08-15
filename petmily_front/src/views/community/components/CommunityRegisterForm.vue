@@ -1,7 +1,6 @@
 <template>
   <div class="container mb-5 d-flex justify-content-center">
     <div>
-      {{ state.files }}
       <label class="d-flex flex-row mb-2 semibold">반려견 사진 또는 동영상 등록 </label>
       <div class="justify-content-center mb-2">
         <input
