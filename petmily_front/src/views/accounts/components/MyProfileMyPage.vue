@@ -1,22 +1,23 @@
 <template>
-  <div class="Jbgc d-flex align-items-center justify-content-center" style="height: 350px;">
-    <h2>My Page</h2>
+  <div class="Jbgc d-flex align-items-center justify-content-center" style="height: 250px;">
+    <div class="row justify-content-center mb-5">
+      <div class="font-bold mt-4" style="font-size:40px">My Page</div>
+    </div>
   </div>
-  <br>
 </template>
 <script>
 export default {
-  name: 'myprofilemypage'
-}
+  name: "myprofilemypage",
+};
 </script>
 <style>
 .btn-white {
   width: 200px;
-  background-color: #A4B5F0;
-  border-right: #A4B5F0 1px solid;
-  border-left: #A4B5F0 1px solid;
-  border-top: #A4B5F0 1px solid;
-  border-bottom: #A4B5F0 1px solid;
+  background-color: #a4b5f0;
+  border-right: #a4b5f0 1px solid;
+  border-left: #a4b5f0 1px solid;
+  border-top: #a4b5f0 1px solid;
+  border-bottom: #a4b5f0 1px solid;
   border-style: none;
   border-radius: 12px;
 }
