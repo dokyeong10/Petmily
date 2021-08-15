@@ -62,14 +62,14 @@
   </div>
 </template>
 <script>
-import { onMounted, computed } from "vue";
-import { useRouter } from "vue-router";
+import { computed } from "vue";
+// import { useRouter } from "vue-router";
 import { useStore } from 'vuex'
 
 export default {
   name: "Navbar",
   setup() {
-    const router = useRouter();
+    // const router = useRouter();
     const store = useStore();
     const confirmLogin = computed(() => {
       console.log(sessionStorage.getItem("isLogin"));
@@ -79,7 +79,7 @@ export default {
     const logout = function () {
       localStorage.clear()
       sessionStorage.clear()
-      router.go('/');
+      location.href="/"
     };
 
     const isAgency = computed(() => {
