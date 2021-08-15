@@ -191,7 +191,7 @@ export default {
     const getFavoriteInfo = function() {
       axios({
         method: "get",
-        url: `http://localhost:8080/users/like/${localStorage.getItem("userno")}`,
+        url: `https://i5a408.p.ssafy.io:8080/users/like/${localStorage.getItem("userno")}`,
       })
         .then((res) => {
           state.favoriteData = res.data;
@@ -230,7 +230,7 @@ export default {
     const getAll = function() {
       axios({
         method: "post",
-        url: "http://localhost:8080/animal/",
+        url: "https://i5a408.p.ssafy.io:8080/animal/",
         data: {
           key: "all",
           word: "",
@@ -261,7 +261,7 @@ export default {
       } else {
         axios({
           method: "post",
-          url: "http://localhost:8080/animal/",
+          url: "https://i5a408.p.ssafy.io:8080/animal/",
           data: {
             key: state.key,
             word: state.word,
@@ -360,7 +360,7 @@ export default {
       });
       axios({
         method: "delete",
-        url: `http://localhost:8080/users/like/${state.tempFavoriteNumber}`,
+        url: `https://i5a408.p.ssafy.io:8080/users/like/${state.tempFavoriteNumber}`,
       })
         .then((res) => {
           console.log(res);

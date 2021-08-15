@@ -100,8 +100,8 @@ import MessageList from "./components/messageList";
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
-const OPENVIDU_SERVER_URL = "https://i5b101.p.ssafy.io:443";
-const OPENVIDU_SERVER_SECRET = "MY_SECRET";
+const OPENVIDU_SERVER_URL = "https://" + "i5a308.p.ssafy.io:8443";
+const OPENVIDU_SERVER_SECRET = "BABBLE";
 
 export default {
   name: "LiveRoom",

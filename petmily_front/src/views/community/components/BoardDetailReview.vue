@@ -14,75 +14,69 @@
           </p>
         </form>
         <div class="d-flex justify-content-end">
-          
-        <button
-            class="btn-white pe-3"
-            @click="registerReview"
-            style="color: #FFFFFF;"
-          >
-              댓글 등록하기
-        </button>
+          <button class="btn-white pe-3" @click="registerReview" style="color: #FFFFFF;">
+            댓글 등록하기
+          </button>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { reactive } from 'vue'
-import axios from 'axios'
+import { reactive } from "vue";
+import axios from "axios";
 export default {
-  name: 'BoardDetailReview',
+  name: "BoardDetailReview",
   props: {
-    replyJoins: Object
+    replyJoins: Object,
   },
-  setup (props) {
+  setup(props) {
     const state = reactive({
-      contents: ""
-    })
-    
-    const registerReview = function () {
-      console.log(localStorage.getItem("isUser"))
-      if (localStorage.getItem("isUser") === 'true') {
+      contents: "",
+    });
+
+    const registerReview = function() {
+      console.log(localStorage.getItem("isUser"));
+      if (localStorage.getItem("isUser") === "true") {
         // console.log('여기')
         axios({
-          method: 'post',
-          url: 'http://localhost:8080/board/reply/register',
+          method: "post",
+          url: "https://i5a408.p.ssafy.io:8080/board/reply/register",
           data: {
             contents: state.contents,
             bno: props.replyJoins.no,
-            userno: localStorage.getItem("userno")
-          }
+            userno: localStorage.getItem("userno"),
+          },
         })
-        .then(res => {
-          console.log(res)
-          router.go()
-        })
-        .catch(err => {
-          console.log(err)
-        })
+          .then((res) => {
+            console.log(res);
+            router.go();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       } else {
         axios({
-          method: 'post',
-          url: 'http://localhost:8080/board/reply/register',
+          method: "post",
+          url: "https://i5a408.p.ssafy.io:8080/board/reply/register",
           data: {
             contents: state.contents,
             bno: props.replyJoins.no,
-            agencycode: localStorage.getItem("agencycode")
-          }
+            agencycode: localStorage.getItem("agencycode"),
+          },
         })
-        .then(res => {
-          console.log(res)
-        })
-        .catch(err => {
-          console.log(err)
-        })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
-    }
+    };
 
-    return { state, registerReview }
-
-  }
-}
+    return { state, registerReview };
+  },
+};
 </script>
 <style>
 .r-border {

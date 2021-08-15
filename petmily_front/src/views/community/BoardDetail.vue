@@ -13,7 +13,6 @@
     </div>
     <div>
       <BoardDetailReview :replyJoins="replyJoins" />
-      <<<<<<< HEAD =======
     </div>
     <div v-if="replyJoins.reply" class="container">
       <BoardDetailCommentList :replyJoins="replyJoins.reply" :comments="replyJoins.comment" />
@@ -69,7 +68,9 @@ export default {
     onMounted(() => {
       axios({
         method: "get",
-        url: "http://localhost:8080/board/details/" + router.currentRoute._value.params.boardno,
+        url:
+          "https://i5a408.p.ssafy.io:8080/board/details/" +
+          router.currentRoute._value.params.boardno,
       })
         .then((res) => {
           console.log(res);

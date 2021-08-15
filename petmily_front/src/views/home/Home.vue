@@ -121,7 +121,7 @@ export default {
     const getGuardiansInfo = async function() {
       await axios({
         method: "get",
-        url: "http://localhost:8080/home/shelterList",
+        url: "https://i5a408.p.ssafy.io:8080/home/shelterList",
       })
         .then((res) => {
           console.log(res);
@@ -135,7 +135,7 @@ export default {
     const getAnimalInfo = async function() {
       axios({
         method: "get",
-        url: "http://localhost:8080/home/animalList",
+        url: "https://i5a408.p.ssafy.io:8080/home/animalList",
       })
         .then((res) => {
           console.log(res);
@@ -148,7 +148,7 @@ export default {
     const getLiveInfo = async function() {
       axios({
         method: "get",
-        url: "http://localhost:8080/home/liveList",
+        url: "https://i5a408.p.ssafy.io:8080/home/liveList",
       })
         .then((res) => {
           console.log(res);

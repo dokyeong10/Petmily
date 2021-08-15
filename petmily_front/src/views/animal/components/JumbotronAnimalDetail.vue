@@ -157,7 +157,7 @@ export default {
     const animalDelete = function() {
       axios({
         method: "delete",
-        url: `http://localhost:8080/animal/${props.aniInfo.no}`,
+        url: `https://i5a408.p.ssafy.io:8080/animal/${props.aniInfo.no}`,
       })
         .then((res) => {
           console.log(res);
