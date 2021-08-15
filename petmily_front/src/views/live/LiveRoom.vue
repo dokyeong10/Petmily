@@ -35,30 +35,13 @@
       <div id="session-header" class="">
         <!-- <h1 id="session-title">{{ mySessionId }}</h1> -->
       </div>
-      <div class="mb-4">
-        <div class="d-flex">
-          <input
-            class="btn-out"
-            type="button"
-            id="buttonLeaveSession"
-            @click="leaveSession"
-            value="라이브 나가기"
-          />
-          <input
-            v-if="isHost"
-            class="btn-end"
-            type="button"
-            id="buttonEndSession"
-            @click="endSession"
-            value="라이브 종료"
-          />
-        </div>
-      </div>
+
       <div class="row">
         <div id="main-video" class="main-video col-10">
           <!-- <user-video :stream-manager="mainStreamManager" /> -->
 
           <div id="video-container" class="col">
+            <div class="RoomInfo mb-3 mt-3">{{ RoomInfo.title }}</div>
             <user-video
               v-if="this.isHost"
               :stream-manager="publisher"
@@ -71,29 +54,36 @@
               :stream-manager="sub"
               @click="updateMainVideoStreamManager(sub)"
             />
+            <div class="RoomInfo-con">{{ RoomInfo.description }}</div>
+            <div class="mb-4">
+              <div class="Live-button">
+                <input
+                  class="btn-out mt-4"
+                  type="button"
+                  id="buttonLeaveSession"
+                  @click="leaveSession"
+                  value="라이브 나가기"
+                />
+                <input
+                  v-if="isHost"
+                  class="btn-end mt-4"
+                  type="button"
+                  id="buttonEndSession"
+                  @click="endSession"
+                  value="라이브 종료"
+                />
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-2">
-          <input
-            v-if="!chatting"
-            class="btn-chat"
-            type="button"
-            id="buttonChatting"
-            @click="chattingOnOff()"
-            value="chatting on"
-          />
-          <input
-            v-else
-            class="btn-chat"
-            type="button"
-            id="buttonChatting"
-            @click="chattingOnOff()"
-            value="chatting off"
-          />
+          <input class="btn-chat" type="button" id="buttonChatting" value="chatting" />
 
           <div>
             <MessageList :msgs="msgs" />
-            <MessageForm @sendMsg="sendMsg" :user-name="myUserName" />
+            <div class="msg-form mt-1">
+              <MessageForm @sendMsg="sendMsg" :user-name="myUserName" />
+            </div>
           </div>
         </div>
       </div>
@@ -144,6 +134,9 @@ export default {
       size: true,
       chatting: false,
       isHost: false,
+      title: "",
+      discription: "",
+      RoomInfo: [],
     };
   },
   created() {
@@ -184,6 +177,13 @@ export default {
         });
     },
     joinSession() {
+      console.log("=========================");
+      axios.get("/live/detail/" + this.mySessionId).then((res) => {
+        console.log(res.data);
+        console.log(res.data.title);
+        this.RoomInfo = res.data;
+      });
+      console.log("=========================");
       // --- Get an OpenVidu object ---
       this.OV = new OpenVidu();
 
@@ -234,7 +234,7 @@ export default {
               videoSource: undefined, // The source of video. If undefined default webcam
               publishAudio: true, // Whether you want to start publishing with your audio unmuted or not
               publishVideo: true, // Whether you want to start publishing with your video enabled or not
-              resolution: "1000x1000", // The resolution of your video
+              resolution: "100%", // The resolution of your video
               frameRate: 30, // The frame rate of your video
               insertMode: "APPEND", // How the video is inserted in the target element 'video-container'
               mirror: false, // Whether to mirror your local video or not
@@ -280,6 +280,12 @@ export default {
         .catch((err) => {
           console.log("실패함");
         });
+    },
+    findRoom() {
+      axios.get("/live/detail" + this.agencycode).then((res) => {
+        console.log(res.data);
+        console.log(res.data.title);
+      });
     },
 
     updateMainVideoStreamManager(stream) {
@@ -375,8 +381,8 @@ export default {
 }
 .btn-chat {
   color: white;
-  width: 90%;
-  height: 40px;
+  width: 100%;
+  height: 30px;
   background-color: #a4b5f0;
   border-right: #a4b5f0 1px solid;
   border-left: #a4b5f0 1px solid;
@@ -384,7 +390,7 @@ export default {
   border-bottom: #a4b5f0 1px solid;
   border-style: none;
   border-radius: 12px;
-  margin-bottom: 6px;
+  margin-bottom: 3px;
 }
 .btn-out {
   color: rgb(255, 255, 255);
@@ -404,4 +410,19 @@ export default {
   border-radius: 12px;
   margin-left: 10px;
 }
+.RoomInfo {
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+}
+.RoomInfo-con {
+  /* //font-weight: bold; */
+  font-size: 18px;
+}
+.Live-button {
+  text-align: center;
+}
+/* .msg-fomr {
+  height: 100vh;
+} */
 </style>

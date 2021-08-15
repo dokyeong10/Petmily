@@ -1,19 +1,17 @@
 <template>
-  <form @keypress="if (event.keyCode == 13) submitForm;" label-width="100px">
-    <div class="chatbox d-flex-lg-row">
-      <span>
+  <form @keypress="if (event.keyCode == 13) submitForm;">
+    <div class="chatbox">
+      <span class="d-flex">
         <input
           type="textarea"
           placeholder="채팅을 입력하세요."
           class="chat"
           v-model="messageForm.message"
         />
-      </span>
-      <span>
-        <button class="my-btn btn-up mt-1" type="primary" @click="submitForm">
+        <button class="my-btn btn-up" type="primary" @click="submitForm">
           입력
-        </button></span
-      >
+        </button>
+      </span>
     </div>
   </form>
 </template>
@@ -47,12 +45,9 @@ export default {
 
 <style scoped>
 .my-btn {
-  height: 40px;
-  width: 90%;
 }
 .chat {
-  width: 90%;
-  height: 50px;
+  font-size: 15px;
 }
 /* .chatbox {
   width: 100%;
