@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-  name: 'AdobtionCommunityList',
+  name: 'CommunityList',
   props: {
     board: Object
   },
