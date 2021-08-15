@@ -133,6 +133,7 @@ export default {
         },
       })
         .then((res) => {
+          console.log(props.aniInfo.no)
           state.agencycode = res.data.agencycode;
         })
         .catch((err) => {

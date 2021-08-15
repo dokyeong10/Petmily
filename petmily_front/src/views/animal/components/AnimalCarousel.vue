@@ -5,37 +5,40 @@
         <div class="d-flex align-items-center w-50">
           <!-- 이미지에 profile_img 넣어줘야 합니다. -->
 
-          <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner ">
-              <div class="carousel-item active">
-                <img src="@\assets\dog.png" class="w-75" />
+          <div>
+            <div id="animalCarousel" class="carousel slide" data-bs-ride="carousel">
+              <div v-if="aniInfo.animalFiles">
+                <div class="carousel-inner">
+                  <div class="carousel-item" v-for="(file, idx) in aniInfo.animalFiles" :key="idx" :class="{ active: idx == 0 }">
+                    <div v-if="file.extension == 'jpg' || file.extension == 'jpeg' || file.extension == 'png' || file.extension == 'bmp' || file.extension == 'gif'">
+                      <img :src="file.file" class="w-75" />
+                    </div>
+                    <div v-else>
+                      <video :src="file.file" class="w-75" controls autoplay muted></video>
+                    </div>
+                  </div>
+                  <button
+                    class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#animalCarousel"
+                    data-bs-slide="prev"
+                  >
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  </button>
+                  <button
+                    class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#animalCarousel"
+                    data-bs-slide="next"
+                  >
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  </button>
+                </div>
               </div>
-              <div class="carousel-item">
-                <img src="@\assets\dog.png" class="w-75" />
-              </div>
-              <div class="carousel-item">
-                <img src="@\assets\dog.png" class="w-75" />
-              </div>
-              <button
-                class="carousel-control-prev"
-                type="button"
-                data-bs-target="#carouselExampleControls"
-                data-bs-slide="prev"
-              >
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              </button>
-              <button
-                class="carousel-control-next"
-                type="button"
-                data-bs-target="#carouselExampleControls"
-                data-bs-slide="next"
-              >
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              </button>
+              <br />
+              <br />
+              <br />
             </div>
-            <br />
-            <br />
-            <br />
             <div class="fw-bold" style="font-size:2rem" align="left">
               보호센터 정보
             </div>
