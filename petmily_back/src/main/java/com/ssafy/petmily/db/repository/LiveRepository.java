@@ -10,4 +10,6 @@ import java.util.List;
 public interface LiveRepository extends JpaRepository<LiveRoom, Long> {
     LiveRoom findByNo(long no);
     LiveRoom findByAgencycode(String agencycode);
+
+    void deleteByAgencycode(String agencycode);
 }

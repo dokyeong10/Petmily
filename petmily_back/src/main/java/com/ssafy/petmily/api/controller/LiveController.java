@@ -58,6 +58,14 @@ public class LiveController {
 		return new ResponseEntity<List<LiveRoom>>(list, HttpStatus.OK);
 	}
 
+	@DeleteMapping("/{agencycode}")
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity<? extends BaseResponseBody> deleteLive(@PathVariable String agencycode) {
+		liveService.deleteLive(agencycode);
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+	}
+
+
 
 
 }

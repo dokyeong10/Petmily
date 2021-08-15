@@ -44,6 +44,14 @@
             @click="leaveSession"
             value="라이브 나가기"
           />
+          <input
+            v-if="isHost"
+            class="btn-end"
+            type="button"
+            id="buttonEndSession"
+            @click="endSession"
+            value="라이브 종료"
+          />
         </div>
       </div>
       <div class="row">
@@ -152,14 +160,14 @@ export default {
       console.log(" 공유 여부 ");
       console.log(this.subscribers[1].stream.typeOfVideo);
     },
-    audioOnOff() {
-      this.publisher.publishAudio(!this.aOnOff);
-      this.aOnOff = !this.aOnOff;
-    },
-    videoOnOff() {
-      this.publisher.publishVideo(!this.vOnOff);
-      this.vOnOff = !this.vOnOff;
-    },
+    // audioOnOff() {
+    //   this.publisher.publishAudio(!this.aOnOff);
+    //   this.aOnOff = !this.aOnOff;
+    // },
+    // videoOnOff() {
+    //   this.publisher.publishVideo(!this.vOnOff);
+    //   this.vOnOff = !this.vOnOff;
+    // },
     sendMsg(msg) {
       // Sender of the message (after 'session.connect')
       this.session
@@ -226,7 +234,7 @@ export default {
               videoSource: undefined, // The source of video. If undefined default webcam
               publishAudio: true, // Whether you want to start publishing with your audio unmuted or not
               publishVideo: true, // Whether you want to start publishing with your video enabled or not
-              resolution: "1280x1280", // The resolution of your video
+              resolution: "1000x1000", // The resolution of your video
               frameRate: 30, // The frame rate of your video
               insertMode: "APPEND", // How the video is inserted in the target element 'video-container'
               mirror: false, // Whether to mirror your local video or not
@@ -259,6 +267,19 @@ export default {
       this.OV = undefined;
 
       window.removeEventListener("beforeunload", this.leaveSession);
+    },
+
+    endSession() {
+      axios
+        .delete("/live/" + this.mySessionId)
+        .then((res) => {
+          confirm("라이브를 종료하시겠습니까?");
+          console.log(res.data);
+          location.replace("/live");
+        })
+        .catch((err) => {
+          console.log("실패함");
+        });
     },
 
     updateMainVideoStreamManager(stream) {
@@ -370,6 +391,15 @@ export default {
   width: 150px;
   height: 50px;
   background-color: #8376fc;
+  border-style: none;
+  border-radius: 12px;
+  margin-left: 10px;
+}
+.btn-end {
+  color: rgb(255, 255, 255);
+  width: 150px;
+  height: 50px;
+  background-color: #fe9090;
   border-style: none;
   border-radius: 12px;
   margin-left: 10px;
