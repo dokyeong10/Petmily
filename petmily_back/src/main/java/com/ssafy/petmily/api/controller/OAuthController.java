@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 public class OAuthController {
     private final HttpSession httpSession;
 
-    @GetMapping("/")
+    @GetMapping("/social/login")
     @ApiOperation(value = "소셜 로그인", notes = "<strong>소셜 로그인</strong>을 통해 로그인 및 회원가입 한다.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),

@@ -27,6 +27,7 @@
             class="w-80"
             style="height: 300px"
             onerror="this.src='https://petmily.s3.ap-northeast-2.amazonaws.com/PetmilyLogo.png'"
+            @click="goLiveRoom(live.agencycode)"
           />
         </div>
         <button
@@ -52,28 +53,40 @@
     </div>
     <button
       type="button"
-      @click="changePassword"
+      @click="mvLiveList"
       class="btn-login mt-5 w-25 me-5"
       style="color: #ffffff"
     >
-      <span class="me-3" @click="mvLiveList">더보기</span>
+      <span class="me-3">더보기</span>
       <img src="@\assets\more.png" style="width: 19px; height: 19px" />
     </button>
   </div>
 </template>
 <script>
+import { useRouter } from "vue-router";
 export default {
   props: {
     lives: Array,
   },
   name: "HomeLiveLIst",
 
-  setup() {
+  setup(props) {
+    const router = useRouter();
     const mvLiveList = () => {
       location.href = "/live";
     };
 
-    return { mvLiveList };
+    function goLiveRoom(agencycode) {
+      console.log(agencycode);
+      router.push({
+        name: "liveroom",
+        params: {
+          agencycode: agencycode,
+        },
+      });
+    }
+
+    return { mvLiveList, goLiveRoom };
   },
 };
 </script>
