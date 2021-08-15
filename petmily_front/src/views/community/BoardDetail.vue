@@ -14,9 +14,10 @@
     <div>
       <BoardDetailReview :replyJoins="replyJoins" />
     </div>
-    <div>
+    <div v-if="replyJoins.reply" class="container">
       <BoardDetailCommentList
-      :replyJoins="replyJoins.data"/>
+      :replyJoins="replyJoins.reply"
+      :comments="replyJoins.comment"/>
     </div>
   </div>
 </template>
@@ -62,6 +63,8 @@ export default {
       data: null,
       no: null,
       bno: router.currentRoute._value.params.boardno,
+      reply: [],
+      comment: []
     });
 
     onMounted(() => {
@@ -76,7 +79,17 @@ export default {
           boardInfo.reg_date = res.data.reg_date.substring(0, 10);
           userInfo.user = res.data.user;
           userInfo.agency = res.data.agency;
-          replyJoins.data = res.data.replyJoins;
+          // replyJoins.data = res.data.replyJoins;
+          res.data.replyJoins.forEach((element) => {
+            if (element.grpdeep === 1) {
+              replyJoins.comment.push(element)
+            } else {
+              replyJoins.reply.push(element)
+            }
+          })
+          console.log(replyJoins.comment)
+          console.log(replyJoins.reply)
+          
           replyJoins.no = res.data.no;
           boardFiles.data = res.data.boardFiles;
           // console.log(res.data.boardFiles[0].extension === "png");
@@ -97,7 +110,7 @@ export default {
           // console.log(userInfo.user)
           // console.log(userInfo.agency)
           // console.log(boardFiles.data)
-          console.log(replyJoins.data)
+          // console.log(replyJoins.data)
         })
         .catch((err) => {
           console.log(err);
