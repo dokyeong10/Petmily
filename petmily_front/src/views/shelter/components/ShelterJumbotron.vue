@@ -1,35 +1,55 @@
 <template>
   <div>
-    <div class="Jbgc mx-auto" style="height: 600px;">
+    <div class="Jbgc mx-auto" style="height: 600px">
       <div>
         <img
+          v-if="agencyInfo.img"
           :src="agencyInfo.img"
           class="mt-4 mb-5"
-          style="height: 200px; width: 200px; border-radius: 40%;"
+          style="height: 200px; width: 200px; border-radius: 40%"
+        />
+        <img
+          v-else
+          src="https://image.flaticon.com/icons/png/512/2817/2817900.png"
+          class="mt-4 mb-5"
+          style="height: 200px; width: 200px; border-radius: 40%"
         />
       </div>
       <div class="d-flex justify-content-evenly">
         <div
           class="d-inline position-relative inner30 d-flex justify-content-evenly align-items-center"
+          style="margin-left: 150px"
         >
           <div align="left">
-            <div class="Info ">담당자 정보</div>
+            <div class="Info" align="center">담당자 정보</div>
             <p>
               <span class="title-sh"> AGENCY : </span>
-              <span class="content-sh">{{ agencyInfo.username }}</span>
+              <span v-if="agencyInfo.username" class="content-sh">{{
+                agencyInfo.username
+              }}</span>
+              <span v-else class="content-sh" style="color: red"
+                >아직 정보가 없어용ㅜㅠ</span
+              >
             </p>
             <p>
               <span class="title-sh">EMAIL : </span>
-              <span class="content-sh">{{ agencyInfo.email }}</span>
+              <span class="content-sh" v-if="agencyInfo.email">{{
+                agencyInfo.email
+              }}</span>
+              <span v-else class="content-sh" style="color: red"
+                >아직 정보가 없어용ㅜㅠ</span
+              >
             </p>
             <p>
               <span class="title-sh">PHONE : </span>
-              <span class="content-sh">{{ agencyInfo.phone }}</span>
+              <span class="content-sh" v-if="agencyInfo.phone">{{
+                agencyInfo.phone
+              }}</span>
+              <span v-else class="content-sh" style="color: red"
+                >아직 정보가 없어용ㅜㅠ</span
+              >
             </p>
-            <p>
-              <span class="title-sh">AGENCY NUMBER : </span>
-              <span class="content-sh"> {{ agencyInfo.agencycode }}</span>
-            </p>
+
             <p>
               <span class="title-sh">DAY OFF : </span>
               <span class="content-sh">{{ agencyInfo.closeday }}</span>
@@ -40,7 +60,7 @@
           class="d-inline position-relative inner30 d-flex justify-content-evenly align-items-center"
         >
           <div align="left">
-            <div class="Info">보호소 정보</div>
+            <div class="Info" align="center">보호소 정보</div>
             <p>
               <span class="title-sh">AGENCY NAME : </span>
               <span class="content-sh">{{ agencyInfo.agencyname }}</span>
