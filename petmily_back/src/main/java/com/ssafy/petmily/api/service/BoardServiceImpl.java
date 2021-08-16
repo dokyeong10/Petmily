@@ -90,8 +90,8 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<BoardJoin> getBoadList() {
-        return boardRepositorySupport.getBoardList();
+    public List<BoardJoin> getBoadList(String word) {
+        return boardRepositorySupport.getBoardList(word);
     }
 
     @Override
