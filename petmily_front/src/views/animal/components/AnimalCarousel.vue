@@ -2,10 +2,10 @@
   <div class="mb-5">
     <div class="container mt-5" style="height: 650px;">
       <div class="d-flex justify-content-center">
-        <div class="d-flex align-items-center w-50">
+        <div class="d-flex align-items-center">
           <!-- 이미지에 profile_img 넣어줘야 합니다. -->
 
-          <div>
+          <div class="align-items-center">
             <div id="animalCarousel" class="carousel slide" data-bs-ride="carousel">
               <div v-if="aniInfo.animalFiles">
                 <div class="carousel-inner">
@@ -24,10 +24,10 @@
                           file.extension == 'gif'
                       "
                     >
-                      <img :src="file.file" class="w-80" style="height: 300px" />
+                      <img :src="file.file" style="height: 300px" />
                     </div>
                     <div v-else>
-                      <video :src="file.file" class="w-75" controls autoplay muted></video>
+                      <video :src="file.file" controls autoplay muted></video>
                     </div>
                   </div>
                   <button
@@ -118,5 +118,8 @@ export default {
 }
 .content-s {
   font-size: 18px;
+}
+.carousel-inner{
+  width: 575.85px !important;
 }
 </style>
