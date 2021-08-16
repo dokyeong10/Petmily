@@ -1,7 +1,7 @@
 <template>
-  <div class="Jbgc d-flex mx-auto justify-content-center align-items-center" style="height: 300px;">
-    <div>
-      <h1>Modify Member</h1>
+  <div class="Jbgc d-flex mx-auto justify-content-center align-items-center" style="height: 250px;">
+    <div class="row justify-content-center mb-5">
+      <div class="font-bold mt-4" style="font-size:40px">Modify Mypage</div>
     </div>
   </div>
   <div class="container mb-5 d-flex justify-content-center">
@@ -50,13 +50,14 @@
           class="form-control radius-border br mb-5"
           placeholder="바꿀 이름을 입력하세요"
           id="username"
+          readonly
         />
         <label for="password" class="d-flex flex-row mb-2">비밀번호</label>
         <input
           v-model="state.password"
           type="password"
           class="form-control radius-border br mb-5"
-          placeholder="••••••••"
+          placeholder="비밀번호를 한번 더 입력하세요"
           id="password"
         />
         <label for="confirmPassword" class="d-flex flex-row mb-2">비밀번호 재입력</label>
@@ -64,7 +65,7 @@
           v-model="state.passwordConfirm"
           type="password"
           class="form-control radius-border br mb-5"
-          placeholder="••••••••"
+          placeholder="비밀번호를 한번 더 입력하세요"
           id="confirmPassword"
         />
         <label for="phone" class="d-flex flex-row mb-2">전화번호</label>
@@ -75,10 +76,10 @@
           placeholder="바꾸실 번호를 입력하세요."
           id="phone"
         />
-        <button class="btn-white" style="color: #FFFFFF;" @click="modifyPrivateInfo">
+        <button class="btn-white-modi" style="color: #FFFFFF;" @click="modifyPrivateInfo">
           수정하기
         </button>
-        <button class="btn-white" style="color: #FFFFFF;" @click="deletePrivateInfo">
+        <button class="btn-delete-modi" style="color: #FFFFFF;" @click="deletePrivateInfo">
           탈퇴하기
         </button>
       </div>
@@ -212,7 +213,7 @@ export default {
     };
 
     const deletePrivateInfo = function() {
-      alert("탈퇴시 회원과 관련된 모든 정보가 삭제됩니다. 탈퇴하겠습니까?");
+      confirm("탈퇴시 회원과 관련된 모든 정보가 삭제됩니다. 탈퇴하겠습니까?");
 
       axios({
         method: "delete",
@@ -224,7 +225,7 @@ export default {
         localStorage.removeItem("email");
         sessionStorage.removeItem("isAgency");
         sessionStorage.removeItem("isUser");
-        router.go("/");
+        location.replace("/");
       });
     };
 
@@ -240,4 +241,19 @@ export default {
   },
 };
 </script>
-<style></style>
+<style>
+.btn-white-modi {
+  width: 40%;
+  background-color: #a4b5f0;
+  border-style: none;
+  border-radius: 12px;
+  margin-left: 10px;
+}
+.btn-delete-modi {
+  width: 40%;
+  background-color: #ff8b8b;
+  border-style: none;
+  border-radius: 30px;
+  color: white;
+}
+</style>
