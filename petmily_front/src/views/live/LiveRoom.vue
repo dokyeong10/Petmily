@@ -3,7 +3,7 @@
     <div id="main-container" class=" container">
       <div id="join" v-if="!session">
         <div id="join-dialog" class="">
-          <div class="font-bold mt-4 mb-5" style="font-size:40px">라이브 입장</div>
+          <div class="font-bold  mb-5" style="font-size:40px">라이브 입장</div>
           <div class="form-group">
             <div class="font-bold mb-3 d-flex flex-row" style="font-size:18px">
               닉네임
