@@ -38,8 +38,15 @@ public class BoardRepositorySupport {
         return num;
     }
 
-    public List<BoardJoin> getBoardList(){
-        return jpaQueryFactory.select(qBoardJoin).from(qBoardJoin).fetch();
+    public List<BoardJoin> getBoardList(String word){
+        // 전체 목록 보여줌
+        if(word == null || word.equals("") || word.equals(" "))
+            return jpaQueryFactory.select(qBoardJoin).from(qBoardJoin).fetch();
+        // 제목 + 내용으로 검색
+        else {
+            return jpaQueryFactory.select(qBoardJoin).from(qBoardJoin)
+                    .where(qBoardJoin.title.like("%" + word + "%").or(qBoardJoin.contents.like("%" + word + "%"))).fetch();
+        }
     }
 
     @Transactional
