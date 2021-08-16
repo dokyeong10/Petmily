@@ -25,7 +25,7 @@
             v-model="writeMe"
             type="checkbox"
             @click="findWriteMe(writeMe)"
-          /> 내가 작성한 글 보기 {{ writeMe }}
+          /> 내가 작성한 글 보기
         </div>
       </div>
       <div class="pt-3 d-flex justify-content-end">
@@ -36,7 +36,7 @@
     </div>
   </div>
   <div v-if="state.data" class="container">
-    <CommunityPagenation
+    <CommunityPagination
       :state="state"
     />
   </div>
@@ -46,12 +46,12 @@ import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
 import CommunityList from '@/views/community/components/CommunityList.vue'
-import CommunityPagenation from '@/views/community/components/CommunityPagenation.vue'
+import CommunityPagination from '@/views/community/components/CommunityPagination.vue'
 export default {
   name: 'Community',
   components: {
     CommunityList,
-    CommunityPagenation
+    CommunityPagination
   },
   setup () {
     let writeMe = ref(false)

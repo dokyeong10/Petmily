@@ -224,7 +224,9 @@ export default {
       })
       .then(res => {
         console.log(res)
-        router.go(`/boarddetail/+${props.replyJoins[idx].bno}`)
+        console.log(idx)
+        console.log(props.replyJoins)
+        router.go(`/boarddetail/${router.currentRoute._value.params.boardno}`)
       })
       .catch(err => {
         console.log(err)
