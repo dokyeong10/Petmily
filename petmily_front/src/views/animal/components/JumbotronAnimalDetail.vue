@@ -2,19 +2,19 @@
   <div class="Jbgc" style="height: 600px;">
     <br />
     <div class="container">
-      <div class="d-flex justify-content-start">
+      <div class="d-flex justify-content-center">
         <div class="me-5">
           <img
             v-if="aniInfo.profile_img != null"
             :src="aniInfo.profile_img"
             class="mt-3 mb-5"
-            style="width: 500px; height: 390px; border-radius: 30px; margin-left :7%"
+            style="width: 360px; height: 350px; border-radius: 30px; margin-left :7%"
           />
           <img
             v-else
             src="@/assets/PetmilyLogo.png"
             class="mt-3 mb-5"
-            style="width: 500px; height: 390px; border-radius: 30px; margin-left :7%"
+            style="width: 360px; height: 350px; border-radius: 30px; margin-left :7%"
           />
           <button class="btn-chatting">채팅상담</button>
         </div>
@@ -91,13 +91,13 @@
               <div class="modal-footer">
                 <button
                   type="button"
-                  class="btn btn-danger"
+                  class="btn-delete"
                   data-bs-dismiss="modal"
                   @click="animalDelete"
                 >
                   삭제
                 </button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                <button type="button" class="btn-login-modal" data-bs-dismiss="modal">
                   취소
                 </button>
               </div>
@@ -133,7 +133,7 @@ export default {
         },
       })
         .then((res) => {
-          console.log(props.aniInfo.no)
+          console.log(props.aniInfo.no);
           state.agencycode = res.data.agencycode;
         })
         .catch((err) => {
@@ -200,11 +200,19 @@ export default {
   color: white;
 }
 .title {
-  font-size: 23px;
+  font-size: 22px;
   font-weight: bold;
   margin-right: 8px;
 }
 .content {
-  font-size: 20px;
+  font-size: 19px;
+}
+.btn-login-modal {
+  width: 15%;
+  height: 30px;
+  background-color: #a4b5f0;
+  border-style: none;
+  border-radius: 30px;
+  color: white;
 }
 </style>

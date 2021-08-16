@@ -2,9 +2,6 @@
   <div class="container">
     <Message v-for="(msg, index) in msgs" :key="index" :msg="msg" style="color:black" />
   </div>
-  <!-- <div class="container">
-    <Message v-for="(msg, index) in msgs" :key="index" :msg="msg" />
-  </div> -->
 </template>
 
 <script>
@@ -24,7 +21,7 @@ export default {
 
 <style scoped>
 .container {
-  height: 0vh;
+  height: 75vh;
   width: 100%;
   background: rgba(207, 190, 207, 0.61);
   overflow: scroll;
