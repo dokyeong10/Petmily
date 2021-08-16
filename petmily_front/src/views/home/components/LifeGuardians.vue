@@ -14,7 +14,14 @@
             style="background-color: #faf9fe"
           >
             <img
-              src="@\assets\shelter.png"
+              v-if="guardian.agencyMain && guardian.agencyMain.img"
+              :src="guardian.agencyMain.img"
+              class="card-img-top guardimg"
+              align="center"
+            />
+            <img
+              v-else
+              src="https://image.flaticon.com/icons/png/512/2817/2817900.png"
               class="card-img-top guardimg"
               align="center"
             />
@@ -103,9 +110,10 @@ export default {
 }
 
 .guardimg {
-  width: 100%;
   height: 50%;
-  clip-path: circle(30% at 50% 50%);
+  width: 60%;
+  margin-bottom: 13px;
+  margin-left: 60px;
 }
 
 .lifecard {
