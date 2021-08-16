@@ -6,7 +6,7 @@
           <img
             :src="animal.profile_img"
             onerror="this.src='https://petmily.s3.ap-northeast-2.amazonaws.com/PetmilyLogo.png'"
-            class="img-fluid rounded-start"
+            class="img-fluid rounded-start profile-img"
             style="width: 280px; height: 160px"
             alt="..."
           />
@@ -24,7 +24,7 @@
               </span>
               <span>
                 <!-- 삭제하기 수정해야합니다 ! ! !  -->
-                <button class="btn-delete-profile" style="height: 35px" @click="goDetail(animal)">
+                <button class="btn-delete-profile" style="height: 35px" @click="animalDelete">
                   삭제하기
                 </button>
               </span>
@@ -39,6 +39,8 @@
 import { ref } from "vue";
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
+
+import axios from "axios";
 import JumbotronAnimalDetail from "@/views/animal/components/JumbotronAnimalDetail.vue";
 
 export default {
@@ -75,6 +77,21 @@ export default {
         },
       });
     };
+    const animalDelete = function() {
+      confirm("동물을 삭제하시겠습니까?");
+      axios({
+        method: "delete",
+        url: `http://localhost:8080/animal/${props.animal.no}`,
+      })
+        .then((res) => {
+          confirm("동물을 삭제하시겠습니까?");
+          console.log(res);
+          location.reload();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
     const confirm = function() {
       if (props.animal.sex) {
         sex.value = "암컷";
@@ -88,7 +105,7 @@ export default {
       }
     };
     confirm();
-    return { state, sex, neutered, goDetail };
+    return { state, sex, neutered, goDetail, animalDelete };
   },
 };
 </script>

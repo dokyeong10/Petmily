@@ -1,8 +1,14 @@
 <template>
   <span class=" mx-3 mb-5" style="width: 18rem; background-color:#FAF9FE">
-    <img :src="animals.profile_img" onerror="this.src='https://petmily.s3.ap-northeast-2.amazonaws.com/PetmilyLogo.png'" class="card-img-top" style="height: 250px;" @click="goDetail" />
+    <img
+      :src="animals.profile_img"
+      onerror="this.src='https://petmily.s3.ap-northeast-2.amazonaws.com/PetmilyLogo.png'"
+      class="card-img-top main-animal"
+      style="height: 220px;"
+      @click="goDetail"
+    />
     <div class="card-body">
-      <h5 class="card-title font-bold mb-4" align="left">{{ animals.type }}</h5>
+      <h5 class="card-title font-bold mb-3 mt-2" align="left">{{ animals.type }}</h5>
       <div class="card-text mb-2" align="left" style="margin-top:0px">
         <span class="font-bold me-2">나이: </span>{{ animals.age }}
       </div>
@@ -47,5 +53,8 @@ export default {
 <style>
 .font-bold {
   font-weight: bold;
+}
+.main-animal {
+  border-radius: 15%;
 }
 </style>
