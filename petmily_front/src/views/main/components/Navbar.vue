@@ -72,7 +72,7 @@ export default {
     // const router = useRouter();
     const store = useStore();
     const confirmLogin = computed(() => {
-      console.log(sessionStorage.getItem("isLogin"));
+      // console.log(sessionStorage.getItem("isLogin"));
       return sessionStorage.getItem("isLogin");
     });
 

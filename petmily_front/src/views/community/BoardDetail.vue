@@ -47,6 +47,7 @@ export default {
       title: "",
       contents: "",
       reg_date: "",
+      bno: null
     });
 
     const userInfo = reactive({
@@ -73,10 +74,11 @@ export default {
         url: "http://localhost:8080/board/details/" + router.currentRoute._value.params.boardno,
       })
         .then((res) => {
-          console.log(res);
+          console.log(res.data)
           boardInfo.title = res.data.title;
           boardInfo.contents = res.data.contents;
           boardInfo.reg_date = res.data.reg_date.substring(0, 10);
+          boardInfo.bno = res.data.no
           userInfo.user = res.data.user;
           userInfo.agency = res.data.agency;
           // replyJoins.data = res.data.replyJoins;

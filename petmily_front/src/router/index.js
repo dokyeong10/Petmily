@@ -44,6 +44,8 @@ import ShelterDetail from "@/views/shelter/ShelterDetail.vue";
 import Community from "@/views/community/Community.vue";
 import CommunityRegister from "@/views/community/CommunityRegister.vue";
 import BoardDetail from "@/views/community/BoardDetail.vue";
+import BoardDetailModify from "@/views/community/BoardDetailModify.vue";
+
 
 const routes = [
   {
@@ -195,7 +197,13 @@ const routes = [
   {
     path: "/:pathMatch(.*)*",
     redirect: '/error',
-},
+  },
+  {
+    path: "/boarddetailmodify/:boardno",
+    name: "boarddetailmodify",
+    component: BoardDetailModify
+  }
+
   // {
   //   path: '/',
   //   name: 'Home',

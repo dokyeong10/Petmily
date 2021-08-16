@@ -13,6 +13,7 @@
       <div>
       <BoardDetailContents
         :boardInfo="boardInfo"
+        :userInfo="userInfo"
       />
       </div>
     </div>
