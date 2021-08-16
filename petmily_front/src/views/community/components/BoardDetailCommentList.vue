@@ -8,7 +8,7 @@
               <img 
                 :src="reply.agency.img"
                 onerror="this.src='https://petmily.s3.ap-northeast-2.amazonaws.com/PetmilyLogo.png'"
-                 style="width: 20px; height: 20px;"
+                style="width: 20px; height: 20px;"
                 >
             </div>
             <div> {{ reply.agency.username }} </div>
