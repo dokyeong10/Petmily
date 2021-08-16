@@ -37,7 +37,7 @@
 </template>
 <script>
 import { ref } from "vue";
-import { reactive, onMounted } from "vue";
+import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import JumbotronAnimalDetail from "@/views/animal/components/JumbotronAnimalDetail.vue";
 
