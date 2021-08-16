@@ -1,16 +1,25 @@
 <template>
   <div class="d-flex jusify-content-start mx-auto" style="width: 800px">
-    <div class="mt-5 font-bold" style="font-size:30px">
-      내 프로필
-    </div>
+    <div class="mt-5 font-bold" style="font-size: 30px">내 프로필</div>
   </div>
   <div>
-    <div class="Jbgc mx-auto" style="height: 400px; width: 800px;">
+    <div class="Jbgc mx-auto" style="height: 400px; width: 800px">
       <div
         class="d-inline position-relative inner30 d-flex justify-content-evenly align-items-center"
       >
         <div>
-          <img :src="agencyInfo.img" style="height: 230px; width: 230px;" class="profile-Img" />
+          <img
+            v-if="agencyInfo.img"
+            :src="agencyInfo.img"
+            style="height: 230px; width: 230px"
+            class="profile-Img"
+          />
+          <img
+            v-else
+            src="https://image.flaticon.com/icons/png/512/1299/1299865.png"
+            style="height: 230px; width: 230px"
+            class="profile-Img"
+          />
         </div>
         <div align="left">
           <p>

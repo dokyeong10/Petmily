@@ -1,7 +1,7 @@
 <template>
   <br />
   <div class="d-flex jusify-content-start mx-auto" style="width: 800px">
-    <div class="font-bold mt-2 mb-4" style="font-size:30px">내 프로필</div>
+    <div class="font-bold mt-2 mb-4" style="font-size: 30px">내 프로필</div>
   </div>
   <div>
     <div class="Jbgc mx-auto" style="height: 400px; width: 800px">
@@ -9,7 +9,16 @@
         class="d-inline position-relative inner30 d-flex justify-content-evenly align-items-center"
       >
         <div>
-          <img :src="userInfo.img" style="height: 200px; width: 200px" />
+          <img
+            v-if="userInfo.img"
+            :src="userInfo.img"
+            style="height: 200px; width: 200px"
+          />
+          <img
+            v-else
+            src="https://image.flaticon.com/icons/png/512/4322/4322991.png"
+            style="height: 200px; width: 200px"
+          />
         </div>
         <div align="left">
           <p>
