@@ -37,12 +37,12 @@
                   type="radio"
                   name="login"
                   v-model="state.toggle"
-                  value="false"
+                  :value="false"
                   checked="checked"
                 />개인
               </label>
               <label>
-                <input type="radio" name="login" v-model="state.toggle" value="true" />기관
+                <input type="radio" name="login" v-model="state.toggle" :value="true" />기관
               </label>
             </div>
             <button
@@ -54,8 +54,13 @@
             </button>
           </div>
         </form>
-        <div class="mt-5 mb-5">
-          <button class="btn-login font-" @click="clickLogin">
+        <div v-if="!state.toggle" class="mt-5 mb-5">
+          <button class="btn-login font-" @click="privateLogin">
+            로그인 하기
+          </button>
+        </div>
+        <div v-else class="mt-5 mb-5">
+          <button class="btn-login font-" @click="agencyLogin">
             로그인 하기
           </button>
         </div>
@@ -152,35 +157,41 @@ export default {
       router.push("/findpassword");
     };
 
-    const clickLogin = function() {
-      if (!state.toggle) {
-        axios({
-          method: "post",
-          url: "http://localhost:8080/auth/personal/login",
-          data: {
-            email: state.form.email,
-            password: state.form.password,
-            header: setToken(),
-          },
+    const privateLogin = function() {
+      axios({
+        method: "post",
+        url: "http://localhost:8080/auth/personal/login",
+        data: {
+          email: state.form.email,
+          password: state.form.password,
+          header: setToken(),
+        },
+      })
+        .then((res) => {
+          console.log(res.data);
+          localStorage.setItem("jwt", res.data.accessToken);
+          localStorage.setItem("userno", res.data.userno);
+          store.state.isLogin = true;
+          store.state.isUser = true;
+          localStorage.setItem("isLogin", store.state.isLogin);
+          localStorage.setItem("isUser", store.state.isUser);
+          localStorage.setItem("isAgency", store.state.isAgency);
+          sessionStorage.setItem("isLogin", store.state.isLogin);
+          sessionStorage.setItem("isUser", store.state.isUser);
+          location.href = "/";
         })
-          .then((res) => {
-            console.log(res.data);
-            localStorage.setItem("jwt", res.data.accessToken);
-            localStorage.setItem("userno", res.data.userno);
-            store.state.isLogin = true;
-            store.state.isUser = true;
-            localStorage.setItem("isLogin", store.state.isLogin);
-            localStorage.setItem("isUser", store.state.isUser);
-            localStorage.setItem("isAgency", store.state.isAgency);
-            sessionStorage.setItem("isLogin", store.state.isLogin);
-            sessionStorage.setItem("isUser", store.state.isUser);
-            location.href = "/";
-          })
-          .catch((err) => {
-            console.log(err);
+        .catch((err) => {
+          console.log(err)
+          console.log(state.toggle)
+          if (err.response.status >= 500) {
             alert("개인회원이 맞는지 확인해주세요!");
-          });
-      } else {
+          }
+          else {
+            alert("잘못된 이메일 혹은 비밀번호입니다.")
+          }
+        });
+    };
+    const agencyLogin = function() {  
         axios({
           method: "post",
           url: "http://localhost:8080/auth/agency/login",
@@ -204,13 +215,18 @@ export default {
             location.href = "/";
           })
           .catch((err) => {
-            console.log(err);
-            alert("기관회원이 맞는지 확인해주세요!");
+            console.log(err)
+            console.log(state.toggle)
+            if (err.response.status >= 500) {
+              alert("기관회원이 맞는지 확인해주세요!");
+            }
+            else {
+              alert("잘못된 이메일 혹은 비밀번호입니다.")
+            }
           });
       }
-    };
 
-    return { state, clickLogin, goToSignup, goToFindPassword };
+    return { state, privateLogin, agencyLogin, goToSignup, goToFindPassword };
   },
 };
 </script>
