@@ -43,49 +43,17 @@
   </div>
 </template>
 <script>
-import { reactive, onMounted, computed } from "vue";
+import { computed } from "vue";
 import { useRouter } from "vue-router";
-import { useStore } from "vuex";
-import axios from "axios";
 export default {
   name: "CommunityPagenation",
+  props: {
+    state: {
+      type: Object
+    }
+  },
   setup() {
     const router = useRouter();
-    const store = useStore();
-    const state = reactive({
-      data: [],
-      numberOfItems: 4,
-      page: 1,
-      numberOfPages: 0,
-    });
-
-    onMounted(() => {
-      axios({
-        method: "get",
-        url: "http://localhost:8080/board/",
-      })
-        .then((res) => {
-          console.log(res.data);
-          state.data = res.data;
-          state.numberOfItems = 10;
-          if (state.data.length % state.numberOfItems) {
-            state.numberOfPages =
-              (state.data.length - (state.data.length % state.numberOfItems)) /
-                state.numberOfItems +
-              1;
-          } else {
-            state.numberOfPages =
-              (state.data.length - (state.data.length % state.numberOfItems)) / state.numberOfItems;
-          }
-
-          state.data.sort(function(a, b) {
-            return new Date(b.reg_date) - new Date(a.reg_date);
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    });
 
     const pageUp = function() {
       state.page++;
@@ -112,7 +80,7 @@ export default {
       }
     };
 
-    return { state, pageUp, pageDown, goToPage, isLogin, goToBoardDetail };
+    return { pageUp, pageDown, goToPage, isLogin, goToBoardDetail };
   },
 };
 </script>
