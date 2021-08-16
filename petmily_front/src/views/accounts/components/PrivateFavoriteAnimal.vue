@@ -24,7 +24,11 @@
               </span>
               <span>
                 <!-- 삭제하기 수정해야합니다 ! ! !  -->
-                <button class="btn-delete-profile" style="height: 35px" @click="goDetail(animal)">
+                <button
+                  class="btn-delete-profile"
+                  style="height: 35px"
+                  @click="cancelFavorite(animal)"
+                >
                   삭제하기
                 </button>
               </span>
@@ -38,6 +42,8 @@
 <script>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { reactive } from "vue";
+import axios from "axios";
 
 export default {
   name: "PrivateFavoriteAnimal",
@@ -49,7 +55,44 @@ export default {
   setup(props) {
     let sex = ref("");
     let neutered = ref("");
+    const getUserInfo = function() {
+      const no = localStorage.getItem("userno");
+      return no;
+    };
+    const getFavoriteInfo = function() {
+      axios({
+        method: "get",
+        url: `http://localhost:8080/users/like/${localStorage.getItem("userno")}`,
+      })
+        .then((res) => {
+          state.favoriteData = res.data;
+          state.favoriteArray = [];
+          state.favoriteData.forEach((element) => {
+            if (!state.favoriteArray.includes(element.animalno)) {
+              state.favoriteArray.push(element.animalno);
+            }
+          });
+          state.favoriteArray.sort(function(a, b) {
+            return a - b;
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getFavoriteInfo();
     const router = useRouter();
+    const state = reactive({
+      userno: getUserInfo(),
+      // isClickedSearch: false,
+      data: {},
+      favoriteData: {},
+      favoriteArray: [],
+      tempFavoriteNumber: "",
+      numberOfItems: 4,
+
+      isLike: false,
+    });
     const confirm = function() {
       if (props.animal.sex) {
         sex.value = "암컷";
@@ -70,8 +113,29 @@ export default {
         },
       });
     };
+
+    const cancelFavorite = function(animal) {
+      state.favoriteData.forEach((element) => {
+        if (element.animalno === animal.no) {
+          state.tempFavoriteNumber = element.no;
+        }
+      });
+      axios({
+        method: "delete",
+        url: `http://localhost:8080/users/like/${state.tempFavoriteNumber}`,
+      })
+        .then((res) => {
+          confirm("즐겨찾기 동물을 삭제하시겠습니까?");
+          console.log(res);
+          getFavoriteInfo();
+          location.reload();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
     confirm();
-    return { sex, neutered, goDetail };
+    return { state, sex, neutered, goDetail, cancelFavorite, getUserInfo };
   },
 };
 </script>
