@@ -46,7 +46,7 @@
 import { computed } from "vue";
 import { useRouter } from "vue-router";
 export default {
-  name: "CommunityPagenation",
+  name: "CommunityPagination",
   props: {
     state: {
       type: Object
