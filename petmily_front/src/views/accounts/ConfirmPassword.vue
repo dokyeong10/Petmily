@@ -1,7 +1,7 @@
 <template>
-  <div class="Jbgc d-flex mx-auto justify-content-center align-items-center" style="height: 350px;">
-    <div>
-      <h1>Confirm Password</h1>
+  <div class="Jbgc d-flex mx-auto justify-content-center align-items-center" style="height: 250px;">
+    <div class="row justify-content-center mb-5">
+      <div class="font-bold mt-4" style="font-size:40px">Confim Password</div>
     </div>
   </div>
   <br />
@@ -11,7 +11,7 @@
       v-model="password"
       type="password"
       class="form-control radius-border br"
-      placeholder="••••••••"
+      placeholder="비밀번호 입력"
       @keyup.enter="confirmEmail"
       id="email"
       style="height: 38px;"
@@ -22,7 +22,7 @@
       class="btn-up"
       style="color: #FFFFFF; margin-left:10px;"
     >
-      인증
+      확인
     </button>
   </div>
 </template>
