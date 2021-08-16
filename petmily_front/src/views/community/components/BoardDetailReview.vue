@@ -16,7 +16,7 @@
         <div class="d-flex justify-content-end">
           
         <button
-            class="btn-white pe-3"
+            class="btn-white btn-sm"
             @click="registerReview"
             style="color: #FFFFFF;"
           >
@@ -29,6 +29,7 @@
 </template>
 <script>
 import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import axios from 'axios'
 export default {
   name: 'BoardDetailReview',
@@ -39,7 +40,7 @@ export default {
     const state = reactive({
       contents: ""
     })
-    
+    const router = useRouter()
     const registerReview = function () {
       console.log(localStorage.getItem("isUser"))
       if (localStorage.getItem("isUser") === 'true') {
@@ -55,7 +56,7 @@ export default {
         })
         .then(res => {
           console.log(res)
-          router.go()
+          router.go(`/boarddetail/${router.currentRoute._value.boardno}`)
         })
         .catch(err => {
           console.log(err)
@@ -72,6 +73,7 @@ export default {
         })
         .then(res => {
           console.log(res)
+          router.go(`/boarddetail/${router.currentRoute._value.boardno}`)
         })
         .catch(err => {
           console.log(err)
