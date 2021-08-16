@@ -58,13 +58,13 @@
                       <div class="modal-footer">
                         <button
                           type="button"
-                          class="btn btn-danger"
+                          class="btn-delete"
                           data-bs-dismiss="modal"
                           @click="animalDelete(animal)"
                         >
                           삭제
                         </button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <button type="button" class="btn-login-modal" data-bs-dismiss="modal">
                           취소
                         </button>
                       </div>

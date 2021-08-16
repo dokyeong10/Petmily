@@ -3,7 +3,9 @@
     <div id="main-container" class=" container">
       <div id="join" v-if="!session">
         <div id="join-dialog" class="">
-          <div class="font-bold  mb-5" style="font-size:40px">라이브 입장</div>
+          <div class="">
+            <div class="font-bold  mb-4 title-live " style="font-size:40px">라이브 입장</div>
+          </div>
           <div class="form-group">
             <div class="font-bold mb-3 d-flex flex-row" style="font-size:18px">
               닉네임
@@ -42,6 +44,11 @@
 
           <div id="video-container" class="col">
             <div class="RoomInfo mb-3 mt-3">{{ RoomInfo.title }}</div>
+            <div>
+              <span class="font-bold">현재 시청자수 : </span>
+              <span class="font-bold"> {{ this.numberOfElements }}</span
+              ><span class="font-bold"> 명 </span>
+            </div>
             <user-video
               v-if="this.isHost"
               :stream-manager="publisher"
@@ -137,6 +144,9 @@ export default {
       title: "",
       discription: "",
       RoomInfo: [],
+
+      connections: [],
+      numberOfElements: 0,
     };
   },
   created() {
@@ -153,14 +163,7 @@ export default {
       console.log(" 공유 여부 ");
       console.log(this.subscribers[1].stream.typeOfVideo);
     },
-    // audioOnOff() {
-    //   this.publisher.publishAudio(!this.aOnOff);
-    //   this.aOnOff = !this.aOnOff;
-    // },
-    // videoOnOff() {
-    //   this.publisher.publishVideo(!this.vOnOff);
-    //   this.vOnOff = !this.vOnOff;
-    // },
+
     sendMsg(msg) {
       // Sender of the message (after 'session.connect')
       this.session
@@ -177,13 +180,6 @@ export default {
         });
     },
     joinSession() {
-      console.log("=========================");
-      axios.get("/live/detail/" + this.mySessionId).then((res) => {
-        console.log(res.data);
-        console.log(res.data.title);
-        this.RoomInfo = res.data;
-      });
-      console.log("=========================");
       // --- Get an OpenVidu object ---
       this.OV = new OpenVidu();
 
@@ -204,6 +200,17 @@ export default {
         if (index >= 0) {
           this.subscribers.splice(index, 1);
         }
+      });
+
+      this.session.on("connectionCreated", ({ stream }) => {
+        this.numberOfElements++;
+      });
+
+      this.session.on("sessionDisconnected", ({ stream }) => {
+        // const subscriber = this.session.subscribe(stream);
+        // this.subscribers.push(subscriber);
+        alert("라이브가 종료되었습니다.");
+        location.replace("live");
       });
 
       // On every asynchronous exception...
@@ -252,6 +259,27 @@ export default {
             console.log("There was an error connecting to the session:", error.code, error.message);
           });
       });
+      // let mySessionId = this.mySessionId;
+      // axios
+      //   .get(
+      //     `${OPENVIDU_SERVER_URL}/openvidu/api/sessions/${mySessionId}`,
+
+      //     {
+      //       auth: {
+      //         username: "OPENVIDUAPP",
+      //         password: OPENVIDU_SERVER_SECRET,
+      //       },
+      //     }
+      //   )
+      //   .then((response) => {
+      //     console.log(" 성공성공");
+      //     this.numberOfElements = response.data.connections.numberOfElements;
+      //     console.log(response);
+      //     console.leg(response.data);
+      //   })
+      //   .catch((error) => {
+      //     console.log("실파~!~!!~");
+      //   });
 
       window.addEventListener("beforeunload", this.leaveSession);
     },
@@ -270,30 +298,42 @@ export default {
     },
 
     endSession() {
-      axios
-        .delete("/live/" + this.mySessionId)
-        .then((res) => {
-          confirm("라이브를 종료하시겠습니까?");
-          console.log(res.data);
-          location.replace("/live");
-        })
-        .catch((err) => {
-          console.log("실패함");
-        });
-      axios
-        .delete("/openvidu/api/sessions/" + this.mySessionId, {
-          auth: {
-            username: "OPENVIDUAPP",
-            password: OPENVIDU_SERVER_SECRET,
-          },
-        })
-        .then((response) => response.data)
-        .then((data) => resolve(data.token))
-        .catch((error) => {
-          if (error.response.status === 404) {
-            console.log("실파~!~!!~");
-          }
-        });
+      let mySessionId = this.mySessionId;
+      let session_con = confirm("라이브를 종료하시겠습니까?");
+      if (session_con == true) {
+        axios
+          .delete("/live/" + this.mySessionId)
+          .then((res) => {
+            console.log(res.data);
+
+            //location.replace("/live");
+
+            axios
+              .delete(
+                `${OPENVIDU_SERVER_URL}/openvidu/api/sessions/${mySessionId}`,
+
+                {
+                  auth: {
+                    username: "OPENVIDUAPP",
+                    password: OPENVIDU_SERVER_SECRET,
+                  },
+                }
+              )
+              .then((response) => {
+                location.replace("/live");
+              })
+
+              .catch((error) => {
+                if (error.response.status === 404) {
+                  console.log("실파~!~!!~");
+                }
+              });
+          })
+          .catch((err) => {
+            console.log("실패함");
+          });
+      } else if (session_con == false) {
+      }
     },
     findRoom() {
       axios.get("/live/detail" + this.agencycode).then((res) => {
@@ -361,6 +401,12 @@ export default {
               reject(error.response);
             }
           });
+        axios.get("/live/detail/" + this.mySessionId).then((res) => {
+          console.log(res.data);
+          console.log(res.data.title);
+          this.RoomInfo = res.data;
+        });
+        let mySessionId = this.mySessionId;
       });
     },
 
@@ -410,7 +456,7 @@ export default {
   color: rgb(255, 255, 255);
   width: 150px;
   height: 50px;
-  background-color: #8376fc;
+  background-color: #b2abee;
   border-style: none;
   border-radius: 12px;
   margin-left: 10px;
@@ -425,6 +471,7 @@ export default {
   margin-left: 10px;
 }
 .RoomInfo {
+  padding-top: 3%;
   font-weight: bold;
   font-size: 30px;
   text-align: center;
@@ -436,7 +483,7 @@ export default {
 .Live-button {
   text-align: center;
 }
-/* .msg-fomr {
-  height: 100vh;
-} */
+.title-live {
+  padding-top: 8%;
+}
 </style>
