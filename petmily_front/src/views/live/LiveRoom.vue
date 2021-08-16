@@ -100,8 +100,8 @@ import MessageList from "./components/messageList";
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
-const OPENVIDU_SERVER_URL = "https://i5b101.p.ssafy.io:443";
-const OPENVIDU_SERVER_SECRET = "MY_SECRET";
+const OPENVIDU_SERVER_URL = "https://" + "i5a308.p.ssafy.io:8443";
+const OPENVIDU_SERVER_SECRET = "BABBLE";
 
 export default {
   name: "LiveRoom",
@@ -279,6 +279,20 @@ export default {
         })
         .catch((err) => {
           console.log("실패함");
+        });
+      axios
+        .delete("/openvidu/api/sessions/" + this.mySessionId, {
+          auth: {
+            username: "OPENVIDUAPP",
+            password: OPENVIDU_SERVER_SECRET,
+          },
+        })
+        .then((response) => response.data)
+        .then((data) => resolve(data.token))
+        .catch((error) => {
+          if (error.response.status === 404) {
+            console.log("실파~!~!!~");
+          }
         });
     },
     findRoom() {
