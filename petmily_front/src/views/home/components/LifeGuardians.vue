@@ -1,16 +1,61 @@
 <template>
-  <div class="Jbgc col-4">
-    <div class="card border-light lifecard mb-5" align="center" style="background-color:#FAF9FE">
-      <img src="@\assets\shelter.png" class="card-img-top guardimg" align="center" />
-      <div class="card-body d-flex flex-column justify-content-between">
-        <h5 class="card-title font-bold">{{ guardians.agencyname }}</h5>
-        <div class="card-text" style="margin-top:0px">{{ guardians.tel }}</div>
-        <div class="card-text mb-3">{{ guardians.addr }}</div>
-        <button class="btn-login" type="button" style="color: #FFFFFF" @click="goToShleterDetail">
-          Read More
-        </button>
+  <div id="guardianCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div
+        class="carousel-item"
+        v-for="(guardian, idx) in guardians"
+        :key="idx"
+        :class="{ active: idx == 0 }"
+      >
+        <div class="Jbgc col-4">
+          <div
+            class="card border-light lifecard mb-5"
+            align="center"
+            style="background-color: #faf9fe"
+          >
+            <img
+              src="@\assets\shelter.png"
+              class="card-img-top guardimg"
+              align="center"
+            />
+            <div class="card-body d-flex flex-column justify-content-between">
+              <h5 class="card-title font-bold">{{ guardian.agencyname }}</h5>
+              <div class="card-text" style="margin-top: 0px">
+                {{ guardian.tel }}
+              </div>
+              <div class="card-text mb-3">{{ guardian.addr }}</div>
+              <button
+                class="btn-login"
+                type="button"
+                style="color: #ffffff"
+                @click="goToShleterDetail(guardian.agencycode)"
+              >
+                Read More
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#guardianCarousel"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#guardianCarousel"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </button>
     </div>
+    <br />
+    <br />
+    <br />
   </div>
 </template>
 
@@ -18,15 +63,15 @@
 import { useRouter } from "vue-router";
 export default {
   props: {
-    guardians: Object,
+    guardians: Array,
   },
   setup(props) {
     const router = useRouter();
-    const goToShleterDetail = () => {
+    const goToShleterDetail = (agencycode) => {
       router.push({
         name: "shelterdetail",
         params: {
-          agencycode: props.guardians.agencycode,
+          agencycode: agencycode,
         },
       });
     };

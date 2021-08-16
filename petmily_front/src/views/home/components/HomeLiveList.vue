@@ -3,7 +3,11 @@
   <div class="container mt-5" style="height: 650px">
     <div class="d-flex justify-content-center">
       <div class="d-flex align-items-center w-50">
-        <div class="font-bold" align="left" style="font-size: 26px; color: #ab0b14">
+        <div
+          class="font-bold"
+          align="left"
+          style="font-size: 26px; color: #ab0b14"
+        >
           Live
         </div>
         <img src="@\assets\circle.png" style="width: 19px; height: 19px" />
@@ -33,7 +37,7 @@
         <button
           class="carousel-control-prev"
           type="button"
-          data-bs-target="#animalCarousel"
+          data-bs-target="#liveCarousel"
           data-bs-slide="prev"
         >
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -41,7 +45,7 @@
         <button
           class="carousel-control-next"
           type="button"
-          data-bs-target="#animalCarousel"
+          data-bs-target="#liveCarousel"
           data-bs-slide="next"
         >
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
