@@ -7,7 +7,7 @@
         :key="idx"
         :class="{ active: idx == 0 }"
       >
-        <div class="Jbgc col-4">
+        <div class="Jbgc col-4" style="width: 400px">
           <div
             class="card border-light lifecard mb-5"
             align="center"
