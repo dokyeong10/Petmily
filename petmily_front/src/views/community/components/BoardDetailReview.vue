@@ -30,12 +30,15 @@
 <script>
 import { reactive } from 'vue'
 import axios from 'axios'
+import { useRouter } from 'vue-router'
+
 export default {
   name: 'BoardDetailReview',
   props: {
     replyJoins: Object
   },
   setup (props) {
+    const router = useRouter()
     const state = reactive({
       contents: ""
     })
