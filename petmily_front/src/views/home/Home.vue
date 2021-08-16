@@ -18,7 +18,7 @@
         />
       </div>
     </div>
-    <div class="Jbgc">
+    <div class="Jbgc" style="height: 650px">
       <div class="container">
         <br />
         <br />
