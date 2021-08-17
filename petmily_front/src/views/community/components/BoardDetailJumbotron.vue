@@ -1,17 +1,13 @@
 <template>
-  <div>
-    <div class="Jbgc d-flex mx-auto justify-content-center align-items-center" style="height: 200px;">
-      <div>
-        <h1>Animal Community</h1>
-      </div>
+  <div class="Jbgc d-flex align-items-center justify-content-center" style="height: 250px;">
+    <div class="row justify-content-center mb-5">
+      <div class="font-bold mt-4" style="font-size:40px">Animal Community</div>
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: 'BoardDetailJumbotron'
-}
+  name: "BoardDetailJumbotron",
+};
 </script>
-<style>
-  
-</style>
+<style></style>
