@@ -10,21 +10,21 @@
         <input
           class="mb-1 form-control radius-border rounded-pill"
           type="text"
-          v-model="search"
+          v-model="state.search"
           placeholder="키워드를 입력하세요">
         <button
           class="mb-1 btn-up"
-          @click="searchBoard"
-          @keyup="searchBoard"
+          @click="findWriteMe(state.writeMe)"
+          @keyup="findWriteMe(state.writeMe)"
         >검색
         </button>
       </div>
       <div class="d-flex justify-content-between">
         <div v-if="isLogin" class="mx-2">
           <input
-            v-model="writeMe"
+            v-model="state.writeMe"
             type="checkbox"
-            @click="findWriteMe(writeMe)"
+            @click="findWriteMe(state.writeMe)"
           /> 내가 작성한 글 보기
         </div>
       </div>
@@ -42,7 +42,7 @@
   </div>
 </template>
 <script>
-import { ref, reactive, onMounted } from 'vue'
+import { reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
 import CommunityList from '@/views/community/components/CommunityList.vue'
@@ -54,8 +54,6 @@ export default {
     CommunityPagination
   },
   setup () {
-    let writeMe = ref(false)
-    let search = ref("")
     const searchBoard = function () {
       }
 
@@ -64,12 +62,14 @@ export default {
       numberOfItems: 4,
       page: 1,
       numberOfPages: 0,
+      search: "",
+      writeMe: false
     });
 
     const router = useRouter()
     const isLogin  = sessionStorage.getItem('isLogin')
-    const isUser = localStorage.getItem('isUser')
-    const isAgency = localStorage.getItem('isAgency')
+    const isUser = Boolean(localStorage.getItem('isUser'))
+    const isAgency = Boolean(localStorage.getItem('isAgency'))
     const userno = Number(localStorage.getItem('userno'))
     const agencycode = localStorage.getItem('agencycode')
     
@@ -78,12 +78,15 @@ export default {
 
     onMounted(() => {
       axios({
-        method: "get",
+        method: "post",
         url: "http://localhost:8080/board/",
+        data: {
+          word: ""
+        }
       })
         .then((res) => {
           state.numberOfItems = 10;
-          // console.log(res.data);
+          console.log(res.data);
           state.data = res.data;
           if (state.data.length % state.numberOfItems) {
             state.numberOfPages =
@@ -106,31 +109,50 @@ export default {
 
     const findWriteMe = function (writeMe) {
       console.log(writeMe)
-      if (!writeMe) {
-        axios({
-          method: "get",
-          url: "http://localhost:8080/board/",
-        })
-          .then((res) => {
-            state.data = []
-            console.log(res.data)
+      console.log(state.search)
+       if ((!writeMe) && isUser) {
+         axios({
+           method: 'post',
+           url: 'http://localhost:8080/board/',
+           data: {
+             word: state.search,
+             userno: userno
+           }
+         })
+         .then(res => {
+          console.log(res)
+          state.numberOfItems = 10;
+          state.data = res.data;
+          if (state.data.length % state.numberOfItems) {
+            state.numberOfPages =
+              (state.data.length - (state.data.length % state.numberOfItems)) /
+                state.numberOfItems +
+              1;
+          } else {
+            state.numberOfPages =
+              (state.data.length - (state.data.length % state.numberOfItems)) / state.numberOfItems;
+          }
+
+          state.data.sort(function(a, b) {
+            return new Date(b.reg_date) - new Date(a.reg_date);
+          });
+         })
+         .catch(err => {
+           console.log(err)
+         })
+       } else if ((!writeMe) && isAgency) {
+         axios({
+           method: 'post',
+           url: 'http://localhost:8080/board/',
+           data: {
+             word: state.search,
+             agencycode: agencycode
+           }
+         })
+         .then(res => {
+            console.log(res)
             state.numberOfItems = 10;
-            if (isUser === 'true') {
-              res.data.forEach(element => {
-                if (element.user.no === userno) {
-                  state.data.push(element)
-                }
-                console.log(state.data)         
-              });
-            } else if (isAgency === 'true') {
-               res.data.forEach(element => {
-                if (element.agency.agencycode === agencycode) {
-                  state.data.push(element)
-                }
-                console.log(state.data)       
-              });
-            } 
-  
+            state.data = res.data;
             if (state.data.length % state.numberOfItems) {
               state.numberOfPages =
                 (state.data.length - (state.data.length % state.numberOfItems)) /
@@ -140,22 +162,24 @@ export default {
               state.numberOfPages =
                 (state.data.length - (state.data.length % state.numberOfItems)) / state.numberOfItems;
             }
+
             state.data.sort(function(a, b) {
               return new Date(b.reg_date) - new Date(a.reg_date);
             });
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      } else {
+         })
+         .catch(err => {
+           console.log(err)
+         })
+       } else {
         axios({
-        method: "get",
-        url: "http://localhost:8080/board/",
+          method: "post",
+          url: "http://localhost:8080/board/",
+          data: {
+          word: state.search
+          }
         })
         .then((res) => {
-          state.data = []
           state.numberOfItems = 10;
-          console.log(res.data);
           state.data = res.data;
           if (state.data.length % state.numberOfItems) {
             state.numberOfPages =
@@ -174,11 +198,11 @@ export default {
         .catch((err) => {
           console.log(err);
         });
-      }
+       }
       }
     const goToRegisterBoard = () => { router.push('/communityregister') }
 
-    return { state, search, searchBoard, isLogin, goToRegisterBoard, writeMe, findWriteMe }
+    return { state, searchBoard, isLogin, goToRegisterBoard, findWriteMe }
     }
   }
 </script>
