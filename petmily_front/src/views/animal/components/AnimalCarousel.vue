@@ -24,10 +24,10 @@
                           file.extension == 'gif'
                       "
                     >
-                      <img :src="file.file" style="max-width: 575.85px;" />
+                      <img :src="file.file" style="max-width: 575.85px; height: 309.52px;" />
                     </div>
                     <div v-else>
-                      <video :src="file.file" controls autoplay muted style="max-width: 575.85px;"></video>
+                      <video :src="file.file" controls autoplay muted style="max-width: 575.85px; height: 309.52px;"></video>
                     </div>
                   </div>
                   <button
@@ -37,7 +37,7 @@
                     data-bs-slide="prev"
                     style="height: 173.96px;"
                   >
-                    <span class="carousel-control-prev-icon" aria-hidden="true" style=" margin-top: 141.96px;"></span>
+                    <span class="carousel-control-prev-icon" aria-hidden="true" style="margin-top: 141.96px;"></span>
                   </button>
                   <button
                     class="carousel-control-next"
@@ -46,7 +46,7 @@
                     data-bs-slide="next"
                     style="height: 173.96px;"
                   >
-                    <span class="carousel-control-next-icon" aria-hidden="true" style=" margin-top: 141.96px;"></span>
+                    <span class="carousel-control-next-icon" aria-hidden="true" style="margin-top: 141.96px;"></span>
                   </button>
                 </div>
               </div>
