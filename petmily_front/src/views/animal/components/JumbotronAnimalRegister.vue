@@ -2,7 +2,7 @@
   <div class="Jbgc d-flex justify-content-center">
     <div
       class="d-flex justify-content-center align-items-center"
-      style="height: 350px; width: 400.24px;"
+      style="height: 250px; width: 400.24px;"
     >
       <div class="overpass d-flex justify-content-between" style="width: 360px;">
         <h1>Register Animal</h1>
