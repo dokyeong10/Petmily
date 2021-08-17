@@ -2,7 +2,7 @@
   <div>
     <BoardDetailJumbotron />
     <div v-if="userInfo.user != null">
-      <BoardDetailUser :userInfo="userInfo.user" :boardFiles="boardFiles" :boardInfo="boardInfo" />
+      <BoardDetailUser :userInfo="userInfo.user" :boardFiles="boardFiles" :boardInfo="boardInfo" :newFiles="newFiles" />
     </div>
     <div v-else>
       <BoardDetailUser
