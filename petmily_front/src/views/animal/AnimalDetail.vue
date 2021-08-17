@@ -25,10 +25,12 @@ export default {
     const state = reactive({
       aniInfo: null,
     });
-    const getAnimal = async function() {
-      await axios({
+    const getAnimal = function () {
+      axios({
         method: "get",
-        url: "http://localhost:8080/animal/details/" + router.currentRoute._value.params.id,
+        url:
+          "http://localhost:8080/animal/details/" +
+          router.currentRoute._value.params.id,
       })
         .then((res) => {
           state.aniInfo = res.data;
