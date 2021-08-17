@@ -18,12 +18,15 @@
     </div>
     <div class="mx-auto Jbgc" style="width: 800px;">
       <div class="container">
-        <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="row row-cols-1 row-cols-md-2 g-4" v-if="animalLikes.likes.length > 0">
           <PrivateFavoriteAnimal
             v-for="(animal, idx) in animalLikes.likes"
             :key="idx"
             :animal="animal"
           />
+        </div>
+        <div class="d-flex justify-content-center align-items-center" v-else style="height: 400px;">
+          <h2> 아직 즐겨찾기 한 동물이 없습니다. </h2>     
         </div>
       </div>
     </div>
