@@ -27,8 +27,8 @@
               <span v-if="agencyInfo.username" class="content-sh">{{
                 agencyInfo.username
               }}</span>
-              <span v-else class="content-sh" style="color: red"
-                >아직 정보가 없어용ㅜㅠ</span
+              <span v-else class="content-sh" style="color: #e26161"
+                >아직 정보가 없습니다.</span
               >
             </p>
             <p>
@@ -36,8 +36,8 @@
               <span class="content-sh" v-if="agencyInfo.email">{{
                 agencyInfo.email
               }}</span>
-              <span v-else class="content-sh" style="color: red"
-                >아직 정보가 없어용ㅜㅠ</span
+              <span v-else class="content-sh" style="color: #e26161"
+                >아직 정보가 없습니다.</span
               >
             </p>
             <p>
@@ -45,8 +45,8 @@
               <span class="content-sh" v-if="agencyInfo.phone">{{
                 agencyInfo.phone
               }}</span>
-              <span v-else class="content-sh" style="color: red"
-                >아직 정보가 없어용ㅜㅠ</span
+              <span v-else class="content-sh" style="color: #e26161"
+                >아직 정보가 없습니다.</span
               >
             </p>
 
@@ -104,6 +104,7 @@ export default {
   margin-bottom: 20px;
   color: rgb(34, 22, 6);
   background-color: beige;
+  
 }
 .title-sh {
   font-weight: bold;

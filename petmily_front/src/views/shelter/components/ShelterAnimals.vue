@@ -1,5 +1,5 @@
 <template>
-  <div class="col-4">
+  <div class="col-4" v-if="animals">
     <div class="card border-light lifecard mb-1" align="center" style="background-color:#FAF9FE">
       <img :src="animals.profile_img" class="card-img-top guardimg" align="center" />
       <hr>
@@ -10,6 +10,9 @@
         <p class="card-text">중성화: {{ neutered }}</p>
       </div>
     </div>
+  </div>
+  <div v-else>
+    <h2>아직 등록한 동물이 없습니다.</h2>
   </div>
 </template>
 <script>

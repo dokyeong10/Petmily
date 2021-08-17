@@ -214,7 +214,7 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
 이용자는 개인정보의 수집 및 이용 동의를 거부할 권리가 있습니다. 회원가입 시 수집하는 최소한의 개인정보, 즉, 필수 항목에 대한 수집 및 이용 동의를 거부하실 경우, 회원가입이 어려울 수 있습니다.
             </pre>
           </div>
-          <div class="d-flex justify-content-end mb-5 mt-2">
+          <div class="d-flex justify-content-end align-items-baseline mb-5 mt-2">
             <input type="checkbox" value="동의함" v-model="secondAgree" />
             <label for="checkbox">이용약관에 동의합니다.</label>
           </div>
