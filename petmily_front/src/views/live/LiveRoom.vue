@@ -259,27 +259,6 @@ export default {
             console.log("There was an error connecting to the session:", error.code, error.message);
           });
       });
-      // let mySessionId = this.mySessionId;
-      // axios
-      //   .get(
-      //     `${OPENVIDU_SERVER_URL}/openvidu/api/sessions/${mySessionId}`,
-
-      //     {
-      //       auth: {
-      //         username: "OPENVIDUAPP",
-      //         password: OPENVIDU_SERVER_SECRET,
-      //       },
-      //     }
-      //   )
-      //   .then((response) => {
-      //     console.log(" 성공성공");
-      //     this.numberOfElements = response.data.connections.numberOfElements;
-      //     console.log(response);
-      //     console.leg(response.data);
-      //   })
-      //   .catch((error) => {
-      //     console.log("실파~!~!!~");
-      //   });
 
       window.addEventListener("beforeunload", this.leaveSession);
     },
@@ -293,6 +272,8 @@ export default {
       this.publisher = undefined;
       this.subscribers = [];
       this.OV = undefined;
+      this.numberOfElements--;
+      console.log(this.numberOfElements);
 
       window.removeEventListener("beforeunload", this.leaveSession);
     },

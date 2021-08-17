@@ -210,11 +210,13 @@ export default {
     const confirmAnimalModify = function() {
       const reg = /.{1,}/;
       const reg_num = /^[0-9]{1,}$/;
-
+      console.log(state.file)
+      console.log(state.imgURL)
+      console.log(state.file.length && !state.imgURL.length)
       if (state.profile && !state.profileURL) {
         return alert("프로필 사진에서 업로드 버튼을 눌러주세요.");
       }
-      if (state.file && !state.imgURL) {
+      if (state.file.length && !state.imgURL.length) {
         return alert("사진 또는 동영상에서 업로드 버튼을 눌러주세요.");
       }
       if (!reg.test(state.type)) {

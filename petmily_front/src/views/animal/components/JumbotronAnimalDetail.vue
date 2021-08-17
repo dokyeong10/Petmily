@@ -35,7 +35,7 @@
             <span class="title"> 나이 : </span>
             <span class="content"> {{ aniInfo.age }}</span>
           </div>
-          <div class="mt-1 mb-2" align="left" v-if="aniInfo.sex">
+          <div class="mt-1 mb-2" align="left" v-if="!aniInfo.sex">
             <span class="title"> 성별 : </span>
             <span class="content"> 수컷</span>
           </div>
