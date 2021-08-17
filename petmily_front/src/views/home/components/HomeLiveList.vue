@@ -29,7 +29,7 @@
           <img
             :src="live.img"
             class="w-80"
-            style="height: 300px"
+            style="height: 300px; border-radius: 12px;"
             onerror="this.src='https://petmily.s3.ap-northeast-2.amazonaws.com/PetmilyLogo.png'"
             @click="goLiveRoom(live.agencycode)"
           />
@@ -62,7 +62,7 @@
       style="color: #ffffff"
     >
       <span class="me-3">더보기</span>
-      <img src="@\assets\more.png" style="width: 19px; height: 19px" />
+      <img src="@\assets\more.png" style="width: 19px; height: 19px; border-radius: 12px;" />
     </button>
   </div>
 </template>

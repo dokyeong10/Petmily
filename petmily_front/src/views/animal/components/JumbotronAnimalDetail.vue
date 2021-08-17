@@ -7,8 +7,8 @@
           <img
             v-if="aniInfo.profile_img != null"
             :src="aniInfo.profile_img"
-            class="mt-3 mb-5"
-            style="width: 360px; height: 350px; border-radius: 30px; margin-left :7%"
+            class="m-5"
+            style="width: 360px; height: 350px; border-radius: 30px; margin-left : 7%"
           />
           <img
             v-else
