@@ -57,7 +57,7 @@
           v-model="state.password"
           type="password"
           class="form-control radius-border br mb-5"
-          placeholder="비밀번호를 한번 더 입력하세요"
+          placeholder="바꾸실 비밀번호를 입력하세요"
           id="password"
         />
         <label for="confirmPassword" class="d-flex flex-row mb-2">비밀번호 재입력</label>
@@ -65,7 +65,7 @@
           v-model="state.passwordConfirm"
           type="password"
           class="form-control radius-border br mb-5"
-          placeholder="비밀번호를 한번 더 입력하세요"
+          placeholder="바꾸실 비밀번호를 한번 더 입력하세요"
           id="confirmPassword"
         />
         <label for="phone" class="d-flex flex-row mb-2">전화번호</label>
