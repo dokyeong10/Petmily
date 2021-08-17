@@ -62,7 +62,7 @@ export default {
     const getFavoriteInfo = function() {
       axios({
         method: "get",
-        url: `http://localhost:8080/users/like/${localStorage.getItem("userno")}`,
+        url: `https://i5a408.p.ssafy.io:8080/users/like/${localStorage.getItem("userno")}`,
       })
         .then((res) => {
           state.favoriteData = res.data;
@@ -122,7 +122,7 @@ export default {
       });
       axios({
         method: "delete",
-        url: `http://localhost:8080/users/like/${state.tempFavoriteNumber}`,
+        url: `https://i5a408.p.ssafy.io:8080/users/like/${state.tempFavoriteNumber}`,
       })
         .then((res) => {
           confirm("즐겨찾기 동물을 삭제하시겠습니까?");

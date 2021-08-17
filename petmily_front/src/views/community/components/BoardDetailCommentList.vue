@@ -235,7 +235,7 @@ export default {
     const replyDelete = function(idx) {
       axios({
         method: "delete",
-        url: "http://localhost:8080/board/reply/delete",
+        url: "https://i5a408.p.ssafy.io:8080/board/reply/delete",
         data: {
           replno: props.replyJoins[idx].no,
           bno: props.replyJoins[idx].bno,
@@ -253,7 +253,7 @@ export default {
     const commentDelete = function(idx) {
       axios({
         method: "delete",
-        url: "http://localhost:8080/board/reply/delete",
+        url: "https://i5a408.p.ssafy.io:8080/board/reply/delete",
         data: {
           replno: props.comments[idx].no,
           bno: props.comments[idx].bno,

@@ -16,7 +16,6 @@
     </div>
     <div v-if="replyJoins.reply" class="container">
       <BoardDetailCommentList :replyJoins="replyJoins.reply" :comments="replyJoins.comment" />
-      >>>>>>> c668def4412e8c1da433e87d3c71741476baaab3
     </div>
   </div>
 </template>
@@ -45,7 +44,7 @@ export default {
       title: "",
       contents: "",
       reg_date: "",
-      bno: null
+      bno: null,
     });
 
     const userInfo = reactive({
@@ -74,11 +73,11 @@ export default {
           router.currentRoute._value.params.boardno,
       })
         .then((res) => {
-          console.log(res.data)
+          console.log(res.data);
           boardInfo.title = res.data.title;
           boardInfo.contents = res.data.contents;
           boardInfo.reg_date = res.data.reg_date.substring(0, 10);
-          boardInfo.bno = res.data.no
+          boardInfo.bno = res.data.no;
           userInfo.user = res.data.user;
           userInfo.agency = res.data.agency;
           // replyJoins.data = res.data.replyJoins;

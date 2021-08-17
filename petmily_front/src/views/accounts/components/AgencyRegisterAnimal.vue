@@ -120,7 +120,7 @@ export default {
     const animalDelete = function(animal) {
       axios({
         method: "delete",
-        url: `http://localhost:8080/animal/${animal.no}`,
+        url: `https://i5a408.p.ssafy.io:8080/animal/${animal.no}`,
       })
         .then((res) => {
           console.log(res);

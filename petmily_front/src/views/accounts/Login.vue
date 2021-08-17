@@ -160,7 +160,7 @@ export default {
     const privateLogin = function() {
       axios({
         method: "post",
-        url: "http://localhost:8080/auth/personal/login",
+        url: "https://i5a408.p.ssafy.io:8080/auth/personal/login",
         data: {
           email: state.form.email,
           password: state.form.password,

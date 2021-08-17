@@ -60,13 +60,13 @@
   </div>
 </template>
 <script>
-import { onMounted, reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
-import axios from 'axios'
+import { onMounted, reactive, ref } from "vue";
+import { useRouter } from "vue-router";
+import axios from "axios";
 export default {
-  name: 'BoardDetailModify',
-  setup () {
-    const router = useRouter()
+  name: "BoardDetailModify",
+  setup() {
+    const router = useRouter();
     const state = reactive({
       no: null,
       title: "",
@@ -78,26 +78,26 @@ export default {
       IdentityPoolId: "ap-northeast-2:50493919-440f-47aa-8403-c78182e3ed3e",
       profileURL: "",
       imgURL: [],
-    })
+    });
 
     const file = ref(null);
 
     onMounted(() => {
       axios({
-        method: 'get',
-        url: `http://localhost:8080/board/details/${router.currentRoute._value.params.boardno}`
+        method: "get",
+        url: `https://i5a408.p.ssafy.io:8080/board/details/${router.currentRoute._value.params.boardno}`,
       })
-      .then(res => {
-        console.log(res)
-        state.no = res.data.no
-        state.contents = res.data.contents
-        state.title = res.data.title
-        // state.photo = res
-      })
-      .catch(err => {
-        console.log(err)
-      })
-    })
+        .then((res) => {
+          console.log(res);
+          state.no = res.data.no;
+          state.contents = res.data.contents;
+          state.title = res.data.title;
+          // state.photo = res
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
 
     const handleFileUpload = function() {
       file.value.files.forEach(function(element) {
@@ -145,7 +145,7 @@ export default {
     const registerBoard = function() {
       const reg_title = /.{1,100}/;
       const reg_content = /.{1,500}/;
-      console.log(state)
+      console.log(state);
       if (!reg_title.test(state.title)) {
         return alert("제목은 1자 이상 100자 이하로 작성해주세요!");
       }
@@ -159,7 +159,7 @@ export default {
       }
       axios({
         method: "patch",
-        url: "http://localhost:8080/board/update",
+        url: "https://i5a408.p.ssafy.io:8080/board/update",
         data: {
           no: state.no,
           title: state.title,
@@ -176,12 +176,9 @@ export default {
           console.log(err);
           alert("에러가 발생했습니다.");
         });
-      
     };
-  return { state, registerBoard, handleFileUpload, upload, file }
-  }
-}
+    return { state, registerBoard, handleFileUpload, upload, file };
+  },
+};
 </script>
-<style>
-  
-</style>
+<style></style>

@@ -11,51 +11,47 @@
           class="mb-1 form-control radius-border rounded-pill"
           type="text"
           v-model="state.search"
-          placeholder="키워드를 입력하세요">
+          placeholder="키워드를 입력하세요"
+        />
         <button
           class="mb-1 btn-up"
           @click="findWriteMe(state.writeMe)"
           @keyup="findWriteMe(state.writeMe)"
-        >검색
+        >
+          검색
         </button>
       </div>
       <div class="d-flex justify-content-between">
         <div v-if="isLogin" class="mx-2">
-          <input
-            v-model="state.writeMe"
-            type="checkbox"
-            @click="findWriteMe(state.writeMe)"
-          /> 내가 작성한 글 보기
+          <input v-model="state.writeMe" type="checkbox" @click="findWriteMe(state.writeMe)" /> 내가
+          작성한 글 보기
         </div>
       </div>
       <div class="pt-3 d-flex justify-content-end">
-        <div v-if="isLogin" >
+        <div v-if="isLogin">
           <button class="mb-1 btn-up" @click="goToRegisterBoard">글 작성하기</button>
         </div>
       </div>
     </div>
   </div>
   <div v-if="state.data" class="container">
-    <CommunityPagination
-      :state="state"
-    />
+    <CommunityPagination :state="state" />
   </div>
 </template>
 <script>
-import { reactive, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import axios from 'axios'
-import CommunityList from '@/views/community/components/CommunityList.vue'
-import CommunityPagination from '@/views/community/components/CommunityPagination.vue'
+import { reactive, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import axios from "axios";
+import CommunityList from "@/views/community/components/CommunityList.vue";
+import CommunityPagination from "@/views/community/components/CommunityPagination.vue";
 export default {
-  name: 'Community',
+  name: "Community",
   components: {
     CommunityList,
-    CommunityPagination
+    CommunityPagination,
   },
-  setup () {
-    const searchBoard = function () {
-      }
+  setup() {
+    const searchBoard = function() {};
 
     const state = reactive({
       data: [],
@@ -63,26 +59,26 @@ export default {
       page: 1,
       numberOfPages: 0,
       search: "",
-      writeMe: false
+      writeMe: false,
     });
 
-    const router = useRouter()
-    const isLogin  = sessionStorage.getItem('isLogin')
-    const isUser = Boolean(localStorage.getItem('isUser'))
-    const isAgency = Boolean(localStorage.getItem('isAgency'))
-    const userno = Number(localStorage.getItem('userno'))
-    const agencycode = localStorage.getItem('agencycode')
-    
-    console.log(userno)
-    console.log(agencycode)
+    const router = useRouter();
+    const isLogin = sessionStorage.getItem("isLogin");
+    const isUser = Boolean(localStorage.getItem("isUser"));
+    const isAgency = Boolean(localStorage.getItem("isAgency"));
+    const userno = Number(localStorage.getItem("userno"));
+    const agencycode = localStorage.getItem("agencycode");
+
+    console.log(userno);
+    console.log(agencycode);
 
     onMounted(() => {
       axios({
         method: "post",
-        url: "http://localhost:8080/board/",
+        url: "https://i5a408.p.ssafy.io:8080/board/",
         data: {
-          word: ""
-        }
+          word: "",
+        },
       })
         .then((res) => {
           state.numberOfItems = 10;
@@ -107,50 +103,20 @@ export default {
         });
     });
 
-    const findWriteMe = function (writeMe) {
-      console.log(writeMe)
-      console.log(state.search)
-       if ((!writeMe) && isUser) {
-         axios({
-           method: 'post',
-           url: 'http://localhost:8080/board/',
-           data: {
-             word: state.search,
-             userno: userno
-           }
-         })
-         .then(res => {
-          console.log(res)
-          state.numberOfItems = 10;
-          state.data = res.data;
-          if (state.data.length % state.numberOfItems) {
-            state.numberOfPages =
-              (state.data.length - (state.data.length % state.numberOfItems)) /
-                state.numberOfItems +
-              1;
-          } else {
-            state.numberOfPages =
-              (state.data.length - (state.data.length % state.numberOfItems)) / state.numberOfItems;
-          }
-
-          state.data.sort(function(a, b) {
-            return new Date(b.reg_date) - new Date(a.reg_date);
-          });
-         })
-         .catch(err => {
-           console.log(err)
-         })
-       } else if ((!writeMe) && isAgency) {
-         axios({
-           method: 'post',
-           url: 'http://localhost:8080/board/',
-           data: {
-             word: state.search,
-             agencycode: agencycode
-           }
-         })
-         .then(res => {
-            console.log(res)
+    const findWriteMe = function(writeMe) {
+      console.log(writeMe);
+      console.log(state.search);
+      if (!writeMe && isUser) {
+        axios({
+          method: "post",
+          url: "https://i5a408.p.ssafy.io:8080/board/",
+          data: {
+            word: state.search,
+            userno: userno,
+          },
+        })
+          .then((res) => {
+            console.log(res);
             state.numberOfItems = 10;
             state.data = res.data;
             if (state.data.length % state.numberOfItems) {
@@ -160,52 +126,85 @@ export default {
                 1;
             } else {
               state.numberOfPages =
-                (state.data.length - (state.data.length % state.numberOfItems)) / state.numberOfItems;
+                (state.data.length - (state.data.length % state.numberOfItems)) /
+                state.numberOfItems;
             }
 
             state.data.sort(function(a, b) {
               return new Date(b.reg_date) - new Date(a.reg_date);
             });
-         })
-         .catch(err => {
-           console.log(err)
-         })
-       } else {
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else if (!writeMe && isAgency) {
         axios({
           method: "post",
-          url: "http://localhost:8080/board/",
+          url: "https://i5a408.p.ssafy.io:8080/board/",
           data: {
-          word: state.search
-          }
+            word: state.search,
+            agencycode: agencycode,
+          },
         })
-        .then((res) => {
-          state.numberOfItems = 10;
-          state.data = res.data;
-          if (state.data.length % state.numberOfItems) {
-            state.numberOfPages =
-              (state.data.length - (state.data.length % state.numberOfItems)) /
-                state.numberOfItems +
-              1;
-          } else {
-            state.numberOfPages =
-              (state.data.length - (state.data.length % state.numberOfItems)) / state.numberOfItems;
-          }
+          .then((res) => {
+            console.log(res);
+            state.numberOfItems = 10;
+            state.data = res.data;
+            if (state.data.length % state.numberOfItems) {
+              state.numberOfPages =
+                (state.data.length - (state.data.length % state.numberOfItems)) /
+                  state.numberOfItems +
+                1;
+            } else {
+              state.numberOfPages =
+                (state.data.length - (state.data.length % state.numberOfItems)) /
+                state.numberOfItems;
+            }
 
-          state.data.sort(function(a, b) {
-            return new Date(b.reg_date) - new Date(a.reg_date);
+            state.data.sort(function(a, b) {
+              return new Date(b.reg_date) - new Date(a.reg_date);
+            });
+          })
+          .catch((err) => {
+            console.log(err);
           });
+      } else {
+        axios({
+          method: "post",
+          url: "https://i5a408.p.ssafy.io:8080/board/",
+          data: {
+            word: state.search,
+          },
         })
-        .catch((err) => {
-          console.log(err);
-        });
-       }
-      }
-    const goToRegisterBoard = () => { router.push('/communityregister') }
+          .then((res) => {
+            state.numberOfItems = 10;
+            state.data = res.data;
+            if (state.data.length % state.numberOfItems) {
+              state.numberOfPages =
+                (state.data.length - (state.data.length % state.numberOfItems)) /
+                  state.numberOfItems +
+                1;
+            } else {
+              state.numberOfPages =
+                (state.data.length - (state.data.length % state.numberOfItems)) /
+                state.numberOfItems;
+            }
 
-    return { state, searchBoard, isLogin, goToRegisterBoard, findWriteMe }
-    }
-  }
+            state.data.sort(function(a, b) {
+              return new Date(b.reg_date) - new Date(a.reg_date);
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    };
+    const goToRegisterBoard = () => {
+      router.push("/communityregister");
+    };
+
+    return { state, searchBoard, isLogin, goToRegisterBoard, findWriteMe };
+  },
+};
 </script>
-<style>
-  
-</style>
+<style></style>
