@@ -82,22 +82,28 @@ public class AnimalController {
     @PatchMapping("/")
     public ResponseEntity<Animal> patchUser(@RequestBody AnimalRegisterPostReq animalRegisterPostReq) {
         System.out.println(animalRegisterPostReq.toString());
-        long no = animalRegisterPostReq.getNo();
-        // 파일 삭제
-        animalService.deleteFile(no);
-        // 파일 등록
+
         String files[] = animalRegisterPostReq.getFiles();
-        for (int i = 0; i < files.length; i++) {
-            System.out.println("============================ file name : "+files[i]);
+        long no = animalRegisterPostReq.getNo();
+
+        if(files.length != 0){ // 파일을 새로 등록했을 때
+            // 파일 삭제
+            animalService.deleteFile(no);
+            // 파일 등록
+            for (int i = 0; i < files.length; i++) {
+                System.out.println("============================ file name : "+files[i]);
+            }
+
+            for (int i = 0; i < files.length; i++) {
+                String extension = "";
+                String[] ext = files[i].split("\\.");
+                extension = ext[(ext.length) - 1];
+                System.out.println("============================ file extention : "+ extension);
+                AnimalFile animalfile = animalService.fileUpdate(no, files[i], extension);
+            }
         }
 
-        for (int i = 0; i < files.length; i++) {
-            String extension = "";
-            String[] ext = files[i].split("\\.");
-            extension = ext[(ext.length) - 1];
-            System.out.println("============================ file extention : "+ extension);
-            AnimalFile animalfile = animalService.fileUpdate(no, files[i], extension);
-        }
+
 
         Animal updateAnimal = animalService.patchAnimal(no, animalRegisterPostReq);
         return new ResponseEntity<Animal>(updateAnimal, HttpStatus.OK);

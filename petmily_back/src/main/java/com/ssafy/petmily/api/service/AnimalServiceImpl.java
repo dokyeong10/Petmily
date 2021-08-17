@@ -58,7 +58,7 @@ public class AnimalServiceImpl implements AnimalService {
             if (animal.getText() != null) {
                 fetchedAnimal.get().setText(animal.getText());
             }
-            if (animal.getProfile_img() != null) {
+            if (animal.getProfile_img() != null && !animal.getProfile_img().equals("")) {
                 fetchedAnimal.get().setProfile_img(animal.getProfile_img());
             }
             return animalWaitRepository.save(fetchedAnimal.get());

@@ -167,6 +167,7 @@ public class UserController {
 	//기관회원수정
 	@PatchMapping("/agency/{email}")
 	public ResponseEntity<Agency> patchAgency(@PathVariable String email,  @RequestBody Agency agency){
+		System.out.println(agency.toString());
 		Agency updateAgency = userService.patchAgency(email,agency);
 		return new ResponseEntity<Agency>(updateAgency,HttpStatus.OK);
 	}
