@@ -3,7 +3,7 @@
   <br>
   <div class="container">
     <div v-if="userInfo" class="d-flex justify-content-evenly pb-5">
-      <div class="card" style="width: 18rem;">
+      <div class="card" style="width: 12rem;">
         <img :src="userInfo.img" alt="">
           <div class="card-body">
             <p class="card-text">{{ userInfo.username }}</p>
@@ -24,7 +24,7 @@
     <h4> {{ userInfo.username }}님의 후기 사진  </h4>
     <div v-if="boardFiles">
       <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
+        <div class="carousel-inner mx-auto">
           <div class="carousel-item active">
             <img :src="userInfo.img" alt="" height="200" width="200">
           </div>
