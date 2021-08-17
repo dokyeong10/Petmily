@@ -37,9 +37,11 @@ public class BoardController {
     public ResponseEntity<List<BoardJoin>> getBoardList(@RequestBody BoardSearchPostReq boardSearchPostReq){
         long userno = boardSearchPostReq.getUserno();
         String word = boardSearchPostReq.getWord();
+        String agencycode = boardSearchPostReq.getAgencycode();
         System.out.println("===================== Board 검색 userno : " + userno);
         System.out.println("===================== Board 검색 word : " + word);
-        List<BoardJoin> list = boardService.getBoadList(userno, word);
+        System.out.println("===================== Board 검색 agencycode : " + agencycode);
+        List<BoardJoin> list = boardService.getBoadList(agencycode, userno, word);
 
         return new ResponseEntity<List<BoardJoin>>(list, HttpStatus.OK);
     }

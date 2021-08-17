@@ -21,7 +21,7 @@ public interface BoardService {
 
     BoardJoin boarddetail(Long no);
 
-    List<BoardJoin> getBoadList(long userno, String word);
+    List<BoardJoin> getBoadList(String agencycode, long userno, String word);
 
     void deleteFile(long no);
 

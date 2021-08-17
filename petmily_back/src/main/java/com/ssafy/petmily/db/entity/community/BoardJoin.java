@@ -24,6 +24,7 @@ public class BoardJoin {
     Long no;
 
     Long userno;
+    String agencycode;
     String title;
     String contents;
     Date reg_date;
