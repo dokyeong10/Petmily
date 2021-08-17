@@ -11,13 +11,13 @@
           <img
             v-if="agencyInfo.img"
             :src="agencyInfo.img"
-            style="height: 230px; width: 230px"
+            style="height: 230px; width: 230px border-radius: 12px;"
             class="profile-Img"
           />
           <img
             v-else
             src="https://image.flaticon.com/icons/png/512/1299/1299865.png"
-            style="height: 230px; width: 230px"
+            style="height: 230px; width: 230px border-radius: 12px;"
             class="profile-Img"
           />
         </div>

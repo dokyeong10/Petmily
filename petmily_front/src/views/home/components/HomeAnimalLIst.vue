@@ -1,10 +1,10 @@
 <template>
-  <span class=" mx-3 mb-5" style="width: 18rem; background-color:#FAF9FE">
+  <span class="mx-3 mb-5" style="width: 18rem; background-color:#FAF9FE">
     <img
       :src="animals.profile_img"
       onerror="this.src='https://petmily.s3.ap-northeast-2.amazonaws.com/PetmilyLogo.png'"
-      class="card-img-top main-animal"
-      style="height: 220px;"
+      class="card-img-top main-animal mt-3"
+      style="height: 190px; width: 190px;"
       @click="goDetail"
     />
     <div class="card-body">

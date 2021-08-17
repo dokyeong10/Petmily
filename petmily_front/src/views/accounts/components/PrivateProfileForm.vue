@@ -12,12 +12,12 @@
           <img
             v-if="userInfo.img"
             :src="userInfo.img"
-            style="height: 200px; width: 200px"
+            style="height: 200px; width: 200px; border-radius: 12px;"
           />
           <img
             v-else
             src="https://image.flaticon.com/icons/png/512/4322/4322991.png"
-            style="height: 200px; width: 200px"
+            style="height: 200px; width: 200px; border-radius: 12px;"
           />
         </div>
         <div align="left">
