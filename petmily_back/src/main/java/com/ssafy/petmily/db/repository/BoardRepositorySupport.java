@@ -38,12 +38,20 @@ public class BoardRepositorySupport {
         return num;
     }
 
-    public List<BoardJoin> getBoardList(String word){
+    public List<BoardJoin> getBoardList(long userno, String word){
         // 전체 목록 보여줌
-        if(word == null || word.equals("") || word.equals(" "))
+        if(word == null || word.equals("") || word.equals(" ")){
+            if(userno > 0) // 자신이 쓴글 조회
+                return jpaQueryFactory.select(qBoardJoin).from(qBoardJoin)
+                        .where(qBoardJoin.userno.eq(userno)).fetch();
+            else
             return jpaQueryFactory.select(qBoardJoin).from(qBoardJoin).fetch();
+        }
         // 제목 + 내용으로 검색
-        else {
+        else if(userno > 0){ // 자신이 쓴글 조회
+            return jpaQueryFactory.select(qBoardJoin).from(qBoardJoin)
+                    .where(qBoardJoin.title.like("%" + word + "%").or(qBoardJoin.contents.like("%" + word + "%")), qBoardJoin.userno.eq(userno)).fetch();
+        }else{
             return jpaQueryFactory.select(qBoardJoin).from(qBoardJoin)
                     .where(qBoardJoin.title.like("%" + word + "%").or(qBoardJoin.contents.like("%" + word + "%"))).fetch();
         }
