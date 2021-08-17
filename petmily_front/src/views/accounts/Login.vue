@@ -116,18 +116,18 @@ export default {
       router.push("/findpassword");
     };
 
-    const login = function () {
+    const login = function() {
       if (state.toggle) {
-        agencyLogin()
+        agencyLogin();
       } else {
-        privateLogin()
+        privateLogin();
       }
-    }
+    };
 
     const privateLogin = function() {
       axios({
         method: "post",
-        url: "https://i5a408.p.ssafy.io:8080/auth/personal/login",
+        url: "http://localhost:8080/auth/personal/login",
         data: {
           email: state.form.email,
           password: state.form.password,
@@ -160,7 +160,7 @@ export default {
     const agencyLogin = function() {
       axios({
         method: "post",
-        url: "https://i5a408.p.ssafy.io:8080/auth/agency/login",
+        url: "http://localhost:8080/auth/agency/login",
         data: {
           email: state.form.email,
           password: state.form.password,
