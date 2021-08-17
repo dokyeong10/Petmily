@@ -28,6 +28,7 @@
               class="mb-2 form-control radius-border rounded-pill"
               type="password"
               placeholder="password"
+              @keydown.enter="login"
             />
           </div>
           <div class="checkbox-container d-flex align-items-center justify-content-between">
@@ -45,13 +46,13 @@
                 <input type="radio" name="login" v-model="state.toggle" :value="true" />기관
               </label>
             </div>
-            <button
+            <a
               class="btn btn-link"
               @click="goToFindPassword"
               style="color: #8699da; text-decoration-line: none"
             >
               forgot password
-            </button>
+            </a>
           </div>
         </form>
         <div v-if="!state.toggle" class="mt-5 mb-5">
@@ -114,6 +115,14 @@ export default {
     const goToFindPassword = function() {
       router.push("/findpassword");
     };
+
+    const login = function () {
+      if (state.toggle) {
+        agencyLogin()
+      } else {
+        privateLogin()
+      }
+    }
 
     const privateLogin = function() {
       axios({
@@ -182,7 +191,7 @@ export default {
         });
     };
 
-    return { state, privateLogin, agencyLogin, goToSignup, goToFindPassword };
+    return { state, login, privateLogin, agencyLogin, goToSignup, goToFindPassword };
   },
 };
 </script>
