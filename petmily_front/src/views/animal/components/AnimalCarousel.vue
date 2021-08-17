@@ -30,7 +30,7 @@
                     >
                       <img
                         :src="file.file"
-                        style="max-width: 575.85px; height: 309.52px"
+                        style="max-width: 575.85px; height: 309.52px; border-radius: 12px;"
                       />
                     </div>
                     <div v-else>
