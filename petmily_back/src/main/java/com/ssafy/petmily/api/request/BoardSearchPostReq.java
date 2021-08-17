@@ -10,6 +10,8 @@ import lombok.Setter;
 @ApiModel("FileBoardPostRequest")
 public class BoardSearchPostReq {
 
+    @ApiModelProperty(name="userno", example="10")
+    long userno;
     @ApiModelProperty(name="word", example="수정")
     String word;
 }

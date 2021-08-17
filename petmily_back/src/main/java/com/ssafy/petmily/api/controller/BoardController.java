@@ -35,9 +35,11 @@ public class BoardController {
     // 게시글 리스트 조회
     @PostMapping("/")
     public ResponseEntity<List<BoardJoin>> getBoardList(@RequestBody BoardSearchPostReq boardSearchPostReq){
+        long userno = boardSearchPostReq.getUserno();
         String word = boardSearchPostReq.getWord();
+        System.out.println("===================== Board 검색 userno : " + userno);
         System.out.println("===================== Board 검색 word : " + word);
-        List<BoardJoin> list = boardService.getBoadList(word);
+        List<BoardJoin> list = boardService.getBoadList(userno, word);
 
         return new ResponseEntity<List<BoardJoin>>(list, HttpStatus.OK);
     }
