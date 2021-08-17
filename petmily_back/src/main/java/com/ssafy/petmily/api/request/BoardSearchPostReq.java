@@ -14,4 +14,6 @@ public class BoardSearchPostReq {
     long userno;
     @ApiModelProperty(name="word", example="수정")
     String word;
+    @ApiModelProperty(name="agencycode", example="3010000")
+    String agencycode;
 }
