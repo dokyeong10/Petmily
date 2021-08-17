@@ -1,63 +1,69 @@
 <template>
   <div class="container">
-    <div v-if="boardInfo">
-      <div class="d-flex justify-content-between pb-3">
-        <h4> 제목: {{ boardInfo.title }} </h4>
+    <div v-if="boardInfo" class="content-board">
+      <div class="d-flex justify-content-center pb-3">
+        <div class="title-board">제목: {{ boardInfo.title }}</div>
       </div>
-      <div>
-        <pre style="overflow:auto; white-space: pre-wrap;" align="left"  class="d-flex justify-content-start"> {{ boardInfo.contents }} </pre>
+      <div class="d-flex justify-content-center">
+        <pre
+          style="overflow:auto; white-space: pre-wrap;"
+          align="left"
+          class="d-flex justify-content-start content-board2"
+        >
+ {{ boardInfo.contents }} </pre
+        >
       </div>
-      <div v-if="userInfo.no === userno" class="d-flex justify-content-end">
-        <button @click="goToModify" class="bn-modify m-1"> 수정 </button>
-        <button @click="deleteBoard" class="bn-delete m-1"> 삭제 </button>
-      </div>
-      <div v-else-if="userInfo.agencycode === agencycode" class="d-flex justify-content-end">
-        <button @click="goToModify" class="bn-modify m-1"> 수정 </button>
-        <button @click="deleteBoard" class="bn-delete m-1"> 삭제 </button>
-      </div>
+    </div>
+    <div v-if="userInfo.no === userno" class="d-flex justify-content-end">
+      <button @click="goToModify" class="bn-modify m-1">수정</button>
+      <button @click="deleteBoard" class="bn-delete m-1">삭제</button>
+    </div>
+    <div v-else-if="userInfo.agencycode === agencycode" class="d-flex justify-content-end">
+      <button @click="goToModify" class="bn-modify m-1">수정</button>
+      <button @click="deleteBoard" class="bn-delete m-1">삭제</button>
     </div>
   </div>
 </template>
 <script>
-import { useRouter } from 'vue-router'
-import axios from 'axios'
+import { useRouter } from "vue-router";
+import axios from "axios";
 export default {
-  name: 'BoardDetailContents',
+  name: "BoardDetailContents",
   props: {
     boardInfo: Object,
-    userInfo: Object
+    userInfo: Object,
   },
-  setup (props) {
-    console.log(props.boardInfo)
-    const router = useRouter()
-    const userno = Number(localStorage.getItem('userno'))
-    const agencycode = localStorage.getItem('agencycode')
-    const deleteBoard = function () {
+  setup(props) {
+    console.log(props.boardInfo);
+    const router = useRouter();
+    const userno = Number(localStorage.getItem("userno"));
+    const agencycode = localStorage.getItem("agencycode");
+    const deleteBoard = function() {
       axios({
-        method: 'delete',
-        url: `http://localhost:8080/board/${props.boardInfo.bno}`
+        method: "delete",
+        url: `http://localhost:8080/board/${props.boardInfo.bno}`,
       })
-      .then(res => {
-        console.log(res)
-        location.href = '/community'
-      })
-      .catch(err => {
-        console.log(err)
-      })
-    }
+        .then((res) => {
+          console.log(res);
+          location.href = "/community";
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
 
-    const goToModify = function () {
+    const goToModify = function() {
       router.push({
         name: "boarddetailmodify",
         params: {
-          boardno: router.currentRoute._value.params.boardno
+          boardno: router.currentRoute._value.params.boardno,
         },
       });
-    }
+    };
 
-    return { deleteBoard, goToModify, userno, agencycode }
-  }
-}
+    return { deleteBoard, goToModify, userno, agencycode };
+  },
+};
 </script>
 <style>
 .bn-modify {
@@ -75,5 +81,25 @@ export default {
   border-style: none;
   border-radius: 12px;
   color: white;
+}
+.content-board {
+  background: #fffff1;
+  height: 350px;
+  width: 550px;
+  text-align: center;
+  border-radius: 20%;
+}
+.title-board {
+  font-weight: bold;
+
+  font-size: 26px;
+  margin-top: 4%;
+  /* //margin-left: 15%; */
+}
+.content-board2 {
+  margin-top: 7%;
+  /* margin-left: 10%; */
+  text-align: center;
+  font-size: 16px;
 }
 </style>
