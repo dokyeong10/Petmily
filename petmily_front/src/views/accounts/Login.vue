@@ -64,51 +64,6 @@
             로그인 하기
           </button>
         </div>
-<<<<<<< HEAD
-        <div class="position-relative mb-5">
-          <hr />
-          <div
-            class="position-absolute top-50 start-50 translate-middle px-2 bg-white"
-            style="font-size: 5px"
-          >
-            on continue with
-          </div>
-        </div>
-        <div class="d-flex justify-content-evenly">
-          <!-- 소셜로그인 로그인 만들기 -->
-          <button class="btn-logo">
-            <a
-              style="color: #ffffff; text-decoration-line: none"
-              href="https://i5a408.p.ssafy.io:8080/oauth2/authorization/google"
-              ><img
-                class="img"
-                src="@\assets\google.png"
-                style="width: 30px; height: 30px; border-radius: 50%"
-            /></a>
-          </button>
-          <button class="btn-logo">
-            <a
-              style="color: #ffffff; text-decoration-line: none"
-              href="https://i5a408.p.ssafy.io:8080/oauth2/authorization/kakao"
-              ><img
-                class="img"
-                src="@\assets\KakaoTalk.png"
-                style="width: 30px; height: 30px; border-radius: 50%"
-            /></a>
-          </button>
-          <button class="btn-logo">
-            <a
-              style="color: #ffffff; text-decoration-line: none"
-              href="https://i5a408.p.ssafy.io:8080/oauth2/authorization/naver"
-              ><img
-                class="img"
-                src="@\assets\naver.png"
-                style="width: 30px; height: 30px; border-radius: 50%"
-            /></a>
-          </button>
-        </div>
-=======
->>>>>>> 0461f99be4ec5ba0d98706cf5f52187a39fc1ea6
       </div>
       <img
         class="img ms-3"

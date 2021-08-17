@@ -115,7 +115,7 @@ export default {
     const getAll = function() {
       axios({
         method: "post",
-        url: "http://localhost:8080/board/",
+        url: "https://i5a408.p.ssafy.io:8080/board/",
         data: {
           word: state.word,
         },
@@ -155,7 +155,7 @@ export default {
           console.log("================== userno: " + state.userno);
           axios({
             method: "post",
-            url: "http://localhost:8080/board/",
+            url: "https://i5a408.p.ssafy.io:8080/board/",
             data: {
               word: state.word,
               userno: state.userno,
@@ -187,7 +187,7 @@ export default {
           console.log("============== agencycode: " + state.agencycode);
           axios({
             method: "post",
-            url: "http://localhost:8080/board/",
+            url: "https://i5a408.p.ssafy.io:8080/board/",
             data: {
               word: state.word,
               agencycode: state.agencycode,
@@ -229,7 +229,7 @@ export default {
           console.log(state.userno);
           axios({
             method: "post",
-            url: "http://localhost:8080/board/",
+            url: "https://i5a408.p.ssafy.io:8080/board/",
             data: {
               word: state.word,
               userno: state.userno,
@@ -260,7 +260,7 @@ export default {
         } else if (state.isAgency == "true") {
           axios({
             method: "post",
-            url: "http://localhost:8080/board/",
+            url: "https://i5a408.p.ssafy.io:8080/board/",
             data: {
               word: state.word,
               agencycode: state.agencycode,

@@ -45,42 +45,6 @@
             <button class="btn-white" style="color: #FFFFFF;" @click="goToChangePassword">비밀번호 바꾸러 가기</button>
           </div> -->
         </form>
-<<<<<<< HEAD
-        <div class="mb-3 position-relative mb-5">
-          <hr />
-          <div
-            class="position-absolute top-50 start-50 translate-middle px-2 bg-white"
-            style="font-size:5px;"
-          >
-            on continue with
-          </div>
-        </div>
-        <div class="d-flex justify-content-evenly">
-          <!-- 소셜로그인 로그인 만들기 -->
-          <button class="btn-logo">
-            <a
-              style="color: #ffffff; text-decoration-line: none"
-              href="https://i5a408.p.ssafy.io:8080/oauth2/authorization/google"
-              ><img src="@\assets\google.png" style="width:30px;height:30px;border-radius: 50%;"
-            /></a>
-          </button>
-          <button class="btn-logo">
-            <a
-              style="color: #ffffff; text-decoration-line: none"
-              href="https://i5a408.p.ssafy.io:8080/oauth2/authorization/kakao"
-              ><img src="@\assets\KakaoTalk.png" style="width:30px;height:30px;border-radius: 50%;"
-            /></a>
-          </button>
-          <button class="btn-logo">
-            <a
-              style="color: #ffffff; text-decoration-line: none"
-              href="https://i5a408.p.ssafy.io:8080/oauth2/authorization/naver"
-              ><img src="@\assets\naver.png" style="width:30px;height:30px;border-radius: 50%;"
-            /></a>
-          </button>
-        </div>
-=======
->>>>>>> 0461f99be4ec5ba0d98706cf5f52187a39fc1ea6
       </div>
       <img
         class="ms-3"

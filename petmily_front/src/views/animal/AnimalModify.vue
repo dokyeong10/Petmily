@@ -239,7 +239,7 @@ export default {
       // 동물 수정
       axios({
         method: "patch",
-        url: `http://localhost:8080/animal/`,
+        url: `https://i5a408.p.ssafy.io:8080/animal/`,
         data: {
           no: state.animalno,
           type: state.type,
