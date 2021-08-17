@@ -36,16 +36,20 @@
                 입양을 원하시는 분은
               </div>
               <div class="mb-3" align="center">
-              [채팅 상담]
-              </div>
-              <div class="mb-3" align="center">
-                버튼을 누르시고
-              </div>
-              <div class="mb-3" align="center">
-                채팅을 통해
+                입양소 번호를 통해
               </div>
               <div class="mb-3" align="center">
                 상담해 주세요
+              </div>
+              <br>
+              <div class="mb-3" align="center">
+                라이브 방송이
+              </div>
+              <div class="mb-3" align="center">
+                진행중일 수 있습니다.
+              </div>
+              <div class="mb-3" align="center">
+                라이브 방송을 확인해주세요
               </div>
             </div>
           </div>

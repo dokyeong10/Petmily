@@ -90,13 +90,6 @@ export default {
       return sessionStorage.getItem("isUser");
     });
 
-    computed(() => {
-      store.state.isLogin = sessionStorage.getItem('isLogin')
-      store.state.isAgency = sessionStorage.getItem('isAgency')
-      store.state.isUser = sessionStorage.getItem('isUser')
-      return
-    })
-
     return { confirmLogin, logout, isAgency, isUser };
   },
 };
