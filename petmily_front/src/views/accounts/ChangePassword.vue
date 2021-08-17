@@ -41,6 +41,7 @@
         <div v-if="isConfirm">
           인증되었습니다.
         </div>
+<<<<<<< HEAD
         <div class="position-relative mb-5">
           <hr />
           <div
@@ -74,6 +75,8 @@
             /></a>
           </button>
         </div>
+=======
+>>>>>>> 0461f99be4ec5ba0d98706cf5f52187a39fc1ea6
       </div>
       <img
         class="ms-3"

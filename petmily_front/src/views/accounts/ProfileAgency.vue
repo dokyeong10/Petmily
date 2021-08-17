@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <div class="mx-auto Jbgc" style="width: 800px;">
+    <div class="mx-auto Jbgc mb-5" style="width: 800px;">
       <div class="container">
         <div class="row row-cols-1 row-cols-md-2 g-4">
           <AgencyRegisterAnimal
@@ -27,6 +27,7 @@
         </div>
       </div>
     </div>
+    <br>
   </div>
 </template>
 <script>

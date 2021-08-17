@@ -19,10 +19,10 @@
         </div>
         <div v-if="aniInfo" class="d-flex flex-column mt-5 ms-5">
           <div class="  mb-2 " align="left">
-            <span class="title"> 이름 : </span> <span class="content"> {{ aniInfo.species }}</span>
+            <span class="title"> 종 : </span> <span class="content"> {{ aniInfo.type }} </span>
           </div>
           <div class=" mt-1 mb-2 " align="left">
-            <span class="title"> 종류 : </span> <span class="content"> {{ aniInfo.type }} </span>
+            <span class="title"> 종류 : </span> <span class="content"> {{ aniInfo.species }} </span>
           </div>
           <div class=" mt-1 mb-2 " align="left">
             <span class="title"> 나이 : </span> <span class="content"> {{ aniInfo.age }}</span>

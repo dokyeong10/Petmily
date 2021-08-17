@@ -3,14 +3,17 @@
     <ShelterJumbotron :agencyInfo="agencyInfo" />
     <ShelterLocation :location="location" :agencyInfo="agencyInfo" />
     <h2 class="mb-4">보호소에서 등록한 동물</h2>
-    <div class="d-grid w-100" align="center">
-      <div class="row w-100" align="center">
+    <div class="d-grid w-75" align="center" v-if="agencyAnimals.animals.length > 0">
+      <div class="container row" align="center">
         <ShelterAnimals
           v-for="(animals, idx) in agencyAnimals.animals"
           :key="idx + 'b'"
           :animals="animals"
         />
       </div>
+    </div>
+    <div v-else class="container d-flex justify-content-center align-items-center Jbgc" style="height: 400px">
+      <h2> 아직 등록한 동물이 없습니다. </h2>
     </div>
   </div>
 </template>

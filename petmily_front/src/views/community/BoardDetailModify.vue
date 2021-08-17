@@ -1,7 +1,14 @@
 <template>
+  <div class="Jbgc d-flex align-items-center justify-content-center" style="height: 250px;">
+    <div class="row justify-content-center mb-5">
+      <div class="font-bold mt-4" style="font-size:40px">Modify Review</div>
+    </div>
+  </div>
   <div class="container mb-5 d-flex justify-content-center">
     <div>
-      <label class="d-flex flex-row mb-2 semibold">반려견 사진 또는 동영상 등록 </label>
+      <label class="d-flex flex-row mb-2 mt-4 semibold" style="font-size:19px"
+        >반려견 사진 또는 동영상 등록
+      </label>
       <div class="justify-content-center mb-2">
         <input
           multiple="multiple"
@@ -85,7 +92,11 @@ export default {
     onMounted(() => {
       axios({
         method: "get",
+<<<<<<< HEAD
         url: `https://i5a408.p.ssafy.io:8080/board/details/${router.currentRoute._value.params.boardno}`,
+=======
+        url: `http://localhost:8080/board/details/${router.currentRoute._value.params.boardno}`,
+>>>>>>> 0461f99be4ec5ba0d98706cf5f52187a39fc1ea6
       })
         .then((res) => {
           console.log(res);

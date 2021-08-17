@@ -45,6 +45,7 @@
             <button class="btn-white" style="color: #FFFFFF;" @click="goToChangePassword">비밀번호 바꾸러 가기</button>
           </div> -->
         </form>
+<<<<<<< HEAD
         <div class="mb-3 position-relative mb-5">
           <hr />
           <div
@@ -78,6 +79,8 @@
             /></a>
           </button>
         </div>
+=======
+>>>>>>> 0461f99be4ec5ba0d98706cf5f52187a39fc1ea6
       </div>
       <img
         class="ms-3"

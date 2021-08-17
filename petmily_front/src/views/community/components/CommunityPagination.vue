@@ -90,7 +90,8 @@ export default {
 }
 
 tbody:hover {
-  border: 2px solid #789ade;
+  background-color: #a4b5f0;
   cursor: pointer;
+  color: #FFFFFF
 }
 </style>

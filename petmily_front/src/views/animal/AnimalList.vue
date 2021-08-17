@@ -38,18 +38,11 @@
             <button class="btn-up" @click="search" style="height: 30px; margin-top: 24px">
               검색
             </button>
-            <div class="mt-4 ms-4">
+            <div v-if="isLogin && !isAgency" class="mt-4 ms-4">
               <label for="isLike">즐겨찾기한 동물</label>
               <input type="checkbox" class="ms-1" v-model="state.isLike" @click="getFavoriteOnly" />
             </div>
           </div>
-          <!-- <div
-            class="d-flex justify-content-start"
-            v-if="!state.key && state.isClickedSearch"
-            style="color: red"
-          >
-            필터를 선택해주세요!
-          </div> -->
         </div>
         <div class="d-flex align-items-end flex-column-reverse">
           <div v-if="isAgency">
@@ -68,20 +61,20 @@
     <br />
     <div class="container">
       <div class="row">
-        <div class="col-md-6" v-for="(animal, no) in state.data" :key="no">
+        <div class="col-lg-6" v-for="(animal, no) in state.data" :key="no">
           <div
             v-if="
               no < state.numberOfItems * state.page && no >= state.numberOfItems * (state.page - 1)
             "
           >
-            <div class="card mb-3" style="max-width: 636px">
+            <div class="card mb-3" style="max-width: 636px;">
               <div class="row g-0">
                 <div class="col-md-4">
                   <img
                     :src="animal.profile_img"
                     onerror="this.src='https://petmily.s3.ap-northeast-2.amazonaws.com/PetmilyLogo.png'"
                     class="img-fluid rounded-start"
-                    style="width: 240px; height: 240px"
+                    style="max-width: 220px; max-height: 220px; margin: 10px;"
                     alt="..."
                   />
                 </div>
@@ -145,6 +138,8 @@
       >Next</a
     >
   </div>
+  <br>
+  <br>
 </template>
 <script>
 import { reactive, onMounted } from "vue";
