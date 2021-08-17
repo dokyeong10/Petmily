@@ -33,8 +33,9 @@ public class BoardController {
     CommunityService communityService;
 
     // 게시글 리스트 조회
-    @GetMapping("/{word}")
-    public ResponseEntity<List<BoardJoin>> getBoardList(@PathVariable String word){
+    @PostMapping("/")
+    public ResponseEntity<List<BoardJoin>> getBoardList(@RequestBody BoardSearchPostReq boardSearchPostReq){
+        String word = boardSearchPostReq.getWord();
         System.out.println("===================== Board 검색 word : " + word);
         List<BoardJoin> list = boardService.getBoadList(word);
 
