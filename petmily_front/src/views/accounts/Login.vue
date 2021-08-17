@@ -116,13 +116,13 @@ export default {
       router.push("/findpassword");
     };
 
-    const login = function () {
+    const login = function() {
       if (state.toggle) {
-        agencyLogin()
+        agencyLogin();
       } else {
-        privateLogin()
+        privateLogin();
       }
-    }
+    };
 
     const privateLogin = function() {
       axios({
@@ -148,50 +148,48 @@ export default {
           location.href = "/";
         })
         .catch((err) => {
-          console.log(err)
-          console.log(state.toggle)
+          console.log(err);
+          console.log(state.toggle);
           if (err.response.status >= 500) {
             alert("개인회원이 맞는지 확인해주세요!");
-          }
-          else {
-            alert("잘못된 이메일 혹은 비밀번호입니다.")
+          } else {
+            alert("잘못된 이메일 혹은 비밀번호입니다.");
           }
         });
     };
-    const agencyLogin = function() {  
-        axios({
-          method: "post",
-          url: "http://localhost:8080/auth/agency/login",
-          data: {
-            email: state.form.email,
-            password: state.form.password,
-            header: setToken(),
-          },
+    const agencyLogin = function() {
+      axios({
+        method: "post",
+        url: "http://localhost:8080/auth/agency/login",
+        data: {
+          email: state.form.email,
+          password: state.form.password,
+          header: setToken(),
+        },
+      })
+        .then((res) => {
+          console.log(res.data);
+          localStorage.setItem("jwt", res.data.accessToken);
+          localStorage.setItem("agencycode", res.data.agencycode);
+          store.state.isLogin = true;
+          store.state.isAgency = true;
+          localStorage.setItem("isLogin", store.state.isLogin);
+          localStorage.setItem("isUser", store.state.isUser);
+          localStorage.setItem("isAgency", store.state.isAgency);
+          sessionStorage.setItem("isLogin", store.state.isLogin);
+          sessionStorage.setItem("isAgency", store.state.isAgency);
+          location.href = "/";
         })
-          .then((res) => {
-            console.log(res.data);
-            localStorage.setItem("jwt", res.data.accessToken);
-            localStorage.setItem("agencycode", res.data.agencycode);
-            store.state.isLogin = true;
-            store.state.isAgency = true;
-            localStorage.setItem("isLogin", store.state.isLogin);
-            localStorage.setItem("isUser", store.state.isUser);
-            localStorage.setItem("isAgency", store.state.isAgency);
-            sessionStorage.setItem("isLogin", store.state.isLogin);
-            sessionStorage.setItem("isAgency", store.state.isAgency);
-            location.href = "/";
-          })
-          .catch((err) => {
-            console.log(err)
-            console.log(state.toggle)
-            if (err.response.status >= 500) {
-              alert("기관회원이 맞는지 확인해주세요!");
-            }
-            else {
-              alert("잘못된 이메일 혹은 비밀번호입니다.")
-            }
-          });
-      }
+        .catch((err) => {
+          console.log(err);
+          console.log(state.toggle);
+          if (err.response.status >= 500) {
+            alert("기관회원이 맞는지 확인해주세요!");
+          } else {
+            alert("잘못된 이메일 혹은 비밀번호입니다.");
+          }
+        });
+    };
 
     return { state, login, privateLogin, agencyLogin, goToSignup, goToFindPassword };
   },
