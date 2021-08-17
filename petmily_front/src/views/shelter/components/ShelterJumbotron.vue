@@ -17,7 +17,7 @@
       </div>
       <div class="d-flex justify-content-evenly">
         <div
-          class="d-inline position-relative inner30 d-flex justify-content-evenly align-items-center"
+          class="d-inline position-relative inner30 d-flex justify-content-evenly"
           style="margin-left: 150px"
         >
           <div align="left">
@@ -104,6 +104,7 @@ export default {
   margin-bottom: 20px;
   color: rgb(34, 22, 6);
   background-color: beige;
+  border-radius: 18px;
   
 }
 .title-sh {

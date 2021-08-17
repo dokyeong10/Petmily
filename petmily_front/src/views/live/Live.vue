@@ -99,7 +99,7 @@
   <div class="">
     <!-- <div class="font-bold mb-3" style="font-size: 2rem;">진행 중인 라이브</div> -->
     <div class="container" align="center">
-      <div class="row" align="center">
+      <div class="row row-cols-md-1 row-cols-lg-4 g-4" align="center">
         <LiveList v-for="(live, no) in liveInfo.live" :key="no + 'b'" :live="live" />
       </div>
     </div>

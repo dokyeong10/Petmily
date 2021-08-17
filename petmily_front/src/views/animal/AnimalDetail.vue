@@ -25,8 +25,8 @@ export default {
     const state = reactive({
       aniInfo: null,
     });
-    const getAnimal = async function() {
-      await axios({
+    const getAnimal = function() {
+      axios({
         method: "get",
         url:
           "https://i5a408.p.ssafy.io:8080/animal/details/" + router.currentRoute._value.params.id,

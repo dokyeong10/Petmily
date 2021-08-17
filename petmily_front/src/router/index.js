@@ -41,7 +41,6 @@ import CommunityRegister from "@/views/community/CommunityRegister.vue";
 import BoardDetail from "@/views/community/BoardDetail.vue";
 import BoardDetailModify from "@/views/community/BoardDetailModify.vue";
 
-
 const routes = [
   {
     path: "/",
@@ -166,23 +165,23 @@ const routes = [
   },
   {
     path: "/boarddetail/:boardno",
-    name: 'boarddetail',
-    component: BoardDetail
+    name: "boarddetail",
+    component: BoardDetail,
   },
   {
     path: "/error",
-    name: 'error',
-    component: Error
+    name: "error",
+    component: Error,
   },
   {
     path: "/:pathMatch(.*)*",
-    redirect: '/error',
+    redirect: "/error",
   },
   {
     path: "/boarddetailmodify/:boardno",
     name: "boarddetailmodify",
-    component: BoardDetailModify
-  }
+    component: BoardDetailModify,
+  },
 
   // {
   //   path: '/',
@@ -200,6 +199,7 @@ const routes = [
 ];
 
 const router = createRouter({
+  mode: "history",
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });

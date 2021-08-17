@@ -6,8 +6,8 @@
           <img
             :src="animal.profile_img"
             onerror="this.src='https://petmily.s3.ap-northeast-2.amazonaws.com/PetmilyLogo.png'"
-            class="img-fluid rounded-start profile-img"
-            style="width: 280px; height: 160px"
+            class="img-fluid p-3"
+            style="width: 180px; height: 180px; border-radius: 25px;"
             alt="..."
           />
         </div>
