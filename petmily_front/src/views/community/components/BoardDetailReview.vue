@@ -14,7 +14,7 @@
           </p>
         </form>
         <div class="d-flex justify-content-end">
-          <button class="btn-white pe-3" @click="registerReview" style="color: #FFFFFF;">
+          <button class="btn-white btn-sm" @click="registerReview" style="color: #FFFFFF;">
             댓글 등록하기
           </button>
         </div>
@@ -24,17 +24,19 @@
 </template>
 <script>
 import { reactive } from "vue";
+import { useRouter } from "vue-router";
 import axios from "axios";
+
 export default {
   name: "BoardDetailReview",
   props: {
     replyJoins: Object,
   },
   setup(props) {
+    const router = useRouter();
     const state = reactive({
       contents: "",
     });
-
     const registerReview = function() {
       console.log(localStorage.getItem("isUser"));
       if (localStorage.getItem("isUser") === "true") {
@@ -48,6 +50,13 @@ export default {
             userno: localStorage.getItem("userno"),
           },
         })
+          .then((res) => {
+            console.log(res);
+            router.go(`/boarddetail/${router.currentRoute._value.boardno}`);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
           .then((res) => {
             console.log(res);
             router.go();
@@ -65,6 +74,13 @@ export default {
             agencycode: localStorage.getItem("agencycode"),
           },
         })
+          .then((res) => {
+            console.log(res);
+            router.go(`/boarddetail/${router.currentRoute._value.boardno}`);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
           .then((res) => {
             console.log(res);
           })

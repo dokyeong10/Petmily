@@ -18,7 +18,7 @@
         />
       </div>
     </div>
-    <div class="Jbgc">
+    <div class="Jbgc" style="height: 650px">
       <div class="container">
         <br />
         <br />
@@ -26,11 +26,7 @@
         <div style="font-size: 45px" class="mb-3">생명 수호자들</div>
         <div class="d-grid w-100" align="center">
           <div class="row w-100" align="center">
-            <LifeGuardians
-              v-for="(guardians, idx) in guardiansInfo.guardians"
-              :key="idx + 'b'"
-              :guardians="guardians"
-            />
+            <LifeGuardians :guardians="guardiansInfo.guardians" />
           </div>
         </div>
       </div>
@@ -118,7 +114,7 @@ export default {
     const guardiansInfo = reactive({
       guardians: [],
     });
-    const getGuardiansInfo = async function() {
+    const getGuardiansInfo = async function () {
       await axios({
         method: "get",
         url: "https://i5a408.p.ssafy.io:8080/home/shelterList",
@@ -132,7 +128,7 @@ export default {
           console.log(error);
         });
     };
-    const getAnimalInfo = async function() {
+    const getAnimalInfo = async function () {
       axios({
         method: "get",
         url: "https://i5a408.p.ssafy.io:8080/home/animalList",
@@ -145,7 +141,7 @@ export default {
           console.log(error);
         });
     };
-    const getLiveInfo = async function() {
+    const getLiveInfo = async function () {
       axios({
         method: "get",
         url: "https://i5a408.p.ssafy.io:8080/home/liveList",

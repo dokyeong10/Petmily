@@ -38,8 +38,30 @@ public class BoardRepositorySupport {
         return num;
     }
 
-    public List<BoardJoin> getBoardList(){
-        return jpaQueryFactory.select(qBoardJoin).from(qBoardJoin).fetch();
+    public List<BoardJoin> getBoardList(String agencycode, long userno, String word){
+        // 전체 목록 보여줌
+        if(word == null || word.equals("") || word.equals(" ")){
+            if(userno > 0) // 자신이 쓴글 조회
+                return jpaQueryFactory.select(qBoardJoin).from(qBoardJoin)
+                        .where(qBoardJoin.userno.eq(userno)).fetch();
+            else if(agencycode != null){ // 기관회원 코드가 비어있지 않을 때
+                return jpaQueryFactory.select(qBoardJoin).from(qBoardJoin)
+                        .where(qBoardJoin.agencycode.eq(agencycode)).fetch();
+            }
+            else
+            return jpaQueryFactory.select(qBoardJoin).from(qBoardJoin).fetch();
+        }
+        // 제목 + 내용으로 검색
+        else if(userno > 0) // 자신이 쓴글 조회
+            return jpaQueryFactory.select(qBoardJoin).from(qBoardJoin)
+                    .where(qBoardJoin.title.like("%" + word + "%").or(qBoardJoin.contents.like("%" + word + "%")), qBoardJoin.userno.eq(userno)).fetch();
+        else if(agencycode != null) // 기관회원 코드가 비어있지 않을 때
+            return jpaQueryFactory.select(qBoardJoin).from(qBoardJoin)
+                .where(qBoardJoin.title.like("%" + word + "%").or(qBoardJoin.contents.like("%" + word + "%")) , qBoardJoin.agencycode.eq(agencycode)).fetch();
+        else
+            return jpaQueryFactory.select(qBoardJoin).from(qBoardJoin)
+                    .where(qBoardJoin.title.like("%" + word + "%").or(qBoardJoin.contents.like("%" + word + "%"))).fetch();
+
     }
 
     @Transactional

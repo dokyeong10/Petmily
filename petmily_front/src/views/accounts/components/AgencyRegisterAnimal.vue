@@ -6,7 +6,7 @@
           <img
             :src="animal.profile_img"
             onerror="this.src='https://petmily.s3.ap-northeast-2.amazonaws.com/PetmilyLogo.png'"
-            class="img-fluid rounded-start"
+            class="img-fluid rounded-start profile-img"
             style="width: 280px; height: 160px"
             alt="..."
           />
@@ -23,10 +23,54 @@
                 </button>
               </span>
               <span>
-                <!-- 삭제하기 수정해야합니다 ! ! !  -->
-                <button class="btn-delete-profile" style="height: 35px" @click="goDetail(animal)">
+                <!-- v-for 안에서 modal 사용방법: button의 data-bs-target과 modal의 id에 v-bind 사용! -->
+                <button
+                  type="button"
+                  class="btn-delete-profile"
+                  data-bs-toggle="modal"
+                  :data-bs-target="'#animal' + animal.no"
+                >
                   삭제하기
                 </button>
+
+                <!-- Modal -->
+                <div
+                  class="modal fade"
+                  :id="'animal' + animal.no"
+                  tabindex="-1"
+                  aria-labelledby="animalDeleteModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="animalDeleteModalLabel">삭제 확인</h5>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div class="modal-body">
+                        정말 삭제하시겠습니까?
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn-delete"
+                          data-bs-dismiss="modal"
+                          @click="animalDelete(animal)"
+                        >
+                          삭제
+                        </button>
+                        <button type="button" class="btn-login-modal" data-bs-dismiss="modal">
+                          취소
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </span>
             </div>
           </div>
@@ -37,14 +81,12 @@
 </template>
 <script>
 import { ref } from "vue";
-import { reactive, onMounted } from "vue";
+import { reactive } from "vue";
 import { useRouter } from "vue-router";
-import JumbotronAnimalDetail from "@/views/animal/components/JumbotronAnimalDetail.vue";
+
+import axios from "axios";
 
 export default {
-  components: {
-    JumbotronAnimalDetail,
-  },
   name: "AgencyRegisterAnimal",
   props: {
     animal: {
@@ -75,6 +117,18 @@ export default {
         },
       });
     };
+    const animalDelete = function(animal) {
+      axios({
+        method: "delete",
+        url: `http://localhost:8080/animal/${animal.no}`,
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
     const confirm = function() {
       if (props.animal.sex) {
         sex.value = "암컷";
@@ -88,7 +142,7 @@ export default {
       }
     };
     confirm();
-    return { state, sex, neutered, goDetail };
+    return { state, sex, neutered, goDetail, animalDelete };
   },
 };
 </script>
@@ -98,6 +152,7 @@ export default {
 }
 .btn-delete-profile {
   width: 40%;
+  height: 35px;
   font-size: 13px;
   background-color: #ff8b8b;
   border-style: none;

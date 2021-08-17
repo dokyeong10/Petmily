@@ -1,7 +1,7 @@
 <template>
-  <div class="Jbgc d-flex mx-auto justify-content-center align-items-center" style="height: 300px;">
-    <div>
-      <h1>Modify Member</h1>
+  <div class="Jbgc d-flex mx-auto justify-content-center align-items-center" style="height: 250px;">
+    <div class="row justify-content-center mb-5">
+      <div class="font-bold mt-4" style="font-size:40px">Modify Mypage</div>
     </div>
   </div>
   <div class="container mb-5 d-flex justify-content-center">
@@ -78,7 +78,7 @@
           v-model="state.password"
           type="password"
           class="form-control radius-border br mb-5"
-          placeholder="••••••••"
+          placeholder="비밀번호를 입력해주세요"
           id="password"
         />
         <label for="confirmPassword" class="d-flex flex-row mb-2">비밀번호 재입력</label>
@@ -86,7 +86,7 @@
           v-model="state.passwordConfirm"
           type="password"
           class="form-control radius-border br mb-5"
-          placeholder="••••••••"
+          placeholder="비밀번호를 입력해주세요"
           id="confirmPassword"
         />
         <label for="phone" class="d-flex flex-row mb-2">전화번호</label>
@@ -97,10 +97,10 @@
           placeholder="바꾸실 번호를 입력하세요."
           id="phone"
         />
-        <button class="btn-white" style="color: #FFFFFF;" @click="modifyAgencyInfo">
+        <button class="btn-white-modi" style="color: #FFFFFF;" @click="modifyAgencyInfo">
           수정하기
         </button>
-        <button class="btn-white" style="color: #FFFFFF;" @click="deleteAgencyInfo">
+        <button class="btn-delete-modi" style="color: #FFFFFF;" @click="deleteAgencyInfo">
           탈퇴하기
         </button>
       </div>
@@ -239,7 +239,7 @@ export default {
 
     const deleteAgencyInfo = function() {
       // 회원 탈퇴 시 모달창... 띄울까 말까.. 고민해봐야 합니다..
-      alert("탈퇴시 회원과 관련된 모든 정보가 삭제됩니다. 탈퇴하겠습니까?");
+      confirm("탈퇴시 회원과 관련된 모든 정보가 삭제됩니다. 탈퇴하겠습니까?");
 
       axios({
         method: "delete",
@@ -251,7 +251,7 @@ export default {
         localStorage.removeItem("email");
         sessionStorage.removeItem("isAgency");
         sessionStorage.removeItem("isUser");
-        router.go("/");
+        location.replace("/");
       });
     };
 

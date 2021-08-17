@@ -47,7 +47,7 @@ export default {
 .my-btn {
 }
 .chat {
-  font-size: 15px;
+  font-size: 19px;
 }
 /* .chatbox {
   width: 100%;

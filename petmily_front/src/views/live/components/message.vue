@@ -9,9 +9,9 @@ export default {
   name: "Message",
   props: {
     msg: {
-      type: String
-    }
-  }
+      type: String,
+    },
+  },
 };
 </script>
 

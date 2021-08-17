@@ -2,13 +2,13 @@
   <div class="mb-5">
     <div class="container mt-5" style="height: 650px;">
       <div class="d-flex justify-content-center">
-        <div class="d-flex align-items-center w-50">
+        <div class="d-flex align-items-center">
           <!-- 이미지에 profile_img 넣어줘야 합니다. -->
 
-          <div>
+          <div class="align-items-center">
             <div id="animalCarousel" class="carousel slide" data-bs-ride="carousel">
               <div v-if="aniInfo.animalFiles">
-                <div class="carousel-inner">
+                <div class="carousel-inner flex-row">
                   <div
                     class="carousel-item"
                     v-for="(file, idx) in aniInfo.animalFiles"
@@ -24,10 +24,10 @@
                           file.extension == 'gif'
                       "
                     >
-                      <img :src="file.file" class="w-80" style="height: 300px" />
+                      <img :src="file.file" style="max-width: 575.85px;" />
                     </div>
                     <div v-else>
-                      <video :src="file.file" class="w-75" controls autoplay muted></video>
+                      <video :src="file.file" controls autoplay muted style="max-width: 575.85px;"></video>
                     </div>
                   </div>
                   <button
@@ -35,16 +35,18 @@
                     type="button"
                     data-bs-target="#animalCarousel"
                     data-bs-slide="prev"
+                    style="height: 173.96px;"
                   >
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="carousel-control-prev-icon" aria-hidden="true" style=" margin-top: 141.96px;"></span>
                   </button>
                   <button
                     class="carousel-control-next"
                     type="button"
                     data-bs-target="#animalCarousel"
                     data-bs-slide="next"
+                    style="height: 173.96px;"
                   >
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="carousel-control-next-icon" aria-hidden="true" style=" margin-top: 141.96px;"></span>
                   </button>
                 </div>
               </div>
@@ -118,5 +120,8 @@ export default {
 }
 .content-s {
   font-size: 18px;
+}
+.carousel-inner{
+  width: 575.85px !important;
 }
 </style>

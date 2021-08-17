@@ -72,7 +72,7 @@ export default {
     // const router = useRouter();
     const store = useStore();
     const confirmLogin = computed(() => {
-      console.log(sessionStorage.getItem("isLogin"));
+      // console.log(sessionStorage.getItem("isLogin"));
       return sessionStorage.getItem("isLogin");
     });
 
@@ -89,13 +89,6 @@ export default {
     const isUser = computed(() => {
       return sessionStorage.getItem("isUser");
     });
-
-    computed(() => {
-      store.state.isLogin = sessionStorage.getItem('isLogin')
-      store.state.isAgency = sessionStorage.getItem('isAgency')
-      store.state.isUser = sessionStorage.getItem('isUser')
-      return
-    })
 
     return { confirmLogin, logout, isAgency, isUser };
   },
