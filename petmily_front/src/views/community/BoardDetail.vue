@@ -9,8 +9,10 @@
         :userInfo="userInfo.agency"
         :boardFiles="boardFiles"
         :boardInfo="boardInfo"
+        :newFiles="newFiles"
       />
     </div>
+    <br>
     <div>
       <BoardDetailReview :replyJoins="replyJoins" />
     </div>
@@ -59,6 +61,9 @@ export default {
       img: [],
       video: [],
     });
+    const newFiles = reactive({
+      files: [],
+    })
 
     const replyJoins = reactive({
       data: null,
@@ -108,6 +113,8 @@ export default {
               boardFiles.video.push(element);
             }
           });
+          newFiles.files = res.data;
+          console.log(newFiles.files)
           // console.log(boardFiles);
           // console.log(userInfo.user)
           // console.log(userInfo.agency)
@@ -118,7 +125,7 @@ export default {
           console.log(err);
         });
     });
-    return { boardInfo, userInfo, boardFiles, replyJoins };
+    return { boardInfo, userInfo, boardFiles, replyJoins, newFiles, };
   },
 };
 </script>

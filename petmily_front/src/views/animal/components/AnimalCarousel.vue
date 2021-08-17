@@ -30,9 +30,7 @@
                     >
                       <img
                         :src="file.file"
-                        style="max-width: 575.85px"
-                        height="400"
-                        width="400"
+                        style="max-width: 575.85px; height: 309.52px"
                       />
                     </div>
                     <div v-else>
@@ -41,7 +39,7 @@
                         controls
                         autoplay
                         muted
-                        style="max-width: 575.85px"
+                        style="max-width: 575.85px; height: 309.52px"
                       ></video>
                     </div>
                   </div>
