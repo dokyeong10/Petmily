@@ -102,7 +102,8 @@
                       </div>
                     </div>
                     <p class="card-text mt-3">{{ animal.species }}</p>
-                    <p class="card-text">{{ animal.text }}</p>
+                    <p v-if="animal.sex" class="card-text">암컷</p>
+                    <p v-else class="card-text">수컷</p>
                     <p class="card-text">
                       <small class="text-muted"
                         >{{ animal.find_date.substring(0, 10) }}
