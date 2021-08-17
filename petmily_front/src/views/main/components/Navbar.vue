@@ -23,9 +23,6 @@
             style="width: 20px; height: 40px"
           />라이브</router-link
         >
-        <router-link to="/chatmain" class="mx-5 text-decoration-none"
-          >채팅방</router-link
-        >
 
         <span v-if="confirmLogin">
           <button
