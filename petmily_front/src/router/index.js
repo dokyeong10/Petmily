@@ -32,11 +32,6 @@ import AnimalDeleteSuccess from "@/views/animal/AnimalDeleteSuccess.vue";
 import Live from "@/views/live/Live.vue";
 import LiveRoom from "@/views/live/LiveRoom.vue";
 
-// Chat
-import Chat from "@/views/chat/Chat.vue";
-import ChatRoom from "@/views/chat/ChatRoom.vue";
-import ChatRooms from "@/views/chat/ChatRooms.vue";
-
 // Shelter
 import ShelterDetail from "@/views/shelter/ShelterDetail.vue";
 
@@ -148,21 +143,6 @@ const routes = [
     path: "/live",
     name: "live",
     component: Live,
-  },
-  {
-    path: "/chatmain",
-    name: "chat",
-    component: Chat,
-  },
-  {
-    path: "/chatmain/room",
-    name: "Room",
-    component: ChatRoom,
-  },
-  {
-    path: "/chatmain/rooms",
-    name: "RoomList",
-    component: ChatRooms,
   },
   {
     path: "/shelterdetail/:agencycode",
