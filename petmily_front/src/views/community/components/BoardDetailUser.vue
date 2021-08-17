@@ -4,7 +4,7 @@
   <div class="container">
     <div v-if="userInfo" class="d-flex justify-content-evenly pb-5">
       <div>
-        <img :src="userInfo.img" alt="" style="width:300px" />
+        <img :src="userInfo.img" alt="" style="width: 300px" />
         <p class="board-user">{{ userInfo.username }}</p>
       </div>
 
@@ -17,19 +17,33 @@
     <div v-if="userInfo">
       <h4 class="mt-4 mb-3">{{ userInfo.username }}님의 후기 사진</h4>
       <div v-if="boardFiles">
-        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div
+          id="carouselExampleControls"
+          class="carousel slide"
+          data-bs-ride="carousel"
+        >
           <div class="carousel-inner mx-auto">
             <div class="carousel-item active mb-5">
               <img
-                style="border-radius: 20px;"
+                style="border-radius: 20px"
                 :src="userInfo.img"
                 alt=""
                 height="200"
                 width="200"
               />
             </div>
-            <div class="carousel-item" v-for="(board, idx) in boardFiles.img" :key="idx">
-              <img style="border-radius: 20px;" :src="board.file" alt="" height="200" width="200" />
+            <div
+              class="carousel-item"
+              v-for="(board, idx) in boardFiles.img"
+              :key="idx"
+            >
+              <img
+                style="border-radius: 20px"
+                :src="board.file"
+                alt=""
+                height="200"
+                width="200"
+              />
             </div>
           </div>
           <button
@@ -38,7 +52,11 @@
             data-bs-target="#carouselExampleControls"
             data-bs-slide="prev"
           >
-            <span style="color: red;" class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span
+              style="color: red"
+              class="carousel-control-prev-icon"
+              aria-hidden="true"
+            ></span>
           </button>
           <button
             class="carousel-control-next"
@@ -46,7 +64,11 @@
             data-bs-target="#carouselExampleControls"
             data-bs-slide="next"
           >
-            <span style="color: red;" class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span
+              style="color: red"
+              class="carousel-control-next-icon"
+              aria-hidden="true"
+            ></span>
           </button>
         </div>
       </div>
