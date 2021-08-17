@@ -109,26 +109,29 @@ public class BoardController {
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
     }
 
+    // 게시물 수정
     @PatchMapping("/update")
     public ResponseEntity<Board> updateBoard(@RequestBody ComuRegisterPostReq comuRegisterPostReq){
         long no = comuRegisterPostReq.getNo();
-
-        // 게시물 파일 삭제
-        boardService.deleteFile(no);
-
-        // 파일 등록
         String files[] = comuRegisterPostReq.getFiles();
-        for (int i = 0; i < files.length; i++) {
-            System.out.println("============================ file name : " + files[i]);
-        }
 
-        for (int i = 0; i < files.length; i++) {
-            String extension = "";
-            String[] ext = files[i].split("\\.");
-            extension = ext[(ext.length) - 1];
-            System.out.println("============================ file extention : " + extension);
-            BoardFile boardfile = boardService.fileUpdate(no, files[i], extension);
+        if(files.length !=0){ //파일이 존재할 때
+            // 게시물 파일 삭제
+            boardService.deleteFile(no);
 
+            // 파일 등록
+            for (int i = 0; i < files.length; i++) {
+                System.out.println("============================ file name : " + files[i]);
+            }
+
+            for (int i = 0; i < files.length; i++) {
+                String extension = "";
+                String[] ext = files[i].split("\\.");
+                extension = ext[(ext.length) - 1];
+                System.out.println("============================ file extention : " + extension);
+                BoardFile boardfile = boardService.fileUpdate(no, files[i], extension);
+
+            }
         }
         // 게시물 수정
         Board board = boardService.updateBoard(comuRegisterPostReq);
