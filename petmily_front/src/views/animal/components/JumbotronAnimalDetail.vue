@@ -16,7 +16,6 @@
             class="mt-3 mb-5"
             style="width: 360px; height: 350px; border-radius: 30px; margin-left :7%"
           />
-          <button class="btn-chatting">채팅상담</button>
         </div>
         <div v-if="aniInfo" class="d-flex flex-column mt-5 ms-5">
           <div class="  mb-2 " align="left">
