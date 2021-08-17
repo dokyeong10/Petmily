@@ -63,16 +63,11 @@
 </template>
 <script>
 import { computed } from "vue";
-// import { useRouter } from "vue-router";
-import { useStore } from 'vuex'
 
 export default {
   name: "Navbar",
   setup() {
-    // const router = useRouter();
-    const store = useStore();
     const confirmLogin = computed(() => {
-      // console.log(sessionStorage.getItem("isLogin"));
       return sessionStorage.getItem("isLogin");
     });
 
@@ -125,6 +120,6 @@ export default {
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #9aaef6;
 }
 </style>
