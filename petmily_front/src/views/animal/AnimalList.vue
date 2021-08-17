@@ -73,15 +73,15 @@
                   <img
                     :src="animal.profile_img"
                     onerror="this.src='https://petmily.s3.ap-northeast-2.amazonaws.com/PetmilyLogo.png'"
-                    class="img-fluid rounded-start"
-                    style="max-width: 220px; max-height: 220px; margin: 10px;"
+                    class="m-4"
+                    style="width: 200px; height: 200px; border-radius: 12px"
                     alt="..."
                   />
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
                     <div class="d-flex justify-content-center">
-                      <h5 class="card-title mb-0 me-2">{{ animal.type }}</h5>
+                      <h5 class="card-title mb-0 me-2 mt-1">{{ animal.type }}</h5>
                       <div v-if="isLogin && !isAgency" class="card-text">
                         <div v-if="favoriteFilter(animal)">
                           <font-awesome-icon
@@ -101,7 +101,7 @@
                         </div>
                       </div>
                     </div>
-                    <p class="card-text">{{ animal.species }}</p>
+                    <p class="card-text mt-3">{{ animal.species }}</p>
                     <p class="card-text">{{ animal.text }}</p>
                     <p class="card-text">
                       <small class="text-muted"

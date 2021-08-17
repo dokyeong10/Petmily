@@ -76,10 +76,10 @@
           placeholder="바꾸실 번호를 입력하세요."
           id="phone"
         />
-        <button class="btn-white-modi" style="color: #FFFFFF;" @click="modifyPrivateInfo">
+        <button class="btn-white-modi m-3" style="color: #FFFFFF;" @click="modifyPrivateInfo">
           수정하기
         </button>
-        <button class="btn-delete-modi" style="color: #FFFFFF;" @click="deletePrivateInfo">
+        <button class="btn-delete-modi m-3" style="color: #FFFFFF;" @click="deletePrivateInfo">
           탈퇴하기
         </button>
       </div>
@@ -110,18 +110,9 @@ export default {
       profileURL: "",
       toggle: false,
     });
-    const reg = /(?=.*[a-zA-ZS])(?=.*?[#?!@$%^&*-]).{8,16}/;
+    
     const profile = ref(null);
-    const isPasswordValid = ref("");
-
-    watchEffect(() => {
-      if (reg.test(state.password)) {
-        isPasswordValid.value = "조건이 충족했습니다.";
-      } else {
-        isPasswordValid.value =
-          "비밀번호는 8자 이상 16자 이하이어야 하며 숫자, 대소문자, 특수문자가 적어도 하나 이상 포함되어야 합니다.";
-      }
-    });
+    
     const setToken = function() {
       const token = localStorage.getItem("jwt");
       const config = `Bearer ${token}`;
@@ -173,7 +164,7 @@ export default {
       })
         .then((res) => {
           console.log(res);
-          router.push("/proflieprivate");
+          router.push("/profileprivate");
         })
         .catch((err) => {
           console.log(err);

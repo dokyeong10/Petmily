@@ -7,19 +7,19 @@
             :src="animal.profile_img"
             onerror="this.src='https://petmily.s3.ap-northeast-2.amazonaws.com/PetmilyLogo.png'"
             class="img-fluid rounded-start p-3"
-            style="width: 280px; height: 160px"
+            style="width: 280px; height: 160px; border-radius: 12px;"
             alt="..."
           />
         </div>
         <div class="col-md-8">
           <div class="card-body">
             <div class="me-2" align="left">
-              <div class="card-text font-bold" style="font-size:20px">{{ animal.type }}</div>
+              <div class="card-text font-bold" style="font-size: 20px">{{ animal.type }}</div>
               <div class="card-text">종: {{ animal.species }}</div>
               <div class="card-text">발견 날짜: {{ animal.find_addr }}</div>
               <div class="mt-1">  
                 <span>
-                  <button class="btn-detail-profile" style="height: 35px" @click="goDetail(animal)">
+                  <button class="btn-detail-profile" style="height: 35px;" @click="goDetail(animal)">
                     상세보기
                   </button>
                 </span>

@@ -1,6 +1,6 @@
 <template>
-  <div class="col-2 mt-3">
-    <div class="card border-light" align="center" style="background-color:#FAF9FE">
+  <div class="col mt-3">
+    <div class="card h-100 border-light" align="center" style="background-color:#FAF9FE">
       <div class="card-body d-flex flex-column justify-content-between">
         <h3 class="card-title font-bold mt-3 mb-4" style="font-size : 20px;">{{ live.title }}</h3>
 

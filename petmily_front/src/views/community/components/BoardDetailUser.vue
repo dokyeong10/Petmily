@@ -4,7 +4,7 @@
   <div class="container">
     <div v-if="userInfo" class="d-flex justify-content-evenly pb-5">
       <div>
-        <img :src="userInfo.img" alt="" style="width: 300px" />
+        <img :src="userInfo.img" alt="" style="width: 300px; border-radius: 12px;" />
         <p class="board-user">{{ userInfo.username }}</p>
       </div>
 
