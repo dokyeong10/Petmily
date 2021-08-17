@@ -92,11 +92,7 @@ export default {
     onMounted(() => {
       axios({
         method: "get",
-<<<<<<< HEAD
         url: `https://i5a408.p.ssafy.io:8080/board/details/${router.currentRoute._value.params.boardno}`,
-=======
-        url: `http://localhost:8080/board/details/${router.currentRoute._value.params.boardno}`,
->>>>>>> 0461f99be4ec5ba0d98706cf5f52187a39fc1ea6
       })
         .then((res) => {
           console.log(res);

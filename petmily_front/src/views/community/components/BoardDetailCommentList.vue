@@ -60,11 +60,7 @@
               </div>
             </div>
             <div class="d-flex justify-content-start">
-<<<<<<< HEAD
-              <button @click="changeToggle(idx)" class="bt-white btn-sm ms-4">답글</button>
-=======
               <button @click="changeToggle(idx)" class="bt-reply btn-sm ms-4">답글</button>
->>>>>>> 0461f99be4ec5ba0d98706cf5f52187a39fc1ea6
             </div>
 
             <!-- <hr> -->
@@ -116,11 +112,7 @@
                   </p>
                 </form>
                 <div class="d-flex justify-content-end">
-<<<<<<< HEAD
-                  <button @click="commentInput(idx, reply)" class="bt-white btn-sm">
-=======
                   <button @click="commentInput(idx, reply)" class="bt-reply btn-sm">
->>>>>>> 0461f99be4ec5ba0d98706cf5f52187a39fc1ea6
                     답글 입력하기
                   </button>
                 </div>
@@ -181,11 +173,7 @@ export default {
         console.log(localStorage.getItem("userno"));
         axios({
           method: "post",
-<<<<<<< HEAD
           url: "https://i5a408.p.ssafy.io:8080/board/reply/re/register",
-=======
-          url: "http://localhost:8080/board/reply/re/register",
->>>>>>> 0461f99be4ec5ba0d98706cf5f52187a39fc1ea6
           data: {
             replno: reply.no,
             contents: state.comment[idx],
@@ -202,25 +190,11 @@ export default {
           })
           .catch((err) => {
             console.log(err);
-<<<<<<< HEAD
-          })
-          .then((res) => {
-            console.log(res);
-            // router.go(`/boarddetail/+${reply.bno}`)
-          })
-          .catch((err) => {
-            console.log(err);
-=======
->>>>>>> 0461f99be4ec5ba0d98706cf5f52187a39fc1ea6
           });
       } else {
         axios({
           method: "post",
-<<<<<<< HEAD
           url: "https://i5a408.p.ssafy.io:8080/board/reply/re/register",
-=======
-          url: "http://localhost:8080/board/reply/re/register",
->>>>>>> 0461f99be4ec5ba0d98706cf5f52187a39fc1ea6
           data: {
             replno: reply.no,
             contents: state.comment[idx],
@@ -237,16 +211,6 @@ export default {
           })
           .catch((err) => {
             console.log(err);
-<<<<<<< HEAD
-          })
-          .then((res) => {
-            console.log(res);
-            // router.go(`/boarddetail/+${reply.bno}`)
-          })
-          .catch((err) => {
-            console.log(err);
-=======
->>>>>>> 0461f99be4ec5ba0d98706cf5f52187a39fc1ea6
           });
       }
       // const cancelInput = function () {
@@ -257,11 +221,7 @@ export default {
     const replyDelete = function(idx) {
       axios({
         method: "delete",
-<<<<<<< HEAD
         url: "https://i5a408.p.ssafy.io:8080/board/reply/delete",
-=======
-        url: "http://localhost:8080/board/reply/delete",
->>>>>>> 0461f99be4ec5ba0d98706cf5f52187a39fc1ea6
         data: {
           replno: props.replyJoins[idx].no,
           bno: props.replyJoins[idx].bno,
@@ -279,11 +239,7 @@ export default {
     const commentDelete = function(idx) {
       axios({
         method: "delete",
-<<<<<<< HEAD
         url: "https://i5a408.p.ssafy.io:8080/board/reply/delete",
-=======
-        url: "http://localhost:8080/board/reply/delete",
->>>>>>> 0461f99be4ec5ba0d98706cf5f52187a39fc1ea6
         data: {
           replno: props.comments[idx].no,
           bno: props.comments[idx].bno,
@@ -313,8 +269,6 @@ export default {
   border-bottom: #ff8b8b 1px solid;
   border-radius: 12px;
   color: #ffffff;
-<<<<<<< HEAD
-=======
 }
 .bt-reply {
   background-color: #789ade;
@@ -324,6 +278,5 @@ export default {
   border-bottom: #789ade 1px solid;
   border-radius: 12px;
   color: #ffffff;
->>>>>>> 0461f99be4ec5ba0d98706cf5f52187a39fc1ea6
 }
 </style>

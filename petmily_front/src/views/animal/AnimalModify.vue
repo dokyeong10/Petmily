@@ -174,20 +174,13 @@ export default {
           state.neuteredToggle = res.data.neutered;
           state.find_date = res.data.find_date;
           state.agencycode = res.data.agencycode;
-          state.profileURL = res.data.profile_img;
           state.text = res.data.text;
-          state.imgURL = res.data.animalFiles;
           console.log(state);
         })
         .catch((err) => {
           console.log(err);
         });
     });
-    const setToken = function() {
-      const token = localStorage.getItem("jwt");
-      const config = `Bearer ${token}`;
-      return config;
-    };
     const file = ref(null);
     const profile = ref(null);
 
@@ -243,14 +236,12 @@ export default {
         return alert("날짜를 입력해주세요.");
       }
 
-      // agencycode 찾기 & 동물 등록
+      // 동물 수정
       axios({
         method: "patch",
-        url: `https://i5a408.p.ssafy.io:8080/animal/${state.animalno}`,
-        headers: {
-          Authorization: setToken(),
-        },
+        url: `http://localhost:8080/animal/`,
         data: {
+          no: state.animalno,
           type: state.type,
           species: state.species,
           find_addr: state.addr,
