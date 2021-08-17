@@ -108,20 +108,14 @@ public class UserServiceImpl implements UserService {
 	public User patchUser(String email, User user) {
 		final Optional<User> fetchedUser = userRepositorySupport.findUserByEmailAndType(email,"normal");
 		if(fetchedUser.isPresent()){
-			if(user.getPassword() != null){
+			if(user.getPassword() != null || user.getPassword().equals("")){
 				fetchedUser.get().setPassword(passwordEncoder.encode(user.getPassword()));
 			}
-			if(user.getPhone() != null){
+			if(user.getPhone() != null || user.getPhone().equals("")){
 				fetchedUser.get().setPhone(user.getPhone());
 			}
-			if(user.getImg() != null){
+			if(user.getImg() != null || user.getImg().equals("")){
 				fetchedUser.get().setImg(user.getImg());
-			}
-			if(user.getType() != null){
-				fetchedUser.get().setType(user.getType());
-			}
-			if(user.getRole() != null){
-				fetchedUser.get().setRole(user.getRole());
 			}
 			return userRepository.save(fetchedUser.get());
 		}
@@ -134,19 +128,19 @@ public class UserServiceImpl implements UserService {
 	public Agency patchAgency(String email, Agency agency) {
 		final Optional<Agency> fetchedAgency = agencyRepository.findByEmail(email);
 		if(fetchedAgency.isPresent()){
-			if(agency.getPassword() != null){
+			if(agency.getPassword() != null || agency.getPassword().equals("")){
 				fetchedAgency.get().setPassword(passwordEncoder.encode(agency.getPassword()));
 			}
-			if(agency.getPhone() != null){
+			if(agency.getPhone() != null || agency.getPhone().equals("")){
 				fetchedAgency.get().setPhone(agency.getPhone());
 			}
-			if(agency.getImg() != null){
+			if(agency.getImg() != null || agency.getImg().equals("")){
 				fetchedAgency.get().setImg(agency.getImg());
 			}
-			if(agency.getAgencycode() != null){
+			if(agency.getAgencycode() != null || agency.getAgencycode().equals("")){
 				fetchedAgency.get().setAgencycode(agency.getAgencycode());
 			}
-			if(agency.getAgencyname() != null){
+			if(agency.getAgencyname() != null || agency.getAgencyname().equals("")){
 				fetchedAgency.get().setAgencyname(agency.getAgencyname());
 			}
 			return agencyRepository.save(fetchedAgency.get());
