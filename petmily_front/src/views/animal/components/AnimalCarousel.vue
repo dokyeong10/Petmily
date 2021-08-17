@@ -1,12 +1,16 @@
 <template>
   <div class="mb-5">
-    <div class="container mt-5" style="height: 650px;">
+    <div class="container mt-5" style="height: 650px">
       <div class="d-flex justify-content-center">
         <div class="d-flex align-items-center">
           <!-- 이미지에 profile_img 넣어줘야 합니다. -->
 
           <div class="align-items-center">
-            <div id="animalCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div
+              id="animalCarousel"
+              class="carousel slide"
+              data-bs-ride="carousel"
+            >
               <div v-if="aniInfo.animalFiles">
                 <div class="carousel-inner flex-row">
                   <div
@@ -18,16 +22,25 @@
                     <div
                       v-if="
                         file.extension == 'jpg' ||
-                          file.extension == 'jpeg' ||
-                          file.extension == 'png' ||
-                          file.extension == 'bmp' ||
-                          file.extension == 'gif'
+                        file.extension == 'jpeg' ||
+                        file.extension == 'png' ||
+                        file.extension == 'bmp' ||
+                        file.extension == 'gif'
                       "
                     >
-                      <img :src="file.file" style="max-width: 575.85px; height: 309.52px;" />
+                      <img
+                        :src="file.file"
+                        style="max-width: 575.85px; height: 309.52px"
+                      />
                     </div>
                     <div v-else>
-                      <video :src="file.file" controls autoplay muted style="max-width: 575.85px; height: 309.52px;"></video>
+                      <video
+                        :src="file.file"
+                        controls
+                        autoplay
+                        muted
+                        style="max-width: 575.85px; height: 309.52px"
+                      ></video>
                     </div>
                   </div>
                   <button
@@ -35,18 +48,26 @@
                     type="button"
                     data-bs-target="#animalCarousel"
                     data-bs-slide="prev"
-                    style="height: 173.96px;"
+                    style="height: 173.96px"
                   >
-                    <span class="carousel-control-prev-icon" aria-hidden="true" style="margin-top: 141.96px;"></span>
+                    <span
+                      class="carousel-control-prev-icon"
+                      aria-hidden="true"
+                      style="margin-top: 141.96px"
+                    ></span>
                   </button>
                   <button
                     class="carousel-control-next"
                     type="button"
                     data-bs-target="#animalCarousel"
                     data-bs-slide="next"
-                    style="height: 173.96px;"
+                    style="height: 173.96px"
                   >
-                    <span class="carousel-control-next-icon" aria-hidden="true" style="margin-top: 141.96px;"></span>
+                    <span
+                      class="carousel-control-next-icon"
+                      aria-hidden="true"
+                      style="margin-top: 141.96px"
+                    ></span>
                   </button>
                 </div>
               </div>
@@ -54,10 +75,10 @@
               <br />
               <br />
             </div>
-            <div class="fw-bold" style="font-size:2rem" align="left">
+            <div class="fw-bold" style="font-size: 2rem" align="left">
               보호센터 정보
             </div>
-            <div v-if="aniInfo" class="position-relative mb-5 " align="left">
+            <div v-if="aniInfo" class="position-relative mb-5" align="left">
               <hr />
               <div class="mb-3">
                 <span class="title-s"> 센터명 : </span>
@@ -80,10 +101,10 @@
           type="button"
           @click="goToShleterDetail"
           class="btn-login w-25 mb-5"
-          style="color: #FFFFFF;"
+          style="color: #ffffff"
         >
           <span class="me-3">상세보기</span>
-          <img src="@\assets\more.png" style="width: 19px; height: 19px;" />
+          <img src="@\assets\more.png" style="width: 19px; height: 19px" />
         </button>
       </div>
     </div>
@@ -121,7 +142,7 @@ export default {
 .content-s {
   font-size: 18px;
 }
-.carousel-inner{
+.carousel-inner {
   width: 575.85px !important;
 }
 </style>

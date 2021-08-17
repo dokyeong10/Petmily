@@ -81,6 +81,7 @@ public class AnimalController {
     //동물 수정
     @PatchMapping("/")
     public ResponseEntity<Animal> patchUser(@RequestBody AnimalRegisterPostReq animalRegisterPostReq) {
+        System.out.println(animalRegisterPostReq.toString());
         long no = animalRegisterPostReq.getNo();
         // 파일 삭제
         animalService.deleteFile(no);

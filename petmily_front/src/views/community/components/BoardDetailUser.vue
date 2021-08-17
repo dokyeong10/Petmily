@@ -4,7 +4,7 @@
   <div class="container">
     <div v-if="userInfo" class="d-flex justify-content-evenly pb-5">
       <div>
-        <img :src="userInfo.img" alt="" style="width:300px" />
+        <img :src="userInfo.img" alt="" style="width: 300px" />
         <p class="board-user">{{ userInfo.username }}</p>
       </div>
 
@@ -14,25 +14,51 @@
     </div>
     <hr />
 
-    <div v-if="userInfo" class="d-flex flex-column justify-content-center align-items-center" >
+    <div
+      v-if="userInfo"
+      class="d-flex flex-column justify-content-center align-items-center"
+    >
       <h4 class="mt-4 mb-3">{{ userInfo.username }}님의 후기 사진</h4>
-      <div v-if="newFiles" style="max-width: 585px; height: 309.52px;">
-        <div id="boardDetailUserCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div v-if="newFiles" style="max-width: 585px; height: 309.52px">
+        <div
+          id="boardDetailUserCarousel"
+          class="carousel slide"
+          data-bs-ride="carousel"
+        >
           <div class="carousel-inner flex-row">
-            <div class="carousel-item" v-for="(board, idx) in newFiles.files.boardFiles" :key="idx" :class="{ active: idx == 0 }">
+            <div
+              class="carousel-item"
+              v-for="(board, idx) in newFiles.files.boardFiles"
+              :key="idx"
+              :class="{ active: idx == 0 }"
+            >
               <div
                 v-if="
                   board.extension == 'jpg' ||
-                    board.extension == 'jpeg' ||
-                    board.extension == 'png' ||
-                    board.extension == 'bmp' ||
-                    board.extension == 'gif'
+                  board.extension == 'jpeg' ||
+                  board.extension == 'png' ||
+                  board.extension == 'bmp' ||
+                  board.extension == 'gif'
                 "
               >
-                <img style="border-radius: 20px; max-width: 575.85px; height: 309.52px;" :src="board.file" alt="" />
+                <img
+                  style="
+                    border-radius: 20px;
+                    max-width: 575.85px;
+                    height: 309.52px;
+                  "
+                  :src="board.file"
+                  alt=""
+                />
               </div>
               <div v-else>
-                <video :src="board.file" controls autoplay muted style="max-width: 575.85px; height: 309.52px;"></video>
+                <video
+                  :src="board.file"
+                  controls
+                  autoplay
+                  muted
+                  style="max-width: 575.85px; height: 309.52px"
+                ></video>
               </div>
             </div>
           </div>
@@ -41,18 +67,26 @@
             type="button"
             data-bs-target="#boardDetailUserCarousel"
             data-bs-slide="prev"
-            style="height: 173.96px;"
+            style="height: 173.96px"
           >
-            <span style="color: red; margin-top: 141.96px;" class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span
+              style="color: red; margin-top: 141.96px"
+              class="carousel-control-prev-icon"
+              aria-hidden="true"
+            ></span>
           </button>
           <button
             class="carousel-control-next"
             type="button"
             data-bs-target="#boardDetailUserCarousel"
             data-bs-slide="next"
-            style="height: 173.96px;"
+            style="height: 173.96px"
           >
-            <span style="color: red; margin-top: 141.96px;" class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span
+              style="color: red; margin-top: 141.96px"
+              class="carousel-control-next-icon"
+              aria-hidden="true"
+            ></span>
           </button>
         </div>
       </div>
@@ -108,7 +142,7 @@ export default {
   margin-top: 7%;
   font-weight: bold;
 }
-.carousel-inner{
+.carousel-inner {
   width: 575.85px !important;
 }
 </style>
