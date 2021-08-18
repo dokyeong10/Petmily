@@ -43,7 +43,7 @@
           <!-- <user-video :stream-manager="mainStreamManager" /> -->
 
           <div id="video-container" class="col">
-            <div class="RoomInfo mb-3 mt-2">{{ RoomInfo.title }}</div>
+            <div class="RoomInfo mb-3">{{ RoomInfo.title }}</div>
             <div>
               <span class="font-bold">현재 시청자수 : </span>
               <span class="font-bold"> {{ this.numberOfElements }}</span

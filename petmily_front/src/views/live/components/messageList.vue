@@ -21,7 +21,7 @@ export default {
 
 <style scoped>
 .container {
-  height: 90vh;
+  height: 700px;
   width: 100%;
   background: rgba(207, 190, 207, 0.61);
   overflow: scroll;
