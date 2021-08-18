@@ -160,7 +160,7 @@ export default {
     const agencyLogin = function() {
       axios({
         method: "post",
-        url: "http://localhost:8080/auth/agency/login",
+        url: "https://i5a408.p.ssafy.io:8080/auth/agency/login",
         data: {
           email: state.form.email,
           password: state.form.password,
