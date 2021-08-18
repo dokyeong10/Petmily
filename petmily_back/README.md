@@ -29,12 +29,14 @@ Petmily : 유기동물 입양을 위한 홍보 및 정보 제공 웹 서비스
     - Figma를 이용한 UI 설계
     - DB 설계
 
+
 - <Strong>4 ~ 6 주차 : Front & Back 환경개발</Strong>
     - Vue3를 이용한 Front-end 개발
     - Spring Boot 를 이용한 Back-end 개발
     - WebRTC 기술을 이용한 Live System
     - SMTP 를 이용한 Email Auth
     - Socket JS를 이용한 실시간 채팅
+
 
 - <Strong>7 주차 : 배포 및 유지보수 & 발표 준비</Strong>
     - AWS 배포 서버에 Jar 파일 배포
