@@ -2,6 +2,7 @@ package com.ssafy.petmily.api.controller;
 
 
 import com.ssafy.petmily.api.request.LiveRegisterPostReq;
+import com.ssafy.petmily.api.response.LivePostRequest;
 import com.ssafy.petmily.api.service.LiveService;
 import com.ssafy.petmily.common.auth.SsafyAgencyDetails;
 import com.ssafy.petmily.common.response.BaseResponseBody;
@@ -43,9 +44,9 @@ public class LiveController {
 		boolean isExist = liveService.createLiveRoom(agencycode, title, img, description);
 
 		if(isExist){
-			return ResponseEntity.status(200).body(BaseResponseBody.of(200,"Success"));
+			return ResponseEntity.status(200).body(LivePostRequest.of(200,"Success",agencycode));
 		}
-		return ResponseEntity.status(200).body((BaseResponseBody.of(500,"Already Exist Room")));
+		return ResponseEntity.status(500).body((BaseResponseBody.of(500,"Already Exist Room")));
 
 	}
 
@@ -56,6 +57,23 @@ public class LiveController {
 
 		return new ResponseEntity<List<LiveRoom>>(list, HttpStatus.OK);
 	}
+
+	//라이브 종료
+	@DeleteMapping("/{agencycode}")
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity<? extends BaseResponseBody> deleteLive(@PathVariable String agencycode) {
+		liveService.deleteLive(agencycode);
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+	}
+
+	//기관 코드로 라이브 정보 조회
+	@GetMapping("/detail/{agencycode}")
+	public ResponseEntity<LiveRoom> livedetail(@PathVariable String agencycode) {
+		LiveRoom liveRoom = liveService.livedetail(agencycode);
+		return new ResponseEntity<LiveRoom>(liveRoom, HttpStatus.OK);
+	}
+
+
 
 
 

@@ -7,6 +7,7 @@ import com.ssafy.petmily.api.request.UserRegisterPostReq;
 import com.ssafy.petmily.db.entity.agency.Agency;
 import com.ssafy.petmily.db.entity.agency.AgencyJoin;
 import com.ssafy.petmily.db.entity.animal.AnimalLike;
+import com.ssafy.petmily.db.entity.animal.AnimalLikeJoin;
 import com.ssafy.petmily.db.entity.user.User;
 import com.ssafy.petmily.db.entity.user.UserJoin;
 import com.ssafy.petmily.db.repository.*;
@@ -43,6 +44,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	AnimalWaitRepositorySupport animalWaitRepositorySupport;
+
+	@Autowired
+	AnimalLikeRepositorySupport animalLikeRepositorySupport;
 
 	@Override
 	public User createUser(UserRegisterPostReq userRegisterInfo) {
@@ -104,20 +108,17 @@ public class UserServiceImpl implements UserService {
 	public User patchUser(String email, User user) {
 		final Optional<User> fetchedUser = userRepositorySupport.findUserByEmailAndType(email,"normal");
 		if(fetchedUser.isPresent()){
-			if(user.getPassword() != null){
+			if(user.getPassword() != null && !user.getPassword().equals("")){
 				fetchedUser.get().setPassword(passwordEncoder.encode(user.getPassword()));
 			}
-			if(user.getPhone() != null){
+			if(user.getPhone() != null && !user.getPhone().equals("")){
 				fetchedUser.get().setPhone(user.getPhone());
 			}
-			if(user.getImg() != null){
+			if(user.getImg() != null && !user.getImg().equals("")){
 				fetchedUser.get().setImg(user.getImg());
 			}
-			if(user.getType() != null){
-				fetchedUser.get().setType(user.getType());
-			}
-			if(user.getRole() != null){
-				fetchedUser.get().setRole(user.getRole());
+			if(user.getUsername() != null){
+				fetchedUser.get().setUsername(user.getUsername());
 			}
 			return userRepository.save(fetchedUser.get());
 		}
@@ -130,20 +131,17 @@ public class UserServiceImpl implements UserService {
 	public Agency patchAgency(String email, Agency agency) {
 		final Optional<Agency> fetchedAgency = agencyRepository.findByEmail(email);
 		if(fetchedAgency.isPresent()){
-			if(agency.getPassword() != null){
+			if(agency.getPassword() != null && !agency.getPassword().equals("")){
 				fetchedAgency.get().setPassword(passwordEncoder.encode(agency.getPassword()));
 			}
-			if(agency.getPhone() != null){
+			if(agency.getPhone() != null && !agency.getPhone().equals("")){
 				fetchedAgency.get().setPhone(agency.getPhone());
 			}
-			if(agency.getImg() != null){
+			if(agency.getImg() != null && !agency.getImg().equals("")) {
 				fetchedAgency.get().setImg(agency.getImg());
 			}
-			if(agency.getAgencycode() != null){
-				fetchedAgency.get().setAgencycode(agency.getAgencycode());
-			}
-			if(agency.getAgencyname() != null){
-				fetchedAgency.get().setAgencyname(agency.getAgencyname());
+			if(agency.getUsername() != null) {
+				fetchedAgency.get().setUsername(agency.getUsername());
 			}
 			return agencyRepository.save(fetchedAgency.get());
 		}
@@ -178,8 +176,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public AnimalLike addlike(LikeRegisterPostReq likeRegisterPostReq) {
 		AnimalLike animalLike = new AnimalLike();
-		animalLike.setNo(likeRegisterPostReq.getNo());
-		;
+		long max =animalLikeRepositorySupport.getMaxNo();
+		animalLike.setNo(max+1);
 		animalLike.setAnimalno(likeRegisterPostReq.getAnimalno());
 		animalLike.setUserno(likeRegisterPostReq.getUserno());
 		return animalLikeRepository.save(animalLike);
@@ -219,6 +217,11 @@ public class UserServiceImpl implements UserService {
 	public Agency getAgencyByAgencyCode(String agencycode) {
 		Agency agency = agencyRepositorySupport.findAgencyByAgecnycode(agencycode);
 		return agency;
+	}
+
+	@Override
+	public List<AnimalLikeJoin> getAnimalLikeList(Long no) {
+		return userRepositorySupport.getAnimalLikeList(no);
 	}
 
 

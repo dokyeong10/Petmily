@@ -3,10 +3,7 @@ package com.ssafy.petmily.db.repository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.petmily.db.entity.*;
 import com.ssafy.petmily.db.entity.animal.QAnimal;
-import com.ssafy.petmily.db.entity.shelter.QShelter;
-import com.ssafy.petmily.db.entity.shelter.QShelterJoin;
-import com.ssafy.petmily.db.entity.shelter.Shelter;
-import com.ssafy.petmily.db.entity.shelter.ShelterJoin;
+import com.ssafy.petmily.db.entity.shelter.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +16,7 @@ public class ShelterRepositorySupport {
     JPAQueryFactory jpaQueryFactory;
     QShelter qShelter = QShelter.shelter;
     QShelterJoin qShelterJoin = QShelterJoin.shelterJoin;
+    QShelterMain qShelterMain = QShelterMain.shelterMain;
     QAnimal qAnimal = QAnimal.animal;
 
     public List<Shelter> searchShelterByName(String word){
@@ -33,6 +31,10 @@ public class ShelterRepositorySupport {
 
     public List<Shelter> getAllShelter(){
         return jpaQueryFactory.select(qShelter).from(qShelter).fetch();
+    }
+
+    public List<ShelterMain> getAllShelterMain(){
+        return jpaQueryFactory.select(qShelterMain).from(qShelterMain).fetch();
     }
 
 }

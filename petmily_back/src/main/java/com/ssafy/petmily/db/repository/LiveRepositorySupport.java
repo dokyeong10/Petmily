@@ -19,4 +19,14 @@ public class LiveRepositorySupport {
         return jpaQueryFactory.select(qLiveRoom).from(qLiveRoom).fetch();
     }
 
+    public List<LiveRoom> getFourLiveList(){
+        return jpaQueryFactory.select(qLiveRoom).from(qLiveRoom)
+                .orderBy(qLiveRoom.no.asc()).limit(4).fetch();
+    }
+
+    public LiveRoom findLiveByAgencycode(String agencycode) {
+        LiveRoom liveRoom = jpaQueryFactory.select(qLiveRoom).from(qLiveRoom)
+                .where(qLiveRoom.agencycode.eq(agencycode)).fetchOne();
+        return liveRoom;
+    }
 }

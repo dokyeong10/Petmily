@@ -32,8 +32,22 @@ public class BoardController {
     @Autowired
     CommunityService communityService;
 
+    // 게시글 리스트 조회
+    @PostMapping("/")
+    public ResponseEntity<List<BoardJoin>> getBoardList(@RequestBody BoardSearchPostReq boardSearchPostReq){
+        long userno = boardSearchPostReq.getUserno();
+        String word = boardSearchPostReq.getWord();
+        String agencycode = boardSearchPostReq.getAgencycode();
+        System.out.println("===================== Board 검색 userno : " + userno);
+        System.out.println("===================== Board 검색 word : " + word);
+        System.out.println("===================== Board 검색 agencycode : " + agencycode);
+        List<BoardJoin> list = boardService.getBoadList(agencycode, userno, word);
 
-//    //개인 회원 게시글 등록
+        return new ResponseEntity<List<BoardJoin>>(list, HttpStatus.OK);
+    }
+
+
+    //개인 회원 게시글 등록
     @PostMapping("/enroll/personal")
      public ResponseEntity<? extends BaseResponseBody> enoll(
             @RequestBody @ApiParam(value="글 등록", required = true) ComuRegisterPostReq comuRegisterPostReq,@ApiIgnore Authentication authentication )
@@ -93,7 +107,36 @@ public class BoardController {
 
         }
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+    }
 
+    // 게시물 수정
+    @PatchMapping("/update")
+    public ResponseEntity<Board> updateBoard(@RequestBody ComuRegisterPostReq comuRegisterPostReq){
+        long no = comuRegisterPostReq.getNo();
+        String files[] = comuRegisterPostReq.getFiles();
+
+        if(files.length !=0){ //파일이 존재할 때
+            // 게시물 파일 삭제
+            boardService.deleteFile(no);
+
+            // 파일 등록
+            for (int i = 0; i < files.length; i++) {
+                System.out.println("============================ file name : " + files[i]);
+            }
+
+            for (int i = 0; i < files.length; i++) {
+                String extension = "";
+                String[] ext = files[i].split("\\.");
+                extension = ext[(ext.length) - 1];
+                System.out.println("============================ file extention : " + extension);
+                BoardFile boardfile = boardService.fileUpdate(no, files[i], extension);
+
+            }
+        }
+        // 게시물 수정
+        Board board = boardService.updateBoard(comuRegisterPostReq);
+
+        return new ResponseEntity<Board>(board, HttpStatus.OK);
     }
 
     //게시글 삭제
@@ -136,24 +179,20 @@ public class BoardController {
 
     // 댓글 등록
     @PostMapping("/reply/register")
-    public ResponseEntity<? extends BaseResponseBody> registerRepl(@ApiIgnore Authentication authentication, @RequestBody ReplyRegisterPostReq replyRegisterPostReq){
+    public ResponseEntity<? extends BaseResponseBody> registerRepl(@RequestBody ReplyRegisterPostReq replyRegisterPostReq){
         String contents = replyRegisterPostReq.getContents();
-        boolean isAgency = replyRegisterPostReq.getIsAgency();
         long bno = replyRegisterPostReq.getBno();
-        System.out.println("===================== contents : " + contents + " | isAgency : "+ isAgency + " | bno : " + bno);
+        long userno = replyRegisterPostReq.getUserno();
+        String agencycode = replyRegisterPostReq.getAgencycode();
+        System.out.println("===================== contents : " + contents + " | agencycode : "+ agencycode + " | bno : " + bno + " | userno : " + userno);
 
         // 기관 회원일 경우
-        if(isAgency){
-            SsafyAgencyDetails agencyDetails = (SsafyAgencyDetails) authentication.getDetails();
-            String agencycode = agencyDetails.getAgencycode();
-
+        if(userno == 0){
             communityService.createAgencyRepl(agencycode,contents,bno);
 
             return ResponseEntity.status(200).body(BaseResponseBody.of(200,"Success"));
 
         }else{ // 일반 회원일 경우
-            SsafyUserDetails userDetails = (SsafyUserDetails) authentication.getDetails();
-            Long userno = userDetails.getNo();
             communityService.createUserRepl(userno, contents, bno);
             return ResponseEntity.status(200).body(BaseResponseBody.of(200,"Success"));
         }
@@ -163,25 +202,18 @@ public class BoardController {
     @PostMapping("/reply/re/register")
     public ResponseEntity<? extends BaseResponseBody> registerReRepl(@ApiIgnore Authentication authentication, @RequestBody ReplyReRegisterPostReq replyReRegisterPostReq){
         String contents = replyReRegisterPostReq.getContents();
-        boolean isAgency = replyReRegisterPostReq.getIsAgency();
         long bno = replyReRegisterPostReq.getBno();
         long replno = replyReRegisterPostReq.getReplno();
-        System.out.println("===================== contents : " + contents + " | isAgency : "+ isAgency + " | bno : " + bno + " | replno : " + replno);
+        long userno = replyReRegisterPostReq.getUserno();
+        String agencycode = replyReRegisterPostReq.getAgencycode();
+        System.out.println("===================== contents : " + contents + " | agencycode : "+ agencycode + " | bno : " + bno + " | userno : " + userno);
 
         // 기관 회원일 경우
-        if(isAgency){
-            System.out.println("========================= 기관 회원");
-            SsafyAgencyDetails agencyDetails = (SsafyAgencyDetails) authentication.getDetails();
-            String agencycode = agencyDetails.getAgencycode();
-
+        if(userno == 0){
             communityService.createAgencyReplRe(agencycode,contents,bno, replno);
             return ResponseEntity.status(200).body(BaseResponseBody.of(200,"Success"));
 
         }else{ // 일반 회원일 경우
-            System.out.println("========================= 일반 회원");
-            SsafyUserDetails userDetails = (SsafyUserDetails) authentication.getDetails();
-            long userno = userDetails.getNo();
-
             communityService.createUserReplRe(userno, contents, bno, replno);
             return ResponseEntity.status(200).body(BaseResponseBody.of(200,"Success"));
         }

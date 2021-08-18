@@ -12,7 +12,7 @@
             Sign up
           </button>
         </div>
-        <br>
+        <br />
         <form>
           <div>
             <input
@@ -28,6 +28,7 @@
               class="mb-2 form-control radius-border rounded-pill"
               type="password"
               placeholder="password"
+              @keydown.enter="login"
             />
           </div>
           <div class="checkbox-container d-flex align-items-center justify-content-between">
@@ -37,59 +38,31 @@
                   type="radio"
                   name="login"
                   v-model="state.toggle"
-                  value="false"
+                  :value="false"
                   checked="checked"
                 />개인
               </label>
               <label>
-                <input
-                  type="radio"
-                  name="login"
-                  v-model="state.toggle"
-                  value="true"
-                />기관
+                <input type="radio" name="login" v-model="state.toggle" :value="true" />기관
               </label>
             </div>
-            <button
+            <a
               class="btn btn-link"
               @click="goToFindPassword"
               style="color: #8699da; text-decoration-line: none"
             >
               forgot password
-            </button>
+            </a>
           </div>
         </form>
-        <div class="mt-5 mb-5">
-          <button class="btn-login font-" @click="clickLogin">
+        <div v-if="!state.toggle" class="mt-5 mb-5">
+          <button class="btn-login font-" @click="privateLogin">
             로그인 하기
           </button>
         </div>
-        <div class="position-relative mb-5">
-          <hr>
-          <div class="position-absolute top-50 start-50 translate-middle px-2 bg-white" style="font-size:5px;">on continue with</div>
-        </div>
-        <div class="d-flex justify-content-evenly">
-          <!-- 소셜로그인 로그인 만들기 -->
-          <button class="btn-logo">
-            <a
-              style="color: #ffffff; text-decoration-line: none"
-              href="http://localhost:8080/oauth2/authorization/google"
-              ><img class="img" src="@\assets\google.png" style="width:30px;height:30px;border-radius: 50%;"></a
-            >
-          </button>
-          <button class="btn-logo">
-            <a
-              style="color: #ffffff; text-decoration-line: none"
-              href="http://localhost:8080/oauth2/authorization/kakao"
-              ><img class="img" src="@\assets\KakaoTalk.png" style="width:30px;height:30px;border-radius: 50%;"></a
-            >
-          </button>
-          <button class="btn-logo">
-            <a
-              style="color: #ffffff; text-decoration-line: none"
-              href="http://localhost:8080/oauth2/authorization/naver"
-              ><img class ="img" src="@\assets\naver.png" style="width:30px;height:30px;border-radius: 50%;"></a
-            >
+        <div v-else class="mt-5 mb-5">
+          <button class="btn-login font-" @click="agencyLogin">
+            로그인 하기
           </button>
         </div>
       </div>
@@ -121,17 +94,13 @@ export default {
         align: "left",
       },
       rules: {
-        id: [
-          { required: true, message: "Please input Email", trigger: "blur" },
-        ],
-        password: [
-          { required: true, message: "Please input password", trigger: "blur" },
-        ],
+        id: [{ required: true, message: "Please input Email", trigger: "blur" }],
+        password: [{ required: true, message: "Please input password", trigger: "blur" }],
       },
       toggle: false,
     });
 
-    const setToken = function () {
+    const setToken = function() {
       const token = localStorage.getItem("jwt");
       const config = {
         Authorization: `JWT ${token}`,
@@ -139,71 +108,94 @@ export default {
       return config;
     };
 
-    const goToSignup = function () {
+    const goToSignup = function() {
       router.push("/signupterms");
     };
 
-    const goToFindPassword = function () {
+    const goToFindPassword = function() {
       router.push("/findpassword");
     };
 
-    const clickLogin = function () {
-      if (!state.toggle) {
-        axios({
-          method: "post",
-          url: "http://localhost:8080/auth/personal/login",
-          data: {
-            email: state.form.email,
-            password: state.form.password,
-            header: setToken(),
-          },
-        })
-          .then((res) => {
-            console.log(res.data);
-            localStorage.setItem("jwt", res.data.accessToken);
-            store.state.isLogin = true;
-            store.state.isUser = true;
-            sessionStorage.setItem("isLogin", store.state.isLogin);
-            sessionStorage.setItem("isUser", store.state.isUser);
-            location.href = "/home";
-          })
-          .catch((err) => {
-            console.log(err);
-            alert("개인회원이 맞는지 확인해주세요!");
-          });
+    const login = function() {
+      if (state.toggle) {
+        agencyLogin();
       } else {
-        axios({
-          method: "post",
-          url: "http://localhost:8080/auth/agency/login",
-          data: {
-            email: state.form.email,
-            password: state.form.password,
-            header: setToken(),
-          },
-        })
-          .then((res) => {
-            console.log(res.data);
-            localStorage.setItem("jwt", res.data.accessToken);
-            store.state.isLogin = true;
-            store.state.isAgency = true;
-            sessionStorage.setItem("isLogin", store.state.isLogin);
-            sessionStorage.setItem("isAgency", store.state.isAgency);
-            location.href = "/home";
-          })
-          .catch((err) => {
-            console.log(err);
-            alert("기관회원이 맞는지 확인해주세요!");
-          });
+        privateLogin();
       }
     };
 
-    return { state, clickLogin, goToSignup, goToFindPassword };
+    const privateLogin = function() {
+      axios({
+        method: "post",
+        url: "http://localhost:8080/auth/personal/login",
+        data: {
+          email: state.form.email,
+          password: state.form.password,
+          header: setToken(),
+        },
+      })
+        .then((res) => {
+          console.log(res.data);
+          localStorage.setItem("jwt", res.data.accessToken);
+          localStorage.setItem("userno", res.data.userno);
+          store.state.isLogin = true;
+          store.state.isUser = true;
+          localStorage.setItem("isLogin", store.state.isLogin);
+          localStorage.setItem("isUser", store.state.isUser);
+          localStorage.setItem("isAgency", store.state.isAgency);
+          sessionStorage.setItem("isLogin", store.state.isLogin);
+          sessionStorage.setItem("isUser", store.state.isUser);
+          location.href = "/";
+        })
+        .catch((err) => {
+          console.log(err);
+          console.log(state.toggle);
+          if (err.response.status >= 500) {
+            alert("개인회원이 맞는지 확인해주세요!");
+          } else {
+            alert("잘못된 이메일 혹은 비밀번호입니다.");
+          }
+        });
+    };
+    const agencyLogin = function() {
+      axios({
+        method: "post",
+        url: "http://localhost:8080/auth/agency/login",
+        data: {
+          email: state.form.email,
+          password: state.form.password,
+          header: setToken(),
+        },
+      })
+        .then((res) => {
+          console.log(res.data);
+          localStorage.setItem("jwt", res.data.accessToken);
+          localStorage.setItem("agencycode", res.data.agencycode);
+          store.state.isLogin = true;
+          store.state.isAgency = true;
+          localStorage.setItem("isLogin", store.state.isLogin);
+          localStorage.setItem("isUser", store.state.isUser);
+          localStorage.setItem("isAgency", store.state.isAgency);
+          sessionStorage.setItem("isLogin", store.state.isLogin);
+          sessionStorage.setItem("isAgency", store.state.isAgency);
+          location.href = "/";
+        })
+        .catch((err) => {
+          console.log(err);
+          console.log(state.toggle);
+          if (err.response.status >= 500) {
+            alert("기관회원이 맞는지 확인해주세요!");
+          } else {
+            alert("잘못된 이메일 혹은 비밀번호입니다.");
+          }
+        });
+    };
+
+    return { state, login, privateLogin, agencyLogin, goToSignup, goToFindPassword };
   },
 };
 </script>
 <style>
-
-
 .img {
   width: 20%;
   height: 21%;
@@ -264,23 +256,22 @@ export default {
 }
 
 .checkbox-round {
-    width: 1rem;
-    height: 1rem;
-    background-color: white;
-    border-radius: 50%;
-    vertical-align: middle;
-    border: 1px solid #ddd;
-    -webkit-appearance: none;
-    outline: none;
-    cursor: pointer;
+  width: 1rem;
+  height: 1rem;
+  background-color: white;
+  border-radius: 50%;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
 }
 
 .checkbox-round:checked {
-    background-color: #789ade;
+  background-color: #789ade;
 }
 
 .checkbox-container {
-width: 25rem;
+  width: 25rem;
 }
-
 </style>

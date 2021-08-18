@@ -38,4 +38,5 @@ public class AnimalJoin {
     @JoinColumn(name="animalno",referencedColumnName = "no",insertable = false, updatable = false)
     List<AnimalFile> animalFiles;
 
+
 }

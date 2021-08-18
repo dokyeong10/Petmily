@@ -27,7 +27,7 @@ public class AnimalWaitRepositorySupport {
         System.out.println("===================== no : " + no);
         System.out.println("===================== Like? : " + isLike);
 
-        if (key == null || word == null || word.equals(" ") || key.equals("all")) { // 전체를 요청할 때
+        if (key == null || word == null || word.equals(" ") || key.equals("all") || key.equals("") || word.equals("")) { // 전체를 요청할 때
             if (no <= 0 || !isLike) { // 즐겨찾기 동물이 아닐 때
                 return jpaQueryFactory.select(qAnimal).from(qAnimal).fetch();
             } else if (no > 0 && isLike) { // 즐겨찾기 동물일 때
@@ -86,9 +86,9 @@ public class AnimalWaitRepositorySupport {
         return null;
     }
 
-    public List<AnimalJoin> findAnimalByNo(Long no) {
-        List<AnimalJoin> animalJoins = jpaQueryFactory.select(qAnimalJoin).from(qAnimalJoin)
-                .where(qAnimalJoin.no.eq(no)).fetch();
+    public AnimalJoin findAnimalByNo(Long no) {
+        AnimalJoin animalJoins = jpaQueryFactory.select(qAnimalJoin).from(qAnimalJoin)
+                .where(qAnimalJoin.no.eq(no)).fetchOne();
         return animalJoins;
     }
 
@@ -101,5 +101,10 @@ public class AnimalWaitRepositorySupport {
        }
 
         return num;
+    }
+
+    public List<Animal> getThreeAnimal(){
+        return jpaQueryFactory.select(qAnimal).from(qAnimal)
+                .orderBy(qAnimal.find_date.asc()).limit(3).fetch();
     }
 }

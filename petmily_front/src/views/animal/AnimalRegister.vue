@@ -25,9 +25,7 @@
             <div>업로드 완료!</div>
           </div>
         </div>
-        <label class="d-flex flex-row mb-2 semibold"
-          >사진 또는 동영상 등록</label
-        >
+        <label class="d-flex flex-row mb-2 semibold">사진 또는 동영상 등록</label>
         <div class="justify-content-center mb-2">
           <input
             multiple="multiple"
@@ -86,12 +84,7 @@
                 />수컷</label
               >
               <label
-                ><input
-                  type="radio"
-                  name="sex"
-                  v-model="state.sexToggle"
-                  value="true"
-                />암컷</label
+                ><input type="radio" name="sex" v-model="state.sexToggle" value="true" />암컷</label
               >
             </span>
           </div>
@@ -125,7 +118,7 @@
           type="text"
           placeholder="발견 주소"
         />
-        <!-- 임시로 특이사항에 agencycode 받도록 해놓음 -->
+
         <label class="d-flex flex-row mb-2 semibold">특이사항</label>
         <input
           v-model="state.text"
@@ -162,7 +155,7 @@ export default {
   components: { JumbotronAnimalRegister },
   name: "AnimalRegister",
   setup() {
-    const setToken = function () {
+    const setToken = function() {
       const token = localStorage.getItem("jwt");
       const config = `Bearer ${token}`;
       return config;
@@ -193,10 +186,20 @@ export default {
     });
     const router = useRouter();
 
-    const confirmAnimalRegister = function () {
+    const confirmAnimalRegister = function() {
       const reg = /.{1,}/;
       const reg_num = /^[0-9]{1,}$/;
 
+      if (!state.profile) {
+        return alert("프로필 사진은 필수 항목입니다.");
+      }
+
+      if (state.profile && !state.profileURL) {
+        return alert("프로필 사진에서 업로드 버튼을 눌러주세요.");
+      }
+      if (state.file && !state.imgURL) {
+        return alert("사진 또는 동영상에서 업로드 버튼을 눌러주세요.");
+      }
       if (!reg.test(state.type)) {
         return alert("동물의 종류를 입력해주세요");
       }
@@ -246,43 +249,17 @@ export default {
     };
 
     // 이미지 업로드 구문 ///
-    const handleProfileUpload = function () {
+    const handleProfileUpload = function() {
       state.profile = profile.value.files[0];
     };
 
-    const handleFileUpload = function () {
-      file.value.files.forEach(function (element) {
+    const handleFileUpload = function() {
+      file.value.files.forEach(function(element) {
         state.file.push(element);
       });
     };
 
-    const upload = function () {
-      // db에 있는 마지막 animalno 받아오는 부분
-      // axios({
-      //   method: "",
-      //   url: "",
-      // })
-      // .then(res => {
-      //   state.animalno = res.data.animalno ++
-      // })
-      // .catch(err => {
-      //   console.log(err)
-      // })
-      // // animalno를 보내주는 부분
-      // axios({
-      //   method: "post",
-      //   url: "http://localhost:8080/animal/register",
-      //   data: {
-      //     animalno: state.animalno,
-      //   }
-      // })
-      // .then(res => {
-      //   console.log(res.data)
-      // })
-      // .catch(err => {
-      //   console.log(err)
-      // })
-
+    const upload = function() {
       AWS.config.update({
         region: state.bucketRegion,
         credentials: new AWS.CognitoIdentityCredentials({
@@ -297,7 +274,7 @@ export default {
         },
       });
       let photoKey = [];
-      state.file.forEach(function (file) {
+      state.file.forEach(function(file) {
         photoKey.push(file.name);
       });
 
@@ -318,7 +295,7 @@ export default {
         );
       }
     };
-    const profileUpload = function () {
+    const profileUpload = function() {
       AWS.config.update({
         region: state.bucketRegion,
         credentials: new AWS.CognitoIdentityCredentials({

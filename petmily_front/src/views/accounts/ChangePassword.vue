@@ -1,8 +1,8 @@
 <template>
-  <br>
-  <br>
+  <br />
+  <br />
   <div class="container">
-    <br>
+    <br />
     <div class="d-flex justify-content-center">
       <div align="left" class="mb-3 mx-5">
         <div class="font-bold" style="font-size: 30px">Forgot Password!</div>
@@ -28,46 +28,18 @@
             />
           </div>
           <div class="position-relative mb-5">
-            <button type="button" @click="changePassword" class="btn-login mt-5" style="color: #FFFFFF;">
+            <button
+              type="button"
+              @click="changePassword"
+              class="btn-login mt-5"
+              style="color: #FFFFFF;"
+            >
               비밀번호 바꾸기
             </button>
           </div>
         </form>
         <div v-if="isConfirm">
           인증되었습니다.
-        </div>
-        <div class="position-relative mb-5">
-          <hr>
-          <div
-            class="position-absolute top-50 start-50 translate-middle px-2 bg-white"
-            style="font-size:5px;"
-          >
-            on continue with
-          </div>
-        </div>
-        <div class="d-flex justify-content-evenly">
-          <!-- 소셜로그인 로그인 만들기 -->
-          <button class="btn-logo">
-            <a
-              style="color: #ffffff; text-decoration-line: none"
-              href="http://localhost:8080/oauth2/authorization/google"
-              ><img src="@\assets\google.png" style="width:30px;height:30px;border-radius: 50%;"
-            /></a>
-          </button>
-          <button class="btn-logo">
-            <a
-              style="color: #ffffff; text-decoration-line: none"
-              href="http://localhost:8080/oauth2/authorization/kakao"
-              ><img src="@\assets\KakaoTalk.png" style="width:30px;height:30px;border-radius: 50%;"
-            /></a>
-          </button>
-          <button class="btn-logo">
-            <a
-              style="color: #ffffff; text-decoration-line: none"
-              href="http://localhost:8080/oauth2/authorization/naver"
-              ><img src="@\assets\naver.png" style="width:30px;height:30px;border-radius: 50%;"
-            /></a>
-          </button>
         </div>
       </div>
       <img

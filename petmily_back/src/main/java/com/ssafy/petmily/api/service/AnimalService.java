@@ -8,11 +8,13 @@ import com.ssafy.petmily.db.entity.animal.AnimalJoin;
 import java.util.List;
 
 public interface AnimalService {
-    Animal patchAnimal(Long no, Animal animal);
+    Animal patchAnimal(Long no, AnimalRegisterPostReq animal);
     Animal createAnimal(AnimalRegisterPostReq registerInfo);
     void deleteAnimal(Long no);
     List<Animal> searchAllAnimal(String key, String word, long no, boolean isLike);
-    List<AnimalJoin> animaldetail(Long no);
-
+    AnimalJoin animaldetail(Long no);
+    List<Animal> getThreeAnimal();
     AnimalFile fileUpload(String filedir, String extension);
+    AnimalFile fileUpdate(long no, String filedir, String extension);
+    void deleteFile(Long no);
 }

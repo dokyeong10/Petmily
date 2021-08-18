@@ -1,106 +1,120 @@
 <template>
-  <JumbotronForms/>
-  
+  <JumbotronForms />
+
   <div class="container mb-5 d-flex justify-content-center">
     <div>
       <div>
-      <div class="d-flex flex-column align-items-start">
-        <h1 class="overpass">Sign up to Petmily</h1>
-        <h5 class="overpass colored">Individual Member</h5>
-      </div>
-      <br>
-      <div class="mb-4">
-        <label for="email" class="d-flex flex-row mb-2">이메일</label>
-        <span class="d-flex" style="width: 400px;">
-          <input
-            v-model="state.email"
-            type="text"
-            class="form-control radius-border br"
-            placeholder="petmily@email.com"
-            @keyup.enter="confirmEmail"
-            id="email"
-            style="height: 38px;"
-          />
-          <button
-            @click="confirmEmail"
-            type="button"
-            class="btn-up"
-            style="color: #FFFFFF; margin-left:10px;"
-          >
-            인증
-          </button>
-        </span>
-      </div>
-      <div class="mb-4">
-        <span v-if="state.isEmail" style="width: 400px;">
-          <label for="emailcode" class="d-flex flex-row mb-2">인증번호</label>
-          <div class="d-flex" style="width: 400px;">
+        <div class="d-flex flex-column align-items-start">
+          <h1 class="overpass">Sign up to Petmily</h1>
+          <h5 class="overpass colored">Individual Member</h5>
+        </div>
+        <br />
+        <div class="mb-4">
+          <label for="email" class="d-flex flex-row mb-2 semibold">이메일</label>
+          <span class="d-flex" style="width: 400px;">
             <input
-              v-model="state.number"
+              v-model="state.email"
               type="text"
               class="form-control radius-border br"
-              placeholder="인증번호를 입력해주세요."
-              @keyup.enter="confirmNumber"
-              id="emailcode"
+              placeholder="petmily@email.com"
+              @keyup.enter="confirmEmail"
+              id="email"
               style="height: 38px;"
             />
-            <button @click="confirmNumber" type="button" class="btn-up" style="color: #FFFFFF;">
-              인증하기
+            <button
+              @click="confirmEmail"
+              type="button"
+              class="btn-up"
+              style="color: #FFFFFF; margin-left:10px;"
+            >
+              인증
             </button>
-          </div>
-        </span>
-      </div>
-      <div v-if="state.isConfirm" class="mb-5">
-        인증이 완료되었습니다.
-      </div>
-      <div class="mb-4">
-        <label class="d-flex flex-row mb-2">사진등록</label>
-        <div class="justify-content-center">
-          <input class="mb-2" id="file-selector" ref="file" type="file" @change="handleFileUpload()" style="width: 323.85px"/>
-          <button @click="upload" class="btn-up" style="color: #FFFFFF; height: 38px; width: 66.38px;" flat>업로드</button>
-          <div class="d-flex justify-content-start" v-if="state.imgURL">
-            <div>
-              업로드 완료!
+          </span>
+        </div>
+        <div class="mb-4">
+          <span v-if="state.isEmail" style="width: 400px;">
+            <label for="emailcode" class="d-flex flex-row mb-2 semibold">인증번호</label>
+            <div class="d-flex" style="width: 400px;">
+              <input
+                v-model="state.number"
+                type="text"
+                class="form-control radius-border br"
+                placeholder="인증번호를 입력해주세요."
+                @keyup.enter="confirmNumber"
+                id="emailcode"
+                style="height: 38px;"
+              />
+              <button @click="confirmNumber" type="button" class="btn-up" style="color: #FFFFFF;">
+                인증하기
+              </button>
+            </div>
+          </span>
+        </div>
+        <div v-if="state.isConfirm" class="mb-5">
+          인증이 완료되었습니다.
+        </div>
+        <div class="mb-4">
+          <label class="d-flex flex-row mb-2 semibold">사진등록</label>
+          <div class="justify-content-center">
+            <input
+              class="mb-2"
+              id="file-selector"
+              ref="file"
+              type="file"
+              @change="handleFileUpload()"
+              style="width: 323.85px"
+            />
+            <button
+              @click="upload"
+              class="btn-up"
+              style="color: #FFFFFF; height: 38px; width: 66.38px;"
+              flat
+            >
+              업로드
+            </button>
+            <div class="d-flex justify-content-start" v-if="state.imgURL">
+              <div>
+                업로드 완료!
+              </div>
             </div>
           </div>
         </div>
+        <label for="username" class="d-flex flex-row mb-2 semibold">이름</label>
+        <input
+          v-model="state.username"
+          type="text"
+          class="form-control radius-border br mb-5"
+          placeholder="홍길동"
+          id="username"
+        />
+        <label for="password" class="d-flex flex-row mb-2 semibold">비밀번호</label>
+        <input
+          v-model="state.password"
+          type="password"
+          class="form-control radius-border br mb-5"
+          placeholder="••••••••"
+          id="password"
+        />
+        <label for="confirmPassword" class="d-flex flex-row mb-2 semibold">비밀번호 재입력</label>
+        <input
+          v-model="state.passwordConfirm"
+          type="password"
+          class="form-control radius-border br mb-5"
+          placeholder="••••••••"
+          id="confirmPassword"
+        />
+        <label for="phone" class="d-flex flex-row mb-2 semibold">전화번호</label>
+        <input
+          v-model="state.phone"
+          type="text"
+          class="form-control br radius-border mb-5"
+          placeholder="010-1234-5678"
+          id="phone"
+        />
+        <button class="btn-white" style="color: #FFFFFF;" @click="confirmSignup">
+          회원가입 하기
+        </button>
       </div>
-      <label for="username" class="d-flex flex-row mb-2">이름</label>
-      <input
-        v-model="state.username"
-        type="text"
-        class="form-control radius-border br mb-5"
-        placeholder="홍길동"
-        id="username"
-      />
-      <label for="password" class="d-flex flex-row mb-2">비밀번호</label>
-      <input
-        v-model="state.password"
-        type="password"
-        class="form-control radius-border br mb-5"
-        placeholder="••••••••"
-        id="password"
-      />
-      <label for="confirmPassword" class="d-flex flex-row mb-2">비밀번호 재입력</label>
-      <input
-        v-model="state.passwordConfirm"
-        type="password"
-        class="form-control radius-border br mb-5"
-        placeholder="••••••••"
-        id="confirmPassword"
-      />
-      <label for="phone" class="d-flex flex-row mb-2">전화번호</label>
-      <input
-        v-model="state.phone"
-        type="text"
-        class="form-control br radius-border mb-5"
-        placeholder="010-1234-5678"
-        id="phone"
-      />
-      <button class="btn-white" style="color: #FFFFFF;" @click="confirmSignup">
-        회원가입 하기
-      </button>
-    </div>
     </div>
   </div>
 </template>
@@ -293,12 +307,12 @@ export default {
 };
 </script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Overpass:wght@700&display=swap");
 .overpass {
-  font-family: 'Overpass', sans-serif;
+  font-family: "Overpass", sans-serif;
 }
 .colored {
-  color: #B8B6F9
+  color: #b8b6f9;
 }
 .image-upload {
   width: 120px !important;
@@ -368,5 +382,9 @@ export default {
   border-bottom: #789ade 1px solid;
   width: 400px;
   color: #789ade;
+}
+
+.semibold {
+  font-weight: 600;
 }
 </style>

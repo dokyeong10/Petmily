@@ -1,24 +1,88 @@
 <template>
-  <div class="Jbgc col-4">
-    <div class="card border-light lifecard mb-5" align="center" style="background-color:#FAF9FE">
-      <img src="@\assets\dog.png" class="card-img-top guardimg" align="center" />
-      <div class="card-body d-flex flex-column justify-content-between">
-        <h4 class="card-title font-bold">{{ guardians.agencyname }}</h4>
-        <div class="card-text" style="margin-top:0px">{{ guardians.tel }}</div>
-        <div class="card-text">{{ guardians.addr }}</div>
-        <button class="btn-login" type="button" style="color: #FFFFFF">Read More</button>
+  <div id="guardianCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div
+        class="carousel-item"
+        v-for="(guardian, idx) in guardians"
+        :key="idx"
+        :class="{ active: idx == 0 }"
+      >
+        <div class="Jbgc col-4" style="width: 400px">
+          <div
+            class="card border-light lifecard mb-5"
+            align="center"
+            style="background-color: #faf9fe"
+          >
+            <img
+              v-if="guardian.agencyMain && guardian.agencyMain.img"
+              :src="guardian.agencyMain.img"
+              class="card-img-top guardimg"
+              align="center"
+            />
+            <img
+              v-else
+              src="https://image.flaticon.com/icons/png/512/2817/2817900.png"
+              class="card-img-top guardimg"
+              align="center"
+            />
+            <div class="card-body d-flex flex-column justify-content-between">
+              <h5 class="card-title font-bold">{{ guardian.agencyname }}</h5>
+              <div class="card-text" style="margin-top: 0px">
+                {{ guardian.tel }}
+              </div>
+              <div class="card-text mb-3">{{ guardian.addr }}</div>
+              <button
+                class="btn-login"
+                type="button"
+                style="color: #ffffff"
+                @click="goToShleterDetail(guardian.agencycode)"
+              >
+                Read More
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#guardianCarousel"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#guardianCarousel"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </button>
     </div>
+    <br />
+    <br />
+    <br />
   </div>
 </template>
 
 <script>
+import { useRouter } from "vue-router";
 export default {
   props: {
-    guardians: Object,
+    guardians: Array,
   },
   setup(props) {
-    console.log(props);
+    const router = useRouter();
+    const goToShleterDetail = (agencycode) => {
+      router.push({
+        name: "shelterdetail",
+        params: {
+          agencycode: agencycode,
+        },
+      });
+    };
+    return { goToShleterDetail };
   },
 };
 </script>
@@ -46,9 +110,10 @@ export default {
 }
 
 .guardimg {
-  width: 100%;
   height: 50%;
-  clip-path: circle(30% at 50% 50%);
+  width: 60%;
+  margin-bottom: 13px;
+  margin-left: 60px;
 }
 
 .lifecard {

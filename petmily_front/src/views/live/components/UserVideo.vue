@@ -18,7 +18,10 @@ export default {
   },
 
   props: {
-    streamManager: Object,
+    streamManager: {
+      type: Object,
+      default: () => {},
+    },
   },
 
   computed: {
