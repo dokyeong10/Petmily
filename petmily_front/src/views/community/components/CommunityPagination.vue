@@ -43,7 +43,7 @@
   </div>
 </template>
 <script>
-import { computed } from "vue";
+import { computed, reactive } from "vue";
 import { useRouter } from "vue-router";
 export default {
   name: "CommunityPagination",
@@ -52,17 +52,17 @@ export default {
       type: Object,
     },
   },
-  setup() {
+  setup(props, { emit }) {
     const router = useRouter();
 
     const pageUp = function() {
-      state.page++;
+      emit('page-up')
     };
     const pageDown = function() {
-      state.page--;
+      emit('page-down')
     };
     const goToPage = function(n) {
-      state.page = n;
+      emit('go-to-page', n)
     };
 
     const isLogin = computed(() => {
