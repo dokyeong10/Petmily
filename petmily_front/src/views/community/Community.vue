@@ -31,19 +31,17 @@
     </div>
   </div>
   <div v-if="state.data" class="container">
-    <CommunityPagination :state="state" />
+    <CommunityPagination :state="state" @page-up="onPageUp" @page-down="onPageDown" @go-to-page="onGoToPage"/>
   </div>
 </template>
 <script>
 import { reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
-import CommunityList from "@/views/community/components/CommunityList.vue";
 import CommunityPagination from "@/views/community/components/CommunityPagination.vue";
 export default {
   name: "Community",
   components: {
-    CommunityList,
     CommunityPagination,
   },
   setup() {
@@ -51,7 +49,7 @@ export default {
 
     const state = reactive({
       data: [],
-      numberOfItems: 4,
+      numberOfItems: 10,
       page: 1,
       numberOfPages: 0,
       word: "",
@@ -305,6 +303,16 @@ export default {
       router.push("/communityregister");
     };
 
+    const onPageUp = function () {
+      state.page++
+    }
+    const onPageDown = function () {
+      state.page--
+    }
+    const onGoToPage = function (n) {
+      state.page = n
+    }
+
     return {
       state,
       searchBoard,
@@ -316,6 +324,10 @@ export default {
       getAgency,
       getAgencycode,
       getUserno,
+      onPageUp,
+      onPageDown,
+      onGoToPage,
+
     };
   },
 };
