@@ -16,7 +16,7 @@
             <div class="me-2" align="left">
               <div class="card-text font-bold" style="font-size: 20px">{{ animal.type }}</div>
               <div class="card-text">종: {{ animal.species }}</div>
-              <div class="card-text">발견 날짜: {{ animal.find_addr }}</div>
+              <div class="card-text">발견 장소: {{ animal.find_addr }}</div>
               <div class="mt-1">  
                 <span>
                   <button class="btn-detail-profile" style="height: 35px;" @click="goDetail(animal)">
