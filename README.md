@@ -24,9 +24,11 @@
 |                           팀장 & BackEnd                            |                                    BackEnd                                    |                               FrontEnd                                |                               FrontEnd                               |                               FrontEnd                               |
 |  SpringBoot(RestAPI) <br /> 배포환경 구축<br /> 동물관리, 커뮤니티  | WebRTC<br/> AWS(EC2,S3) <br/> SpringBoot(RestAPI) <br/> 유저관리, Live 페이지 |             메인페이지<br /> 로그인 <br /> 비밀번호 찾기              |      커뮤니티 페이지 <br /> 마이페이지<br /> 보호소 상세페이지       |           동물 관리 <br /> 동물 즐겨찾기 <br /> 유저 등록            |
 
-### 📢 프로젝트 주요 기능
+## 📢 프로젝트 주요 기능
 
-<img src="https://imgur.com/kWnY8yU.gif">
+![pepe](https://user-images.githubusercontent.com/78183382/131553841-814f5ade-f2d5-4bdb-939b-68e2cd7b02b6.gif)
+
+
 
 - **[동물 관리]** <br>
   보호소 - 동물 등록, 삭제, 수정 <br>
