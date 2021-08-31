@@ -42,7 +42,7 @@
 - **[보호소 상세]**<br>
   보호소 정보 제공, 수정,삭제, 지도 제공, 빠른길 찾기, 등록된 동물 조회
 
-### ⚙️ 기술 스택
+## ⚙️ 기술 스택
 
 <p align="center">
 <img src="https://img.shields.io/badge/Framework-SpringBoot-6DB33F?style=flat&logo=spring&logoColor=white">&nbsp
