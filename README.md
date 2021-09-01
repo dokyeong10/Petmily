@@ -32,8 +32,6 @@
 
 ![pepe](https://user-images.githubusercontent.com/78183382/131553841-814f5ade-f2d5-4bdb-939b-68e2cd7b02b6.gif)
 
-
-
 - **[동물 관리]** <br>
   보호소 - 동물 등록, 삭제, 수정 <br>
   개인 - 동물 즐겨찾기, 삭제
@@ -46,19 +44,6 @@
 - **[보호소 상세]**<br>
   보호소 정보 제공, 수정,삭제, 지도 제공, 빠른길 찾기, 등록된 동물 조회
 
-## ⚙️ 기술 스택
-
-<p align="center">
-<img src="https://img.shields.io/badge/Framework-SpringBoot-6DB33F?style=flat&logo=spring&logoColor=white">&nbsp
- <img src="https://img.shields.io/badge/Framework-Vue-D22128?style=flat&logo=apahce&logoColor=white">&nbsp 
- <img src="https://img.shields.io/badge/Database-MySql-F80000?style=flat&logo=oracle&logoColor=white">&nbsp
-   <img src="https://img.shields.io/badge/Language-Java_11-007396?style=flat&logo=java&logoColor=white">&nbsp
-   <img src="https://img.shields.io/badge/Language-JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=white">&nbsp   
-   <img src="https://img.shields.io/badge/Deployment-EC2(20.04)-skyblue?style=flat&logo=apahce&logoColor=white">&nbsp 
-  <img src="https://img.shields.io/badge/API-Kakao_Map-red?style=flat">&nbsp 
-  <img src="https://img.shields.io/badge/WebRTC-Openvidu-563D7C?style=flat&lo">&nbsp
-
-</p>
 
 ## 📺 시연 영상
 
