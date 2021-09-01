@@ -22,7 +22,7 @@
 | :-----------------------------------------------------------------: | :---------------------------------------------------------------------------: | :-------------------------------------------------------------------: | :------------------------------------------------------------------: | :------------------------------------------------------------------: |
 | <img src="https://imgur.com/NwEdyu7.png" width=180px, height=180px> |     <img src="https://imgur.com/tDLmq0v.png"  width=180px, height=180px>      | <img src="https://imgur.com/vJXGeyX.png"   width=180px, height=180px> | <img src="https://imgur.com/nQeT3f5.png"  width=180px, height=180px> | <img src="https://imgur.com/ohKsslr.png"  width=180px, height=180px> |
 |                           팀장 & BackEnd                            |                                    BackEnd                                    |                               FrontEnd                                |                               FrontEnd                               |                               FrontEnd                               |
-|  SpringBoot(RestAPI) <br /> 배포환경 구축<br /> 동물관리, 커뮤니티  | WebRTC<br/> AWS(EC2,S3) <br/> SpringBoot(RestAPI) <br/> 유저관리, Live 페이지 |             메인페이지<br /> 로그인 <br /> 비밀번호 찾기              |      커뮤니티 페이지 <br /> 마이페이지<br /> 보호소 상세페이지       |           동물 관리 <br /> 동물 즐겨찾기 <br /> 유저 등록            |
+|  RestAPI <br /> 배포환경 구축<br /> 동물관리, 커뮤니티  |  RestAPI <br/> WebRTC<br/> AWS(EC2,S3) <br/> 유저관리, Live 페이지 |             로그인 <br /> 메인페이지 <br/> 비밀번호 찾기     |       마이페이지<br /> 커뮤니티 페이지 <br /> 보호소 상세페이지       |         유저 등록  <br />    동물 관리 <br /> 동물 즐겨찾기          |
 
 ## 📢 프로젝트 주요 기능
 
