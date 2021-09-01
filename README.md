@@ -27,7 +27,8 @@
 ## 🔧 Architecture
 
 ### 기술스택
-![기술스택](https://user-images.githubusercontent.com/78183382/131700125-5c3b3fef-bebf-4770-ba77-e69bc729134f.jpg)
+![기술스택진짜](https://user-images.githubusercontent.com/78183382/131702787-e5b83f18-533c-4729-818c-1d3af959c34f.jpg)
+
 
 ### ERD
 ![peterd](https://user-images.githubusercontent.com/78183382/131701050-82744c8c-3707-436b-a9cb-a5a07d49f5d8.png)
